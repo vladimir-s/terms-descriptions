@@ -50,8 +50,8 @@ Description of this plugin is available in [Russian]( http://www.simplecoding.or
 
 == Screenshots ==
 
-1. Admin page td_admin.png
-2. Term creation form td_term_creation_form.png
+1. Admin page
+2. Term creation form
 
 == Changelog ==
 
