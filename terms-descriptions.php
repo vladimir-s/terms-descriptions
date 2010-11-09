@@ -311,7 +311,7 @@ class Terms_descriptions {
 		<div class="form-field form-required">
 			<label for="term"><?php _e( 'Term', $domain ); ?></label>
 			<input name="term" id="term" type="text" value="<?php echo ( isset( $term )) ? $term['term'] : ''; ?>" size="20" />
-			<p><?php _e( 'Term can contain one or several words and will be converted to a link. If you whant to use several word forms of a term, separate them with a "|". Example, "apple|apples".', $domain ); ?></p>
+			<p><?php _e( 'Term can contain one or several words and will be converted to a link. If you want to use several word forms of a term, separate them with a "|". Example, "apple|apples".', $domain ); ?></p>
 		</div>
 		<div class="form-field form-required">
 			<label for="termtarget"><?php _e( 'Link to', $domain ); ?></label>
