@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: termdescription\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-06 17:23+0200\n"
-"PO-Revision-Date: 2010-11-06 17:28+0200\n"
+"POT-Creation-Date: 2010-11-24 18:00+0200\n"
+"PO-Revision-Date: 2010-11-24 18:02+0200\n"
 "Last-Translator: Владимир <vova_33@gala.net>\n"
 "Language-Team: Vladimir Statsenko <vova_33@gala.net>\n"
 "MIME-Version: 1.0\n"
@@ -14,150 +14,159 @@ msgstr ""
 "X-Poedit-Language: Russian\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-SearchPath-0: E:\\Docs\\www\\sites\\www.wp-plugins.l\\public_html\\wp-content\\plugins\\terms-descriptions\n"
+"X-Poedit-SearchPath-0: .\n"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:182
+#: terms-descriptions.php:210
 msgid "Terms Descriptions"
 msgstr "Описание терминов"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:193
+#: terms-descriptions.php:221
 msgid "Options saved"
 msgstr "Настройки сохранены"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:197
+#: terms-descriptions.php:225
 msgid "Term created"
 msgstr "Термин создан"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:198
+#: terms-descriptions.php:226
 msgid "Term deleted"
 msgstr "Термин удалён"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:199
+#: terms-descriptions.php:227
 msgid "Term updated"
 msgstr "Термин изменён"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:200
+#: terms-descriptions.php:228
 msgid "Term create error"
 msgstr "Ошибка создания термина"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:201
+#: terms-descriptions.php:229
 msgid "Term delete error"
 msgstr "Ошибка удаления термина"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:202
+#: terms-descriptions.php:230
 msgid "Term update error"
 msgstr "Ошибка обновления термина"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:211
+#: terms-descriptions.php:238
 msgid "Terms descriptions plugin"
 msgstr "Плагин Описания Терминов"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:247
+#: terms-descriptions.php:277
 msgid "Update term"
 msgstr "Изменить термин"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:248
+#: terms-descriptions.php:278
 msgid "Update"
 msgstr "Изменить"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:264
+#: terms-descriptions.php:294
 msgid "Create term"
 msgstr "Создать термин"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:265
+#: terms-descriptions.php:295
 msgid "Create"
 msgstr "Создать"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:282
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:372
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:378
+#: terms-descriptions.php:312
+#: terms-descriptions.php:414
+#: terms-descriptions.php:420
 msgid "Term"
 msgstr "Термин"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:284
-msgid "Term can contain one or several words and will be converted to a link. If you whant to use several word forms of a term, separate them with a \"|\". Example, \"apple|apples\"."
+#: terms-descriptions.php:314
+msgid "Term can contain one or several words and will be converted to a link. If you want to use several word forms of a term, separate them with a \"|\". Example, \"apple|apples\"."
 msgstr "Термин может состоять из одного или нескольких слов, которые будут преобразованы в ссылки. Если вы хотете использовать несколько словоформ, разделите их символом \"|\". Например, \"яблоко|яблоки\"."
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:287
+#: terms-descriptions.php:317
 msgid "Link to"
 msgstr "Ссылка на"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:290
+#: terms-descriptions.php:320
 msgid "Page"
 msgstr "Страницу"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:292
+#: terms-descriptions.php:322
 msgid "Post"
-msgstr "Пост"
+msgstr "Запись"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:294
+#: terms-descriptions.php:324
 msgid "External link"
 msgstr "Внешняя ссылка"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:298
+#: terms-descriptions.php:328
 msgid "Select page/post or enter external link"
-msgstr "Выберите страницу / пост или укажите внешнюю ссылку"
+msgstr "Выберите страницу / запись или укажите внешнюю ссылку"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:306
+#: terms-descriptions.php:336
 msgid "Select a page or post you want to link to"
-msgstr "Выберите страницу или пост на которую вы хотите поставить ссылку"
+msgstr "Выберите страницу или запись на которую вы хотите поставить ссылку"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:309
+#: terms-descriptions.php:339
 msgid "Cancel"
 msgstr "Отмена"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:315
+#: terms-descriptions.php:345
 msgid "Options"
 msgstr "Настройки"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:321
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:324
+#: terms-descriptions.php:351
+#: terms-descriptions.php:354
 msgid "Convert terms to links"
 msgstr "Преобразовывать термины в ссылки"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:333
+#: terms-descriptions.php:363
 msgid "in posts"
-msgstr "в постах"
+msgstr "в записях"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:334
+#: terms-descriptions.php:364
 msgid "in comments"
 msgstr "в комментариях"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:341
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:343
+#: terms-descriptions.php:371
+#: terms-descriptions.php:373
 msgid "Convert first"
 msgstr "Преобразовывать первые"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:343
+#: terms-descriptions.php:373
 msgid "term occurrences."
 msgstr "найденных терминов."
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:344
+#: terms-descriptions.php:374
 msgid "Enter a number. \"-1\" for converting all found terms. If a term has several word forms each of them will be counted."
-msgstr "Введите число. \"-1\" для преобразования всех найденных терминов. Если для термина указано несколько словоформ, каждая из них будет защитана."
+msgstr "Введите число. \"-1\" для преобразования всех найденных терминов. Если для термина указано несколько словоформ, каждая из них будет засчитана."
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:351
+#: terms-descriptions.php:381
+#: terms-descriptions.php:383
+msgid "Links Class attribute"
+msgstr "Атрибут Class для ссылок"
+
+#: terms-descriptions.php:384
+msgid "Leave this field empty if you didn't whant to add class attribute."
+msgstr "Не заполняйте это поле если не хотите использовать атрибут class в ссылках."
+
+#: terms-descriptions.php:391
 msgid "Save"
 msgstr "Сохранить"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:365
+#: terms-descriptions.php:407
 msgid "Terms not found"
 msgstr "Термины не найдены"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:373
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:379
+#: terms-descriptions.php:415
+#: terms-descriptions.php:421
 msgid "Link"
 msgstr "Ссылка"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:388
+#: terms-descriptions.php:430
 msgid "Edit"
 msgstr "Изменить"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:394
+#: terms-descriptions.php:436
 msgid "Are you sure?"
 msgstr "Вы уверены?"
 
-#: E:\Docs\www\sites\www.wp-plugins.l\public_html\wp-content\plugins\terms-descriptions/terms-descriptions.php:395
+#: terms-descriptions.php:437
 msgid "Delete"
 msgstr "Удалить"
 

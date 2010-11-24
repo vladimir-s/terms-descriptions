@@ -3,7 +3,7 @@
 Plugin Name: Terms Descriptions
 Plugin URI: http://www.simplecoding.org/plagin-wordpress-terms-descriptions
 Description: This plugin allows you to create list of terms and assign links to them. Plugin automatically replaces terms occurrences in your posts with appropriate links. You can control the number of replacements. After activation you can create terms list on plugin administration page (Tools -> Terms Descriptions).
-Version: 1.0
+Version: 1.1
 Author: Vladimir Statsenko
 Author URI: http://www.simplecoding.org
 License: GPLv3
@@ -375,6 +375,16 @@ class Terms_descriptions {
 				</fieldset>
 				</td>
 			</tr>
+			<tr>
+				<td colspan="2">
+				<fieldset>
+					<legend class="screen-reader-text"><span><?php _e( 'Links Class attribute', $domain ); ?></span></legend>
+					<?php $convert_count = get_option( 'td_class' ); ?>
+					<label><?php _e( 'Links Class attribute', $domain ); ?> <input type="text" value="<?php echo get_option( 'td_class' ); ?>" name="td_class" size="15" /></label>
+					<p class="hint"><?php _e( 'Leave this field empty if you didn\'t whant to add class attribute.', $domain ); ?></p>
+				</fieldset>
+				</td>
+			</tr>
 			</tbody>
 		</table>
 		<p class="submit">
@@ -445,6 +455,7 @@ class Terms_descriptions {
 	 */
 	public function registerTdSettings() {
 		register_setting( 'td-settings-group', 'td_target' );
+		register_setting( 'td-settings-group', 'td_class' );
 		//in the third parameter of register_setting we passing name of
 		//the function that will be called befoure saving new value
 		register_setting( 'td-settings-group', 'td_count', 'intval' );
@@ -494,8 +505,14 @@ class Terms_descriptions {
 				//cheking if the term contains several word forms
 				$term_search_str = self::parse_term( $term['term'] );
 				
+				$class_attr = get_option( 'td_class' );
+				if ( $class_attr !== false && trim( $class_attr ) !== '' ) {
+					$class_attr = ' class="'.$class_attr.'"';
+				}
+				
 				//regular expression for term replacement
 				$replace_re = '/([\s\r\n\:\;\!\?\.\,\)\(<>]{1}|^)('.$term_search_str.')([\s\r\n\:\;\!\?\.\,\)\(<>]{1}|$)/isu';
+
 				foreach ( $matches[0] as $match ) {
 					//is their a text befoure this occuarance?
 					$length = $match[1] - $start_pos;
@@ -503,11 +520,11 @@ class Terms_descriptions {
 						//searching for a term
 						$text = substr( $content, $start_pos, $length );
 						if ( $replace_terms >= 0 ) {
-							$result .= preg_replace( $replace_re, '$1<a href="'.$term['url'].'">$2</a>$3', $text, $replace_terms, $replaced );
+							$result .= preg_replace( $replace_re, '$1<a href="'.$term['url'].'"'.$class_attr.'>$2</a>$3', $text, $replace_terms, $replaced );
 							$replace_terms -= $replaced;
 						}
 						else {
-							$result .= preg_replace( $replace_re, '$1<a href="'.$term['url'].'">$2</a>$3', $text );
+							$result .= preg_replace( $replace_re, '$1<a href="'.$term['url'].'"'.$class_attr.'>$2</a>$3', $text );
 						}
 						
 					}
@@ -520,11 +537,11 @@ class Terms_descriptions {
 				if ( $start_pos < strlen( $content )) {
 					$text = substr( $content, $start_pos );
 					if ( $replace_terms >= 0 ) {
-						$result .= preg_replace( $replace_re, '$1<a href="'.$term['url'].'">$2</a>$3', $text, $replace_terms, $replaced );
+						$result .= preg_replace( $replace_re, '$1<a href="'.$term['url'].'"'.$class_attr.'>$2</a>$3', $text, $replace_terms, $replaced );
 						$replace_terms -= $replaced;
 					}
 					else {
-						$result .= preg_replace( $replace_re, '$1<a href="'.$term['url'].'">$2</a>$3', $text );
+						$result .= preg_replace( $replace_re, '$1<a href="'.$term['url'].'"'.$class_attr.'>$2</a>$3', $text );
 					}
 				}
 				$content = $result;

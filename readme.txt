@@ -55,6 +55,11 @@ Description of this plugin is available in [Russian]( http://www.simplecoding.or
 
 == Changelog ==
 
+= 1.1 =
+
+* Links Class attribute support added.
+* Mistakes in Russian translated corrected
+
 = 1.0 =
 
 * Automated terms-to-links convertion in posts and/or coments.
