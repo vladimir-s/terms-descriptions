@@ -55,6 +55,11 @@ Description of this plugin is available in [Russian]( http://www.simplecoding.or
 
 == Changelog ==
 
+= 1.1.1 =
+
+* Term input field replaced with textarea (entering word forms will be more comfortable)
+* Bug fixes
+
 = 1.1 =
 
 * Links Class attribute support added.

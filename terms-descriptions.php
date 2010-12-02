@@ -3,7 +3,7 @@
 Plugin Name: Terms Descriptions
 Plugin URI: http://www.simplecoding.org/plagin-wordpress-terms-descriptions
 Description: This plugin allows you to create list of terms and assign links to them. Plugin automatically replaces terms occurrences in your posts with appropriate links. You can control the number of replacements. After activation you can create terms list on plugin administration page (Tools -> Terms Descriptions).
-Version: 1.1
+Version: 1.1.1
 Author: Vladimir Statsenko
 Author URI: http://www.simplecoding.org
 License: GPLv3
@@ -80,12 +80,11 @@ class Terms_descriptions {
 				//adding term
 				case 'add':
 					check_admin_referer( 'td-add' );
-					if ( !isset( $_GET['term'] ) || trim( $_GET['term'] ) == '' || !isset( $_GET['termpageid'] ) ) {
+					if ( !isset( $_GET['term'] ) || ( $term = self::remove_new_lines( $_GET['term'] ) ) == '' || !isset( $_GET['termpageid'] ) ) {
 						$message = 4;
 						wp_redirect( "$parent_file&m=$message" );
 						break;
 					}
-					$term = $_GET['term'];
 					$page_id = $_GET['termpageid'];
 					//saving term
 					$key = Terms_descriptions::getNewKey( $terms );
@@ -129,9 +128,13 @@ class Terms_descriptions {
 				//updating term
 				case 'edit':
 					check_admin_referer( 'td-edit' );
+					if ( !isset( $_GET['term'] ) || ( $term = self::remove_new_lines( $_GET['term'] ) ) == '' || !isset( $_GET['termpageid'] ) ) {
+						$message = 4;
+						wp_redirect( "$parent_file&m=$message" );
+						break;
+					}
 					if ( isset( $_GET['termid'] ) && is_numeric( $_GET['termid'] )
 							&& isset( $terms[$_GET['termid']] )) {
-						$term = $_GET['term'];
 						$page_id = $_GET['termpageid'];
 						//if user set external link
 						if ( 'http:' === substr( $page_id, 0, 5 ) ) {
@@ -148,7 +151,7 @@ class Terms_descriptions {
 							$terms[$_GET['termid']] = array(
 								'term'=>$term,
 								'pageid'=>( int )$page_id,
-								'url'=>get_page_link( $page->ID ),
+								'url'=>get_permalink( $page->ID ),
 								'title'=>$page->post_title,
 							);
 						}
@@ -310,7 +313,7 @@ class Terms_descriptions {
 		<?php wp_original_referer_field( true, 'previous' ); wp_nonce_field( $nonse ); ?>
 		<div class="form-field form-required">
 			<label for="term"><?php _e( 'Term', $domain ); ?></label>
-			<input name="term" id="term" type="text" value="<?php echo ( isset( $term )) ? $term['term'] : ''; ?>" size="20" />
+			<textarea name="term" id="term" cols="20" rows="5" ><?php echo ( isset( $term )) ? $term['term'] : ''; ?></textarea>
 			<p><?php _e( 'Term can contain one or several words and will be converted to a link. If you want to use several word forms of a term, separate them with a "|". Example, "apple|apples".', $domain ); ?></p>
 		</div>
 		<div class="form-field form-required">
@@ -602,8 +605,13 @@ class Terms_descriptions {
 		echo '/* ]]> */</script>';
 	}
 	
+	function remove_new_lines( $str ) {
+		$res = str_replace( "\r", "", $str );
+		return trim( str_replace( "\n", "", $res ) );
+	}
+	
 	/**
-	 * This method parsing term and mistakes in word forms settins (if any)
+	 * This method parse term and trying to correct mistakes in word forms settins (if any)
 	 * 
 	 * @param string $term term (possibly with several word forms)
 	 * @return string term in form that can be used in regular expression
