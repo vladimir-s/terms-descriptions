@@ -3,7 +3,7 @@
 Plugin Name: Terms Descriptions
 Plugin URI: http://www.simplecoding.org/plagin-wordpress-terms-descriptions
 Description: This plugin allows you to create list of terms and assign links to them. Plugin automatically replaces terms occurrences in your posts with appropriate links. You can control the number of replacements. After activation you can create terms list on plugin administration page (Tools -> Terms Descriptions).
-Version: 1.1.1
+Version: 1.1.2
 Author: Vladimir Statsenko
 Author URI: http://www.simplecoding.org
 License: GPLv3
@@ -579,7 +579,7 @@ class Terms_descriptions {
 				else {
 					$selected = '';
 				}
-				echo 'posts += "<option value=\"'.$post->ID.'\" '.$selected.'>'.$post->post_title.'</option>";'."\n";
+				echo 'posts += "<option value=\"'.$post->ID.'\" '.$selected.'>'.addslashes( $post->post_title ).'</option>";'."\n";
 			}
 		}
 		
@@ -595,7 +595,7 @@ class Terms_descriptions {
 				else {
 					$selected = '';
 				}
-				echo 'pages += "<option value=\"'.$page->ID.'\" '.$selected.'>'.$page->post_title.'</option>";'."\n";
+				echo 'pages += "<option value=\"'.$page->ID.'\" '.$selected.'>'.addslashes( $page->post_title ).'</option>";'."\n";
 			}
 		}
 		
