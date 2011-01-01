@@ -36,7 +36,7 @@ Please, note that terms *will not* be replaced with links in following cases.
 
 Huge terms lists with hundreds of terms can increase page creation time. In such cases, consider to use caching plugin.
 
-Description of this plugin is available in [Russian]( http://www.simplecoding.org/plagin-wordpress-terms-descriptions "Terms Descriptions WordPress Plugin").
+Description of this plugin is available in [Russian]( http://www.simplecoding.org/plagin-wordpress-terms-descriptions "Terms Descriptions WordPress Plugin"). And some useful information you can read from the [plugin blog](http://terms-descriptions.tumblr.com/) (in English).
 
 == Installation ==
 
