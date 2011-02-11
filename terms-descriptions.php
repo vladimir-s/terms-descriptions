@@ -63,10 +63,6 @@ class Terms_descriptions {
 		$domain = Terms_descriptions::get_text_domain();
 		load_plugin_textdomain( $domain, '/wp-content/plugins/'.$plugin_dir, $plugin_dir );
 
-		//include JS script, which replaces posts/pages lists
-		$script_src = get_bloginfo( 'siteurl' ).'/wp-content/plugins/terms-descriptions/pagesposts.js';
-		wp_enqueue_script( 'td_pagesposts', $script_src, array( 'jquery' ), false, true );
-
 		$parent_file = 'tools.php?page=' . Terms_descriptions::get_plugin_slug();
 		
 		//if request come from plugin page
@@ -210,7 +206,8 @@ class Terms_descriptions {
 	public function addPages() {
 		$domain = Terms_descriptions::get_text_domain();
 		
-		add_management_page( __( 'Terms Descriptions', $domain ), __( 'Terms Descriptions', $domain ), "manage_options", __FILE__, array( 'Terms_descriptions', 'manage_terms' ));
+		$page = add_management_page( __( 'Terms Descriptions', $domain ), __( 'Terms Descriptions', $domain ), "manage_options", __FILE__, array( 'Terms_descriptions', 'manage_terms' ));
+		add_action( 'admin_print_scripts-'.$page, array( 'Terms_descriptions', 'load_scripts' ) );
 	}
 	
 	/**
@@ -553,10 +550,19 @@ class Terms_descriptions {
 		return $content;
 	}
 	
+	function load_scripts() {
+		//include JS script, which replaces posts/pages lists
+		$script_src = get_bloginfo( 'siteurl' ).'/wp-content/plugins/terms-descriptions/pagesposts.js';
+		wp_enqueue_script( 'td_pagesposts', $script_src, array( 'jquery' ), false, true );
+	}
+	
 	/**
 	 * This method creates JavaScript code with blog posts and pages lists.
 	 */
 	function generate_js() {
+		if ( $_GET[ 'page' ] != 'terms-descriptions/terms-descriptions.php' ) {
+			return;
+		}
 		$term_id = ( isset( $_GET['termid'] ) ) ? $_GET['termid'] : null;
 		$page_url = 'http://';
 		if ( $term_id !== null ) {
@@ -640,6 +646,7 @@ class Terms_descriptions {
 
 //request handler
 add_action( 'admin_init', array( 'Terms_descriptions', 'management_handler' ) );
+
 //options form handler
 add_action( 'admin_init', array( 'Terms_descriptions', 'registerTdSettings' ) );
 
