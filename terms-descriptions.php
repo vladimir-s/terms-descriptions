@@ -3,7 +3,7 @@
 Plugin Name: Terms Descriptions
 Plugin URI: http://www.simplecoding.org/plagin-wordpress-terms-descriptions
 Description: This plugin allows you to create list of terms and assign links to them. Plugin automatically replaces terms occurrences in your posts with appropriate links. You can control the number of replacements. After activation you can create terms list on plugin administration page (Tools -> Terms Descriptions).
-Version: 1.1.3
+Version: 1.1.4
 Author: Vladimir Statsenko
 Author URI: http://www.simplecoding.org
 License: GPLv3
@@ -478,6 +478,12 @@ class Terms_descriptions {
 		$terms = get_option( 'td_terms' );
 		if ( $terms ) {
 			foreach ( $terms as $term ) {
+				if ( $term[ 'pageid' ] != 0 ) {
+					$term_link = get_permalink( (int)$term['pageid'] );
+				}
+				else {
+					$term_link = $term[ 'url' ];
+				}
 				//if the term link is pointing to the current page/post
 				if ( $cur_id == $term['pageid'] ) {
 					continue;
@@ -520,11 +526,11 @@ class Terms_descriptions {
 						//searching for a term
 						$text = substr( $content, $start_pos, $length );
 						if ( $replace_terms >= 0 ) {
-							$result .= preg_replace( $replace_re, '$1<a href="'.$term['url'].'"'.$class_attr.'>$2</a>$3', $text, $replace_terms, $replaced );
+							$result .= preg_replace( $replace_re, '$1<a href="'.$term_link.'"'.$class_attr.'>$2</a>$3', $text, $replace_terms, $replaced );
 							$replace_terms -= $replaced;
 						}
 						else {
-							$result .= preg_replace( $replace_re, '$1<a href="'.$term['url'].'"'.$class_attr.'>$2</a>$3', $text );
+							$result .= preg_replace( $replace_re, '$1<a href="'.$term_link.'"'.$class_attr.'>$2</a>$3', $text );
 						}
 						
 					}
@@ -537,11 +543,11 @@ class Terms_descriptions {
 				if ( $start_pos < strlen( $content )) {
 					$text = substr( $content, $start_pos );
 					if ( $replace_terms >= 0 ) {
-						$result .= preg_replace( $replace_re, '$1<a href="'.$term['url'].'"'.$class_attr.'>$2</a>$3', $text, $replace_terms, $replaced );
+						$result .= preg_replace( $replace_re, '$1<a href="'.$term_link.'"'.$class_attr.'>$2</a>$3', $text, $replace_terms, $replaced );
 						$replace_terms -= $replaced;
 					}
 					else {
-						$result .= preg_replace( $replace_re, '$1<a href="'.$term['url'].'"'.$class_attr.'>$2</a>$3', $text );
+						$result .= preg_replace( $replace_re, '$1<a href="'.$term_link.'"'.$class_attr.'>$2</a>$3', $text );
 					}
 				}
 				$content = $result;
