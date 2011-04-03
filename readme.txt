@@ -55,6 +55,10 @@ Description of this plugin is available in [Russian]( http://www.simplecoding.or
 
 == Changelog ==
 
+= 1.1.5 =
+
+* Now you can use quotes in terms
+
 = 1.1.4 =
 
 * Custom permalinks structure support added. Now when you change permalinks structure all links will be updated automatically.

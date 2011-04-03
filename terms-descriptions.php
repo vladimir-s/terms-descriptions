@@ -3,7 +3,7 @@
 Plugin Name: Terms Descriptions
 Plugin URI: http://www.simplecoding.org/plagin-wordpress-terms-descriptions
 Description: This plugin allows you to create list of terms and assign links to them. Plugin automatically replaces terms occurrences in your posts with appropriate links. You can control the number of replacements. After activation you can create terms list on plugin administration page (Tools -> Terms Descriptions).
-Version: 1.1.4
+Version: 1.1.5
 Author: Vladimir Statsenko
 Author URI: http://www.simplecoding.org
 License: GPLv3
@@ -310,7 +310,7 @@ class Terms_descriptions {
 		<?php wp_original_referer_field( true, 'previous' ); wp_nonce_field( $nonse ); ?>
 		<div class="form-field form-required">
 			<label for="term"><?php _e( 'Term', $domain ); ?></label>
-			<textarea name="term" id="term" cols="20" rows="5" ><?php echo ( isset( $term )) ? $term['term'] : ''; ?></textarea>
+			<textarea name="term" id="term" cols="20" rows="5" ><?php echo ( isset( $term )) ? stripslashes( $term['term'] ) : ''; ?></textarea>
 			<p><?php _e( 'Term can contain one or several words and will be converted to a link. If you want to use several word forms of a term, separate them with a "|". Example, "apple|apples".', $domain ); ?></p>
 		</div>
 		<div class="form-field form-required">
@@ -425,7 +425,7 @@ class Terms_descriptions {
 	<?php foreach ( $terms as $key => $term ) { ?>
 		<tr class="iedit alternate">
 			<td class="name column-name">
-				<span style="display:block"><strong><?php echo $term['term']; ?></strong></span>
+				<span style="display:block"><strong><?php echo stripslashes( $term['term'] ); ?></strong></span>
 				<div class="row-actions">
 					<span class="edit"><a href="tools.php?page=<?php echo Terms_descriptions::get_plugin_slug(); ?>&amp;action=term_edit&amp;termid=<?php echo $key; ?>"><?php _e( 'Edit', $domain ); ?></a></span> |
 					<span class="delete">
@@ -510,7 +510,12 @@ class Terms_descriptions {
 				
 				//cheking if the term contains several word forms
 				$term_search_str = self::parse_term( $term['term'] );
+				$term_search_str = stripslashes( $term_search_str );
+				$term_search_str = str_replace( '"', '("|&#8220;|&#8221;)', $term_search_str);
 				
+				//counting number of groupes in regular expression
+				$groupes_num = substr_count(  $term_search_str, '(' ) - substr_count(  $term_search_str, '\(' ) + 3;
+
 				$class_attr = get_option( 'td_class' );
 				if ( $class_attr !== false && trim( $class_attr ) !== '' ) {
 					$class_attr = ' class="'.$class_attr.'"';
@@ -526,11 +531,11 @@ class Terms_descriptions {
 						//searching for a term
 						$text = substr( $content, $start_pos, $length );
 						if ( $replace_terms >= 0 ) {
-							$result .= preg_replace( $replace_re, '$1<a href="'.$term_link.'"'.$class_attr.'>$2</a>$3', $text, $replace_terms, $replaced );
+							$result .= preg_replace( $replace_re, '$1<a href="'.$term_link.'"'.$class_attr.'>$2</a>$'.$groupes_num, $text, $replace_terms, $replaced );
 							$replace_terms -= $replaced;
 						}
 						else {
-							$result .= preg_replace( $replace_re, '$1<a href="'.$term_link.'"'.$class_attr.'>$2</a>$3', $text );
+							$result .= preg_replace( $replace_re, '$1<a href="'.$term_link.'"'.$class_attr.'>$2</a>$'.$groupes_num, $text );
 						}
 						
 					}
@@ -659,10 +664,10 @@ add_action( 'admin_init', array( 'Terms_descriptions', 'registerTdSettings' ) );
 //filters for posts and/or comments
 $tdTarget = get_option( 'td_target' );
 if ( is_array( $tdTarget ) && in_array( 'posts', $tdTarget )) {
-	add_filter( 'the_content', array( 'Terms_descriptions', 'termReplace' ) );
+	add_filter( 'the_content', array( 'Terms_descriptions', 'termReplace' ), 9999 );
 }
 if ( is_array( $tdTarget ) && in_array( 'comments', $tdTarget )) {
-	add_filter( 'comment_text', array( 'Terms_descriptions', 'termReplace' ) );
+	add_filter( 'comment_text', array( 'Terms_descriptions', 'termReplace' ), 9999 );
 }
   
 //creating plugin administration page
