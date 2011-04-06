@@ -55,6 +55,10 @@ Description of this plugin is available in [Russian]( http://www.simplecoding.or
 
 == Changelog ==
 
+= 1.1.6 =
+
+* &laquo; &raquo; quotes support is added
+
 = 1.1.5 =
 
 * Now you can use quotes in terms

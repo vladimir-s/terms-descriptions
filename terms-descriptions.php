@@ -3,7 +3,7 @@
 Plugin Name: Terms Descriptions
 Plugin URI: http://www.simplecoding.org/plagin-wordpress-terms-descriptions
 Description: This plugin allows you to create list of terms and assign links to them. Plugin automatically replaces terms occurrences in your posts with appropriate links. You can control the number of replacements. After activation you can create terms list on plugin administration page (Tools -> Terms Descriptions).
-Version: 1.1.5
+Version: 1.1.6
 Author: Vladimir Statsenko
 Author URI: http://www.simplecoding.org
 License: GPLv3
@@ -511,7 +511,7 @@ class Terms_descriptions {
 				//cheking if the term contains several word forms
 				$term_search_str = self::parse_term( $term['term'] );
 				$term_search_str = stripslashes( $term_search_str );
-				$term_search_str = str_replace( '"', '("|&#8220;|&#8221;)', $term_search_str);
+				$term_search_str = str_replace( '"', '("|&#8220;|&#8221;|&laquo;|&raquo;)', $term_search_str);
 				
 				//counting number of groupes in regular expression
 				$groupes_num = substr_count(  $term_search_str, '(' ) - substr_count(  $term_search_str, '\(' ) + 3;
