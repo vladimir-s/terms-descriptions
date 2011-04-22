@@ -3,7 +3,7 @@
 Plugin Name: Terms Descriptions
 Plugin URI: http://www.simplecoding.org/plagin-wordpress-terms-descriptions
 Description: This plugin allows you to create list of terms and assign links to them. Plugin automatically replaces terms occurrences in your posts with appropriate links. You can control the number of replacements. After activation you can create terms list on plugin administration page (Tools -> Terms Descriptions).
-Version: 1.1.6
+Version: 1.1.7
 Author: Vladimir Statsenko
 Author URI: http://www.simplecoding.org
 License: GPLv3
@@ -52,6 +52,8 @@ Description of this plugin is available in [Russian]( http://www.simplecoding.or
 */
 
 class Terms_descriptions {
+	public static $terms_links = array();
+	
 	/**
 	 * This method handles the requests for plugin admin page
 	 * (create, edit, delete term, etc.)
@@ -70,7 +72,7 @@ class Terms_descriptions {
 			//reading terms list
 			$terms = get_option( 'td_terms' );
 			
-			$action = $_GET['action'];
+			$action = ( isset( $_GET['action'] ) ) ? $_GET['action'] : '';
 			
 			switch ( $action ) {
 				//adding term
@@ -170,7 +172,7 @@ class Terms_descriptions {
 	 * @return string plugin slug
 	 */
 	public function get_plugin_slug() {
-		return $_GET['page'];
+		return ( isset( $_GET[ 'page' ] ) ) ? $_GET[ 'page' ] : '';
 	}
 	
 	/**
@@ -247,7 +249,7 @@ class Terms_descriptions {
 			<div class="col-wrap">
 				<?php
 				//showing term creation form
-				if ( 'term_edit' == $_GET['action'] && !empty( $_GET['termid'] )
+				if ( isset( $_GET['action'] ) && 'term_edit' == $_GET['action'] && !empty( $_GET['termid'] )
 						&& is_numeric( $_GET['termid'] )) {
 					Terms_descriptions::show_term_form( $_GET['termid'], $terms[$_GET['termid']] );
 				}
@@ -271,6 +273,7 @@ class Terms_descriptions {
 	 */
 	public function show_term_form( $term_id = '', $term = null ) {
 		$domain = Terms_descriptions::get_text_domain();
+		$page_type = '';
 		
 		//если нужно показать форму изменения термина
 		if ( !empty( $term_id ) && isset( $term )) {
@@ -478,12 +481,15 @@ class Terms_descriptions {
 		$terms = get_option( 'td_terms' );
 		if ( $terms ) {
 			foreach ( $terms as $term ) {
+			//	$term_link = Terms_descriptions::get_term_link( $term );
+				/*
 				if ( $term[ 'pageid' ] != 0 ) {
 					$term_link = get_permalink( (int)$term['pageid'] );
 				}
 				else {
 					$term_link = $term[ 'url' ];
 				}
+				*/
 				//if the term link is pointing to the current page/post
 				if ( $cur_id == $term['pageid'] ) {
 					continue;
@@ -525,17 +531,27 @@ class Terms_descriptions {
 				$replace_re = '/([\s\r\n\:\;\!\?\.\,\)\(<>]{1}|^)('.$term_search_str.')([\s\r\n\:\;\!\?\.\,\)\(<>]{1}|$)/isu';
 
 				foreach ( $matches[0] as $match ) {
-					//is their a text befoure this occuarance?
+					//is their a text before this occuarance?
 					$length = $match[1] - $start_pos;
 					if ( $length > 0 ) {
 						//searching for a term
 						$text = substr( $content, $start_pos, $length );
+						//if user set replacements number, we execute nesessary number of replacements
 						if ( $replace_terms >= 0 ) {
-							$result .= preg_replace( $replace_re, '$1<a href="'.$term_link.'"'.$class_attr.'>$2</a>$'.$groupes_num, $text, $replace_terms, $replaced );
-							$replace_terms -= $replaced;
+							//get term link is time consuming operation (requires DB request), so we call if we found a term
+							if ( 0 < preg_match( $replace_re, $text ) ) {
+								$result .= preg_replace( $replace_re, '$1<a href="'.Terms_descriptions::get_term_link( $term ).'"'.$class_attr.'>$2</a>$'.$groupes_num, $text, $replace_terms, $replaced );
+								$replace_terms -= $replaced;
+							}
+							else {
+								$result .= $text;
+							}
 						}
+						//otherwise, we replace all terms occurrences
 						else {
-							$result .= preg_replace( $replace_re, '$1<a href="'.$term_link.'"'.$class_attr.'>$2</a>$'.$groupes_num, $text );
+							if ( 0 < preg_match( $replace_re, $text ) ) {
+								$result .= preg_replace( $replace_re, '$1<a href="'.Terms_descriptions::get_term_link( $term ).'"'.$class_attr.'>$2</a>$'.$groupes_num, $text );
+							}
 						}
 						
 					}
@@ -548,11 +564,15 @@ class Terms_descriptions {
 				if ( $start_pos < strlen( $content )) {
 					$text = substr( $content, $start_pos );
 					if ( $replace_terms >= 0 ) {
-						$result .= preg_replace( $replace_re, '$1<a href="'.$term_link.'"'.$class_attr.'>$2</a>$3', $text, $replace_terms, $replaced );
-						$replace_terms -= $replaced;
+						if ( 0 < preg_match( $replace_re, $text ) ) {
+							$result .= preg_replace( $replace_re, '$1<a href="'.Terms_descriptions::get_term_link( $term ).'"'.$class_attr.'>$2</a>$3', $text, $replace_terms, $replaced );
+							$replace_terms -= $replaced;
+						}
 					}
 					else {
-						$result .= preg_replace( $replace_re, '$1<a href="'.$term_link.'"'.$class_attr.'>$2</a>$3', $text );
+						if ( 0 < preg_match( $replace_re, $text ) ) {
+							$result .= preg_replace( $replace_re, '$1<a href="'.Terms_descriptions::get_term_link( $term ).'"'.$class_attr.'>$2</a>$3', $text );
+						}
 					}
 				}
 				$content = $result;
@@ -561,7 +581,30 @@ class Terms_descriptions {
 		return $content;
 	}
 	
-	function load_scripts() {
+	/**
+	 * This method creates link to term page
+	 *
+	 * @param array $term term data
+	 * @return string term link
+	 */
+	public static function get_term_link( $term ) {
+		//if we already have term link
+		if ( isset( Terms_descriptions::$terms_links[ $term[ 'pageid' ] ] ) ) {
+			return Terms_descriptions::$terms_links[ $term[ 'pageid' ] ];
+		}
+		//otherwise we try to create it
+		if ( $term[ 'pageid' ] != 0 ) {
+			$link = get_permalink( (int)$term['pageid'] );
+			Terms_descriptions::$terms_links[ $term[ 'pageid' ] ] = $link;
+			return $link;
+		}
+		else {
+			return $term[ 'url' ];
+		}
+		
+	}
+	
+	public function load_scripts() {
 		//include JS script, which replaces posts/pages lists
 		$script_src = get_bloginfo( 'siteurl' ).'/wp-content/plugins/terms-descriptions/pagesposts.js';
 		wp_enqueue_script( 'td_pagesposts', $script_src, array( 'jquery' ), false, true );
@@ -570,8 +613,8 @@ class Terms_descriptions {
 	/**
 	 * This method creates JavaScript code with blog posts and pages lists.
 	 */
-	function generate_js() {
-		if ( $_GET[ 'page' ] != 'terms-descriptions/terms-descriptions.php' ) {
+	public function generate_js() {
+		if ( isset( $_GET[ 'page' ] ) && $_GET[ 'page' ] != 'terms-descriptions/terms-descriptions.php' ) {
 			return;
 		}
 		$term_id = ( isset( $_GET['termid'] ) ) ? $_GET['termid'] : null;
@@ -622,7 +665,7 @@ class Terms_descriptions {
 		echo '/* ]]> */</script>';
 	}
 	
-	function remove_new_lines( $str ) {
+	public function remove_new_lines( $str ) {
 		$res = str_replace( "\r", "", $str );
 		return trim( str_replace( "\n", "", $res ) );
 	}
@@ -633,7 +676,7 @@ class Terms_descriptions {
 	 * @param string $term term (possibly with several word forms)
 	 * @return string term in form that can be used in regular expression
 	 */
-	function parse_term( $term ) {
+	public function parse_term( $term ) {
 		$term_forms = explode( '|', $term );
 		$term_search_str = '';
 		if ( empty( $term_forms ) ) {
