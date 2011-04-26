@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: termdescription\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-24 18:00+0200\n"
-"PO-Revision-Date: 2010-11-24 18:02+0200\n"
+"POT-Creation-Date: 2011-04-26 20:22+0200\n"
+"PO-Revision-Date: 2011-04-26 20:24+0200\n"
 "Last-Translator: Владимир <vova_33@gala.net>\n"
 "Language-Team: Vladimir Statsenko <vova_33@gala.net>\n"
 "MIME-Version: 1.0\n"
@@ -16,157 +16,166 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: terms-descriptions.php:210
+#: terms-descriptions.php:211
 msgid "Terms Descriptions"
 msgstr "Описание терминов"
 
-#: terms-descriptions.php:221
+#: terms-descriptions.php:223
 msgid "Options saved"
 msgstr "Настройки сохранены"
 
-#: terms-descriptions.php:225
+#: terms-descriptions.php:227
 msgid "Term created"
 msgstr "Термин создан"
 
-#: terms-descriptions.php:226
+#: terms-descriptions.php:228
 msgid "Term deleted"
 msgstr "Термин удалён"
 
-#: terms-descriptions.php:227
+#: terms-descriptions.php:229
 msgid "Term updated"
 msgstr "Термин изменён"
 
-#: terms-descriptions.php:228
+#: terms-descriptions.php:230
 msgid "Term create error"
 msgstr "Ошибка создания термина"
 
-#: terms-descriptions.php:229
+#: terms-descriptions.php:231
 msgid "Term delete error"
 msgstr "Ошибка удаления термина"
 
-#: terms-descriptions.php:230
+#: terms-descriptions.php:232
 msgid "Term update error"
 msgstr "Ошибка обновления термина"
 
-#: terms-descriptions.php:238
+#: terms-descriptions.php:240
 msgid "Terms descriptions plugin"
 msgstr "Плагин Описания Терминов"
 
-#: terms-descriptions.php:277
+#: terms-descriptions.php:280
 msgid "Update term"
 msgstr "Изменить термин"
 
-#: terms-descriptions.php:278
+#: terms-descriptions.php:281
 msgid "Update"
 msgstr "Изменить"
 
-#: terms-descriptions.php:294
+#: terms-descriptions.php:297
 msgid "Create term"
 msgstr "Создать термин"
 
-#: terms-descriptions.php:295
+#: terms-descriptions.php:298
 msgid "Create"
 msgstr "Создать"
 
-#: terms-descriptions.php:312
-#: terms-descriptions.php:414
-#: terms-descriptions.php:420
+#: terms-descriptions.php:315
+#: terms-descriptions.php:425
+#: terms-descriptions.php:431
 msgid "Term"
 msgstr "Термин"
 
-#: terms-descriptions.php:314
+#: terms-descriptions.php:317
 msgid "Term can contain one or several words and will be converted to a link. If you want to use several word forms of a term, separate them with a \"|\". Example, \"apple|apples\"."
 msgstr "Термин может состоять из одного или нескольких слов, которые будут преобразованы в ссылки. Если вы хотете использовать несколько словоформ, разделите их символом \"|\". Например, \"яблоко|яблоки\"."
 
-#: terms-descriptions.php:317
+#: terms-descriptions.php:320
 msgid "Link to"
 msgstr "Ссылка на"
 
-#: terms-descriptions.php:320
+#: terms-descriptions.php:323
 msgid "Page"
 msgstr "Страницу"
 
-#: terms-descriptions.php:322
+#: terms-descriptions.php:325
 msgid "Post"
 msgstr "Запись"
 
-#: terms-descriptions.php:324
+#: terms-descriptions.php:327
 msgid "External link"
 msgstr "Внешняя ссылка"
 
-#: terms-descriptions.php:328
+#: terms-descriptions.php:331
 msgid "Select page/post or enter external link"
 msgstr "Выберите страницу / запись или укажите внешнюю ссылку"
 
-#: terms-descriptions.php:336
+#: terms-descriptions.php:339
 msgid "Select a page or post you want to link to"
 msgstr "Выберите страницу или запись на которую вы хотите поставить ссылку"
 
-#: terms-descriptions.php:339
+#: terms-descriptions.php:342
 msgid "Cancel"
 msgstr "Отмена"
 
-#: terms-descriptions.php:345
+#: terms-descriptions.php:348
 msgid "Options"
 msgstr "Настройки"
 
-#: terms-descriptions.php:351
 #: terms-descriptions.php:354
+#: terms-descriptions.php:357
 msgid "Convert terms to links"
 msgstr "Преобразовывать термины в ссылки"
 
-#: terms-descriptions.php:363
+#: terms-descriptions.php:366
 msgid "in posts"
 msgstr "в записях"
 
-#: terms-descriptions.php:364
+#: terms-descriptions.php:367
 msgid "in comments"
 msgstr "в комментариях"
 
-#: terms-descriptions.php:371
-#: terms-descriptions.php:373
+#: terms-descriptions.php:374
+#: terms-descriptions.php:376
 msgid "Convert first"
 msgstr "Преобразовывать первые"
 
-#: terms-descriptions.php:373
+#: terms-descriptions.php:376
 msgid "term occurrences."
 msgstr "найденных терминов."
 
-#: terms-descriptions.php:374
+#: terms-descriptions.php:377
 msgid "Enter a number. \"-1\" for converting all found terms. If a term has several word forms each of them will be counted."
 msgstr "Введите число. \"-1\" для преобразования всех найденных терминов. Если для термина указано несколько словоформ, каждая из них будет засчитана."
 
-#: terms-descriptions.php:381
-#: terms-descriptions.php:383
+#: terms-descriptions.php:384
+#: terms-descriptions.php:385
 msgid "Links Class attribute"
 msgstr "Атрибут Class для ссылок"
 
-#: terms-descriptions.php:384
+#: terms-descriptions.php:386
 msgid "Leave this field empty if you didn't whant to add class attribute."
 msgstr "Не заполняйте это поле если не хотите использовать атрибут class в ссылках."
 
-#: terms-descriptions.php:391
+#: terms-descriptions.php:393
+#: terms-descriptions.php:394
+msgid "Convert terms only on single pages"
+msgstr "Преобразовывать термины только на страницах отдельных записей"
+
+#: terms-descriptions.php:395
+msgid "If you select this checkbox the plugin will not convert terms on archive, categories and similar pages."
+msgstr "Если этот чекбокс отмечен, плагин не будет преобразовывать термины на страницах категорий, архивов и т.п."
+
+#: terms-descriptions.php:402
 msgid "Save"
 msgstr "Сохранить"
 
-#: terms-descriptions.php:407
+#: terms-descriptions.php:418
 msgid "Terms not found"
 msgstr "Термины не найдены"
 
-#: terms-descriptions.php:415
-#: terms-descriptions.php:421
+#: terms-descriptions.php:426
+#: terms-descriptions.php:432
 msgid "Link"
 msgstr "Ссылка"
 
-#: terms-descriptions.php:430
+#: terms-descriptions.php:441
 msgid "Edit"
 msgstr "Изменить"
 
-#: terms-descriptions.php:436
+#: terms-descriptions.php:447
 msgid "Are you sure?"
 msgstr "Вы уверены?"
 
-#: terms-descriptions.php:437
+#: terms-descriptions.php:448
 msgid "Delete"
 msgstr "Удалить"
 

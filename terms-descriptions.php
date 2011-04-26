@@ -3,7 +3,7 @@
 Plugin Name: Terms Descriptions
 Plugin URI: http://www.simplecoding.org/plagin-wordpress-terms-descriptions
 Description: This plugin allows you to create list of terms and assign links to them. Plugin automatically replaces terms occurrences in your posts with appropriate links. You can control the number of replacements. After activation you can create terms list on plugin administration page (Tools -> Terms Descriptions).
-Version: 1.1.7
+Version: 1.1.8
 Author: Vladimir Statsenko
 Author URI: http://www.simplecoding.org
 License: GPLv3
@@ -382,9 +382,17 @@ class Terms_descriptions {
 				<td colspan="2">
 				<fieldset>
 					<legend class="screen-reader-text"><span><?php _e( 'Links Class attribute', $domain ); ?></span></legend>
-					<?php $convert_count = get_option( 'td_class' ); ?>
 					<label><?php _e( 'Links Class attribute', $domain ); ?> <input type="text" value="<?php echo get_option( 'td_class' ); ?>" name="td_class" size="15" /></label>
 					<p class="hint"><?php _e( 'Leave this field empty if you didn\'t whant to add class attribute.', $domain ); ?></p>
+				</fieldset>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+				<fieldset>
+					<legend class="screen-reader-text"><span><?php _e( 'Convert terms only on single pages', $domain ); ?></span></legend>
+					<label><?php _e( 'Convert terms only on single pages', $domain ); ?> <input type="checkbox" value="1" name="td_convert_only_single" <?php checked( get_option( 'td_convert_only_single' ), 1 ); ?> /></label><br />
+					<p class="hint"><?php _e( 'If you select this checkbox the plugin will not convert terms on archive, categories and similar pages.', $domain ); ?></p>
 				</fieldset>
 				</td>
 			</tr>
@@ -462,6 +470,7 @@ class Terms_descriptions {
 		//in the third parameter of register_setting we passing name of
 		//the function that will be called befoure saving new value
 		register_setting( 'td-settings-group', 'td_count', 'intval' );
+		register_setting( 'td-settings-group', 'td_convert_only_single' );
 	}
 	
 	/**
@@ -471,6 +480,9 @@ class Terms_descriptions {
 	 * @return string the post content with terms converted to links
 	 */
 	public function termReplace( $content ) {
+		if ( get_option( 'td_convert_only_single' ) && !is_single() ) {
+			return $content;
+		}
 		//getting the post id
 		$cur_id = get_the_id();
 		//getting convertions limit
@@ -537,7 +549,7 @@ class Terms_descriptions {
 						//searching for a term
 						$text = substr( $content, $start_pos, $length );
 						//if user set replacements number, we execute nesessary number of replacements
-						if ( $replace_terms >= 0 ) {
+						if ( $replace_terms >= 0 || $replace_count == '-1' ) {
 							//get term link is time consuming operation (requires DB request), so we call if we found a term
 							if ( 0 < preg_match( $replace_re, $text ) ) {
 								$result .= preg_replace( $replace_re, '$1<a href="'.Terms_descriptions::get_term_link( $term ).'"'.$class_attr.'>$2</a>$'.$groupes_num, $text, $replace_terms, $replaced );
@@ -563,7 +575,7 @@ class Terms_descriptions {
 				//(problem may occur if the closing tag in post content was missed)
 				if ( $start_pos < strlen( $content )) {
 					$text = substr( $content, $start_pos );
-					if ( $replace_terms >= 0 ) {
+					if ( $replace_terms >= 0  || $replace_count == '-1' ) {
 						if ( 0 < preg_match( $replace_re, $text ) ) {
 							$result .= preg_replace( $replace_re, '$1<a href="'.Terms_descriptions::get_term_link( $term ).'"'.$class_attr.'>$2</a>$3', $text, $replace_terms, $replaced );
 							$replace_terms -= $replaced;
@@ -629,7 +641,10 @@ class Terms_descriptions {
 		echo '<script type="text/javascript"> /* <![CDATA[ */'."\n";
 		
 		//creating posts list
-		$posts = get_posts( array( 'numberposts' => -1 ) );
+		$posts_types = get_post_types( $args=array( 'public' => true, '_builtin' => false ), 'names' );
+//		var_export($posts_types);
+		$posts_types[] = 'post';
+		$posts = get_posts( array( 'numberposts' => -1, 'post_type' => $posts_types ) );
 		if ( count( $posts ) > 0 ) {
 			echo 'var posts = "";'."\n";
 			foreach ( $posts as $i => $post ) {

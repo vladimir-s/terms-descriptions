@@ -2,7 +2,7 @@
 Contributors: vladimir.s
 Tags: post, page, links, plugin
 Requires at least: 2.9
-Tested up to: 3.1
+Tested up to: 3.1.1
 Stable tag: trunk
 
 This plugin allows you to create list of terms and assign links to them. Plugin replaces terms occurrences in your posts with appropriate links.
@@ -54,6 +54,12 @@ Description of this plugin is available in [Russian]( http://www.simplecoding.or
 2. Term creation form
 
 == Changelog ==
+
+= 1.1.8 =
+
+* "Convert terms only on single pages" option is added.
+* Custom posts types partial support is added.
+* Bug fix: Convert first "-1" term occurrences means "no limit".
 
 = 1.1.7 =
 
