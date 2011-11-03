@@ -1,0 +1,40 @@
+<p style="text-align: center;"><img title="VRay RT CPU+GPU одновременно" src="http://img.3dyuriki.com/11.05/vray-rt-cpu+gpu-odnovremenno.jpg" alt="VRay RT CPU+GPU одновременно" /></p>
+
+<p>Как известно, в настройках V-Ray RT можно выбрать тип движка (Engine Type), который будет визуализировать вашу сцену на лету (realtime). Это может быть или только CPU (процессор), или только GPU (видеокарта):</p>
+
+<p><!--more--></p>
+
+<p style="text-align: center;"><img title="Настройки стол VRay RT выбор CPU или GPU" src="http://img.3dyuriki.com/11.05/nastroiki-vray-rt-cpu-ili-gpu.png" alt="Настройки VRay RT выбор CPU или GPU" width="464" height="578" /></p>
+
+<p style="text-align: left;">Но есть два метода "стол", которые позволят вам использовать одновременно CPU+GPU для VRay RT на одном компьютере.</p>
+
+<h2>Метод 1 (экспериментальный от разработчиков VRay).</h2>
+
+<p>В Windows нужно открыть Control Panel -&gt; System -&gt; Advanced -&gt; нажать кнопку "Environment Variables". Далее нажимаете кнопку "New..." в разделе System variables и добавляете в поле "Variable name" фразу "VRAY_OPENCL_MIXED_MODE" без кавычек, а в поле "Variable value" значение "1" без кавычек. Нажимаете OK.</p>
+
+<p style="text-align: center;"><img title="Добавление параметра VRAY_OPENCL_MIXED_MODE в environment variables" src="http://img.3dyuriki.com/11.05/VRAY_OPENCL_MIXED_MODE-v-environment-variables.png" alt="Добавление параметра VRAY_OPENCL_MIXED_MODE в environment variables" width="394" height="436" /></p>
+
+<p>Закрываете V-Ray render server. В следующий раз, как вы запустите V-Ray render server, он будет использовать CPU и GPU параллельно.</p>
+
+<h2>Метод 2 (если первый метод у вас не заработал).</h2>
+
+<p>Чтобы можно было рендерить используя мощности одновременно и GPU и CPU будем использовать VRayRT Distributed Rendering на одном компьютере. Наилучшим образом для этого подойдет компьютер у которого, как минимум 4 процессорных ядра (не виртуальных) и 4 Гб оперативки.</p>
+
+<ol>
+	<li>Сначала нужно "стол создать виртуальную машину (Virtual Machine), которая будет гостем (the <strong>guest</strong>) на вашем компьютере (the <strong>host</strong>).</li>
+	<li>Для этих целей можно использовать бесплатную программу <a href="http://www.virtualbox.org/" target="_blank">"стол" VirtualBox</a> (весит 79 Мб).</li>
+	<li>Создаем нашего виртуального гостя (guest) и отдаем ему вот столько ваших ресурсов: 25 Гб места на диске, 30% оперативной памяти (т.е. для host'а остается 70% оперативки), все процессорные ядра кроме одного (таким образом одно ядро остается для host'а) и включаем hardware virtualization.</li>
+	<li>Теперь устанавливаете на вашем (только что созданном) виртуальном госте (guest) вашу любимую ОС (к примеру, Windows 7 64bit), а также 3ds Max и Vray.</li>
+	<li>Далее guest должен быть виден в вашей локальной сети как новый компьютер. И если к примеру host имеет айпишник (IP) 192.168.0.1, то для гостя (guest) используйте 192.168.0.xxx (где вместо xxx поставьте любое значение отличное от единицы, но не большее 255).</li>
+	<li>Запускайте 3dsmax на host'е.</li>
+	<li>Загружайте вашу сцену и смените рендерер на VRayRT.</li>
+	<li>В VRayRT установите параметр Engine Type на OpenCL и поставьте галочку Distributed в области Rendering. Теперь вы можете туда добавить ваш рендер сервер - гостя (guest): 192.168.1.xxx.</li>
+</ol>
+
+<p>Конечно же рендер на госте (guest) не сможет запустить визуализацию в режиме OpenCL поэтому он вернется к CPU рендерингу и будет использовать все ваши процессорные ядра (которые вы ему отдали), а ваш компьютер (host) будет использовать GPU для рендеринга.</p>
+
+<p><strong>P.S.</strong> Карикатура фотографа сделана в 3ds Max, Photoshop и ZBrush, а рендеринг проводился с помощью VRay. Советую <a href="http://forums.cgsociety.org/showthread.php?threadid=961100" target="_blank">посмотреть на большую картинку</a> (обалденно сделана одежка).</p>
+
+<p><br class="spacer_" /></p>
+
+<p>Реклама: вот же у нас сейчас ситуация: консервы для домашних животных содержат больше мяса нежели для людей, а <a href="http://zoo.com.ua/catalog/vitaminy_i_dobavki_dlja_sobak/" target="_blank">витамины для собак</a> покупаются чаще, чем для взрослых людей.</p>

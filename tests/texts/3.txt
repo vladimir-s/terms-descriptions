@@ -1,0 +1,17 @@
+<p style="text-align: center;"><img title="Зонтик из морской звезды. 3D-визуализация дня" src="http://img.3dyuriki.com/11.05/render-dnya-zontik-iz-morsoki-zvezdy.jpg" alt="Зонтик из морской звезды. 3D-визуализация дня" width="500" height="688" /></p>
+<h3>Инфо.</h3>
+<p>Автор: <strong>Patryk Habryn</strong>, Польша.</p>
+<p><strong>3D-/2D-инструменты:</strong> Maya, mental ray, Photoshop, ZBrush.</p>
+<h3>О процессе создания забавной подводной сцены.</h3>
+<p>Два персонажа (Медуза и Морская звезда) смоделены с помощью Maya и ZBrush. Визуализация проводилась в mentalray.</p>
+<p>Персонаж не только смоделен и отрендерён, но также полностью привязан:</p>
+<p><!--more--></p>
+<p style="text-align: center;"><img title="Риг медузы в Maya" src="http://img.3dyuriki.com/11.05/rig-meduzy-maya.jpg" alt="Риг медузы в Maya" /></p>
+<p style="text-align: center;"><img title="Настроенный 3D-персонаж Медуза" src="http://img.3dyuriki.com/11.05/nastroika-3d-personaja-meduza.jpg" alt="Настроенный 3D-персонаж Медуза" /></p>
+<p style="text-align: center;"><img title="Манипуляторы для анимации 3D-персонажа Медуза в Maya" src="http://img.3dyuriki.com/11.05/manipulyatory-dlya-3d-personaja-meduza-maya.jpg" alt="Манипуляторы для анимации 3D-персонажа Медуза в Maya" /></p>
+<p>Смотрите видео демонстрацию возможностей мультяшного ригга медузы:</p>
+<p><iframe frameborder="0" height="281" src="http://player.vimeo.com/video/20556340?byline=0" width="500"></iframe></p>
+<p>Также автор выложил сетку персонажей:</p>
+<p style="text-align: center;"><img title="Сетка мультяшной 3D-медузы и морской звезды" src="http://img.3dyuriki.com/11.05/setka-meduzy-i-morskoi-zvezdy.jpg" alt="Сетка мультяшной 3D-медузы и морской звезды" /></p>
+<p style="text-align: left;">Оригинальную картинку hi-res смотрите на <a href="http://forums.cgsociety.org/showthread.php?t=961772" target="_blank">forums.cgsociety.org</a>. Или на прикольном <a href="http://www.phabryn.blogspot.com/" target="_blank">блоге автора</a>.</p>
+<p style="text-align: left;">Постовой (<a href="http://3dyuriki.com/reklamodatelyam/">как сюда попасть</a>): обустраивая свою квартиру, хочется конечно же поставить на <a href="http://nabitek.com.ua/furniture/home/kitchen/" target="_blank">кухни мебель</a>, которая бы устраивала как в плане внешнего вида, так и в плане функциональности. Сейчас выбор мебели для кухонь очень большой и при наличии хорошей суммы денег можно позволить купить себе дизайнерскую мебель, которая будет и безумно красивой и шикарно впишется в вашу большую или маленькую квартиру.</p>
