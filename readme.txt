@@ -60,6 +60,10 @@ Description of this plugin is available in [Russian]( http://www.simplecoding.or
 
 == Changelog ==
 
+= 1.2.1 =
+
+* "Link to itself" bug fix
+
 = 1.2.0 =
 
 * Administration interface updated

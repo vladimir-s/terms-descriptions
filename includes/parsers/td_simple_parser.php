@@ -49,6 +49,9 @@ class TD_Simple_Parser extends TD_Parser {
             }
             
             foreach ( $this->terms as $term ) {
+                if ( $this->is_current_url( $term[ 't_post_url' ] ) ) {
+                    continue;
+                }
                 //regular expression for deviding post context
                 //(devision is made by html tags)
                 preg_match_all( '/' . implode( '|', $this->skip_tags ) . '/isu', $text,

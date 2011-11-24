@@ -31,7 +31,7 @@ class TD_Frontend {
      */
     public function parse_content( $content ) {
         //checking if have to convert terms on this page
-        if ( false == $this->options[ 'convert_only_single' ] || is_single() ) {
+        if ( false == $this->options[ 'convert_only_single' ] || is_single() || is_page() ) {
             global $wpdb;
             //selecting parser
             switch ( $this->options[ 'parser' ] ) {

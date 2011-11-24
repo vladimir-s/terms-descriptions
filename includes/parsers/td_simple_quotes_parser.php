@@ -19,6 +19,9 @@ class TD_Simple_Quotes_Parser extends TD_Simple_Parser {
             }
             
             foreach ( $this->terms as $term ) {
+                if ( $this->is_current_url( $term[ 't_post_url' ] ) ) {
+                    continue;
+                }
                 //regular expression for deviding post context
                 //(devision is made by html tags)
                 preg_match_all( '/' . implode( '|', $this->skip_tags ) . '/isu', $text,
@@ -29,7 +32,6 @@ class TD_Simple_Quotes_Parser extends TD_Simple_Parser {
                 $term_search_str = implode( '|', $term[ 't_term' ] );
                 $replace_re = '/([\s\r\n\:\;\!\?\.\,\)\(<>]{1}|^)("|&#8220;|&#8221;|&#8243;|&laquo;|&raquo;)?(' . $term_search_str
                         . ')("|&#8220;|&#8221;|&#8243;|&laquo;|&raquo;)?([\s\r\n\:\;\!\?\.\,\)\(<>]{1}|$)/isu';
-
                 $result = '';
                 $terms_count = $replace_terms;
                 

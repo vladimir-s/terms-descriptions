@@ -7,7 +7,7 @@ class TD_Simple_Quotes_Parser_Test extends PHPUnit_Framework_TestCase {
     public $parser;
     
     public function setUp() {
-        $this->parser = new TD_Simple_Quotes_Parser();
+        $this->parser = $this->getMock('TD_Simple_Quotes_Parser', array('is_current_url'));
     }
     
     public function testPrepareTermRegex() {
@@ -136,7 +136,7 @@ class TD_Simple_Quotes_Parser_Test extends PHPUnit_Framework_TestCase {
         $parsed_file_q = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/1_q_1.txt'));
         $this->assertEquals($parsed_file_q, $this->parser->parse($orig_file_q));
         
-        $p_2 = new TD_Simple_Quotes_Parser();
+        $p_2 = $this->getMock('TD_Simple_Quotes_Parser', array('is_current_url'));
         $terms_2 = array(
             array(
                 't_term' => 'стол',
@@ -157,7 +157,7 @@ class TD_Simple_Quotes_Parser_Test extends PHPUnit_Framework_TestCase {
         $parsed_file_2_q = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/2_q_1.txt'));
         $this->assertEquals($parsed_file_2_q, $p_2->parse($orig_file_2_q, 2));
         
-        $p_3 = new TD_Simple_Quotes_Parser();
+        $p_3 = $this->getMock('TD_Simple_Quotes_Parser', array('is_current_url'));
         $terms_3 = array(
             array(
                 't_term' => 'стол',
@@ -182,7 +182,7 @@ class TD_Simple_Quotes_Parser_Test extends PHPUnit_Framework_TestCase {
         $parsed_file_3_q = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/3_q_1.txt'));
         $this->assertEquals($parsed_file_3_q, $p_3->parse($orig_file_3_q, 1));
         
-        $p_4 = new TD_Simple_Quotes_Parser();
+        $p_4 = $this->getMock('TD_Simple_Quotes_Parser', array('is_current_url'));
         $terms_4 = array(
         );
         $p_4->set_terms($terms_4);
