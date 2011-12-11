@@ -369,7 +369,6 @@ function td_update_permalink() {
                 $term[ 't_post_url' ] = get_permalink( $term[ 't_post_id' ] );
                 $affected_rows = $wpdb->update( $wpdb->prefix . 'td_terms', $term, array( 't_id' => $_POST[ 'td_term_id' ] )
                         , array( '%d', '%d', '%s', '%s', '%s', '%s' ), array( '%d' ) );
-                //var_export($term[ 't_post_url' ]);
                 if ( !is_int( $affected_rows ) || ( int )$affected_rows < 0 ) {
                     $res[ 'message' ] = __( 'Permalink update error', TD_TEXTDOMAIN );
                     echo json_encode( $res );

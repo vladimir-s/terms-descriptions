@@ -61,16 +61,34 @@ class TD_Admin_Options {
                     </td>
                 </tr>
                 <tr valign="middle">
-                    <th scope="row"><?php _e( 'Convert first', TD_TEXTDOMAIN ); ?></th>
+                    <th scope="row"><?php _e( 'Convert the first', TD_TEXTDOMAIN ); ?></th>
                     <td>
-                        <input name="td_options[convert_first_n_terms]" type="text" id="convert_first_n_terms" value="<?php echo $options[ 'convert_first_n_terms' ]; ?>" class="small-text" /> <?php _e( 'term occurrences.', TD_TEXTDOMAIN ); ?>
+                        <input name="td_options[convert_first_n_terms]" type="text" id="convert_first_n_terms" value="<?php echo $options[ 'convert_first_n_terms' ]; ?>" class="small-text" /> <?php _e( 'occurrences of each term.', TD_TEXTDOMAIN ); ?>
                         <span class="description"><?php _e( 'Set "-1" if you want to convert all terms.', TD_TEXTDOMAIN ); ?></span>
+                    </td>
+                </tr>
+                <tr valign="middle">
+                    <th scope="row"><?php _e( 'Maximum transformations number', TD_TEXTDOMAIN ); ?></th>
+                    <td>
+                        <?php
+                        if ( $options[ 'convert_total' ] === null ) {
+                            $options[ 'convert_total' ] = '-1';
+                        }
+                        ?>
+                        <input name="td_options[convert_total]" type="text" id="convert_total" value="<?php echo $options[ 'convert_total' ]; ?>" class="small-text" />
+                        <span class="description"><?php _e( 'Set "-1" if you don\'t want to use this limitation.', TD_TEXTDOMAIN ); ?></span>
                     </td>
                 </tr>
                 <tr valign="middle">
                     <th scope="row"><?php _e( 'Add CSS class', TD_TEXTDOMAIN ); ?></th>
                     <td>
                         <input name="td_options[class]" type="text" id="class" value="<?php echo $options[ 'class' ]; ?>" class="small-text" /> <?php _e( 'to terms links.', TD_TEXTDOMAIN ); ?>
+                    </td>
+                </tr>
+                <tr valign="middle">
+                    <th scope="row"><?php _e( 'Add title attribute to links', TD_TEXTDOMAIN ); ?></th>
+                    <td>
+                        <input name="td_options[show_title]" type="checkbox" id="show_title" <?php checked( $options[ 'show_title' ], 'on' ); ?> />
                     </td>
                 </tr>
                 <tr valign="middle">
@@ -131,7 +149,7 @@ class TD_Admin_Options {
         else {
             $input[ 'convert_first_n_terms' ] = (int)$input[ 'convert_first_n_terms' ];
         }
-        if ( (int)$input[ 'terms_per_page' ] <= 0 ) {
+        if ( ( int )$input[ 'terms_per_page' ] <= 0 ) {
             $input[ 'terms_per_page' ] = 20;
         }
         if ( !isset( $input[ 'convert_in_posts' ] ) ) {
@@ -145,6 +163,12 @@ class TD_Admin_Options {
         }
         if ( !isset( $input[ 'parser' ] ) ) {
             $input[ 'parser' ] = 'simple_parser';
+        }
+        if ( !isset( $input[ 'convert_total' ] ) || ( int )$input[ 'convert_total' ] <= 0 ) {
+            $input[ 'convert_total' ] = -1;
+        }
+        if ( !isset( $input[ 'show_title' ] ) ) {
+            $input[ 'show_title' ] = false;
         }
         if ( false !== $old_options ) {
             return array_merge( $old_options, $input );

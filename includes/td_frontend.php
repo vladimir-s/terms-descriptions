@@ -32,7 +32,10 @@ class TD_Frontend {
     public function parse_content( $content ) {
         //checking if have to convert terms on this page
         if ( false == $this->options[ 'convert_only_single' ] || is_single() || is_page() ) {
-            global $wpdb;
+            global $wpdb, $post;
+            if ( 'on' === get_post_meta( $post->ID, '_disable_terms_descriptions', true ) ) {
+                return $content;
+            }
             //selecting parser
             switch ( $this->options[ 'parser' ] ) {
                 case 'simple_parser' :
@@ -50,7 +53,8 @@ class TD_Frontend {
             //setting up parser
             $parser->set_terms( $terms );
             //replacing terms
-            return $parser->parse( $content, $this->options[ 'convert_first_n_terms' ], $this->options[ 'class' ] );
+            return $parser->parse( $content, $this->options[ 'convert_first_n_terms' ], $this->options[ 'class' ]
+                    , ( int )$this->options[ 'convert_total' ], $this->options[ 'show_title' ] );
         }
         else {
             return $content;

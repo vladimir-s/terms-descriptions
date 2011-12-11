@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: termdescription\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-30 20:05+0200\n"
-"PO-Revision-Date: 2011-10-30 20:18+0200\n"
+"POT-Creation-Date: 2011-12-11 22:14+0200\n"
+"PO-Revision-Date: 2011-12-11 22:14+0200\n"
 "Last-Translator: Statsenko Vladimir <vovchiksta@gmail.com>\n"
 "Language-Team: Vladimir Statsenko <vova_33@gala.net>\n"
 "MIME-Version: 1.0\n"
@@ -16,326 +16,343 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: ./..\n"
 
-#: ../ajax/td_terms_ajax.php:25
-#: ../ajax/td_terms_ajax.php:198
-#: ../includes/td_admin_terms.php:157
+#: ../ajax/td_terms_ajax.php:39
+#: ../ajax/td_terms_ajax.php:243
+#: ../includes/td_admin_terms.php:196
 msgid "Enter the term, please"
 msgstr "Введите термин, пожалуйста"
 
-#: ../ajax/td_terms_ajax.php:28
-#: ../ajax/td_terms_ajax.php:201
-#: ../includes/td_admin_terms.php:158
+#: ../ajax/td_terms_ajax.php:42
+#: ../ajax/td_terms_ajax.php:246
+#: ../includes/td_admin_terms.php:197
 msgid "Enter the link, please"
 msgstr "Введите ссылку, пожалуйста"
 
-#: ../ajax/td_terms_ajax.php:31
-#: ../ajax/td_terms_ajax.php:204
+#: ../ajax/td_terms_ajax.php:45
+#: ../ajax/td_terms_ajax.php:249
 msgid "Content type is not set"
 msgstr "Тип записи не указан"
 
-#: ../ajax/td_terms_ajax.php:50
-#: ../ajax/td_terms_ajax.php:226
+#: ../ajax/td_terms_ajax.php:64
+#: ../ajax/td_terms_ajax.php:272
 msgid "Incorrect post ID"
 msgstr "Некорректный ID записи"
 
-#: ../ajax/td_terms_ajax.php:54
-#: ../ajax/td_terms_ajax.php:73
-#: ../ajax/td_terms_ajax.php:230
-#: ../ajax/td_terms_ajax.php:249
+#: ../ajax/td_terms_ajax.php:68
+#: ../ajax/td_terms_ajax.php:87
+#: ../ajax/td_terms_ajax.php:276
+#: ../ajax/td_terms_ajax.php:295
 msgid "Link creation error"
 msgstr "Ошибка создания ссылки"
 
-#: ../ajax/td_terms_ajax.php:69
-#: ../ajax/td_terms_ajax.php:245
+#: ../ajax/td_terms_ajax.php:83
+#: ../ajax/td_terms_ajax.php:291
 msgid "Post ID is not set"
 msgstr "ID записи не указан"
 
-#: ../ajax/td_terms_ajax.php:90
+#: ../ajax/td_terms_ajax.php:104
 msgid "Term save error"
 msgstr "Ошибка сохранения термина"
 
-#: ../ajax/td_terms_ajax.php:95
+#: ../ajax/td_terms_ajax.php:109
 msgid "The term was added"
 msgstr "Термин был добавлен"
 
-#: ../ajax/td_terms_ajax.php:127
+#: ../ajax/td_terms_ajax.php:151
 msgid "Unknown term ID"
 msgstr "Не известный ID записи"
 
-#: ../ajax/td_terms_ajax.php:130
+#: ../ajax/td_terms_ajax.php:154
 msgid "Term delete error"
 msgstr "Ошибка удаления термина"
 
-#: ../ajax/td_terms_ajax.php:134
+#: ../ajax/td_terms_ajax.php:158
 msgid "The term was deleted"
 msgstr "Термин удалён"
 
-#: ../ajax/td_terms_ajax.php:140
-#: ../ajax/td_terms_ajax.php:170
-#: ../ajax/td_terms_ajax.php:174
+#: ../ajax/td_terms_ajax.php:164
+#: ../ajax/td_terms_ajax.php:203
+#: ../ajax/td_terms_ajax.php:207
 msgid "Unknown term"
 msgstr "Не известный термин"
 
-#: ../ajax/td_terms_ajax.php:207
-#: ../ajax/td_terms_ajax.php:300
-#: ../ajax/td_terms_ajax.php:309
+#: ../ajax/td_terms_ajax.php:252
+#: ../ajax/td_terms_ajax.php:355
+#: ../ajax/td_terms_ajax.php:364
 msgid "Unknown term id"
 msgstr "Не известный ID термина"
 
-#: ../ajax/td_terms_ajax.php:267
+#: ../ajax/td_terms_ajax.php:313
 msgid "Term update error"
 msgstr "Ошибка обновления термина"
 
-#: ../ajax/td_terms_ajax.php:272
-#: ../includes/td_admin_terms.php:169
+#: ../ajax/td_terms_ajax.php:318
+#: ../includes/td_admin_terms.php:208
 msgid "The term was updated"
 msgstr "Термин изменён"
 
-#: ../ajax/td_terms_ajax.php:319
+#: ../ajax/td_terms_ajax.php:373
 msgid "Permalink update error"
 msgstr "Ошибка обновления ссылки на термин"
 
-#: ../ajax/td_terms_ajax.php:326
+#: ../ajax/td_terms_ajax.php:380
 msgid "The term permalink was updated"
 msgstr "Ссылка на термин изменена"
 
-#: ../includes/td_admin_options.php:11
-#: ../includes/td_admin_options.php:12
-#: ../includes/td_admin_options.php:30
+#: ../includes/td_admin_options.php:20
+#: ../includes/td_admin_options.php:21
+#: ../includes/td_admin_options.php:46
 msgid "Options"
 msgstr "Настройки"
 
-#: ../includes/td_admin_options.php:33
+#: ../includes/td_admin_options.php:49
 msgid "Options saved"
 msgstr "Настройки сохранены"
 
-#: ../includes/td_admin_options.php:41
+#: ../includes/td_admin_options.php:57
 msgid "Convert terms"
 msgstr "Преобразовать термины"
 
-#: ../includes/td_admin_options.php:43
+#: ../includes/td_admin_options.php:59
 msgid "in posts"
 msgstr "в записях"
 
-#: ../includes/td_admin_options.php:44
+#: ../includes/td_admin_options.php:60
 msgid "in comments"
 msgstr "в комментариях"
 
-#: ../includes/td_admin_options.php:48
-msgid "Convert first"
+#: ../includes/td_admin_options.php:64
+msgid "Convert the first"
 msgstr "Преобразовывать первые"
 
-#: ../includes/td_admin_options.php:50
-msgid "term occurrences."
-msgstr "найденных терминов."
+#: ../includes/td_admin_options.php:66
+msgid "occurrences of each term."
+msgstr "вхождений каждого термина."
 
-#: ../includes/td_admin_options.php:51
+#: ../includes/td_admin_options.php:67
 msgid "Set \"-1\" if you want to convert all terms."
 msgstr "Установите \"-1\" если вы хотите преобразовать все термины."
 
-#: ../includes/td_admin_options.php:55
+#: ../includes/td_admin_options.php:71
+msgid "Maximum transformations number"
+msgstr "Максимальное количество преобразований"
+
+#: ../includes/td_admin_options.php:79
+msgid "Set \"-1\" if you don't want to use this limitation."
+msgstr "Установите \"-1\" если вы не хотите использовать это ограничение."
+
+#: ../includes/td_admin_options.php:83
 msgid "Add CSS class"
 msgstr "Добавить CSS класс"
 
-#: ../includes/td_admin_options.php:57
+#: ../includes/td_admin_options.php:85
 msgid "to terms links."
 msgstr "к ссылкам на термины."
 
-#: ../includes/td_admin_options.php:61
+#: ../includes/td_admin_options.php:89
+msgid "Add title attribute to links"
+msgstr "Добавить title атрибут к ссылкам"
+
+#: ../includes/td_admin_options.php:95
 msgid "Convert terms only on single pages"
 msgstr "Преобразовывать термины только на страницах отдельных записей"
 
-#: ../includes/td_admin_options.php:64
+#: ../includes/td_admin_options.php:98
 msgid "Terms will not be converted on home, categories and archives pages."
 msgstr "Термины не будут преобразованы на главной, страницах категорий и архивов."
 
-#: ../includes/td_admin_options.php:68
+#: ../includes/td_admin_options.php:102
 msgid "Show"
 msgstr "Показывать"
 
-#: ../includes/td_admin_options.php:78
+#: ../includes/td_admin_options.php:112
 msgid "terms on a page (in admin area)"
 msgstr "терминов на странице (в админке)"
 
-#: ../includes/td_admin_options.php:82
+#: ../includes/td_admin_options.php:116
 msgid "Parser"
 msgstr "Парсер"
 
-#: ../includes/td_admin_options.php:86
+#: ../includes/td_admin_options.php:120
 msgid "Simple parser"
 msgstr "Простой парсер"
 
-#: ../includes/td_admin_options.php:89
+#: ../includes/td_admin_options.php:123
 msgid "Simple parser with quotes support"
 msgstr "Простой парсер с поддержкой кавычек"
 
-#: ../includes/td_admin_options.php:95
+#: ../includes/td_admin_options.php:129
 msgid "Update"
 msgstr "Изменить"
 
-#: ../includes/td_admin_terms.php:58
+#: ../includes/td_admin_terms.php:79
 msgid "Terms Descriptions plugin is almost updated. Please, BACKUP YOUR DATABASE and press following button to"
 msgstr "Плагин Terms Descriptions практически обновлен. Пожалуйста, СДЕЛАЙТЕ РЕЗЕРВНУЮ КОПИЮ БАЗЫ ДАННЫХ и нажмите следующую кнопку чтобы "
 
-#: ../includes/td_admin_terms.php:59
+#: ../includes/td_admin_terms.php:80
 msgid "Update DB"
 msgstr "Обновить БД"
 
-#: ../includes/td_admin_terms.php:130
-#: ../includes/td_admin_terms.php:131
-#: ../includes/td_admin_terms.php:199
+#: ../includes/td_admin_terms.php:164
+#: ../includes/td_admin_terms.php:165
+#: ../includes/td_admin_terms.php:247
 msgid "Terms"
 msgstr "Термины"
 
-#: ../includes/td_admin_terms.php:160
-#: ../includes/td_admin_terms.php:288
+#: ../includes/td_admin_terms.php:199
+#: ../includes/td_admin_terms.php:338
 msgid "Edit"
 msgstr "Изменить"
 
-#: ../includes/td_admin_terms.php:161
-#: ../includes/td_admin_terms.php:289
+#: ../includes/td_admin_terms.php:200
+#: ../includes/td_admin_terms.php:339
 msgid "Delete"
 msgstr "Удалить"
 
-#: ../includes/td_admin_terms.php:162
+#: ../includes/td_admin_terms.php:201
 msgid "Are you sure?"
 msgstr "Вы уверены?"
 
-#: ../includes/td_admin_terms.php:163
-#: ../includes/td_admin_terms.php:228
+#: ../includes/td_admin_terms.php:202
+#: ../includes/td_admin_terms.php:276
 msgid "Add term"
 msgstr "Добавить термин"
 
-#: ../includes/td_admin_terms.php:164
+#: ../includes/td_admin_terms.php:203
 msgid "Update term"
 msgstr "Изменить термин"
 
-#: ../includes/td_admin_terms.php:165
+#: ../includes/td_admin_terms.php:204
 msgid "Cancel"
 msgstr "Отмена"
 
-#: ../includes/td_admin_terms.php:168
+#: ../includes/td_admin_terms.php:207
 msgid "New term was added"
 msgstr "Термин добавлен"
 
-#: ../includes/td_admin_terms.php:170
+#: ../includes/td_admin_terms.php:209
 msgid "Updating..."
 msgstr "Обновляю..."
 
-#: ../includes/td_admin_terms.php:171
+#: ../includes/td_admin_terms.php:210
 msgid "Done!"
 msgstr "Готово!"
 
-#: ../includes/td_admin_terms.php:204
-#: ../includes/td_admin_terms.php:261
-#: ../includes/td_admin_terms.php:268
+#: ../includes/td_admin_terms.php:252
+#: ../includes/td_admin_terms.php:311
+#: ../includes/td_admin_terms.php:318
 msgid "Term"
 msgstr "Термин"
 
-#: ../includes/td_admin_terms.php:210
+#: ../includes/td_admin_terms.php:258
 msgid "Link"
 msgstr "Ссылка"
 
-#: ../includes/td_admin_terms.php:212
+#: ../includes/td_admin_terms.php:260
 msgid "Link to"
 msgstr "Ссылка на"
 
-#: ../includes/td_admin_terms.php:219
+#: ../includes/td_admin_terms.php:267
 msgid "External link"
 msgstr "Внешняя ссылка"
 
-#: ../includes/td_admin_terms.php:220
+#: ../includes/td_admin_terms.php:268
 msgid "Post ID"
 msgstr "ID записи"
 
-#: ../includes/td_admin_terms.php:233
+#: ../includes/td_admin_terms.php:281
 msgid "Update permalinks"
 msgstr "Обновить ссылки на термины"
 
-#: ../includes/td_admin_terms.php:260
-#: ../includes/td_admin_terms.php:267
+#: ../includes/td_admin_terms.php:310
+#: ../includes/td_admin_terms.php:317
 msgid "Term ID"
 msgstr "ID термина"
 
-#: ../includes/td_admin_terms.php:262
-#: ../includes/td_admin_terms.php:269
+#: ../includes/td_admin_terms.php:312
+#: ../includes/td_admin_terms.php:319
 msgid "Term Link"
 msgstr "Ссылка термина"
 
-#: ../includes/td_admin_terms.php:301
+#: ../includes/td_admin_terms.php:351
 msgid "Premalinks updated"
 msgstr "Ссылки обновлены"
 
-#: ../includes/td_admin_terms.php:316
+#: ../includes/td_admin_terms.php:374
 msgid "&laquo; Previous"
 msgstr "&laquo; Предыдущие"
 
-#: ../includes/td_admin_terms.php:317
+#: ../includes/td_admin_terms.php:375
 msgid "Next &raquo;"
 msgstr "Следующие &raquo;"
 
-#: ../includes/td_admin_tools.php:17
+#: ../includes/td_admin_tools.php:28
 msgid "Import error"
 msgstr "Ошибка импорта"
 
-#: ../includes/td_admin_tools.php:20
+#: ../includes/td_admin_tools.php:31
 msgid "Import successfully finished"
 msgstr "Импорт успешно завершен"
 
-#: ../includes/td_admin_tools.php:25
+#: ../includes/td_admin_tools.php:37
 msgid "Terms creation error"
 msgstr "Ошибка создания термина"
 
-#: ../includes/td_admin_tools.php:28
+#: ../includes/td_admin_tools.php:40
 msgid "Terms successfully created"
 msgstr "Термин создан"
 
-#: ../includes/td_admin_tools.php:34
-#: ../includes/td_admin_tools.php:35
-#: ../includes/td_admin_tools.php:48
+#: ../includes/td_admin_tools.php:49
+#: ../includes/td_admin_tools.php:50
+#: ../includes/td_admin_tools.php:68
 msgid "Tools"
 msgstr "Инструменты"
 
-#: ../includes/td_admin_tools.php:54
+#: ../includes/td_admin_tools.php:74
 msgid "Export / Import"
 msgstr "Экспорт / Импорт"
 
-#: ../includes/td_admin_tools.php:56
+#: ../includes/td_admin_tools.php:76
 msgid "Export"
 msgstr "Экспорт"
 
-#: ../includes/td_admin_tools.php:60
+#: ../includes/td_admin_tools.php:80
 msgid "Select file with terms"
 msgstr "Выберите файл с терминами"
 
-#: ../includes/td_admin_tools.php:61
+#: ../includes/td_admin_tools.php:81
 msgid "Import"
 msgstr "Импорт"
 
-#: ../includes/td_admin_tools.php:63
+#: ../includes/td_admin_tools.php:83
 msgid "Packet terms upload"
 msgstr "Пакетная загрузка терминов"
 
-#: ../includes/td_admin_tools.php:66
+#: ../includes/td_admin_tools.php:86
 msgid "Terms list"
 msgstr "Список терминов"
 
-#: ../includes/td_admin_tools.php:67
+#: ../includes/td_admin_tools.php:87
 msgid "Each term should be written on its own line. Use the following format.<br />word_form_1|word_form_2|...|post_id OR URL (with http://)<br />Examples:<br />apple|apples|21<br />pear|pears|http://site.domen<br />Note that if you use term_id the post with this id should exist."
 msgstr "Каждый термин должен быть записан в отдельной строке. Используйте следующий формат.<br />word_form_1|word_form_2|...|post_id OR URL (with http://)<br />Примеры:<br />яблоко|яблоки|21<br />груша|груши|http://site.domen<br />Обратите внимание, что если вы используете id терминов, то посты с этими id должны существовать."
 
-#: ../includes/td_admin_tools.php:73
+#: ../includes/td_admin_tools.php:93
 msgid "Add terms"
 msgstr "Добавить термин"
 
+#: ../includes/td_meta_box.php:23
+msgid "Terms Descriptions"
+msgstr "Terms Descriptions"
+
+#: ../includes/td_meta_box.php:37
+msgid "Disable Terms Descriptions plugin for this post"
+msgstr "Отключить плагин Terms Descriptions для этой записи"
+
+#~ msgid "term occurrences."
+#~ msgstr "найденных терминов."
+
 #~ msgid "terms per page."
 #~ msgstr "терминов на странице."
-
-#~ msgid "Terms Descriptions"
-#~ msgstr "Описание терминов"
-
-#~ msgid "Terms descriptions plugin"
-#~ msgstr "Плагин Описания Терминов"
 
 #~ msgid "Create term"
 #~ msgstr "Создать термин"

@@ -1,7 +1,7 @@
 === Terms descriptions ===
 Contributors: vladimir.s
 Tags: post, page, links, plugin
-Requires at least: 2.9
+Requires at least: 3.0
 Tested up to: 3.2.1
 Stable tag: trunk
 
@@ -21,6 +21,7 @@ This plugin allows.
 * Select where you want to replace terms, in posts content, in posts comments or both.
 * Set several word forms for each term. For example, "apple|apples". Word forms should be separated with a "|" symbol.
 * Search for terms in posts content and convert them to appropriate links. This task is performed automatically when plugin is activated.
+* Disable terms to links conversion for individual posts.
 * Export and import terms and plugin options.
 * Packet terms creation.
 * Permalinks update function (use it after permalinks structure updates).
@@ -31,6 +32,7 @@ Please, note that terms *will not* be replaced with links in following cases.
 * If the term is located inside html tag. For example, inside `alt` attribute of `img` tag.
 * If the term is located in `h1`-`h6` tags.
 * If the term is part of another word. E.g. term = `car` and the word is `carrot`.
+* If you checked "Disable Terms Descriptions plugin for this post" checkbox (at the bottom of post edit screen).
 
 **Important!**
 
@@ -50,6 +52,7 @@ Description of this plugin is available in [Russian]( http://www.simplecoding.or
 8. Update DB message may appear after plugin upgrade at the top of admin pages. In this case backup you database and press "Update DB" button.
 9. Go to "Terms" > "Options" and select parser type. Simple parser will search for exact terms. Simple parser with quotes support will search for terms that may be surrounded with quotes.
 10. If you change permalinks structure go to "Term" > "Terms" page and press "Update permalinks" button
+11. If you want to disable the plugin for individual posts check "Disable Terms Descriptions plugin for this post" checkbox (at the bottom of post edit screen)
 
 == Screenshots ==
 
@@ -59,6 +62,13 @@ Description of this plugin is available in [Russian]( http://www.simplecoding.or
 4. Tools page
 
 == Changelog ==
+
+= 1.2.2 =
+
+* New feature: disable plugin for individual post
+* New option: maximum transformations number
+* New option: add title attribute to links
+* Bug fix: "Link to itself" in posts with non-latin URLs
 
 = 1.2.1 =
 

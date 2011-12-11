@@ -10,16 +10,30 @@ class TD_Simple_Quotes_Parser extends TD_Simple_Parser {
      * @param string $text original text
      * @param string $replace_terms number of terms to replace
      * @param string $class_attr CSS class that will be added to term link
+     * @param int $max_convertions maximum number of terms-to-links conversions
+     * @param boolean $show_title whether to show link title
      * @return string parsed text
      */
-    public function parse( $text, $replace_terms = '-1', $class_attr = false ) {
+    public function parse( $text, $replace_terms = '-1', $class_attr = false
+            , $max_convertions = -1, $show_title = false ) {
         if ( null !== $text && !empty( $text ) ) {
             if ( $class_attr !== false && trim( $class_attr ) !== '' ) {
                 $class_attr = ' class="' . $class_attr . '"';
             }
             
+            if ( -1 === $max_convertions ) {
+                $this->max_convertions = null;
+            }
+            else {
+                $this->max_convertions = $max_convertions;
+            }
+            
+            if ( is_int( $this->max_convertions ) && $this->max_convertions <= 0 ) {
+                return $text;
+            }
+            
             foreach ( $this->terms as $term ) {
-                if ( $this->is_current_url( $term[ 't_post_url' ] ) ) {
+                if ( $this->is_current_post( $term[ 't_post_id' ] ) ) {
                     continue;
                 }
                 //regular expression for deviding post context
@@ -28,6 +42,14 @@ class TD_Simple_Quotes_Parser extends TD_Simple_Parser {
                     $matches, PREG_OFFSET_CAPTURE );
                 $start_pos = 0;
 
+                //t_post_id = 0 indicates that this is an external link
+                if ( $show_title === 'on' && ( int )$term[ 't_post_id' ] !== 0 ) {
+                    $title_attr = ' title="' . esc_attr( wp_kses_stripslashes( $term[ 't_post_title' ] ) ) . '" ';
+                }
+                else {
+                    $title_attr = '';
+                }
+                
                 //regular expression for term replacement
                 $term_search_str = implode( '|', $term[ 't_term' ] );
                 $replace_re = '/([\s\r\n\:\;\!\?\.\,\)\(<>]{1}|^)("|&#8220;|&#8221;|&#8243;|&laquo;|&raquo;)?(' . $term_search_str
@@ -42,19 +64,29 @@ class TD_Simple_Quotes_Parser extends TD_Simple_Parser {
 					if ( $length > 0 ) {
 						//searching for a term
 						$fragment = substr( $text, $start_pos, $length );
-						$result .= $this->replace_term( $replace_re, $term, $fragment, $terms_count, $class_attr );
+						$result .= $this->replace_term( $replace_re, $term, $fragment
+                                , $terms_count, $class_attr, $title_attr );
 					}
 					//adding html tag to the result
 					$result .= $match[0];
 					$start_pos = $match[1] + strlen( $match[0] );
+                    
+                    if ( is_int( $this->max_convertions ) && $this->max_convertions <= 0 ) {
+                        break;
+                    }
 				}
 				//cheking if all post content was parsed
 				//(problem may occur if the closing tag in post content was missed)
 				if ( $start_pos < strlen( $text )) {
 					$fragment = substr( $text, $start_pos );
-                    $result .= $this->replace_term( $replace_re, $term, $fragment, $terms_count, $class_attr );
+                    $result .= $this->replace_term( $replace_re, $term, $fragment
+                            , $terms_count, $class_attr, $title_attr );
 				}
 				$text = $result;
+                
+                if ( is_int( $this->max_convertions ) && $this->max_convertions <= 0 ) {
+                    break;
+                }
             }
         }
         return $text;
@@ -68,15 +100,21 @@ class TD_Simple_Quotes_Parser extends TD_Simple_Parser {
      * @param string $text original text
      * @param int $terms_count number of currently replaced terms
      * @param string $class_attr CSS class that will be added to term link 
+     * @param string $title_attr title attribute that will be added to term link
      * @return string processed text 
      */
-    protected function replace_term( $replace_re, $term, $text, &$terms_count, $class_attr ) {
+    protected function replace_term( $replace_re, $term, $text, &$terms_count, $class_attr, $title_attr = '' ) {
         $result = '';
+
+        if ( null !== $this->max_convertions && ( int )$terms_count > $this->max_convertions ) {
+            $terms_count = $this->max_convertions;
+        }
+        
         //if user set replacements number, we execute nesessary number of replacements
         if ( (int)$terms_count > 0 ) {
             if ( 0 < preg_match( $replace_re, $text ) ) {
                 $result = preg_replace( $replace_re, '$1<a href="'. $term[ 't_post_url' ]
-                        .'"'.$class_attr.'>$2$3$4</a>$5', $text, $terms_count, $replaced );
+                        . '"' . $class_attr . $title_attr . '>$2$3$4</a>$5', $text, $terms_count, $replaced );
                 $terms_count -= $replaced;
             }
             else {
@@ -87,7 +125,7 @@ class TD_Simple_Quotes_Parser extends TD_Simple_Parser {
         elseif ( (int)$terms_count === -1 ) {
             if ( 0 < preg_match( $replace_re, $text ) ) {
                 $result = preg_replace( $replace_re, '$1<a href="'. $term[ 't_post_url' ]
-                        . '"' . $class_attr . '>$2$3$4</a>$5', $text );
+                        . '"' . $class_attr . $title_attr . '>$2$3$4</a>$5', $text );
             }
             else {
                 $result = $text;
@@ -97,6 +135,11 @@ class TD_Simple_Quotes_Parser extends TD_Simple_Parser {
         else {
             return $text;
         }
+        
+        if ( isset($replaced) && null !== $replaced && null !== $this->max_convertions ) {
+            $this->max_convertions -= $replaced;
+        }
+        
         return $result;
     }
 }

@@ -6,6 +6,8 @@ class TD_Simple_Parser_Test extends PHPUnit_Framework_TestCase {
     public $parser;
     
     public function setUp() {
+        global $post;
+        $post->ID = 1;
         $this->parser = $this->getMock('TD_Simple_Parser', array('is_current_url'));
     }
     
@@ -112,6 +114,7 @@ class TD_Simple_Parser_Test extends PHPUnit_Framework_TestCase {
             array(
                 't_term' => 'стол',
                 't_post_url' => 'http://fdgd.sff',
+                't_post_id' => 22,
             )
         );
         $orig_text = 'xc xsf стол впівп';
@@ -131,10 +134,12 @@ class TD_Simple_Parser_Test extends PHPUnit_Framework_TestCase {
             array(
                 't_term' => 'стол',
                 't_post_url' => 'http://fdgd.sff',
+                't_post_id' => 22,
             ),
             array(
                 't_term' => 'анимацией|анимации',
                 't_post_url' => 'http://fdgd.sff',
+                't_post_id' => 22,
             ),
         );
         $p_2->set_terms($terms_2);
@@ -148,14 +153,17 @@ class TD_Simple_Parser_Test extends PHPUnit_Framework_TestCase {
             array(
                 't_term' => 'стол',
                 't_post_url' => 'http://fdgd.sff',
+                't_post_id' => 22,
             ),
             array(
                 't_term' => 'анимацией|анимации',
                 't_post_url' => 'http://fdgd.sff',
+                't_post_id' => 22,
             ),
             array(
                 't_term' => 'Maya',
                 't_post_url' => 'http://fdgd.sff',
+                't_post_id' => 22,
             ),
         );
         $p_3->set_terms($terms_3);

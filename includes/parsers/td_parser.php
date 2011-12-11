@@ -99,26 +99,9 @@ abstract class TD_Parser {
         }
         return $words;
     }
-    
-    protected function is_current_url( $url ) {
-        if ( $this->cur_url === '' ) {
-            $this->cur_url = $this->get_current_url();
-        }
-        if ( trailingslashit( $url ) === trailingslashit( $this->cur_url ) ) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    
-    private function get_current_url() {
-        $page_URL = ( @$_SERVER[ 'HTTPS' ] == 'on' ) ? 'https://' : 'http://';
-        if ( $_SERVER[ 'SERVER_PORT' ] != '80' ) {
-            $page_URL .= $_SERVER[ 'SERVER_NAME' ] . ':' . $_SERVER[ 'SERVER_PORT' ] . $_SERVER[ 'REQUEST_URI' ];
-        } else {
-            $page_URL .= $_SERVER[ 'SERVER_NAME' ] . $_SERVER[ 'REQUEST_URI' ];
-        }
-        return $page_URL;
+
+    protected function is_current_post( $id ) {
+        global $post;
+        return ( $post->ID === ( int )$id ) ? true : false;
     }
 }
