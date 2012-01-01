@@ -47,7 +47,8 @@ class TD_Simple_Parser extends TD_Parser {
      * @return string parsed text
      */
     public function parse( $text, $replace_terms = '-1', $class_attr = false
-            , $max_convertions = -1, $show_title = false ) {
+            , $max_convertions = -1, $show_title = false
+            , $text_before = '', $text_after = '' ) {
         if ( null !== $text && !empty( $text ) ) {
             if ( $class_attr !== false && trim( $class_attr ) !== '' ) {
                 $class_attr = ' class="' . $class_attr . '"';
@@ -99,7 +100,7 @@ class TD_Simple_Parser extends TD_Parser {
 						//searching for a term
 						$fragment = substr( $text, $start_pos, $length );
 						$result .= $this->replace_term( $replace_re, $term, $fragment
-                                , $terms_count, $class_attr, $title_attr );
+                                , $terms_count, $class_attr, $title_attr, $text_before, $text_after );
 					}
 					//adding html tag to the result
 					$result .= $match[0];
@@ -114,7 +115,7 @@ class TD_Simple_Parser extends TD_Parser {
 				if ( $start_pos < strlen( $text )) {
 					$fragment = substr( $text, $start_pos );
                     $result .= $this->replace_term( $replace_re, $term, $fragment
-                            , $terms_count, $class_attr, $title_attr );
+                            , $terms_count, $class_attr, $title_attr, $text_before, $text_after );
 				}
 				$text = $result;
                 
@@ -137,7 +138,8 @@ class TD_Simple_Parser extends TD_Parser {
      * @param string $title_attr title attribute that will be added to term link
      * @return string processed text 
      */
-    protected function replace_term( $replace_re, $term, $text, &$terms_count, $class_attr, $title_attr = '' ) {
+    protected function replace_term( $replace_re, $term, $text, &$terms_count, $class_attr
+            , $title_attr = '', $text_before = '', $text_after = '' ) {
         $result = '';
         
         if ( null !== $this->max_convertions && ( int )$terms_count > $this->max_convertions ) {
@@ -147,8 +149,8 @@ class TD_Simple_Parser extends TD_Parser {
         //if user set replacements number, we execute nesessary number of replacements
         if ( (int)$terms_count > 0 ) {
             if ( 0 < preg_match( $replace_re, $text ) ) {
-                $result = preg_replace( $replace_re, '$1<a href="'. $term[ 't_post_url' ]
-                        . '"' . $class_attr . $title_attr . '>$2</a>$3', $text, $terms_count, $replaced );
+                $result = preg_replace( $replace_re, '$1' . $text_before . '<a href="'. $term[ 't_post_url' ]
+                        . '"' . $class_attr . $title_attr . '>$2</a>' . $text_after . '$3', $text, $terms_count, $replaced );
                 $terms_count -= $replaced;
             }
             else {
@@ -158,8 +160,8 @@ class TD_Simple_Parser extends TD_Parser {
         //if $terms_count === -1 (unlimited) we replace all terms occurrences
         elseif ( (int)$terms_count === -1 ) {
             if ( 0 < preg_match( $replace_re, $text ) ) {
-                $result = preg_replace( $replace_re, '$1<a href="'. $term[ 't_post_url' ]
-                        . '"' . $class_attr . $title_attr . '>$2</a>$3', $text, -1, $replaced );
+                $result = preg_replace( $replace_re, '$1' . $text_before . '<a href="'. $term[ 't_post_url' ]
+                        . '"' . $class_attr . $title_attr . '>$2</a>' . $text_after . '$3', $text, -1, $replaced );
             }
             else {
                 $result = $text;

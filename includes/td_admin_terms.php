@@ -14,6 +14,8 @@ class TD_Admin_Terms {
                 'class' => '',
                 'convert_only_single' => true,
                 'parser' => 'simple_parser',
+                'text_before' => '',
+                'text_after' => '',
             );
     private $terms_ids = array();
 
@@ -35,6 +37,15 @@ class TD_Admin_Terms {
     public function install() {
         global $wpdb;
         //creating database table for terms
+
+        $charset_collate = '';
+        if ( ! empty($wpdb->charset) ) {
+            $charset_collate = " DEFAULT CHARACTER SET $wpdb->charset";
+        }
+        if ( ! empty($wpdb->collate) ) {
+            $charset_collate .= " COLLATE $wpdb->collate";
+        }
+        
         $terms_table_name = $wpdb->prefix . 'td_terms';
         if( $wpdb->get_var( 'show tables like "' . $terms_table_name . '"' ) != $terms_table_name ) {
             //creating terms table
@@ -46,7 +57,7 @@ class TD_Admin_Terms {
                 t_post_type VARCHAR(255) NOT NULL,
                 t_term TEXT NOT NULL,
                 UNIQUE KEY t_id (t_id)
-                );";
+                )" . $charset_collate . ";";
 
             require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
             dbDelta($sql);

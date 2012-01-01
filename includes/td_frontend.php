@@ -54,7 +54,8 @@ class TD_Frontend {
             $parser->set_terms( $terms );
             //replacing terms
             return $parser->parse( $content, $this->options[ 'convert_first_n_terms' ], $this->options[ 'class' ]
-                    , ( int )$this->options[ 'convert_total' ], $this->options[ 'show_title' ] );
+                    , ( int )$this->options[ 'convert_total' ], $this->options[ 'show_title' ]
+                    , $this->options[ 'text_before' ], $this->options[ 'text_after' ] );
         }
         else {
             return $content;

@@ -2,7 +2,7 @@
 Contributors: vladimir.s
 Tags: post, page, links, plugin
 Requires at least: 3.0
-Tested up to: 3.2.1
+Tested up to: 3.3
 Stable tag: trunk
 
 This plugin allows you to create list of terms and assign links to them. Plugin replaces terms occurrences in your posts with appropriate links.
@@ -22,6 +22,7 @@ This plugin allows.
 * Set several word forms for each term. For example, "apple|apples". Word forms should be separated with a "|" symbol.
 * Search for terms in posts content and convert them to appropriate links. This task is performed automatically when plugin is activated.
 * Disable terms to links conversion for individual posts.
+* Wrap links with arbitrary text (for example, you can wrap link with strong tag)
 * Export and import terms and plugin options.
 * Packet terms creation.
 * Permalinks update function (use it after permalinks structure updates).
@@ -62,6 +63,12 @@ Description of this plugin is available in [Russian]( http://www.simplecoding.or
 4. Tools page
 
 == Changelog ==
+
+= 3.0.1 =
+
+* New option: wrap links with arbitrary text
+* Bug fix: the plugin now uses default database charset and collation during table creation
+* The plugin version updated according with very old releases
 
 = 1.2.2 =
 

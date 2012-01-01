@@ -200,6 +200,20 @@ class TD_Simple_Quotes_Parser_Test extends PHPUnit_Framework_TestCase {
         $this->assertEquals($orig_file_4, $p_4->parse($orig_file_4, 1));
     }
     
+    public function testWrap() {
+        $terms = array(
+            array(
+                't_term' => 'стол',
+                't_post_url' => 'http://fdgd.sff',
+                't_post_id' => 22,
+            )
+        );
+        $orig_text = 'xc xsf "стол" впівп';
+        $parsed_text = 'xc xsf <strong><a href="http://fdgd.sff">"стол"</a></strong> впівп';
+        //testing without terms
+        $this->assertEquals($orig_text, $this->parser->parse( $orig_text, '-1', false, -1, false, '<strong>', '</strong>' ) );
+    }
+    
     protected static function getMethod( $name ) {
         $class = new ReflectionClass( 'TD_Simple_Quotes_Parser' );
         $method = $class->getMethod( $name );

@@ -92,6 +92,15 @@ class TD_Admin_Options {
                     </td>
                 </tr>
                 <tr valign="middle">
+                    <th scope="row"><?php _e( 'Wrap link', TD_TEXTDOMAIN ); ?></th>
+                    <td>
+                        <?php _e( 'text before', TD_TEXTDOMAIN ); ?> <input name="td_options[text_before]" type="text" id="text_before" value="<?php echo $options[ 'text_before' ]; ?>" />
+                        <span class="description"><?php _e( 'example: &lt;strong&gt;', TD_TEXTDOMAIN ); ?></span><br />
+                        <?php _e( 'text after', TD_TEXTDOMAIN ); ?> <input name="td_options[text_after]" type="text" id="text_after" value="<?php echo $options[ 'text_after' ]; ?>" />
+                        <span class="description"><?php _e( 'example: &lt;/strong&gt;', TD_TEXTDOMAIN ); ?></span>
+                    </td>
+                </tr>
+                <tr valign="middle">
                     <th scope="row"><?php _e( 'Convert terms only on single pages', TD_TEXTDOMAIN ); ?></th>
                     <td>
                         <input name="td_options[convert_only_single]" type="checkbox" id="convert_only_single" <?php checked( $options[ 'convert_only_single' ], 'on' ); ?> />
@@ -169,6 +178,12 @@ class TD_Admin_Options {
         }
         if ( !isset( $input[ 'show_title' ] ) ) {
             $input[ 'show_title' ] = false;
+        }
+        if ( !isset( $input[ 'show_before' ] ) ) {
+            $input[ 'show_before' ] = '';
+        }
+        if ( !isset( $input[ 'show_after' ] ) ) {
+            $input[ 'show_after' ] = '';
         }
         if ( false !== $old_options ) {
             return array_merge( $old_options, $input );
