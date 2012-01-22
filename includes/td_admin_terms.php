@@ -297,7 +297,14 @@ class TD_Admin_Terms {
     //getting terms data
     $options = get_option( 'td_options' );
     
-    $terms_count = $wpdb->get_var( 'SELECT COUNT(*) FROM ' . $wpdb->prefix . 'td_terms' );
+    $search_str = '';
+    $where_clause = '';
+    if ( isset( $_GET[ 'term_search' ] ) && '' !== trim( $_GET[ 'term_search' ] ) ) {
+        $search_str = $_GET[ 'term_search' ];
+        $where_clause = ' WHERE t_term LIKE "%' . $wpdb->escape( $search_str ) . '%" ';
+    }
+    
+    $terms_count = $wpdb->get_var( 'SELECT COUNT(*) FROM ' . $wpdb->prefix . 'td_terms' . $where_clause );
     //preparing pagination
     $cur_page = 1;
     if ( isset( $_GET[ 'term_page' ] ) && ( int )$_GET[ 'term_page' ] > 0 ) {
@@ -308,7 +315,22 @@ class TD_Admin_Terms {
     if ( false === $terms_per_page ) {
         $terms_per_page = 10;
     }
-
+    ?>
+    
+    <div id="terms_filter">
+        <form id="filter_form" action="<?php echo get_admin_url( null, 'admin.php' ); ?>" method="get">
+            <label><?php _e( 'Search', TD_TEXTDOMAIN ); ?> <input type="text" name="term_search" value="<?php echo $search_str; ?>" /></label>
+            <input type="submit" class="button-primary" value="<?php _e( 'Search', TD_TEXTDOMAIN ); ?>" />
+            <input type="hidden" name="page" value="terms-descriptions" />
+        <?php
+        if ( isset( $_GET[ 'term_search' ] ) ) {
+            echo '<a href="' . get_admin_url( null, 'admin.php' ) . '?page=terms-descriptions" class="button-secondary">' . __( 'Cancel', TD_TEXTDOMAIN ) . '</a>';
+        }
+        ?>
+        </form>
+    </div>
+    
+    <?php
     $pagination = $this->pagination( $terms_count, $cur_page, ( int )$terms_per_page );
     echo $pagination;
     
@@ -336,7 +358,7 @@ class TD_Admin_Terms {
     
     $from = ( $cur_page - 1 ) * $terms_per_page;
     $to = $terms_per_page;
-    $terms = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . 'td_terms ORDER BY t_id DESC LIMIT ' . $from . ',' . $to );
+    $terms = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . 'td_terms ' . $where_clause . ' ORDER BY t_id DESC LIMIT ' . $from . ',' . $to );
     
     if ( is_array( $terms ) ) {
         foreach ( $terms as $term ) {

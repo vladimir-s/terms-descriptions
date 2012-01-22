@@ -52,10 +52,16 @@ class TD_Frontend {
             $terms = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . 'td_terms ORDER BY t_id DESC', ARRAY_A );
             //setting up parser
             $parser->set_terms( $terms );
+            //target attribute
+            $target = '';
+            if ( isset( $this->options[ 'open_new_tab' ] ) && 'on' === $this->options[ 'open_new_tab' ] ) {
+                $target = ' target="_blank" ';
+            }
+            
             //replacing terms
             return $parser->parse( $content, $this->options[ 'convert_first_n_terms' ], $this->options[ 'class' ]
                     , ( int )$this->options[ 'convert_total' ], $this->options[ 'show_title' ]
-                    , $this->options[ 'text_before' ], $this->options[ 'text_after' ] );
+                    , $this->options[ 'text_before' ], $this->options[ 'text_after' ], $target );
         }
         else {
             return $content;

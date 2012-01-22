@@ -71,7 +71,7 @@ class TD_Admin_Options {
                     <th scope="row"><?php _e( 'Maximum transformations number', TD_TEXTDOMAIN ); ?></th>
                     <td>
                         <?php
-                        if ( $options[ 'convert_total' ] === null ) {
+                        if ( !isset( $options[ 'convert_total' ] ) || $options[ 'convert_total' ] === null ) {
                             $options[ 'convert_total' ] = '-1';
                         }
                         ?>
@@ -88,23 +88,30 @@ class TD_Admin_Options {
                 <tr valign="middle">
                     <th scope="row"><?php _e( 'Add title attribute to links', TD_TEXTDOMAIN ); ?></th>
                     <td>
-                        <input name="td_options[show_title]" type="checkbox" id="show_title" <?php checked( $options[ 'show_title' ], 'on' ); ?> />
+                        <input name="td_options[show_title]" type="checkbox" id="show_title" <?php if ( isset( $options[ 'show_title' ] ) ) { checked( $options[ 'show_title' ], 'on' ); } ?> />
                     </td>
                 </tr>
                 <tr valign="middle">
                     <th scope="row"><?php _e( 'Wrap link', TD_TEXTDOMAIN ); ?></th>
                     <td>
-                        <?php _e( 'text before', TD_TEXTDOMAIN ); ?> <input name="td_options[text_before]" type="text" id="text_before" value="<?php echo $options[ 'text_before' ]; ?>" />
+                        <?php _e( 'text before', TD_TEXTDOMAIN ); ?> <input name="td_options[text_before]" type="text" id="text_before" value="<?php if ( isset( $options[ 'text_before' ] ) ) { echo $options[ 'text_before' ]; } ?>" />
                         <span class="description"><?php _e( 'example: &lt;strong&gt;', TD_TEXTDOMAIN ); ?></span><br />
-                        <?php _e( 'text after', TD_TEXTDOMAIN ); ?> <input name="td_options[text_after]" type="text" id="text_after" value="<?php echo $options[ 'text_after' ]; ?>" />
+                        <?php _e( 'text after', TD_TEXTDOMAIN ); ?> <input name="td_options[text_after]" type="text" id="text_after" value="<?php if ( isset( $options[ 'text_after' ] ) ) { echo $options[ 'text_after' ]; } ?>" />
                         <span class="description"><?php _e( 'example: &lt;/strong&gt;', TD_TEXTDOMAIN ); ?></span>
                     </td>
                 </tr>
                 <tr valign="middle">
                     <th scope="row"><?php _e( 'Convert terms only on single pages', TD_TEXTDOMAIN ); ?></th>
                     <td>
-                        <input name="td_options[convert_only_single]" type="checkbox" id="convert_only_single" <?php checked( $options[ 'convert_only_single' ], 'on' ); ?> />
+                        <input name="td_options[convert_only_single]" type="checkbox" id="convert_only_single" <?php if ( isset( $options[ 'convert_only_single' ] ) ) { checked( $options[ 'convert_only_single' ], 'on' ); } ?> />
                         <span class="description"><?php _e( 'Terms will not be converted on home, categories and archives pages.', TD_TEXTDOMAIN ); ?></span>
+                    </td>
+                </tr>
+                <tr valign="middle">
+                    <th scope="row"><?php _e( 'Open link in a new tab', TD_TEXTDOMAIN ); ?></th>
+                    <td>
+                        <input name="td_options[open_new_tab]" type="checkbox" id="open_new_tab" <?php if ( isset( $options[ 'open_new_tab' ] ) ) { checked( $options[ 'open_new_tab' ], 'on' ); } ?> />
+                        <span class="description"><?php _e( 'If this option is checked plugin will add target="_blank" to links.', TD_TEXTDOMAIN ); ?></span>
                     </td>
                 </tr>
                 <tr valign="middle">
@@ -169,6 +176,9 @@ class TD_Admin_Options {
         }
         if ( !isset( $input[ 'convert_only_single' ] ) ) {
             $input[ 'convert_only_single' ] = false;
+        }
+        if ( !isset( $input[ 'open_new_tab' ] ) ) {
+            $input[ 'open_new_tab' ] = false;
         }
         if ( !isset( $input[ 'parser' ] ) ) {
             $input[ 'parser' ] = 'simple_parser';

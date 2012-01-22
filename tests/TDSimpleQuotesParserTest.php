@@ -190,6 +190,14 @@ class TD_Simple_Quotes_Parser_Test extends PHPUnit_Framework_TestCase {
         $parsed_file_3_q = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/3_q_1.txt'));
         $this->assertEquals($parsed_file_3_q, $p_3->parse($orig_file_3_q, 1));
         
+        $orig_file_5 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/4.txt'));
+        $parsed_file_5 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/4_1.txt'));
+        $this->assertEquals($parsed_file_5, $p_3->parse($orig_file_5, 1));
+
+        $orig_file_5_q = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/4_q.txt'));
+        $parsed_file_5_q = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/4_q_1.txt'));
+        $this->assertEquals($parsed_file_5_q, $p_3->parse($orig_file_5_q, 1));
+        
         $p_4 = $this->getMock('TD_Simple_Quotes_Parser', array('is_current_url'));
         $terms_4 = array(
         );

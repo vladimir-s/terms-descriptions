@@ -171,6 +171,10 @@ class TD_Simple_Parser_Test extends PHPUnit_Framework_TestCase {
         $orig_file_3 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/3.txt'));
         $parsed_file_3 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/3_1.txt'));
         $this->assertEquals($parsed_file_3, $p_3->parse($orig_file_3, 1));
+
+        $orig_file_5 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/4.txt'));
+        $parsed_file_5 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/4_1.txt'));
+        $this->assertEquals($parsed_file_5, $p_3->parse($orig_file_5, 1));
         
         $p_4 = $this->getMock('TD_Simple_Parser', array('is_current_url'));
         $terms_4 = array(

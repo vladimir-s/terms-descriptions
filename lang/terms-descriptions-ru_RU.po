@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: termdescription\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-01 23:04+0200\n"
-"PO-Revision-Date: 2012-01-01 23:05+0200\n"
+"POT-Creation-Date: 2012-01-22 19:27+0200\n"
+"PO-Revision-Date: 2012-01-22 19:28+0200\n"
 "Last-Translator: Statsenko Vladimir <vovchiksta@gmail.com>\n"
 "Language-Team: Vladimir Statsenko <vova_33@gala.net>\n"
 "MIME-Version: 1.0\n"
@@ -18,13 +18,13 @@ msgstr ""
 
 #: ../ajax/td_terms_ajax.php:39
 #: ../ajax/td_terms_ajax.php:243
-#: ../includes/td_admin_terms.php:205
+#: ../includes/td_admin_terms.php:207
 msgid "Enter the term, please"
 msgstr "Введите термин, пожалуйста"
 
 #: ../ajax/td_terms_ajax.php:42
 #: ../ajax/td_terms_ajax.php:246
-#: ../includes/td_admin_terms.php:206
+#: ../includes/td_admin_terms.php:208
 msgid "Enter the link, please"
 msgstr "Введите ссылку, пожалуйста"
 
@@ -87,7 +87,7 @@ msgid "Term update error"
 msgstr "Ошибка обновления термина"
 
 #: ../ajax/td_terms_ajax.php:318
-#: ../includes/td_admin_terms.php:217
+#: ../includes/td_admin_terms.php:219
 msgid "The term was updated"
 msgstr "Термин изменён"
 
@@ -182,127 +182,141 @@ msgid "Terms will not be converted on home, categories and archives pages."
 msgstr "Термины не будут преобразованы на главной, страницах категорий и архивов."
 
 #: ../includes/td_admin_options.php:111
+msgid "Open link in a new tab"
+msgstr "Открывать ссылку в новом табе"
+
+#: ../includes/td_admin_options.php:114
+msgid "If this option is checked plugin will add target=\"_blank\" to links."
+msgstr "Если эта опция установлена, плагин добавит target=\"_blank\" к ссылкам."
+
+#: ../includes/td_admin_options.php:118
 msgid "Show"
 msgstr "Показывать"
 
-#: ../includes/td_admin_options.php:121
+#: ../includes/td_admin_options.php:128
 msgid "terms on a page (in admin area)"
 msgstr "терминов на странице (в админке)"
 
-#: ../includes/td_admin_options.php:125
+#: ../includes/td_admin_options.php:132
 msgid "Parser"
 msgstr "Парсер"
 
-#: ../includes/td_admin_options.php:129
+#: ../includes/td_admin_options.php:136
 msgid "Simple parser"
 msgstr "Простой парсер"
 
-#: ../includes/td_admin_options.php:132
+#: ../includes/td_admin_options.php:139
 msgid "Simple parser with quotes support"
 msgstr "Простой парсер с поддержкой кавычек"
 
-#: ../includes/td_admin_options.php:138
+#: ../includes/td_admin_options.php:145
 msgid "Update"
 msgstr "Изменить"
 
-#: ../includes/td_admin_terms.php:88
+#: ../includes/td_admin_terms.php:90
 msgid "Terms Descriptions plugin is almost updated. Please, BACKUP YOUR DATABASE and press following button to"
 msgstr "Плагин Terms Descriptions практически обновлен. Пожалуйста, СДЕЛАЙТЕ РЕЗЕРВНУЮ КОПИЮ БАЗЫ ДАННЫХ и нажмите следующую кнопку чтобы "
 
-#: ../includes/td_admin_terms.php:89
+#: ../includes/td_admin_terms.php:91
 msgid "Update DB"
 msgstr "Обновить БД"
 
-#: ../includes/td_admin_terms.php:173
-#: ../includes/td_admin_terms.php:174
-#: ../includes/td_admin_terms.php:256
+#: ../includes/td_admin_terms.php:175
+#: ../includes/td_admin_terms.php:176
+#: ../includes/td_admin_terms.php:258
 msgid "Terms"
 msgstr "Термины"
 
-#: ../includes/td_admin_terms.php:208
-#: ../includes/td_admin_terms.php:347
+#: ../includes/td_admin_terms.php:210
+#: ../includes/td_admin_terms.php:371
 msgid "Edit"
 msgstr "Изменить"
 
-#: ../includes/td_admin_terms.php:209
-#: ../includes/td_admin_terms.php:348
+#: ../includes/td_admin_terms.php:211
+#: ../includes/td_admin_terms.php:372
 msgid "Delete"
 msgstr "Удалить"
 
-#: ../includes/td_admin_terms.php:210
+#: ../includes/td_admin_terms.php:212
 msgid "Are you sure?"
 msgstr "Вы уверены?"
 
-#: ../includes/td_admin_terms.php:211
-#: ../includes/td_admin_terms.php:285
+#: ../includes/td_admin_terms.php:213
+#: ../includes/td_admin_terms.php:287
 msgid "Add term"
 msgstr "Добавить термин"
 
-#: ../includes/td_admin_terms.php:212
+#: ../includes/td_admin_terms.php:214
 msgid "Update term"
 msgstr "Изменить термин"
 
-#: ../includes/td_admin_terms.php:213
+#: ../includes/td_admin_terms.php:215
+#: ../includes/td_admin_terms.php:327
 msgid "Cancel"
 msgstr "Отмена"
 
-#: ../includes/td_admin_terms.php:216
+#: ../includes/td_admin_terms.php:218
 msgid "New term was added"
 msgstr "Термин добавлен"
 
-#: ../includes/td_admin_terms.php:218
+#: ../includes/td_admin_terms.php:220
 msgid "Updating..."
 msgstr "Обновляю..."
 
-#: ../includes/td_admin_terms.php:219
+#: ../includes/td_admin_terms.php:221
 msgid "Done!"
 msgstr "Готово!"
 
-#: ../includes/td_admin_terms.php:261
-#: ../includes/td_admin_terms.php:320
-#: ../includes/td_admin_terms.php:327
+#: ../includes/td_admin_terms.php:263
+#: ../includes/td_admin_terms.php:344
+#: ../includes/td_admin_terms.php:351
 msgid "Term"
 msgstr "Термин"
 
-#: ../includes/td_admin_terms.php:267
+#: ../includes/td_admin_terms.php:269
 msgid "Link"
 msgstr "Ссылка"
 
-#: ../includes/td_admin_terms.php:269
+#: ../includes/td_admin_terms.php:271
 msgid "Link to"
 msgstr "Ссылка на"
 
-#: ../includes/td_admin_terms.php:276
+#: ../includes/td_admin_terms.php:278
 msgid "External link"
 msgstr "Внешняя ссылка"
 
-#: ../includes/td_admin_terms.php:277
+#: ../includes/td_admin_terms.php:279
 msgid "Post ID"
 msgstr "ID записи"
 
-#: ../includes/td_admin_terms.php:290
+#: ../includes/td_admin_terms.php:292
 msgid "Update permalinks"
 msgstr "Обновить ссылки на термины"
 
-#: ../includes/td_admin_terms.php:319
-#: ../includes/td_admin_terms.php:326
+#: ../includes/td_admin_terms.php:322
+#: ../includes/td_admin_terms.php:323
+msgid "Search"
+msgstr "Поиск"
+
+#: ../includes/td_admin_terms.php:343
+#: ../includes/td_admin_terms.php:350
 msgid "Term ID"
 msgstr "ID термина"
 
-#: ../includes/td_admin_terms.php:321
-#: ../includes/td_admin_terms.php:328
+#: ../includes/td_admin_terms.php:345
+#: ../includes/td_admin_terms.php:352
 msgid "Term Link"
 msgstr "Ссылка термина"
 
-#: ../includes/td_admin_terms.php:360
+#: ../includes/td_admin_terms.php:384
 msgid "Premalinks updated"
 msgstr "Ссылки обновлены"
 
-#: ../includes/td_admin_terms.php:383
+#: ../includes/td_admin_terms.php:407
 msgid "&laquo; Previous"
 msgstr "&laquo; Предыдущие"
 
-#: ../includes/td_admin_terms.php:384
+#: ../includes/td_admin_terms.php:408
 msgid "Next &raquo;"
 msgstr "Следующие &raquo;"
 
