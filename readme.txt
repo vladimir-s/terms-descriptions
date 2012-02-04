@@ -64,6 +64,11 @@ Description of this plugin is available in [Russian]( http://www.simplecoding.or
 
 == Changelog ==
 
+= 3.0.3 =
+
+* New feature: two additional quotes types added to "Simple parser with quotes support"
+* Bug fix: number of post titles in autocomplete list increased
+
 = 3.0.2 =
 
 * New feature: terms search

@@ -100,6 +100,7 @@
             {
                 minChars: 0,
                 matchContains: true,
+                max: 9999,
                 formatItem: function( item ) {
                     var post_type = content_type.val();
                     if ( item.post_type !== post_type ) {
