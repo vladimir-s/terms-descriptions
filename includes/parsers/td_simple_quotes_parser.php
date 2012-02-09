@@ -33,7 +33,6 @@ class TD_Simple_Quotes_Parser extends TD_Simple_Parser {
             if ( is_int( $this->max_convertions ) && $this->max_convertions <= 0 ) {
                 return $text;
             }
-            
             foreach ( $this->terms as $term ) {
                 if ( $this->is_current_post( $term[ 't_post_id' ] ) ) {
                     continue;
@@ -54,8 +53,8 @@ class TD_Simple_Quotes_Parser extends TD_Simple_Parser {
                 
                 //regular expression for term replacement
                 $term_search_str = implode( '|', $term[ 't_term' ] );
-                $replace_re = '/([\s\r\n\:\;\!\?\.\,\)\(<>]{1}|^)("|&#171;|&#187;|&#8220;|&#8221;|&#8243;|&laquo;|&raquo;)?(' . $term_search_str
-                        . ')("|&#171;|&#187;|&#8220;|&#8221;|&#8243;|&laquo;|&raquo;)?([\s\r\n\:\;\!\?\.\,\)\(<>]{1}|$)/isu';
+                $replace_re = '/([\s\r\n\:\;\!\?\.\,\)\(<>]{1}|^)("|«|&#171;|&#187;|&#8220;|&#8221;|&#8243;|&laquo;|&raquo;)?(' . $term_search_str
+                        . ')("|»|&#171;|&#187;|&#8220;|&#8221;|&#8243;|&laquo;|&raquo;)?([\s\r\n\:\;\!\?\.\,\)\(<>]{1}|$)/isu';
                 $result = '';
                 $terms_count = $replace_terms;
                 
