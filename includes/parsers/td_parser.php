@@ -6,7 +6,7 @@
 abstract class TD_Parser {
     protected $counters = array();
     protected $terms = array();
-    protected $cur_url = '';
+    private $cur_url = '';
     
     /**
      * Parses the text
@@ -66,8 +66,9 @@ abstract class TD_Parser {
      * @return string escaped term
      */
     protected function prepare_term_regex( $term ) {
-        $search = array( ' ', '.', '\'', '"', '-', '&', ')', '(', '[', ']', '+', '{', '}', '*', ',', '^', '?', '$', '#' );
-        $replace = array( '\s', '\.', '\\\'', '\"', '\-', '\&', '\)', '\(', '\[', '\]', '\+', '\{', '\}', '\*', '\,', '\^', '\?', '\$', '\#' );
+        $term = preg_quote( $term, '/' );
+        $search = array( ' ', '\'', '"', '&', ',', '#' );
+        $replace = array( '\s', '\\\'', '\"', '\&', '\,', '\#' );
         return str_replace( $search, $replace, $term );
     }
     
@@ -100,8 +101,46 @@ abstract class TD_Parser {
         return $words;
     }
 
+    /**
+     * Checks if current post ID is equal to the first parameter value
+     *
+     * @param $id post ID
+     * @return bool true if current post ID is equal to the ID
+     */
     protected function is_current_post( $id ) {
         global $post;
         return ( $post->ID === ( int )$id ) ? true : false;
+    }
+
+    /**
+     * Compares current page URL with given URL
+     *
+     * @param $url given URL
+     * @return bool true if URLs are equals
+     */
+    protected function is_current_url( $url ) {
+        return $this->get_current_url() === trailingslashit( $url );
+    }
+
+    /**
+     * This function is returns current page URL
+     *
+     * @return string current page URL
+     */
+    private function get_current_url() {
+        if ( $this->cur_url !== '' ) {
+            return $this->cur_url;
+        }
+        $this->cur_url = 'http';
+        if ( $_SERVER[ "HTTPS" ] == "on" ) {
+            $this->cur_url .= "s";
+        }
+        $this->cur_url .= "://";
+        if ( $_SERVER[ "SERVER_PORT" ] != "80" ) {
+            $this->cur_url .= $_SERVER[ "SERVER_NAME" ] . ":" . $_SERVER[ "SERVER_PORT" ] . $_SERVER[ "REQUEST_URI" ];
+        } else {
+            $this->cur_url .= $_SERVER[ "SERVER_NAME" ] . $_SERVER[ "REQUEST_URI" ];
+        }
+        return trailingslashit( $this->cur_url );
     }
 }

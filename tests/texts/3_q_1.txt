@@ -1,7 +1,7 @@
 <p style="text-align: center;"><img title="Зонтик из морской звезды. 3D-визуализация дня" src="http://img.3dyuriki.com/11.05/render-dnya-zontik-iz-morsoki-zvezdy.jpg" alt="Зонтик из морской звезды. 3D-визуализация дня" width="500" height="688" /></p>
 <h3>Инфо.</h3>
 <p>Автор: <strong>Patryk Habryn</strong>, Польша.</p>
-<p><strong>3D-/2D-инструменты:</strong> <a href="http://fdgd.sff">"Maya"</a>, mental ray, Photoshop, ZBrush.</p>
+<p><strong>3D-/2D-инструменты:</strong> "<a href="http://fdgd.sff">Maya</a>", mental ray, Photoshop, ZBrush.</p>
 <h3>О процессе создания забавной подводной сцены.</h3>
 <p>Два персонажа (Медуза и Морская звезда) смоделены с помощью Maya и ZBrush. Визуализация проводилась в mentalray.</p>
 <p>Персонаж не только смоделен и отрендерён, но также полностью привязан:</p>

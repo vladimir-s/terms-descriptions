@@ -128,7 +128,7 @@ class TD_Simple_Quotes_Parser_Test extends PHPUnit_Framework_TestCase {
         
         //test with quotes
         $quouted_text = 'xc xsf "стол" впівп';
-        $parsed_quouted_text = 'xc xsf <a href="http://fdgd.sff">"стол"</a> впівп';
+        $parsed_quouted_text = 'xc xsf "<a href="http://fdgd.sff">стол</a>" впівп';
         $this->assertEquals($parsed_quouted_text, $this->parser->parse( $quouted_text ) );
         
         $orig_file = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/1.txt'));

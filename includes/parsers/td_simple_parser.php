@@ -34,7 +34,7 @@ class TD_Simple_Parser extends TD_Parser {
         '<.*?>',
     );
     
-    private $max_convertions = null;
+    protected $max_convertions = null;
     
     /**
      * Searches for terms in a text and converts them to links.
@@ -67,10 +67,15 @@ class TD_Simple_Parser extends TD_Parser {
             }
             
             foreach ( $this->terms as $term ) {
+                //if page URL or ID is equal to term ID or URL - skipping term
                 if ( $this->is_current_post( $term[ 't_post_id' ] ) ) {
                     continue;
                 }
-                
+                if ( isset( $term[ 't_post_type' ] ) && $term[ 't_post_type' ] === 'ext_link'
+                        && $this->is_current_url( $term[ 't_post_url' ] ) ) {
+                    continue;
+                }
+
                 //t_post_id = 0 indicates that this is an external link
                 if ( $show_title === 'on' && ( int )$term[ 't_post_id' ] !== 0 ) {
                     $title_attr = ' title="' . esc_attr( wp_kses_stripslashes( $term[ 't_post_title' ] ) ) . '" ';

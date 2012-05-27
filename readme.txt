@@ -2,7 +2,7 @@
 Contributors: vladimir.s
 Tags: post, page, links, plugin
 Requires at least: 3.0
-Tested up to: 3.3.1
+Tested up to: 3.3.2
 Stable tag: trunk
 
 This plugin allows you to create list of terms and assign links to them. Plugin replaces terms occurrences in your posts with appropriate links.
@@ -63,6 +63,11 @@ Description of this plugin is available in [Russian]( http://www.simplecoding.or
 4. Tools page
 
 == Changelog ==
+
+= 3.0.5 =
+
+* Additional checks added for external links to prevent self-linking
+* Quotation marks are not included in the links when using the Simple quotes parser
 
 = 3.0.4 =
 

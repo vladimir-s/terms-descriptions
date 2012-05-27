@@ -2,7 +2,7 @@
 <h3>Инфо стол.</h3>
 <h3 style="text-align: justify;">Инфо стол.</h3>
 <p>Автор: <strong>Patryk Habryn</strong>, Польша.</p>
-<p><strong>3D-/2D-инструменты:</strong> <a href="http://fdgd.sff">"Maya"</a>, mental ray, Photoshop, ZBrush.</p>
+<p><strong>3D-/2D-инструменты:</strong> "<a href="http://fdgd.sff">Maya</a>", mental ray, Photoshop, ZBrush.</p>
 <h3>О процессе создания забавной подводной сцены.</h3>
 <p>Два персонажа (Медуза и Морская звезда) смоделены с помощью Maya и ZBrush. Визуализация проводилась в mentalray.</p>
 <p>Персонаж не только смоделен и отрендерён, но также полностью привязан:</p>

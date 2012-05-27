@@ -34,11 +34,16 @@ class TD_Simple_Quotes_Parser extends TD_Simple_Parser {
                 return $text;
             }
             foreach ( $this->terms as $term ) {
+                //if page URL or ID is equal to term ID or URL - skipping term
                 if ( $this->is_current_post( $term[ 't_post_id' ] ) ) {
                     continue;
                 }
-                //regular expression for deviding post context
-                //(devision is made by html tags)
+                if ( isset( $term[ 't_post_type' ] ) && $term[ 't_post_type' ] === 'ext_link'
+                        && $this->is_current_url( $term[ 't_post_url' ] ) ) {
+                    continue;
+                }
+                //regular expression for dividing post context
+                //(division is made by html tags)
                 preg_match_all( '/' . implode( '|', $this->skip_tags ) . '/isu', $text,
                     $matches, PREG_OFFSET_CAPTURE );
                 $start_pos = 0;
@@ -118,8 +123,8 @@ class TD_Simple_Quotes_Parser extends TD_Simple_Parser {
         //if user set replacements number, we execute nesessary number of replacements
         if ( (int)$terms_count > 0 ) {
             if ( 0 < preg_match( $replace_re, $text ) ) {
-                $result = preg_replace( $replace_re, '$1' . $text_before . '<a href="'. $term[ 't_post_url' ]
-                        . '"' . $class_attr . $title_attr . $target . '>$2$3$4</a>' . $text_after . '$5', $text, $terms_count, $replaced );
+                $result = preg_replace( $replace_re, '$1' . $text_before . '$2<a href="'. $term[ 't_post_url' ]
+                        . '"' . $class_attr . $title_attr . $target . '>$3</a>$4' . $text_after . '$5', $text, $terms_count, $replaced );
                 $terms_count -= $replaced;
             }
             else {
@@ -129,8 +134,8 @@ class TD_Simple_Quotes_Parser extends TD_Simple_Parser {
         //if $terms_count === -1 (unlimited) we replace all terms occurrences
         elseif ( (int)$terms_count === -1 ) {
             if ( 0 < preg_match( $replace_re, $text ) ) {
-                $result = preg_replace( $replace_re, '$1' . $text_before . '<a href="'. $term[ 't_post_url' ]
-                        . '"' . $class_attr . $title_attr . $target . '>$2$3$4</a>' . $text_after . '$5', $text );
+                $result = preg_replace( $replace_re, '$1' . $text_before . '$2<a href="'. $term[ 't_post_url' ]
+                        . '"' . $class_attr . $title_attr . $target . '>$3</a>$4' . $text_after . '$5', $text );
             }
             else {
                 $result = $text;
