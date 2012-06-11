@@ -44,6 +44,9 @@ class TD_Frontend {
                 case 'quotes_parser' :
                     $parser = new TD_Simple_Quotes_Parser();
                     break;
+                case 'long_terms_first_parser' :
+                    $parser = new TD_Long_Terms_First_Parser();
+                    break;
                 default :
                     $parser = new TD_Simple_Parser();
                     break;

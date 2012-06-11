@@ -132,7 +132,7 @@ abstract class TD_Parser {
             return $this->cur_url;
         }
         $this->cur_url = 'http';
-        if ( $_SERVER[ "HTTPS" ] == "on" ) {
+        if ( isset( $_SERVER[ "HTTPS" ] ) && $_SERVER[ "HTTPS" ] == "on" ) {
             $this->cur_url .= "s";
         }
         $this->cur_url .= "://";

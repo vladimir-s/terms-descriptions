@@ -24,6 +24,7 @@ This plugin allows.
 * Disable terms to links conversion for individual posts.
 * Wrap links with arbitrary text (for example, you can wrap link with strong tag)
 * Export and import terms and plugin options.
+* Export terms in CSV format.
 * Packet terms creation.
 * Permalinks update function (use it after permalinks structure updates).
 
@@ -63,6 +64,11 @@ Description of this plugin is available in [Russian]( http://www.simplecoding.or
 4. Tools page
 
 == Changelog ==
+
+= 3.1.0 =
+
+* New feature: CVS export is added
+* New feature: Long terms first parser is added
 
 = 3.0.5 =
 

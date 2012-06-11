@@ -40,6 +40,10 @@ class TD_Admin_Tools {
                 $this->message = __( 'Terms successfully created', TD_TEXTDOMAIN );
             }
         }
+        //cvs export
+        if ( isset( $_POST[ 'td_csv_export' ] ) && !empty ( $_POST[ 'td_csv_export' ] ) ) {
+            $this->csv_export();
+        }
     }
     
     /**
@@ -91,6 +95,11 @@ class TD_Admin_Tools {
                 .'<br />pear|pears|http://site.domen<br />'
                 .'Note that if you use term_id the post with this id should exist.', TD_TEXTDOMAIN ); ?></div>
         <input type="submit" name="td_packet_upload" value="<?php _e( 'Add terms', TD_TEXTDOMAIN ); ?>" class="button-primary" />
+    </form>
+    <h3><?php _e( 'CSV Export', TD_TEXTDOMAIN ); ?></h3>
+    <form action="admin.php?page=td-tools" method="post" class="tools_form">
+        <input type="submit" name="td_csv_export" value="<?php _e( 'Get terms in CSV format', TD_TEXTDOMAIN ); ?>" class="button-primary" />
+        <div class="description"><?php _e( 'Please, note, you can\'t restore terms from this file. Use Export instead.', TD_TEXTDOMAIN ); ?></div>
     </form>
 </div>
 <?php        
@@ -203,6 +212,30 @@ class TD_Admin_Tools {
             }
         }
         return true;
+    }
+
+    /**
+     * Sends to browser CSV file with all terms.
+     *
+     * @global type $wpdb wordpress database class
+     */
+    public function csv_export() {
+        header( 'Content-Type:text/csv; charset=windows-1251' );
+        $file_name = 'terms_descriptions_' . date( 'Y_m_d_G_i_s' ) . '.csv';
+        header( 'Content-Disposition:attachment; filename="' . $file_name . '"' );
+
+        global $wpdb;
+        $terms = $wpdb->get_col( 'SELECT t_term FROM ' . $wpdb->prefix . 'td_terms', 0 );
+        $list = array();
+        if ( $terms ) {
+            foreach ( $terms as $term ) {
+                $list[] = '"' . iconv( 'UTF-8', 'windows-1251', str_replace( '"', '""', stripslashes( $term ) ) ) . '"';
+            }
+        }
+
+        echo implode("\n", $list);
+
+        exit();
     }
     
     /**

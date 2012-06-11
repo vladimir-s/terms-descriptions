@@ -82,5 +82,6 @@ else {
     require_once( TD_DIR . '/includes/parsers/td_parser.php' );
     require_once( TD_DIR . '/includes/parsers/td_simple_parser.php' );
     require_once( TD_DIR . '/includes/parsers/td_simple_quotes_parser.php' );
+    require_once( TD_DIR . '/includes/parsers/td_long_terms_first_parser.php' );
     require_once( TD_DIR . '/includes/td_frontend.php' );
 }

@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: termdescription\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-22 19:27+0200\n"
-"PO-Revision-Date: 2012-01-22 19:28+0200\n"
-"Last-Translator: Statsenko Vladimir <vovchiksta@gmail.com>\n"
+"POT-Creation-Date: 2012-06-11 13:43+0200\n"
+"PO-Revision-Date: 2012-06-11 13:47+0200\n"
+"Last-Translator: Vladimir Statsenko <vovchiksta@gmail.com>\n"
 "Language-Team: Vladimir Statsenko <vova_33@gala.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -209,7 +209,15 @@ msgstr "Простой парсер"
 msgid "Simple parser with quotes support"
 msgstr "Простой парсер с поддержкой кавычек"
 
-#: ../includes/td_admin_options.php:145
+#: ../includes/td_admin_options.php:142
+msgid "Long terms first parser"
+msgstr "Парсер с сортировкой терминов по их длинне"
+
+#: ../includes/td_admin_options.php:143
+msgid "Orders terms by their lengths before searching them in text"
+msgstr "Перед поиском терминов в тексте, сортирует их по убыванию их длин"
+
+#: ../includes/td_admin_options.php:149
 msgid "Update"
 msgstr "Изменить"
 
@@ -336,43 +344,55 @@ msgstr "Ошибка создания термина"
 msgid "Terms successfully created"
 msgstr "Термин создан"
 
-#: ../includes/td_admin_tools.php:49
-#: ../includes/td_admin_tools.php:50
-#: ../includes/td_admin_tools.php:68
+#: ../includes/td_admin_tools.php:53
+#: ../includes/td_admin_tools.php:54
+#: ../includes/td_admin_tools.php:72
 msgid "Tools"
 msgstr "Инструменты"
 
-#: ../includes/td_admin_tools.php:74
+#: ../includes/td_admin_tools.php:78
 msgid "Export / Import"
 msgstr "Экспорт / Импорт"
 
-#: ../includes/td_admin_tools.php:76
+#: ../includes/td_admin_tools.php:80
 msgid "Export"
 msgstr "Экспорт"
 
-#: ../includes/td_admin_tools.php:80
+#: ../includes/td_admin_tools.php:84
 msgid "Select file with terms"
 msgstr "Выберите файл с терминами"
 
-#: ../includes/td_admin_tools.php:81
+#: ../includes/td_admin_tools.php:85
 msgid "Import"
 msgstr "Импорт"
 
-#: ../includes/td_admin_tools.php:83
+#: ../includes/td_admin_tools.php:87
 msgid "Packet terms upload"
 msgstr "Пакетная загрузка терминов"
 
-#: ../includes/td_admin_tools.php:86
+#: ../includes/td_admin_tools.php:90
 msgid "Terms list"
 msgstr "Список терминов"
 
-#: ../includes/td_admin_tools.php:87
+#: ../includes/td_admin_tools.php:91
 msgid "Each term should be written on its own line. Use the following format.<br />word_form_1|word_form_2|...|post_id OR URL (with http://)<br />Examples:<br />apple|apples|21<br />pear|pears|http://site.domen<br />Note that if you use term_id the post with this id should exist."
 msgstr "Каждый термин должен быть записан в отдельной строке. Используйте следующий формат.<br />word_form_1|word_form_2|...|post_id OR URL (with http://)<br />Примеры:<br />яблоко|яблоки|21<br />груша|груши|http://site.domen<br />Обратите внимание, что если вы используете id терминов, то посты с этими id должны существовать."
 
-#: ../includes/td_admin_tools.php:93
+#: ../includes/td_admin_tools.php:97
 msgid "Add terms"
-msgstr "Добавить термин"
+msgstr "Добавить термины"
+
+#: ../includes/td_admin_tools.php:99
+msgid "CSV Export"
+msgstr "CSV Экспорт"
+
+#: ../includes/td_admin_tools.php:101
+msgid "Get terms in CSV format"
+msgstr "Загрузить термины в CSV формате"
+
+#: ../includes/td_admin_tools.php:102
+msgid "Please, note, you can't restore terms from this file. Use Export instead."
+msgstr "Пожалуйста, обратите внимание, вы не сможете восстановить термины из этого файла. Если необходимо последуещее восстановление, используйте Экспорт."
 
 #: ../includes/td_meta_box.php:23
 msgid "Terms Descriptions"

@@ -136,7 +136,11 @@ class TD_Admin_Options {
                             <?php _e( 'Simple parser', TD_TEXTDOMAIN ); ?></label><br />
                         <label><input type="radio" name="td_options[parser]" id="quotes_parser" value="quotes_parser"
                             <?php checked( $options[ 'parser' ], 'quotes_parser' ); ?> />
-                            <?php _e( 'Simple parser with quotes support', TD_TEXTDOMAIN ); ?></label>
+                            <?php _e( 'Simple parser with quotes support', TD_TEXTDOMAIN ); ?></label><br />
+                        <label><input type="radio" name="td_options[parser]" id="long_terms_first_parser" value="long_terms_first_parser"
+                            <?php checked( $options[ 'parser' ], 'long_terms_first_parser' ); ?> />
+                            <?php _e( 'Long terms first parser', TD_TEXTDOMAIN ); ?></label>
+                            <span class="description"><?php _e( 'Orders terms by their lengths before searching them in text', TD_TEXTDOMAIN ); ?></span>
                     </td>
                 </tr>
             </tbody>
