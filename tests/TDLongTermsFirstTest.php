@@ -41,6 +41,12 @@ class TD_Long_Terms_First_Test extends PHPUnit_Framework_TestCase {
         $term = array( 'тест', 'тесты', 'тестов' );
         $this->assertEquals( $term, $pt->invokeArgs( $this->parser, array( 'тест|тесты|тестов' ) ) );
         $this->assertEquals( $term, $pt->invokeArgs( $this->parser, array( '  тест|тесты|тестов ' ) ) );
+        $this->assertEquals( $term, $pt->invokeArgs( $this->parser, array( '|тест|тесты|тестов|' ) ) );
+        $this->assertEquals( $term, $pt->invokeArgs( $this->parser, array( '  |тест|тесты|тестов| ' ) ) );
+        $this->assertEquals( $term, $pt->invokeArgs( $this->parser, array( '  |тест|||тесты||тестов| ' ) ) );
+        $this->assertEquals( $term, $pt->invokeArgs( $this->parser, array( '  |тест|  | |тесты||тестов| ' ) ) );
+        $this->assertEquals( $term, $pt->invokeArgs( $this->parser, array( 'тест|тесты|тестов|' ) ) );
+        $this->assertEquals( $term, $pt->invokeArgs( $this->parser, array( 'тест|тесты|тестов|  ' ) ) );
         $this->assertEquals( $term, $pt->invokeArgs( $this->parser, array( ' тест  |тесты |тестов ' ) ) );
         $this->assertEquals( $term, $pt->invokeArgs( $this->parser, array( " тест | тесты\t| тестов" ) ) );
         $this->assertEquals( $term, $pt->invokeArgs( $this->parser, array( " тест | тесты | тестов \n" ) ) );

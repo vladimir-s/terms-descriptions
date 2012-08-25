@@ -90,6 +90,15 @@ abstract class TD_Parser {
         }
         
         $words = explode( '|', $trimmed_term );
+		
+		//removing empty terms
+		foreach ( $words as $key => $word ) {
+			$w = trim($word);
+			if ( empty($w) ) {
+				unset( $words[$key] );
+			}
+		}
+		$words = array_values($words);
         
         if ( false === $words || !is_array( $words ) ) {
             return false;
