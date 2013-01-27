@@ -66,9 +66,10 @@ abstract class TD_Parser {
      * @return string escaped term
      */
     protected function prepare_term_regex( $term ) {
+        $term = str_replace('\\\'', '\'', $term);
         $term = preg_quote( $term, '/' );
-        $search = array( ' ', '\'', '"', '&', ',', '#' );
-        $replace = array( '\s', '\\\'', '\"', '\&', '\,', '\#' );
+        $search = array( ' ', '"', '&', ',', '#' );
+        $replace = array( '\s', '\"', '\&', '\,', '\#' );
         return str_replace( $search, $replace, $term );
     }
     
@@ -129,6 +130,21 @@ abstract class TD_Parser {
      */
     protected function is_current_url( $url ) {
         return $this->get_current_url() === trailingslashit( $url );
+    }
+
+    /**
+     * Counts URLs occurrences in the text
+     *
+     * @param $text original text
+     * @param $term term data (must contain t_post_url field)
+     * @return int number of URL in the text
+     */
+    protected function find_existing_links( $text, $term ) {
+        $url = $term[ 't_post_url' ];
+        if ( substr( $term[ 't_post_url' ], -1 ) === '/' ) {
+            $url = substr( $term[ 't_post_url' ], 0, count( $term[ 't_post_url' ] ) - 2 );
+        }
+        return substr_count( $text, $url );
     }
 
     /**

@@ -80,6 +80,13 @@ class TD_Admin_Options {
                     </td>
                 </tr>
                 <tr valign="middle">
+                    <th scope="row"><?php _e( 'Consider existing links', TD_TEXTDOMAIN ); ?></th>
+                    <td>
+                        <input name="td_options[consider_existing_links]" type="checkbox" id="consider_existing_links" <?php if ( isset( $options[ 'consider_existing_links' ] ) ) { checked( $options[ 'consider_existing_links' ], 'on' ); } ?> />
+                        <span class="description"><?php _e( 'If this option is checked plugin will count links that are added by hand.', TD_TEXTDOMAIN ); ?></span>
+                    </td>
+                </tr>
+                <tr valign="middle">
                     <th scope="row"><?php _e( 'Add CSS class', TD_TEXTDOMAIN ); ?></th>
                     <td>
                         <input name="td_options[class]" type="text" id="class" value="<?php echo $options[ 'class' ]; ?>" class="small-text" /> <?php _e( 'to terms links.', TD_TEXTDOMAIN ); ?>
@@ -177,6 +184,9 @@ class TD_Admin_Options {
         }
         if ( !isset( $input[ 'convert_in_comments' ] ) ) {
             $input[ 'convert_in_comments' ] = false;
+        }
+        if ( !isset( $input[ 'consider_existing_links' ] ) ) {
+            $input[ 'consider_existing_links' ] = false;
         }
         if ( !isset( $input[ 'convert_only_single' ] ) ) {
             $input[ 'convert_only_single' ] = false;

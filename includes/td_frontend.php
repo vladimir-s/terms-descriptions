@@ -60,11 +60,16 @@ class TD_Frontend {
             if ( isset( $this->options[ 'open_new_tab' ] ) && 'on' === $this->options[ 'open_new_tab' ] ) {
                 $target = ' target="_blank" ';
             }
-            
+
+            $consider_existing_links = false;
+            if ( isset( $this->options[ 'consider_existing_links' ] ) && 'on' === $this->options[ 'consider_existing_links' ] ) {
+                $consider_existing_links = true;
+            }
+
             //replacing terms
             return $parser->parse( $content, $this->options[ 'convert_first_n_terms' ], $this->options[ 'class' ]
                     , ( int )$this->options[ 'convert_total' ], $this->options[ 'show_title' ]
-                    , $this->options[ 'text_before' ], $this->options[ 'text_after' ], $target );
+                    , $this->options[ 'text_before' ], $this->options[ 'text_after' ], $target, $consider_existing_links );
         }
         else {
             return $content;

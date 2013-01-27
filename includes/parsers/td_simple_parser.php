@@ -49,7 +49,7 @@ class TD_Simple_Parser extends TD_Parser {
      */
     public function parse( $text, $replace_terms = '-1', $class_attr = false
             , $max_convertions = -1, $show_title = false
-            , $text_before = '', $text_after = '', $target = '' ) {
+            , $text_before = '', $text_after = '', $target = '', $consider_existing_links = false ) {
         if ( null !== $text && !empty( $text ) ) {
             if ( $class_attr !== false && trim( $class_attr ) !== '' ) {
                 $class_attr = ' class="' . $class_attr . '"';
@@ -65,7 +65,7 @@ class TD_Simple_Parser extends TD_Parser {
             if ( is_int( $this->max_convertions ) && $this->max_convertions <= 0 ) {
                 return $text;
             }
-            
+
             foreach ( $this->terms as $term ) {
                 //if page URL or ID is equal to term ID or URL - skipping term
                 if ( $this->is_current_post( $term[ 't_post_id' ] ) ) {
@@ -97,7 +97,10 @@ class TD_Simple_Parser extends TD_Parser {
 
                 $result = '';
                 $terms_count = $replace_terms;
-                
+                if ( true === $consider_existing_links ) {
+                    $terms_count -= $this->find_existing_links( $text, $term );
+                }
+
                 //adding links to terms
 				foreach ( $matches[0] as $match ) {
 					//is their a text before this occuarance?
@@ -150,11 +153,11 @@ class TD_Simple_Parser extends TD_Parser {
     protected function replace_term( $replace_re, $term, $text, &$terms_count, $class_attr
             , $title_attr = '', $text_before = '', $text_after = '', $target = '' ) {
         $result = '';
-        
+
         if ( null !== $this->max_convertions && ( int )$terms_count > $this->max_convertions ) {
             $terms_count = $this->max_convertions;
         }
-        
+
         //if user set replacements number, we execute nesessary number of replacements
         if ( (int)$terms_count > 0 ) {
             if ( 0 < preg_match( $replace_re, $text ) ) {

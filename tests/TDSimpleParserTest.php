@@ -36,7 +36,7 @@ class TD_Simple_Parser_Test extends PHPUnit_Framework_TestCase {
         $this->assertEquals( false, $pt->invokeArgs( $this->parser, array( 7989 ) ) );
         $this->assertEquals( false, $pt->invokeArgs( $this->parser, array( '' ) ) );
         $this->assertEquals( false, $pt->invokeArgs( $this->parser, array( '   ' ) ) );
-        
+
         $term = array( 'тест', 'тесты', 'тестов' );
         $this->assertEquals( $term, $pt->invokeArgs( $this->parser, array( 'тест|тесты|тестов' ) ) );
         $this->assertEquals( $term, $pt->invokeArgs( $this->parser, array( 'тест|тесты|тестов|' ) ) );
@@ -64,13 +64,13 @@ class TD_Simple_Parser_Test extends PHPUnit_Framework_TestCase {
             array( 't_term' => 'сто.л|сто.ла|сто.лов' ),
             array( 't_term' => ' (пирог) | (пирогов)' ),
         );
-        
+
         $this->parser->set_terms( $strings );
         $this->assertEquals( $terms, $this->parser->get_terms() );
 
         $this->parser->set_terms( '' );
         $this->assertEquals( $terms, $this->parser->get_terms() );
-        
+
         $this->parser->set_terms( 'ds dsf sdf' );
         $this->assertEquals( $terms, $this->parser->get_terms() );
 
@@ -86,36 +86,36 @@ class TD_Simple_Parser_Test extends PHPUnit_Framework_TestCase {
         $strings_1 = array(
             array( 't_term' => ' (пирог) | (пирогов)' ),
         );
-        
+
         $this->parser->set_terms( $strings_1 );
         $this->assertEquals( array( $terms[ 2 ] ), $this->parser->get_terms() );
     }
-    
+
     public function testAddTerm() {
         $terms = array();
-        
+
         $this->parser->add_term( array( 't_term' => '' ) );
         $this->assertEquals( $terms, $this->parser->get_terms() );
-        
+
         $terms = array(
             array( 't_term' => array( 'сто\{л\}', 'сто\{ла\}', 'сто\{лов\}' ) ),
         );
         $this->parser->add_term( array( 't_term' => ' сто{л} | сто{ла}|сто{лов}' ) );
         $this->assertEquals( $terms, $this->parser->get_terms() );
-        
+
         $terms[] = array( 't_term' => array( 'вишня' ) );
         $this->parser->add_term( array( 't_term' => "вишня\r\n" ) );
         $this->assertEquals( $terms, $this->parser->get_terms() );
-        
+
         $terms[] = array( 't_term' => array( 'слива', 'слив' ) );
         $this->parser->add_term( array( 't_term' => "\nслива\t|слив  " ) );
         $this->assertEquals( $terms, $this->parser->get_terms() );
-        
+
         $terms[] = array( 't_term' => array( 'Большие\sворота', 'Больших\sворот' ) );
         $this->parser->add_term( array( 't_term' => "Большие ворота | Больших ворот" ) );
         $this->assertEquals( $terms, $this->parser->get_terms() );
     }
-    
+
     public function testParse() {
         $terms = array(
             array(
@@ -128,14 +128,14 @@ class TD_Simple_Parser_Test extends PHPUnit_Framework_TestCase {
         $parsed_text = 'xc xsf <a href="http://fdgd.sff">стол</a> впівп';
         //testing without terms
         $this->assertEquals($orig_text, $this->parser->parse( $orig_text ) );
-        
+
         $this->parser->set_terms( $terms );
         $this->assertEquals($parsed_text, $this->parser->parse( $orig_text ) );
-        
+
         $orig_file = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/1.txt'));
         $parsed_file = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/1_1.txt'));
         $this->assertEquals($parsed_file, $this->parser->parse($orig_file));
-        
+
         $p_2 = $this->getMock('TD_Simple_Parser', array('is_current_url'));
         $terms_2 = array(
             array(
@@ -150,11 +150,11 @@ class TD_Simple_Parser_Test extends PHPUnit_Framework_TestCase {
             ),
         );
         $p_2->set_terms($terms_2);
-        
+
         $orig_file_2 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/2.txt'));
         $parsed_file_2 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/2_1.txt'));
         $this->assertEquals($parsed_file_2, $p_2->parse($orig_file_2, 2));
-        
+
         $p_3 = $this->getMock('TD_Simple_Parser', array('is_current_url'));
         $terms_3 = array(
             array(
@@ -174,7 +174,7 @@ class TD_Simple_Parser_Test extends PHPUnit_Framework_TestCase {
             ),
         );
         $p_3->set_terms($terms_3);
-        
+
         $orig_file_3 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/3.txt'));
         $parsed_file_3 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/3_1.txt'));
         $this->assertEquals($parsed_file_3, $p_3->parse($orig_file_3, 1));
@@ -182,15 +182,42 @@ class TD_Simple_Parser_Test extends PHPUnit_Framework_TestCase {
         $orig_file_5 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/4.txt'));
         $parsed_file_5 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/4_1.txt'));
         $this->assertEquals($parsed_file_5, $p_3->parse($orig_file_5, 1));
-        
+
         $p_4 = $this->getMock('TD_Simple_Parser', array('is_current_url'));
         $terms_4 = array(
         );
         $p_4->set_terms($terms_4);
-        
+
         $orig_file_4 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/3.txt'));
         $parsed_file_4 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/3_1.txt'));
         $this->assertEquals($orig_file_4, $p_4->parse($orig_file_4, 1));
+
+        $p_6 = $this->getMock('TD_Simple_Parser', array('is_current_url'));
+        $terms_6 = array(
+            array(
+                't_term' => "Zachary's Jewelers",
+                't_post_url' => 'http://fdgd.sff',
+                't_post_id' => 22,
+            )
+        );
+        $p_6->set_terms($terms_6);
+        $orig_text = "fdsgsfg Zachary's Jewelers впівп";
+        $parsed_text = "fdsgsfg <a href=\"http://fdgd.sff\">Zachary's Jewelers</a> впівп";
+        $this->assertEquals($parsed_text, $p_6->parse( $orig_text ) );
+
+        $p_7 = $this->getMock('TD_Simple_Parser', array('is_current_url'));
+        $terms_7 = array(
+            array(
+                't_term' => "test",
+                't_post_url' => 'http://fdgd.sff',
+                't_post_id' => 22,
+            )
+        );
+        $p_7->set_terms($terms_7);
+        $orig_text_1 = "fdsgsfg <a href='http://fdgd.sff'>test</a> впівп";
+        $this->assertEquals($orig_text_1, $p_7->parse( $orig_text_1, '-1', false, -1, false, '<strong>', '</strong>', '', true ) );
+        $orig_text_2 = "fdsgsfg <a href='http://fdgd.sff'>test</a> test впівп";
+        $this->assertEquals($orig_text_2, $p_7->parse( $orig_text_2, '1', false, -1, false, '<strong>', '</strong>', '', true ) );
     }
     
     public function testWrap() {
@@ -205,6 +232,28 @@ class TD_Simple_Parser_Test extends PHPUnit_Framework_TestCase {
         $parsed_text = 'xc xsf <strong><a href="http://fdgd.sff">стол</a></strong> впівп';
         //testing without terms
         $this->assertEquals($orig_text, $this->parser->parse( $orig_text, '-1', false, -1, false, '<strong>', '</strong>' ) );
+    }
+
+    public function testFindExistingLinks() {
+        $fel = self::getMethod( 'find_existing_links' );
+
+        $text_1 = 'test <a href="http://ddd.com">test</a> test';
+        $term = array(
+            't_post_url' => 'http://ddd.com'
+        );
+        $this->assertEquals( 1, $fel->invokeArgs( $this->parser, array( $text_1, $term ) ) );
+
+        $text_2 = 'test <a href="http://ddd.com">test</a> http://ddd.com test';
+        $this->assertEquals( 2, $fel->invokeArgs( $this->parser, array( $text_2, $term ) ) );
+
+        $text_3 = 'test <a href="http://ddd.com/">test</a> http://ddd.com test';
+        $this->assertEquals( 2, $fel->invokeArgs( $this->parser, array( $text_3, $term ) ) );
+
+        $text_4 = 'test <a href="http://ddd.com/">test</a> http://ddd.com/ test';
+        $term_2 = array(
+            't_post_url' => 'http://ddd.com/'
+        );
+        $this->assertEquals( 2, $fel->invokeArgs( $this->parser, array( $text_4, $term_2 ) ) );
     }
     
     protected static function getMethod( $name ) {

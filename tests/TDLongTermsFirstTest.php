@@ -191,6 +191,33 @@ class TD_Long_Terms_First_Test extends PHPUnit_Framework_TestCase {
         $orig_file_4 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/3.txt'));
         $parsed_file_4 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/3_1.txt'));
         $this->assertEquals($orig_file_4, $p_4->parse($orig_file_4, 1));
+
+        $p_6 = $this->getMock('TD_Long_Terms_First_Parser', array('is_current_url'));
+        $terms_6 = array(
+            array(
+                't_term' => "Zachary's Jewelers",
+                't_post_url' => 'http://fdgd.sff',
+                't_post_id' => 22,
+            )
+        );
+        $p_6->set_terms($terms_6);
+        $orig_text = "fdsgsfg Zachary's Jewelers впівп";
+        $parsed_text = "fdsgsfg <a href=\"http://fdgd.sff\">Zachary's Jewelers</a> впівп";
+        $this->assertEquals($parsed_text, $p_6->parse( $orig_text ) );
+
+        $p_7 = $this->getMock('TD_Long_Terms_First_Parser', array('is_current_url'));
+        $terms_7 = array(
+            array(
+                't_term' => "test",
+                't_post_url' => 'http://fdgd.sff',
+                't_post_id' => 22,
+            )
+        );
+        $p_7->set_terms($terms_7);
+        $orig_text_1 = "fdsgsfg <a href='http://fdgd.sff'>test</a> впівп";
+        $this->assertEquals($orig_text_1, $p_7->parse( $orig_text_1, '-1', false, -1, false, '<strong>', '</strong>', '', true ) );
+        $orig_text_2 = "fdsgsfg <a href='http://fdgd.sff'>test</a> test впівп";
+        $this->assertEquals($orig_text_2, $p_7->parse( $orig_text_2, '1', false, -1, false, '<strong>', '</strong>', '', true ) );
     }
 
     public function testSortTerms() {
