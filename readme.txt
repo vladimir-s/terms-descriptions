@@ -65,6 +65,11 @@ Description of this plugin is available in [Russian]( http://www.simplecoding.or
 
 == Changelog ==
 
+= 3.2.3 =
+
+* "convert unlimited terms" with "consider existing links" option bug fixed
+* Mockpress added to the plugin
+
 = 3.1.2 =
 
 * New feature: consider existing links option added

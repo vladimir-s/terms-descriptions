@@ -97,38 +97,43 @@ class TD_Simple_Parser extends TD_Parser {
 
                 $result = '';
                 $terms_count = $replace_terms;
-                if ( true === $consider_existing_links ) {
+                if ( $terms_count !== '-1' && true === $consider_existing_links ) {
                     $terms_count -= $this->find_existing_links( $text, $term );
                 }
 
                 //adding links to terms
-				foreach ( $matches[0] as $match ) {
-					//is their a text before this occuarance?
-					$length = $match[1] - $start_pos;
-					if ( $length > 0 ) {
-						//searching for a term
-						$fragment = substr( $text, $start_pos, $length );
-						$result .= $this->replace_term( $replace_re, $term, $fragment
+                foreach ( $matches[0] as $match ) {
+                    //is their a text before this occuarance?
+                    $length = $match[1] - $start_pos;
+                    if ( $length > 0 ) {
+                        //searching for a term
+                        $fragment = substr( $text, $start_pos, $length );
+                        $result .= $this->replace_term( $replace_re, $term, $fragment
                                 , $terms_count, $class_attr, $title_attr, $text_before
                                 , $text_after, $target );
-					}
-					//adding html tag to the result
-					$result .= $match[0];
-					$start_pos = $match[1] + strlen( $match[0] );
+                    }
+                    //adding html tag to the result
+                    $result .= $match[0];
+                    $start_pos = $match[1] + strlen( $match[0] );
                     
                     if ( is_int( $this->max_convertions ) && $this->max_convertions <= 0 ) {
                         break;
                     }
-				}
-				//cheking if all post content was parsed
-				//(problem may occur if the closing tag in post content was missed)
-				if ( $start_pos < strlen( $text )) {
-					$fragment = substr( $text, $start_pos );
-                    $result .= $this->replace_term( $replace_re, $term, $fragment
-                            , $terms_count, $class_attr, $title_attr, $text_before
-                            , $text_after, $target );
-				}
-				$text = $result;
+                }
+                //cheking if all post content was parsed
+                //(problem may occur if the closing tag in post content was missed)
+                if ( $start_pos < strlen( $text )) {
+                    $fragment = substr( $text, $start_pos );
+                    if ( is_int( $this->max_convertions ) && $this->max_convertions <= 0 ) {
+                        $result .= $fragment;
+                    }
+                    else {
+                        $result .= $this->replace_term( $replace_re, $term, $fragment
+                                , $terms_count, $class_attr, $title_attr, $text_before
+                                , $text_after, $target );
+                    }
+                }
+                $text = $result;
                 
                 if ( is_int( $this->max_convertions ) && $this->max_convertions <= 0 ) {
                     break;

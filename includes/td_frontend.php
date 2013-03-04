@@ -12,11 +12,11 @@ class TD_Frontend {
         $this->options = get_option( 'td_options' );
         if ( false !== $this->options ) {
             //post filter
-            if ( true == $this->options[ 'convert_in_posts' ] ) {
+            if ( 'on' === $this->options[ 'convert_in_posts' ] ) {
                 add_filter( 'the_content', array( $this, 'parse_content' ) );
             }
             //comments filter
-            if ( true == $this->options[ 'convert_in_comments' ] ) {
+            if ( 'on' === $this->options[ 'convert_in_comments' ] ) {
                 add_filter( 'comment_text', array( $this, 'parse_content' ) );
             }
         }
@@ -31,7 +31,7 @@ class TD_Frontend {
      */
     public function parse_content( $content ) {
         //checking if have to convert terms on this page
-        if ( false == $this->options[ 'convert_only_single' ] || is_single() || is_page() ) {
+        if ( false === $this->options[ 'convert_only_single' ] || is_single() || is_page() ) {
             global $wpdb, $post;
             if ( 'on' === get_post_meta( $post->ID, '_disable_terms_descriptions', true ) ) {
                 return $content;
