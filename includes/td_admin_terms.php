@@ -8,7 +8,7 @@ class TD_Admin_Terms {
     //options defaults
     private $td_options = array(
                 'terms_per_page' => 20,
-                'convert_in_posts' => true,
+                'convert_in_posts' => 'on',
                 'convert_in_comments' => false,
                 'convert_first_n_terms' => 3,
                 'class' => '',
@@ -16,6 +16,12 @@ class TD_Admin_Terms {
                 'parser' => 'simple_parser',
                 'text_before' => '',
                 'text_after' => '',
+                'convert_total' => -1,
+                'consider_existing_links' => false,
+                'open_new_tab' => false,
+                'show_title' => false,
+                'show_before' => '',
+                'show_after' => '',                
             );
     private $terms_ids = array();
 
@@ -24,7 +30,7 @@ class TD_Admin_Terms {
      */
     public function __construct() {
         register_activation_hook( TD_FILE, array( $this, 'install' ) );
-		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+        add_action( 'admin_menu', array( $this, 'admin_menu' ) );
         add_action( 'admin_notices', array( $this, 'update_message' ) );
         add_action( 'admin_init', array( $this, 'update_db' ) );
     }
@@ -171,14 +177,14 @@ class TD_Admin_Terms {
      * @global type $wpdb wordpress database class
      */
     public function admin_menu() {
-		load_plugin_textdomain( TD_TEXTDOMAIN, false, TD_TEXTDOMAIN . '/lang' );
-		$this->page = add_menu_page( __( 'Terms', TD_TEXTDOMAIN )
-				, __( 'Terms', TD_TEXTDOMAIN )
-				, 'manage_options'
-				, TD_TEXTDOMAIN
-				, array( $this, 'terms_page' ) );
-		add_action( 'admin_print_scripts-' . $this->page, array( $this, 'load_scripts' ) );
-		add_action( 'admin_print_styles-' . $this->page, array( $this, 'load_styles' ) );
+        load_plugin_textdomain( TD_TEXTDOMAIN, false, TD_TEXTDOMAIN . '/lang' );
+        $this->page = add_menu_page( __( 'Terms', TD_TEXTDOMAIN )
+                , __( 'Terms', TD_TEXTDOMAIN )
+                , 'manage_options'
+                , TD_TEXTDOMAIN
+                , array( $this, 'terms_page' ) );
+        add_action( 'admin_print_scripts-' . $this->page, array( $this, 'load_scripts' ) );
+        add_action( 'admin_print_styles-' . $this->page, array( $this, 'load_styles' ) );
         
         $this->post_types = get_post_types( array(
             'public' => true,
@@ -195,13 +201,13 @@ class TD_Admin_Terms {
      *
      * @global type $wpdb wordpress database class
      */
-	public function load_scripts() {
-		wp_enqueue_script( 'td_autocomplete', TD_URL . '/js/jquery.autocomplete.min.js'
-				, array( 'jquery' ), '1.0', true );
-		wp_enqueue_script( 'td_template', TD_URL . '/js/jquery.tmpl.min.js'
-				, array( 'jquery' ), '1.0', true );
+    public function load_scripts() {
+        wp_enqueue_script( 'td_autocomplete', TD_URL . '/js/jquery.autocomplete.min.js'
+                , array( 'jquery' ), '1.0', true );
+        wp_enqueue_script( 'td_template', TD_URL . '/js/jquery.tmpl.min.js'
+                , array( 'jquery' ), '1.0', true );
         wp_enqueue_script( 'td_terms', TD_URL . '/js/terms.js'
-				, array( 'td_autocomplete', 'jquery-ui-dialog' ), '1.0', true );
+                , array( 'td_autocomplete', 'jquery-ui-dialog' ), '1.0', true );
         //translations for use in JS code and array of terms ids
         wp_localize_script( 'td_terms', 'td_messages', array(
             'enter_term' => __( 'Enter the term, please', TD_TEXTDOMAIN ),
@@ -255,7 +261,7 @@ class TD_Admin_Terms {
     public function terms_page() {
 ?>
 <div class="wrap">
-	<h2><?php _e( 'Terms', TD_TEXTDOMAIN ); ?></h2>
+    <h2><?php _e( 'Terms', TD_TEXTDOMAIN ); ?></h2>
     <form action="#" method="post" id="td_add_term_form">
     <?php wp_nonce_field( 'td_add_term' ); ?>
     <table class="form-table">

@@ -45,7 +45,7 @@ class TD_Meta_Box {
             return;
         }
 
-        if ( !wp_verify_nonce( $_POST[ '_td_nonce' ], 'disable_terms_descriptions' ) ) {
+        if ( !isset($_POST[ '_td_nonce' ]) || !wp_verify_nonce( $_POST[ '_td_nonce' ], 'disable_terms_descriptions' ) ) {
             return;
         }
 

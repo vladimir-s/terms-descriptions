@@ -1,4 +1,5 @@
 <?php
+require_once 'mockpress/mockpress.php';
 require_once '../includes/parsers/td_parser.php';
 require_once '../includes/parsers/td_simple_parser.php';
 require_once '../includes/parsers/td_simple_quotes_parser.php';
@@ -8,7 +9,7 @@ class TD_Simple_Quotes_Parser_Test extends PHPUnit_Framework_TestCase {
     
     public function setUp() {
         global $post;
-        $post->ID = 1;
+		$post = (object)array('ID' => 1);
         $this->parser = $this->getMock('TD_Simple_Quotes_Parser', array('is_current_url'));
     }
     
