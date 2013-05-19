@@ -40,7 +40,9 @@ Please, note that terms *will not* be replaced with links in following cases.
 
 Huge terms lists with hundreds of terms can increase page creation time. In such cases, consider to use caching plugin.
 
-Description of this plugin is available in [Russian]( http://www.simplecoding.org/plagin-wordpress-terms-descriptions "Terms Descriptions WordPress Plugin").
+Detail description of this plugin is available in [English]( http://www.simplecoding.org/wordpress-easy-cross-linking-with-terms-descriptions-plugin "WordPress: easy cross-linking with Terms Descriptions plugin").
+
+Detail description of this plugin is available in [Russian]( http://www.simplecoding.org/plagin-wordpress-terms-descriptions "Terms Descriptions WordPress Plugin").
 
 == Installation ==
 
@@ -65,7 +67,12 @@ Description of this plugin is available in [Russian]( http://www.simplecoding.or
 
 == Changelog ==
 
-= 3.2.3 =
+= 3.1.4 =
+
+* Bug fix: Undefined index notice for text_before and text_after variables fixed
+* Description updated
+
+= 3.1.3 =
 
 * "convert unlimited terms" with "consider existing links" option bug fixed
 * Mockpress added to the plugin
