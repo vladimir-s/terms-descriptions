@@ -178,11 +178,14 @@ class TD_Admin_Terms {
      */
     public function admin_menu() {
         load_plugin_textdomain( TD_TEXTDOMAIN, false, TD_TEXTDOMAIN . '/lang' );
-        $this->page = add_menu_page( __( 'Terms', TD_TEXTDOMAIN )
-                , __( 'Terms', TD_TEXTDOMAIN )
-                , 'manage_options'
-                , TD_TEXTDOMAIN
-                , array( $this, 'terms_page' ) );
+        $this->page = add_menu_page(
+            __( 'Terms', TD_TEXTDOMAIN )
+            , __( 'Terms', TD_TEXTDOMAIN )
+            , 'manage_options'
+            , TD_TEXTDOMAIN
+            , array( $this, 'terms_page' )
+            , ''
+        );
         add_action( 'admin_print_scripts-' . $this->page, array( $this, 'load_scripts' ) );
         add_action( 'admin_print_styles-' . $this->page, array( $this, 'load_styles' ) );
         
@@ -202,12 +205,8 @@ class TD_Admin_Terms {
      * @global type $wpdb wordpress database class
      */
     public function load_scripts() {
-        wp_enqueue_script( 'td_autocomplete', TD_URL . '/js/jquery.autocomplete.min.js'
-                , array( 'jquery' ), '1.0', true );
-        wp_enqueue_script( 'td_template', TD_URL . '/js/jquery.tmpl.min.js'
-                , array( 'jquery' ), '1.0', true );
         wp_enqueue_script( 'td_terms', TD_URL . '/js/terms.js'
-                , array( 'td_autocomplete', 'jquery-ui-dialog' ), '1.0', true );
+                , array( 'jquery-ui-autocomplete', 'jquery-ui-dialog', 'backbone' ), '1.0', true );
         //translations for use in JS code and array of terms ids
         wp_localize_script( 'td_terms', 'td_messages', array(
             'enter_term' => __( 'Enter the term, please', TD_TEXTDOMAIN ),
@@ -226,6 +225,7 @@ class TD_Admin_Terms {
             'updating_permalinks' => __( 'Updating...', TD_TEXTDOMAIN ),
             'done' => __( 'Done!', TD_TEXTDOMAIN ),
             'terms_ids' => json_encode( $this->terms_ids ),
+            'dbl_click_to_open_list' => __('Double click to open the titles list or type some letters', TD_TEXTDOMAIN),
         ) );
         
         global $wpdb;
@@ -248,8 +248,6 @@ class TD_Admin_Terms {
      * Including CSS files
      */
     public function load_styles() {
-        wp_enqueue_style( 'td_autocomplete_css', TD_URL . '/css/jquery.autocomplete.css' );
-        wp_enqueue_style( 'td_jquery_ui_smoothness', TD_URL . '/css/smoothness/jquery-ui-1.8.16.custom.css' );
         wp_enqueue_style( 'td_css', TD_URL . '/css/td_styles.css' );
     }
     
@@ -291,13 +289,17 @@ class TD_Admin_Terms {
     </table>
         <p class="submit">
             <input type="submit" name="td_add_term" id="td_add_term" class="button-primary" value="<?php _e( 'Add term', TD_TEXTDOMAIN ); ?>">
+            <span class="spinner" id="save_term_spinner"></span>
         </p>
     </form>
-    
+
+    <hr class="form-divider" />
     <form action="#" method="post" id="td_update_permalinks">
+        <span class="description"><?php _e('Press this button if you have updated permalinks structure.', TD_TEXTDOMAIN); ?></span>
         <input type="submit" class="button-primary" name="td_update_permalinks_btn" value="<?php _e( 'Update permalinks', TD_TEXTDOMAIN ); ?>" />
     </form>
-    
+    <hr class="form-divider" />
+
     <?php
     global $wpdb;
     //getting terms data

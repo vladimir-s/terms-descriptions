@@ -1,20 +1,20 @@
 ( function( $ ) {
     //term row template 
-    var term_template = $.template(
-        '<tr id="term_${t_id}">' + '<th scope="row">${t_id}</th>'
+    var term_template = _.template(
+        '<tr id="term_<%=t_id%>">' + '<th scope="row"><%=t_id%></th>'
         + '<td>'
-        + '<strong>${t_term}</strong>'
+        + '<strong><%=t_term%></strong>'
         + '<div class="row-actions">'
-        + '<span class="edit"><a href="?action=td_edit_term&amp;term_id=${t_id}">' + td_messages.edit + '</a> | </span>'
-        + '<span class="trash"><a href="?action=td_delete_term&amp;term_id=${t_id}&amp;_wpnonce=' + td_messages.nonce + '">' + td_messages.remove + '</a></span>'
+        + '<span class="edit"><a href="?action=td_edit_term&amp;term_id=<%=t_id%>">' + td_messages.edit + '</a> | </span>'
+        + '<span class="trash"><a href="?action=td_delete_term&amp;term_id=<%=t_id%>&amp;_wpnonce=' + td_messages.nonce + '">' + td_messages.remove + '</a></span>'
         + '</div>'
         + '</td>'
-        + '<td><a href="${t_post_url}" target="_blank">${t_post_title}</a></td>'
+        + '<td><a href="<%=t_post_url%>" target="_blank"><%=t_post_title%></a></td>'
         + '<tr>' );
     
     //term id field template
-    var term_id_field_template = $.template(
-        '<input type="hidden" name="td_term_id" id="td_term_id" value="${t_id}">'
+    var term_id_field_template = _.template(
+        '<input type="hidden" name="td_term_id" id="td_term_id" value="<%=t_id%>">'
     );
     
     //parsing terms_ids
@@ -58,20 +58,24 @@
         if ( $( '#td_edit_term' ).length === 1 ) {
             values.action = 'td_update_term';
         }
+
+        $('#td_add_term').attr('disabled', true);
+        $('#save_term_spinner').css('display', 'inline-block');
+
         //sending AJAX request
         $.post( td_messages.url_save, values, function( response ) {
             if ( response.status === 'OK' ) {
                 //adding new row in a table
                 if ( values.action === 'td_add_term' ) {
                     term_add_msg.insertAfter( 'div.wrap h2' );
-                    $.tmpl( term_template, response.term_data ).fadeIn( 'slow' ).prependTo( 'table.wp-list-table tbody' );
+                    $( term_template( response.term_data ) ).fadeIn( 'slow' ).prependTo( 'table.wp-list-table tbody' );
                     //adding term id to global terms array
                     terms_ids.push( response.term_data.t_id );
                 }
                 //updating the term row in a table
                 if ( values.action === 'td_update_term' ) {
                     term_update_msg.insertAfter( 'div.wrap h2' );
-                    var row_cells = $.tmpl( term_template, response.term_data ).children();
+                    var row_cells = $( term_template( response.term_data ) ).children();
                     $( '#term_' + response.term_data.t_id ).html( '' ).append( row_cells )
                         .animate( {'background-color' : 'lightYellow'}, 100, function() {
                             $( this ).animate( {'background-color' : 'transparent'}, 100 );
@@ -85,33 +89,65 @@
             else {
                 alert( response.message );
             }
+
+            $('#td_add_term').attr('disabled', false);
+            $('#save_term_spinner').css('display', 'none');
         } );
         
         return false;
     } );
-    
+
     //content type select
     var content_type = $( '#td_content_type' );
+    var link_field = $( '#td_link' );
+
+    function get_posts() {
+        var posts = [];
+        var post_type = content_type.val();
+        var search_exp = new RegExp(link_field.val(), 'i');
+
+        $.each(td_posts, function(i, post) {
+            if (post.post_type === post_type && search_exp.test(post.post_title)) {
+                posts.push({
+                    label: post.post_title,
+                    value: post.post_title,
+                    ID: post.ID
+                });
+            }
+        });
+
+        return posts;
+    }
+
+    link_field.autocomplete({
+        source: function (request, response) {
+            response(get_posts());
+        },
+        select: function (event, ui) {
+            $('#td_post_id').val(ui.item.ID);
+        },
+        minLength: 0
+    });
+
+    link_field.dblclick(function() {
+        link_field.autocomplete('search', '');
+    });
+
     //updating autocomplete settings if content type was changed
     content_type.change( function() {
         $( '#td_link' ).val( '' );
         $( '#td_post_id' ).val( '' );
-        $( '#td_link' ).autocomplete( td_posts,
-            {
-                minChars: 0,
-                matchContains: true,
-                max: 9999,
-                formatItem: function( item ) {
-                    var post_type = content_type.val();
-                    if ( item.post_type !== post_type ) {
-                        return false;
-                    }
-                    return item.post_title;
-                }
-            }
-        ).result( function( event, item ) {
-            $( this ).parent().find( '#td_post_id' ).val( item.ID );
-        } );
+
+        if (content_type.val() !== 'ext_link' && content_type.val() !== 'post_id') {
+            link_field.attr('placeholder', td_messages.dbl_click_to_open_list);
+        }
+        else {
+            link_field.attr('placeholder', '');
+        }
+
+        $( '#td_link').autocomplete('option', 'source', function (request, response) {
+            response(get_posts());
+        });
     } );
     
     $( '#td_content_type' ).trigger( 'change' );
@@ -163,7 +199,7 @@
                     var term_id_field = $( '#td_term_id' );
                     //inserting term_id field
                     if ( term_id_field.length === 0 ) {
-                        $.tmpl( term_id_field_template, response.term ).insertAfter( $( '#td_post_id' ) );
+                        $( term_id_field_template( response.term ) ).insertAfter( $( '#td_post_id' ) );
                     }
                     else {
                         term_id_field.val( response.term.t_id );
@@ -216,7 +252,9 @@
                 title: td_messages.updating_permalinks,
                 close: function() {
                     stop_updating = true;
-                }
+                },
+                dialogClass: 'update-permalinks-dialog',
+                modal: true
             } );
             //updating terms permalinks
             $( terms_ids ).each( function( i, term ) {
