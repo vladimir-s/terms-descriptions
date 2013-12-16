@@ -325,23 +325,24 @@ class TD_Admin_Terms {
     }
     ?>
     
-    <div id="terms_filter">
-        <form id="filter_form" action="<?php echo get_admin_url( null, 'admin.php' ); ?>" method="get">
+    <div id="terms_filter" class="tablenav top">
+        <form id="filter_form" class="alignleft" action="<?php echo get_admin_url( null, 'admin.php' ); ?>" method="get">
             <label><?php _e( 'Search', TD_TEXTDOMAIN ); ?> <input type="text" name="term_search" value="<?php echo $search_str; ?>" /></label>
-            <input type="submit" class="button-primary" value="<?php _e( 'Search', TD_TEXTDOMAIN ); ?>" />
+            <input type="submit" class="button action" value="<?php _e( 'Search', TD_TEXTDOMAIN ); ?>" />
             <input type="hidden" name="page" value="terms-descriptions" />
         <?php
         if ( isset( $_GET[ 'term_search' ] ) ) {
-            echo '<a href="' . get_admin_url( null, 'admin.php' ) . '?page=terms-descriptions" class="button-secondary">' . __( 'Cancel', TD_TEXTDOMAIN ) . '</a>';
+            echo '<a href="' . get_admin_url( null, 'admin.php' ) . '?page=terms-descriptions" class="button">' . __( 'Cancel', TD_TEXTDOMAIN ) . '</a>';
         }
         ?>
         </form>
+        <?php
+            $pagination = $this->pagination( $terms_count, $cur_page, ( int )$terms_per_page );
+            echo $pagination;
+        ?>
     </div>
     
     <?php
-    $pagination = $this->pagination( $terms_count, $cur_page, ( int )$terms_per_page );
-    echo $pagination;
-    
     //creating terms table
     ?>
     
@@ -388,8 +389,12 @@ class TD_Admin_Terms {
 ?>
         </tbody>
     </table>
-    <?php echo $pagination; ?>
-    <div style="display: none;" id="td_update_permalinks_dialog"><p><?php _e( 'Premalinks updated', TD_TEXTDOMAIN ); ?>: <span id="td_update_progress">0</span>%</p></div>
+    <div class="tablenav bottom">
+        <?php echo $pagination; ?>
+    </div>
+    <div style="display: none;" id="td_update_permalinks_dialog">
+        <p><?php _e( 'Premalinks updated', TD_TEXTDOMAIN ); ?>: <span id="td_update_progress">0</span>%</p>
+    </div>
 </div>
 <?php        
     }
@@ -403,26 +408,42 @@ class TD_Admin_Terms {
      * @return string 
      */
     public function pagination( $terms_count, $cur_page, $terms_per_page ) {
-        $links = paginate_links( array(
-            'base'         => @add_query_arg( 'term_page', '%#%' ),
-            'format'       => '',
-            'total'        => ceil( $terms_count / $terms_per_page ),
-            'current'      => $cur_page,
-            'show_all'     => false,
-            'end_size'     => 3,
-            'mid_size'     => 2,
-            'prev_next'    => true,
-            'prev_text'    => __( '&laquo; Previous', TD_TEXTDOMAIN ),
-            'next_text'    => __( 'Next &raquo;', TD_TEXTDOMAIN ),
-            'type'         => 'plain',
-            'add_args'     => false,
-        ));
-        
-        $html = '<div class="tablenav">';
-        $html .= '<div class="tablenav-pages">';
-        $html .= '<span class="pagination-links">' . $links . '</span>';
+        $total_pages = ceil( $terms_count / $terms_per_page );
+
+        $first_page_link = add_query_arg( 'term_page', false );
+
+        $prev_disabled = '';
+        if ( $cur_page <= 1 ) {
+            $prev_page_link = add_query_arg( 'term_page', false );
+            $prev_disabled = ' disabled';
+        }
+        else {
+            $prev_page_link = add_query_arg( 'term_page', $cur_page - 1 );
+        }
+
+        $last_page_link = add_query_arg( 'term_page', $total_pages );
+
+        $next_disabled = '';
+        if ( $cur_page >= $total_pages ) {
+            $next_page_link = add_query_arg( 'term_page', $total_pages );
+            $next_disabled = ' disabled';
+        }
+        else {
+            $next_page_link = add_query_arg( 'term_page', $cur_page + 1 );
+        }
+
+        $html = '<div class="tablenav-pages">';
+        $html .= '<span class="pagination-links">';
+        $html .= '<a class="first-page' . $prev_disabled . '" title="' . esc_attr__( 'Go to the first page' ) . '" href="' . $first_page_link . '">«</a>';
+        $html .= '<a class="prev-page' . $prev_disabled . '" title="' . esc_attr__( 'Go to the previous page' ) . '" href="' . $prev_page_link . '">‹</a>';
+        $html .= '<span class="paging-input">';
+        $html .= '<span class="total-pages"> ' . $cur_page . '</span> ' . __('of') . ' <span class="total-pages">' . $total_pages . ' </span>';
+        $html .= '</span>';
+        $html .= '<a class="next-page' . $next_disabled . '" title="' . esc_attr__( 'Go to the next page' ) . '" href="' . $next_page_link . '">›</a>';
+        $html .= '<a class="last-page' . $next_disabled . '" title="' . esc_attr__( 'Go to the last page' ) . '" href="' . $last_page_link . '">»</a>';
+        $html .= '</span>';
         $html .= '</div>';
-        $html .= '</div>';
+
         return $html;
     }
 }
