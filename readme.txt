@@ -2,7 +2,7 @@
 Contributors: vladimir.s
 Tags: post, page, links, plugin
 Requires at least: 3.0
-Tested up to: 3.5.1
+Tested up to: 3.8
 Stable tag: trunk
 
 This plugin allows you to create list of terms and assign links to them. Plugin replaces terms occurrences in your posts with appropriate links.
@@ -66,6 +66,11 @@ Detail description of this plugin is available in [Russian]( http://www.simpleco
 4. Tools page
 
 == Changelog ==
+
+= 3.1.5 =
+
+* Interface updated in accordance to WP 3.8 requirements
+* New feature: batch terms removal added
 
 = 3.1.4 =
 

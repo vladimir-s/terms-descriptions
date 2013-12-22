@@ -1,7 +1,12 @@
 ( function( $ ) {
     //term row template 
     var term_template = _.template(
-        '<tr id="term_<%=t_id%>">' + '<th scope="row"><%=t_id%></th>'
+        '<tr id="term_<%=t_id%>">'
+        + '<th scope="row" class="check-column">'
+        + '<label class="screen-reader-text" for="cb-select-<%=t_id%>">' + td_messages.select + '</label>'
+        + '<input id="cb-select-<%=t_id%>" type="checkbox" name="td_term[]" value="<%=t_id%>">'
+        + '<div class="locked-indicator"></div>'
+        + '</th>'
         + '<td>'
         + '<strong><%=t_term%></strong>'
         + '<div class="row-actions">'
@@ -153,7 +158,7 @@
     $( '#td_content_type' ).trigger( 'change' );
     
     //remove term handler
-    $( 'span.trash a' ).live( 'click', function() {
+    $( '.wrap' ).on( 'click', 'span.trash a', function() {
         $( '#td_message' ).remove();
         var cur_term = $( this );
         var params = $( this ).attr( 'href' ).slice( 1 );
@@ -180,7 +185,7 @@
     } );
     
     //edit term handler
-    $( 'span.edit a' ).live( 'click', function() {
+    $( '.wrap' ).on( 'click', 'span.edit a', function() {
         $( '#td_message' ).remove();
         //reading term id
         var term_id = $( this ).attr( 'href' ).match( /term\_id\=\d+/ );
@@ -217,7 +222,7 @@
     } );
     
     //cancel edit handler
-    $( '#td_cancel_edit_term' ).live( 'click', function() {
+    $( '.wrap' ).on( 'click', '#td_cancel_edit_term', function() {
         //replacing buttons and clearing the form
         edit_term_button.remove();
         cancel_edit_term_button.remove();
@@ -288,6 +293,66 @@
             } );
         }
         
+        return false;
+    } );
+
+    //remove selected terms
+    var removeSelectedBtn = $( '#td_remove_selected_btn' );
+
+    function setRemoveSelectedBtn() {
+        if ($('.wp-list-table input:checkbox:checked').length > 0) {
+            removeSelectedBtn.attr('disabled', false);
+        }
+        else {
+            removeSelectedBtn.attr('disabled', true);
+        }
+    }
+
+    $( '.wp-list-table tbody' ).on( 'change', 'input:checkbox', function() {
+        setRemoveSelectedBtn();
+    });
+
+    $( '.cb-select-all').change( function() {
+        $( '.wp-list-table input:checkbox').prop( 'checked', $( this).prop( 'checked' ) );
+        setRemoveSelectedBtn();
+    } );
+
+    removeSelectedBtn.on( 'click', function() {
+        var terms = $( '.wp-list-table tbody input:checkbox:checked' );
+        if ( terms.length > 0 ) {
+            var termsIds = [];
+            $.each( terms, function( i, term ) {
+                termsIds.push( $( term ).val() );
+            } );
+
+            if ( confirm( td_messages.confirm_delete ) ) {
+                //sending AJAX request
+                var params = {
+                    'action': 'td_delete_terms',
+                    'terms_ids': termsIds,
+                    '_wpnonce': td_messages.nonce
+                };
+                $.post( td_messages.url_save, params, function( response ) {
+                    if ( response.status === 'OK' ) {
+                        $.each( response.t_ids, function(i, id) {
+                            $( '#term_' + id ).animate( { 'background-color' : '#ffabab' }, 'fast'
+                                , function() { $( this ).fadeOut( 'slow', function() {
+                                    $( this ).remove();
+                                } ) } );
+
+                            //removing terms ids from global terms array
+                            var term_index = terms_ids.indexOf( id );
+                            if( term_index != -1 ) {
+                                terms_ids.splice(term_index, 1);
+                            }
+                        } );
+                    }
+                    else {
+                        alert( response.message );
+                    }
+                } );
+            }
+        }
         return false;
     } );
 } )( jQuery );

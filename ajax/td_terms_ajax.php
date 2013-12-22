@@ -4,6 +4,7 @@
  */
 add_action( 'wp_ajax_td_add_term', 'td_add_term' );
 add_action( 'wp_ajax_td_delete_term', 'td_delete_term' );
+add_action( 'wp_ajax_td_delete_terms', 'td_delete_terms' );
 add_action( 'wp_ajax_td_get_term', 'td_get_term' );
 add_action( 'wp_ajax_td_update_term', 'td_update_term' );
 add_action( 'wp_ajax_td_update_permalink', 'td_update_permalink' );
@@ -166,6 +167,64 @@ function td_delete_term() {
     
 	echo json_encode( $res );
 	die();
+}
+
+/**
+ * Delete several terms.
+ * $_POST[ 'terms_ids' ] - ids of the terms that should be deleted
+ *
+ * @global type $wpdb wordpress database class
+ *
+ * @return JSON ids of the deleted term
+ */
+function td_delete_terms() {
+    header( 'Content-type: application/json' );
+
+    //Checking user capabilities
+    if ( !current_user_can( 'manage_options' ) ) {
+        die();
+    }
+
+    $res = array(
+        'status' => 'ERR',
+    );
+
+    if ( !wp_verify_nonce( $_POST[ '_wpnonce' ], 'td_delete_term' ) ) {
+        die( 'Security check error' );
+    }
+
+    //checking term id
+    if ( isset( $_POST[ 'terms_ids' ] ) ) {
+        $ids = array();
+        foreach ($_POST[ 'terms_ids' ] as $id ) {
+            if ( (int)$id > 0 ) {
+                $ids[] = (int)$id;
+            }
+        }
+
+        global $wpdb;
+        //deleteng term
+        $affected_rows = $wpdb->query( 'DELETE FROM ' . $wpdb->prefix . 'td_terms WHERE t_id IN (' . implode( ',', $ids ) . ')' );
+        switch ( $affected_rows ) {
+            case false :
+                $res[ 'message' ] = __( 'Unknown terms IDs', TD_TEXTDOMAIN );
+                break;
+            case 0 :
+                $res[ 'message' ] = __( 'Terms delete error', TD_TEXTDOMAIN );
+                break;
+            default :
+                $res[ 'status' ] = 'OK';
+                $res[ 'message' ] = __( 'The terms were deleted', TD_TEXTDOMAIN );
+                $res[ 't_ids' ] = $_POST[ 'terms_ids' ];
+                break;
+        }
+    }
+    else {
+        $res[ 'message' ] = __( 'Unknown terms', TD_TEXTDOMAIN );
+    }
+
+    echo json_encode( $res );
+    die();
 }
 
 /**

@@ -224,6 +224,7 @@ class TD_Admin_Terms {
             'term_update' => __( 'The term was updated', TD_TEXTDOMAIN ),
             'updating_permalinks' => __( 'Updating...', TD_TEXTDOMAIN ),
             'done' => __( 'Done!', TD_TEXTDOMAIN ),
+            'select' => __( 'Select', TD_TEXTDOMAIN ),
             'terms_ids' => json_encode( $this->terms_ids ),
             'dbl_click_to_open_list' => __('Double click to open the titles list or type some letters', TD_TEXTDOMAIN),
         ) );
@@ -327,6 +328,9 @@ class TD_Admin_Terms {
     
     <div id="terms_filter" class="tablenav top">
         <form id="filter_form" class="alignleft" action="<?php echo get_admin_url( null, 'admin.php' ); ?>" method="get">
+            <div class="alignleft actions td_remove_selected">
+                <button class="button action" id="td_remove_selected_btn" disabled="disabled"><?php _e( 'Remove selected', TD_TEXTDOMAIN ); ?></button>
+            </div>
             <label><?php _e( 'Search', TD_TEXTDOMAIN ); ?> <input type="text" name="term_search" value="<?php echo $search_str; ?>" /></label>
             <input type="submit" class="button action" value="<?php _e( 'Search', TD_TEXTDOMAIN ); ?>" />
             <input type="hidden" name="page" value="terms-descriptions" />
@@ -349,14 +353,20 @@ class TD_Admin_Terms {
     <table class="wp-list-table widefat fixed" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col" class="short"><?php _e( 'Term ID', TD_TEXTDOMAIN ); ?></th>
+                <th scope="col" class="td-check-column">
+                    <label class="screen-reader-text" for="cb-select-all-1"><?php _e( 'Select All', TD_TEXTDOMAIN ); ?></label>
+                    <input id="cb-select-all-1" class="cb-select-all" type="checkbox">
+                </th>
                 <th scope="col"><?php _e( 'Term', TD_TEXTDOMAIN ); ?></th>
                 <th scope="col"><?php _e( 'Term Link', TD_TEXTDOMAIN ); ?></th>
             </tr>
         </thead>
         <tfoot>
             <tr>
-                <th scope="col" class="short"><?php _e( 'Term ID', TD_TEXTDOMAIN ); ?></th>
+                <th scope="col" class="td-check-column">
+                    <label class="screen-reader-text" for="cb-select-all-2"><?php _e( 'Select All', TD_TEXTDOMAIN ); ?></label>
+                    <input id="cb-select-all-2" class="cb-select-all" type="checkbox">
+                </th>
                 <th scope="col"><?php _e( 'Term', TD_TEXTDOMAIN ); ?></th>
                 <th scope="col"><?php _e( 'Term Link', TD_TEXTDOMAIN ); ?></th>
             </tr>
@@ -373,7 +383,11 @@ class TD_Admin_Terms {
         foreach ( $terms as $term ) {
 ?>
             <tr id="term_<?php echo $term->t_id; ?>">
-                <th scope="row" class="short"><?php echo $term->t_id; ?></th>
+                <th scope="row" class="check-column">
+                    <label class="screen-reader-text" for="cb-select-<?php echo $term->t_id; ?>"><?php _e( 'Select', TD_TEXTDOMAIN ); ?></label>
+                    <input id="cb-select-<?php echo $term->t_id; ?>" type="checkbox" name="td_term[]" value="<?php echo $term->t_id; ?>">
+                    <div class="locked-indicator"></div>
+                </th>
                 <td>
                     <strong><?php echo stripcslashes( $term->t_term ); ?></strong>
                     <div class="row-actions">
