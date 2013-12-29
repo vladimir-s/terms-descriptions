@@ -18,13 +18,15 @@ class TD_Long_Terms_First_Parser extends TD_Simple_Parser {
      */
     public function parse( $text, $replace_terms = '-1', $class_attr = false
             , $max_convertions = -1, $show_title = false
-            , $text_before = '', $text_after = '', $target = '', $consider_existing_links = false ) {
+            , $text_before = '', $text_after = '', $target = '', $consider_existing_links = false
+            , $add_nofollow = false, $add_noindex = false ) {
 
         //sorting terms list according to terms length
         uasort( $this->terms, array( 'TD_Long_Terms_First_Parser', 'compare_terms' ) );
 
         return parent::parse($text, $replace_terms, $class_attr
-            , $max_convertions, $show_title, $text_before, $text_after, $target, $consider_existing_links);
+            , $max_convertions, $show_title, $text_before, $text_after, $target
+            , $consider_existing_links, $add_nofollow, $add_noindex);
     }
 
     /**

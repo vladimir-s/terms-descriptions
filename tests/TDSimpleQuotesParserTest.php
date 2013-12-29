@@ -123,6 +123,7 @@ class TD_Simple_Quotes_Parser_Test extends PHPUnit_Framework_TestCase {
                 't_term' => 'стол',
                 't_post_url' => 'http://fdgd.sff',
                 't_post_id' => 0,
+                't_post_type' => 'post',
             )
         );
         $orig_text = 'xc xsf стол впівп';
@@ -152,11 +153,13 @@ class TD_Simple_Quotes_Parser_Test extends PHPUnit_Framework_TestCase {
                 't_term' => 'стол',
                 't_post_url' => 'http://fdgd.sff',
                 't_post_id' => 0,
+                't_post_type' => 'post',
             ),
             array(
                 't_term' => 'анимацией|анимации',
                 't_post_url' => 'http://fdgd.sff',
                 't_post_id' => 0,
+                't_post_type' => 'post',
             ),
         );
         $p_2->set_terms($terms_2);
@@ -175,16 +178,19 @@ class TD_Simple_Quotes_Parser_Test extends PHPUnit_Framework_TestCase {
                 't_term' => 'стол',
                 't_post_url' => 'http://fdgd.sff',
                 't_post_id' => 0,
+                't_post_type' => 'post',
             ),
             array(
                 't_term' => 'анимацией|анимации',
                 't_post_url' => 'http://fdgd.sff',
                 't_post_id' => 0,
+                't_post_type' => 'post',
             ),
             array(
                 't_term' => 'Maya',
                 't_post_url' => 'http://fdgd.sff',
                 't_post_id' => 0,
+                't_post_type' => 'post',
             ),
         );
         $p_3->set_terms($terms_3);
@@ -220,6 +226,7 @@ class TD_Simple_Quotes_Parser_Test extends PHPUnit_Framework_TestCase {
                 't_term' => "Zachary's Jewelers",
                 't_post_url' => 'http://fdgd.sff',
                 't_post_id' => 22,
+                't_post_type' => 'post',
             )
         );
         $p_6->set_terms($terms_6);
@@ -233,6 +240,7 @@ class TD_Simple_Quotes_Parser_Test extends PHPUnit_Framework_TestCase {
                 't_term' => "test",
                 't_post_url' => 'http://fdgd.sff',
                 't_post_id' => 22,
+                't_post_type' => 'post',
             )
         );
         $p_7->set_terms($terms_7);
@@ -241,13 +249,44 @@ class TD_Simple_Quotes_Parser_Test extends PHPUnit_Framework_TestCase {
         $orig_text_2 = "fdsgsfg <a href='http://fdgd.sff'>test</a> test впівп";
         $this->assertEquals($orig_text_2, $p_7->parse( $orig_text_2, '1', false, -1, false, '<strong>', '</strong>', '', true ) );
     }
-    
+
+    public function testNoIndex() {
+        $terms = array(
+            array(
+                't_term' => 'стол',
+                't_post_url' => 'http://fdgd.sff',
+                't_post_id' => 22,
+                't_post_type' => 'ext_link',
+            )
+        );
+        $orig_text = 'xc xsf стол впівп';
+        $parsed_text = 'xc xsf <noindex><a href="http://fdgd.sff">стол</a></noindex> впівп';
+        //testing without terms
+        $this->assertEquals($orig_text, $this->parser->parse( $orig_text, '-1', false, -1, false, '', '', '', 'on' ) );
+    }
+
+    public function testNoFollow() {
+        $terms = array(
+            array(
+                't_term' => 'стол',
+                't_post_url' => 'http://fdgd.sff',
+                't_post_id' => 22,
+                't_post_type' => 'ext_link',
+            )
+        );
+        $orig_text = 'xc xsf стол впівп';
+        $parsed_text = 'xc xsf <a href="http://fdgd.sff" rel="nofollow">стол</a> впівп';
+        //testing without terms
+        $this->assertEquals($orig_text, $this->parser->parse( $orig_text, '-1', false, -1, false, '', '', 'on' ) );
+    }
+
     public function testWrap() {
         $terms = array(
             array(
                 't_term' => 'стол',
                 't_post_url' => 'http://fdgd.sff',
                 't_post_id' => 22,
+                't_post_type' => 'post',
             )
         );
         $orig_text = 'xc xsf "стол" впівп';

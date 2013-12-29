@@ -71,6 +71,8 @@ Detail description of this plugin is available in [Russian]( http://www.simpleco
 
 * Interface updated in accordance to WP 3.8 requirements
 * New feature: batch terms removal added
+* New feature: nofollow attribute support added
+* New feature: noindex tag support added
 
 = 3.1.4 =
 

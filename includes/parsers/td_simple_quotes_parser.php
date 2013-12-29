@@ -17,7 +17,8 @@ class TD_Simple_Quotes_Parser extends TD_Simple_Parser {
      */
     public function parse( $text, $replace_terms = '-1', $class_attr = false
             , $max_convertions = -1, $show_title = false
-            , $text_before = '', $text_after = '', $target = '', $consider_existing_links = false ) {
+            , $text_before = '', $text_after = '', $target = '', $consider_existing_links = false
+            , $add_nofollow = false, $add_noindex = false ) {
         if ( null !== $text && !empty( $text ) ) {
             if ( $class_attr !== false && trim( $class_attr ) !== '' ) {
                 $class_attr = ' class="' . $class_attr . '"';
@@ -66,9 +67,19 @@ class TD_Simple_Quotes_Parser extends TD_Simple_Parser {
                     $terms_count -= $this->find_existing_links( $text, $term );
                 }
 
+                if ( $term[ 't_post_type' ] === 'ext_link' ) {
+                    if ( $add_nofollow === 'on' ) {
+                        $target .= ' rel="nofollow"';
+                    }
+                    if ( $add_noindex === 'on' ) {
+                        $text_before = '<noindex>'.$text_before;
+                        $text_after = $text_after.'</noindex>';
+                    }
+                }
+
                 //adding links to terms
                 foreach ( $matches[0] as $match ) {
-                    //is their a text before this occuarance?
+                    //is their a text before this occurrence?
                     $length = $match[1] - $start_pos;
                     if ( $length > 0 ) {
                         //searching for a term
@@ -85,7 +96,7 @@ class TD_Simple_Quotes_Parser extends TD_Simple_Parser {
                         break;
                     }
                 }
-                //cheking if all post content was parsed
+                //checking if all post content was parsed
                 //(problem may occur if the closing tag in post content was missed)
                 if ( $start_pos < strlen( $text )) {
                     $fragment = substr( $text, $start_pos );
@@ -126,7 +137,7 @@ class TD_Simple_Quotes_Parser extends TD_Simple_Parser {
             $terms_count = $this->max_convertions;
         }
 
-        //if user set replacements number, we execute nesessary number of replacements
+        //if user set replacements number, we execute necessary number of replacements
         if ( (int)$terms_count > 0 ) {
             if ( 0 < preg_match( $replace_re, $text ) ) {
                 $result = preg_replace( $replace_re, '$1' . $text_before . '$2<a href="'. $term[ 't_post_url' ]

@@ -75,7 +75,8 @@ class TD_Frontend {
 			}
             return $parser->parse( $content, $this->options[ 'convert_first_n_terms' ], $this->options[ 'class' ]
                     , ( int )$this->options[ 'convert_total' ], $this->options[ 'show_title' ]
-                    , $this->options[ 'text_before' ], $this->options[ 'text_after' ], $target, $consider_existing_links );
+                    , $this->options[ 'text_before' ], $this->options[ 'text_after' ], $target, $consider_existing_links
+                    , $this->options[ 'add_nofollow' ], $this->options[ 'add_noindex' ] );
         }
         else {
             return $content;

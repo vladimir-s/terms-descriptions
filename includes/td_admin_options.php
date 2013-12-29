@@ -89,7 +89,7 @@ class TD_Admin_Options {
                 <tr valign="middle">
                     <th scope="row"><?php _e( 'Add CSS class', TD_TEXTDOMAIN ); ?></th>
                     <td>
-                        <input name="td_options[class]" type="text" id="class" value="<?php echo $options[ 'class' ]; ?>" class="small-text" /> <?php _e( 'to terms links.', TD_TEXTDOMAIN ); ?>
+                        <input name="td_options[class]" type="text" id="class" value="<?php echo $options[ 'class' ]; ?>" /> <?php _e( 'to terms links.', TD_TEXTDOMAIN ); ?>
                     </td>
                 </tr>
                 <tr valign="middle">
@@ -119,6 +119,20 @@ class TD_Admin_Options {
                     <td>
                         <input name="td_options[open_new_tab]" type="checkbox" id="open_new_tab" <?php if ( isset( $options[ 'open_new_tab' ] ) ) { checked( $options[ 'open_new_tab' ], 'on' ); } ?> />
                         <span class="description"><?php _e( 'If this option is checked plugin will add target="_blank" to links.', TD_TEXTDOMAIN ); ?></span>
+                    </td>
+                </tr>
+                <tr valign="middle">
+                    <th scope="row"><?php _e( 'Add nofollow to external links', TD_TEXTDOMAIN ); ?></th>
+                    <td>
+                        <input name="td_options[add_nofollow]" type="checkbox" id="add_nofollow" <?php if ( isset( $options[ 'add_nofollow' ] ) ) { checked( $options[ 'add_nofollow' ], 'on' ); } ?> />
+                        <span class="description"><?php _e( 'If this option is checked plugin will add rel="nofollow" to <strong>external</strong> links.', TD_TEXTDOMAIN ); ?></span>
+                    </td>
+                </tr>
+                <tr valign="middle">
+                    <th scope="row"><?php _e( 'Wrap external links with noindex tag', TD_TEXTDOMAIN ); ?></th>
+                    <td>
+                        <input name="td_options[add_noindex]" type="checkbox" id="add_noindex" <?php if ( isset( $options[ 'add_noindex' ] ) ) { checked( $options[ 'add_noindex' ], 'on' ); } ?> />
+                        <span class="description"><?php _e( 'If this option is checked plugin will wrap <strong>external</strong> links with &lt;noindex&gt; tag.', TD_TEXTDOMAIN ); ?></span>
                     </td>
                 </tr>
                 <tr valign="middle">
@@ -193,6 +207,12 @@ class TD_Admin_Options {
         }
         if ( !isset( $input[ 'open_new_tab' ] ) ) {
             $input[ 'open_new_tab' ] = false;
+        }
+        if ( !isset( $input[ 'add_nofollow' ] ) ) {
+            $input[ 'add_nofollow' ] = false;
+        }
+        if ( !isset( $input[ 'add_noindex' ] ) ) {
+            $input[ 'add_noindex' ] = false;
         }
         if ( !isset( $input[ 'parser' ] ) ) {
             $input[ 'parser' ] = 'simple_parser';
