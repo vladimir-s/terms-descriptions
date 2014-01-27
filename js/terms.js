@@ -75,7 +75,7 @@
                     term_add_msg.insertAfter( 'div.wrap h2' );
                     $( term_template( response.term_data ) ).fadeIn( 'slow' ).prependTo( 'table.wp-list-table tbody' );
                     //adding term id to global terms array
-                    terms_ids.push( response.term_data.t_id );
+                    terms_ids.push( response.term_data.t_id.toString() );
                 }
                 //updating the term row in a table
                 if ( values.action === 'td_update_term' ) {

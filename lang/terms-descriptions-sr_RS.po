@@ -1,0 +1,534 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: termdescription\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-12-29 19:30+0200\n"
+"PO-Revision-Date: 2014-01-27 11:15+0100\n"
+"Last-Translator: Borisa Djuraskovic <borisad@webhostinghub.com>\n"
+"Language-Team: Vladimir Statsenko <vova_33@gala.net>\n"
+"Language: ru_UA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;_e;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-SearchPath-0: ./..\n"
+
+#: ../ajax/td_terms_ajax.php:40 ../ajax/td_terms_ajax.php:302
+#: ../includes/td_admin_terms.php:212
+msgid "Enter the term, please"
+msgstr "Molim vas, unesite termin"
+
+#: ../ajax/td_terms_ajax.php:43 ../ajax/td_terms_ajax.php:305
+#: ../includes/td_admin_terms.php:213
+msgid "Enter the link, please"
+msgstr "Molim vas, unesite link"
+
+#: ../ajax/td_terms_ajax.php:46 ../ajax/td_terms_ajax.php:308
+msgid "Content type is not set"
+msgstr "Tip sadržaja nije podešen"
+
+#: ../ajax/td_terms_ajax.php:65 ../ajax/td_terms_ajax.php:331
+msgid "Incorrect post ID"
+msgstr "Netačan post ID"
+
+#: ../ajax/td_terms_ajax.php:69 ../ajax/td_terms_ajax.php:88
+#: ../ajax/td_terms_ajax.php:335 ../ajax/td_terms_ajax.php:354
+msgid "Link creation error"
+msgstr "Greška stvorenog linka"
+
+#: ../ajax/td_terms_ajax.php:84 ../ajax/td_terms_ajax.php:350
+msgid "Post ID is not set"
+msgstr "Post ID nije namešten"
+
+#: ../ajax/td_terms_ajax.php:105
+msgid "Term save error"
+msgstr "Greška sašuvanog termina"
+
+#: ../ajax/td_terms_ajax.php:110
+msgid "The term was added"
+msgstr "Termin je dodat"
+
+#: ../ajax/td_terms_ajax.php:152
+msgid "Unknown term ID"
+msgstr "Nepoznati ID termina"
+
+#: ../ajax/td_terms_ajax.php:155
+msgid "Term delete error"
+msgstr "Greška brisanja termina"
+
+#: ../ajax/td_terms_ajax.php:159
+msgid "The term was deleted"
+msgstr "Termin je obrisan"
+
+#: ../ajax/td_terms_ajax.php:165 ../ajax/td_terms_ajax.php:262
+#: ../ajax/td_terms_ajax.php:266
+msgid "Unknown term"
+msgstr "Nepoznati termin"
+
+#: ../ajax/td_terms_ajax.php:210
+msgid "Unknown terms IDs"
+msgstr "Nepoznati IDovi termina"
+
+#: ../ajax/td_terms_ajax.php:213
+msgid "Terms delete error"
+msgstr "Greška brisanja termina"
+
+#: ../ajax/td_terms_ajax.php:217
+msgid "The terms were deleted"
+msgstr "Termini su izbrisani"
+
+#: ../ajax/td_terms_ajax.php:223
+msgid "Unknown terms"
+msgstr "Nepoznati termini"
+
+#: ../ajax/td_terms_ajax.php:311 ../ajax/td_terms_ajax.php:414
+#: ../ajax/td_terms_ajax.php:423
+msgid "Unknown term id"
+msgstr "Nepoznati id termina"
+
+#: ../ajax/td_terms_ajax.php:372
+msgid "Term update error"
+msgstr "Greška update-a termina"
+
+#: ../ajax/td_terms_ajax.php:377 ../includes/td_admin_terms.php:224
+msgid "The term was updated"
+msgstr "Trmin je updateovan"
+
+#: ../ajax/td_terms_ajax.php:432
+msgid "Permalink update error"
+msgstr "Greška update-a permalinka"
+
+#: ../ajax/td_terms_ajax.php:439
+msgid "The term permalink was updated"
+msgstr "Termin permalinka je update-ovan"
+
+#: ../includes/td_admin_options.php:20 ../includes/td_admin_options.php:21
+#: ../includes/td_admin_options.php:46
+msgid "Options"
+msgstr "Opcije"
+
+#: ../includes/td_admin_options.php:49
+msgid "Options saved"
+msgstr "Opcije sačuvane"
+
+#: ../includes/td_admin_options.php:57
+msgid "Convert terms"
+msgstr "Konvertovani termini"
+
+#: ../includes/td_admin_options.php:59
+msgid "in posts"
+msgstr "u postovima"
+
+#: ../includes/td_admin_options.php:60
+msgid "in comments"
+msgstr "u komentarima"
+
+#: ../includes/td_admin_options.php:64
+msgid "Convert the first"
+msgstr "Konvertuj prvu"
+
+#: ../includes/td_admin_options.php:66
+msgid "occurrences of each term."
+msgstr "pojavu svakog termina.."
+
+#: ../includes/td_admin_options.php:67
+msgid "Set \"-1\" if you want to convert all terms."
+msgstr "Namestiti \"-1\" ako želite da konvertujete se termine."
+
+#: ../includes/td_admin_options.php:71
+msgid "Maximum transformations number"
+msgstr "Maksimum transformacija brojeva"
+
+#: ../includes/td_admin_options.php:79
+msgid "Set \"-1\" if you don't want to use this limitation."
+msgstr "Namestiti \"-1\"ako ne želite da iskoristite ove limitacije."
+
+#: ../includes/td_admin_options.php:83
+msgid "Consider existing links"
+msgstr "Razmotriti postojeće linkove"
+
+#: ../includes/td_admin_options.php:86
+msgid ""
+"If this option is checked plugin will count links that are added by hand."
+msgstr ""
+"Ako je ova opcija čekirana dodatak će računati linkove koje se dodaju ručno ."
+
+#: ../includes/td_admin_options.php:90
+msgid "Add CSS class"
+msgstr "Dodati CSS klasu"
+
+#: ../includes/td_admin_options.php:92
+msgid "to terms links."
+msgstr "terminima linkova."
+
+#: ../includes/td_admin_options.php:96
+msgid "Add title attribute to links"
+msgstr "Dodati naslov atributa linkovima"
+
+#: ../includes/td_admin_options.php:102
+msgid "Wrap link"
+msgstr "Obložiti link"
+
+#: ../includes/td_admin_options.php:104
+msgid "text before"
+msgstr "tekst pre"
+
+#: ../includes/td_admin_options.php:105
+msgid "example: &lt;strong&gt;"
+msgstr "primer:&lt;strong&gt;"
+
+#: ../includes/td_admin_options.php:106
+msgid "text after"
+msgstr "tekst posle"
+
+#: ../includes/td_admin_options.php:107
+msgid "example: &lt;/strong&gt;"
+msgstr "primer:&lt;/strong&gt;"
+
+#: ../includes/td_admin_options.php:111
+msgid "Convert terms only on single pages"
+msgstr "Konvertuj termine samo na jednoj stranici"
+
+#: ../includes/td_admin_options.php:114
+msgid "Terms will not be converted on home, categories and archives pages."
+msgstr ""
+"Termsini neće biti konvertovani na pošetnoj stranici, kategorijama i "
+"arhivskim stranicama."
+
+#: ../includes/td_admin_options.php:118
+msgid "Open link in a new tab"
+msgstr "Otvori link u novom tabu"
+
+#: ../includes/td_admin_options.php:121
+msgid "If this option is checked plugin will add target=\"_blank\" to links."
+msgstr "Ako je ova opcija čekirana plagin će dodati metu=\"_blank\" do linka."
+
+#: ../includes/td_admin_options.php:125
+msgid "Add nofollow to external links"
+msgstr "Dodati nofollow za eksterne linkove"
+
+#: ../includes/td_admin_options.php:128
+msgid ""
+"If this option is checked plugin will add rel=\"nofollow\" to "
+"<strong>external</strong> links."
+msgstr ""
+"Ako je ova opcija čekirana plugin će biti dodat rel=\"nofollow\" to "
+"<strong>external</strong> links."
+
+#: ../includes/td_admin_options.php:132
+msgid "Wrap external links with noindex tag"
+msgstr "Obložiti eksterne linkove sa noindex tagom"
+
+#: ../includes/td_admin_options.php:135
+msgid ""
+"If this option is checked plugin will wrap <strong>external</strong> links "
+"with &lt;noindex&gt; tag."
+msgstr ""
+"Ako je ova opcija čekirana plugin će obložiti<strong>external</strong> "
+"linkove sa  &lt;noindex&gt; tag."
+
+#: ../includes/td_admin_options.php:139
+msgid "Show"
+msgstr "Prikazati"
+
+#: ../includes/td_admin_options.php:149
+msgid "terms on a page (in admin area)"
+msgstr "termini na stranici (u admin području)"
+
+#: ../includes/td_admin_options.php:153
+msgid "Parser"
+msgstr "Parser"
+
+#: ../includes/td_admin_options.php:157
+msgid "Simple parser"
+msgstr "Jednostavan parser"
+
+#: ../includes/td_admin_options.php:160
+msgid "Simple parser with quotes support"
+msgstr "Jednostavan parser sa podrškom"
+
+#: ../includes/td_admin_options.php:163
+msgid "Long terms first parser"
+msgstr "Termini sa prvim parserom"
+
+#: ../includes/td_admin_options.php:164
+msgid "Orders terms by their lengths before searching them in text"
+msgstr ""
+"Naručite termine po njihovoj dužini pre nego što ih pretražite u tekstu"
+
+#: ../includes/td_admin_options.php:170
+msgid "Update"
+msgstr "Update"
+
+#: ../includes/td_admin_terms.php:96
+msgid ""
+"Terms Descriptions plugin is almost updated. Please, BACKUP YOUR DATABASE "
+"and press following button to"
+msgstr ""
+"Terms Descriptions plugin je skoro updateovan. Molimo vas, BACKUPUJTE BAZU "
+"PODATAKA i pritisnite sledeće dugme na"
+
+#: ../includes/td_admin_terms.php:97
+msgid "Update DB"
+msgstr "Update-uj DB"
+
+#: ../includes/td_admin_terms.php:182 ../includes/td_admin_terms.php:183
+#: ../includes/td_admin_terms.php:263
+msgid "Terms"
+msgstr "Termini"
+
+#: ../includes/td_admin_terms.php:215 ../includes/td_admin_terms.php:394
+msgid "Edit"
+msgstr "Edituj"
+
+#: ../includes/td_admin_terms.php:216 ../includes/td_admin_terms.php:395
+msgid "Delete"
+msgstr "Obrisati"
+
+#: ../includes/td_admin_terms.php:217
+msgid "Are you sure?"
+msgstr "Da li ste sigurni?"
+
+#: ../includes/td_admin_terms.php:218 ../includes/td_admin_terms.php:292
+msgid "Add term"
+msgstr "Dodati termin"
+
+#: ../includes/td_admin_terms.php:219
+msgid "Update term"
+msgstr "Update-ovan termin"
+
+#: ../includes/td_admin_terms.php:220 ../includes/td_admin_terms.php:339
+msgid "Cancel"
+msgstr "Ukinuti"
+
+#: ../includes/td_admin_terms.php:223
+msgid "New term was added"
+msgstr "Novi termin je dodat"
+
+#: ../includes/td_admin_terms.php:225
+msgid "Updating..."
+msgstr "Updatujemo..."
+
+#: ../includes/td_admin_terms.php:226
+msgid "Done!"
+msgstr "Gotovo!"
+
+#: ../includes/td_admin_terms.php:227 ../includes/td_admin_terms.php:387
+msgid "Select"
+msgstr "Selektuj"
+
+#: ../includes/td_admin_terms.php:229
+msgid "Double click to open the titles list or type some letters"
+msgstr "Dupli klik da biste otvorili listu naslova ili ukucali neka slova"
+
+#: ../includes/td_admin_terms.php:268 ../includes/td_admin_terms.php:360
+#: ../includes/td_admin_terms.php:370
+msgid "Term"
+msgstr "Termin"
+
+#: ../includes/td_admin_terms.php:274
+msgid "Link"
+msgstr "Link"
+
+#: ../includes/td_admin_terms.php:276
+msgid "Link to"
+msgstr "Link za"
+
+#: ../includes/td_admin_terms.php:283
+msgid "External link"
+msgstr "Eksterni link"
+
+#: ../includes/td_admin_terms.php:284
+msgid "Post ID"
+msgstr "Post ID"
+
+#: ../includes/td_admin_terms.php:299
+msgid "Press this button if you have updated permalinks structure."
+msgstr "Pritisnite ovo dugme ako ste update-ovali strukturu permalinkova."
+
+#: ../includes/td_admin_terms.php:300
+msgid "Update permalinks"
+msgstr "Update-ujte permalinkove"
+
+#: ../includes/td_admin_terms.php:332
+msgid "Remove selected"
+msgstr "RUklonite selektovano"
+
+#: ../includes/td_admin_terms.php:334 ../includes/td_admin_terms.php:335
+msgid "Search"
+msgstr "Pretraga"
+
+#: ../includes/td_admin_terms.php:357 ../includes/td_admin_terms.php:367
+msgid "Select All"
+msgstr "Selektuj sve"
+
+#: ../includes/td_admin_terms.php:361 ../includes/td_admin_terms.php:371
+msgid "Term Link"
+msgstr "Link termina"
+
+#: ../includes/td_admin_terms.php:410
+msgid "Premalinks updated"
+msgstr "Premalink-ovi update-ovani"
+
+#: ../includes/td_admin_terms.php:454
+msgid "of"
+msgstr "od"
+
+#: ../includes/td_admin_tools.php:28
+msgid "Import error"
+msgstr "Import greška"
+
+#: ../includes/td_admin_tools.php:31
+msgid "Import successfully finished"
+msgstr "Import uspečno izvršen"
+
+#: ../includes/td_admin_tools.php:37
+msgid "Terms creation error"
+msgstr "Greška stvaranja termina"
+
+#: ../includes/td_admin_tools.php:40
+msgid "Terms successfully created"
+msgstr "Termini uspečno kreirani"
+
+#: ../includes/td_admin_tools.php:53 ../includes/td_admin_tools.php:54
+#: ../includes/td_admin_tools.php:72
+msgid "Tools"
+msgstr "Alatke"
+
+#: ../includes/td_admin_tools.php:78
+msgid "Export / Import"
+msgstr "Export / Import"
+
+#: ../includes/td_admin_tools.php:80
+msgid "Export"
+msgstr "Export"
+
+#: ../includes/td_admin_tools.php:84
+msgid "Select file with terms"
+msgstr "Selektuj fajl sa terminima"
+
+#: ../includes/td_admin_tools.php:85
+msgid "Import"
+msgstr "Import"
+
+#: ../includes/td_admin_tools.php:87
+msgid "Packet terms upload"
+msgstr "Termini iz paketa su uploadovani"
+
+#: ../includes/td_admin_tools.php:90
+msgid "Terms list"
+msgstr "Lista termina"
+
+#: ../includes/td_admin_tools.php:91
+msgid ""
+"Each term should be written on its own line. Use the following format.<br /"
+">word_form_1|word_form_2|...|post_id OR URL (with http://)<br />Examples:"
+"<br />apple|apples|21<br />pear|pears|http://site.domen<br />Note that if "
+"you use term_id the post with this id should exist."
+msgstr ""
+"Svaki termin treba da budu napisan na svojoj rečenici. Koristite sledeći "
+"format .<br />word_form_1|word_form_2|...|post_id OR URL (with http://)<br /"
+">Examples:<br />apple|apples|21<br />pear|pears|http://site.domen<br /> "
+"Imajte na umu da ako koristite term_id post sa ovim id treba da postoji ."
+
+#: ../includes/td_admin_tools.php:97
+msgid "Add terms"
+msgstr "Dodaj termine"
+
+#: ../includes/td_admin_tools.php:99
+msgid "CSV Export"
+msgstr "CSV Export"
+
+#: ../includes/td_admin_tools.php:101
+msgid "Get terms in CSV format"
+msgstr "Termini u CSV formatu"
+
+#: ../includes/td_admin_tools.php:102
+msgid ""
+"Please, note, you can't restore terms from this file. Use Export instead."
+msgstr ""
+"Molim vas , napomena , ne možete vratiti termine iz ovog fajla . Koristite "
+"Export umesto toga ."
+
+#: ../includes/td_meta_box.php:23
+msgid "Terms Descriptions"
+msgstr "Opisi termina"
+
+#: ../includes/td_meta_box.php:37
+msgid "Disable Terms Descriptions plugin for this post"
+msgstr "Onemogući opise termina plugina za ovaj post"
+
+#~ msgid "Term ID"
+#~ msgstr "ID термина"
+
+#~ msgid "&laquo; Previous"
+#~ msgstr "&laquo; Предыдущие"
+
+#~ msgid "Next &raquo;"
+#~ msgstr "Следующие &raquo;"
+
+#~ msgid "term occurrences."
+#~ msgstr "найденных терминов."
+
+#~ msgid "terms per page."
+#~ msgstr "терминов на странице."
+
+#~ msgid "Create term"
+#~ msgstr "Создать термин"
+
+#~ msgid "Create"
+#~ msgstr "Создать"
+
+#~ msgid ""
+#~ "Term can contain one or several words and will be converted to a link. If "
+#~ "you want to use several word forms of a term, separate them with a \"|\". "
+#~ "Example, \"apple|apples\"."
+#~ msgstr ""
+#~ "Термин может состоять из одного или нескольких слов, которые будут "
+#~ "преобразованы в ссылки. Если вы хотете использовать несколько словоформ, "
+#~ "разделите их символом \"|\". Например, \"яблоко|яблоки\"."
+
+#~ msgid "Select page/post or enter external link"
+#~ msgstr "Выберите страницу / запись или укажите внешнюю ссылку"
+
+#~ msgid "Select a page or post you want to link to"
+#~ msgstr "Выберите страницу или запись на которую вы хотите поставить ссылку"
+
+#~ msgid ""
+#~ "Enter a number. \"-1\" for converting all found terms. If a term has "
+#~ "several word forms each of them will be counted."
+#~ msgstr ""
+#~ "Введите число. \"-1\" для преобразования всех найденных терминов. Если "
+#~ "для термина указано несколько словоформ, каждая из них будет засчитана."
+
+#~ msgid "Links Class attribute"
+#~ msgstr "Атрибут Class для ссылок"
+
+#~ msgid "Leave this field empty if you didn't whant to add class attribute."
+#~ msgstr ""
+#~ "Не заполняйте это поле если не хотите использовать атрибут class в "
+#~ "ссылках."
+
+#~ msgid "Save"
+#~ msgstr "Сохранить"
+
+#~ msgid "Terms not found"
+#~ msgstr "Термины не найдены"
+
+#~ msgid ""
+#~ "Term can contain one or several words and will be converted to a link"
+#~ msgstr ""
+#~ "Термин может состоять из одного или нескольких слов, которые будут "
+#~ "преобразованы в ссылку"
+
+#~ msgid "terms"
+#~ msgstr "терминов"
+
+#~ msgid "Enter a number"
+#~ msgstr "Введите число"
+
+#~ msgid "Select page/post"
+#~ msgstr "Выберите страницу/пост"

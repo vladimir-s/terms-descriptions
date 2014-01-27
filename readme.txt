@@ -2,7 +2,7 @@
 Contributors: vladimir.s
 Tags: post, page, links, plugin
 Requires at least: 3.0
-Tested up to: 3.8
+Tested up to: 3.8.1
 Stable tag: trunk
 
 This plugin allows you to create list of terms and assign links to them. Plugin replaces terms occurrences in your posts with appropriate links.
@@ -44,6 +44,12 @@ Detail description of this plugin is available in [English]( http://www.simpleco
 
 Detail description of this plugin is available in [Russian]( http://www.simplecoding.org/plagin-wordpress-terms-descriptions "Terms Descriptions WordPress Plugin").
 
+Serbo-Croatian translations were created by [Borisa Djuraskovic]( http://www.webhostinghub.com "Borisa Djuraskovic").
+
+**Development**
+
+If you want to participate in the plugin development, create a pull request to the [official GutHub repository](https://github.com/vladimir-s/terms-descriptions "Terms Descriptions GitHub repository").
+
 == Installation ==
 
 1. Download the zip file
@@ -66,6 +72,10 @@ Detail description of this plugin is available in [Russian]( http://www.simpleco
 4. Tools page
 
 == Changelog ==
+
+= 3.1.6 =
+
+* Serbo-Croatian translations were added (thanks to Borisa Djuraskovic, http://www.webhostinghub.com)
 
 = 3.1.5 =
 
