@@ -1,6 +1,6 @@
 <?php
 
-require_once('PHPUnit/Autoload.php');
+//require_once('PHPUnit/Autoload.php');
 require_once(dirname(__FILE__) . '/../includes/comments.php');
 
 class CommentsTest extends PHPUnit_Framework_TestCase {

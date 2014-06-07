@@ -144,7 +144,7 @@ abstract class TD_Parser {
         if ( substr( $term[ 't_post_url' ], -1 ) === '/' ) {
             $url = substr( $term[ 't_post_url' ], 0, count( $term[ 't_post_url' ] ) - 2 );
         }
-        return substr_count( $text, $url );
+        return preg_match_all( '/' . str_replace( '/', '\/', preg_quote( $url ) ) . '\/?(\"|\'|\s)/i', $text, $matches );
     }
 
     /**

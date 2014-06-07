@@ -2,7 +2,7 @@
 Contributors: vladimir.s
 Tags: post, page, links, plugin
 Requires at least: 3.0
-Tested up to: 3.8.1
+Tested up to: 3.9.1
 Stable tag: trunk
 
 This plugin allows you to create list of terms and assign links to them. Plugin replaces terms occurrences in your posts with appropriate links.
@@ -72,6 +72,11 @@ If you want to participate in the plugin development, create a pull request to t
 4. Tools page
 
 == Changelog ==
+
+= 3.1.7 =
+
+* Bug fix: mistakes in links counting method fixed
+* Mockpress updated
 
 = 3.1.6 =
 
