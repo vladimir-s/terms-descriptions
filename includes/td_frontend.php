@@ -73,6 +73,12 @@ class TD_Frontend {
 			if ( !isset( $this->options[ 'text_after' ] ) ) {
 				$this->options[ 'text_after' ] = '';
 			}
+            if ( !isset( $this->options[ 'add_nofollow' ] ) ) {
+                $this->options[ 'add_nofollow' ] = '';
+            }
+            if ( !isset( $this->options[ 'add_noindex' ] ) ) {
+                $this->options[ 'add_noindex' ] = '';
+            }
             return $parser->parse( $content, $this->options[ 'convert_first_n_terms' ], $this->options[ 'class' ]
                     , ( int )$this->options[ 'convert_total' ], $this->options[ 'show_title' ]
                     , $this->options[ 'text_before' ], $this->options[ 'text_after' ], $target, $consider_existing_links

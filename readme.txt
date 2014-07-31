@@ -73,6 +73,10 @@ If you want to participate in the plugin development, create a pull request to t
 
 == Changelog ==
 
+= 3.1.8 =
+
+* Bug fix: empty nofollow and nofollow attributes notice fixed
+
 = 3.1.7 =
 
 * Bug fix: mistakes in links counting method fixed
