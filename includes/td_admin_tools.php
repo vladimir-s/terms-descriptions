@@ -225,11 +225,22 @@ class TD_Admin_Tools {
         header( 'Content-Disposition:attachment; filename="' . $file_name . '"' );
 
         global $wpdb;
-        $terms = $wpdb->get_col( 'SELECT t_term FROM ' . $wpdb->prefix . 'td_terms', 0 );
+        $terms = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . 'td_terms' );
         $list = array();
         if ( $terms ) {
-            foreach ( $terms as $term ) {
-                $list[] = '"' . iconv( 'UTF-8', 'windows-1251', str_replace( '"', '""', stripslashes( $term ) ) ) . '"';
+            foreach ( $terms as $termRow ) {
+                $term = $termRow->t_term;
+                $link = $termRow->t_post_url;
+                if ( false !== strpos( $term, '|' ) ) {
+                    $termsArr = explode( '|', $term );
+                    foreach ($termsArr as $i => $value) {
+                        $termsArr[$i] = '"' . iconv( 'UTF-8', 'windows-1251', str_replace( '"', '""', trim( stripslashes( $value ) ) ) ) . '"';
+                    }
+                    $list[] = '"' . $link . '";' . implode( ';', $termsArr );
+                }
+                else {
+                    $list[] = '"' . $link . '";' . '"' . iconv( 'UTF-8', 'windows-1251', str_replace( '"', '""', trim( stripslashes( $term ) ) ) ) . '"';
+                }
             }
         }
 

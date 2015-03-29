@@ -199,7 +199,12 @@
                     $( '#td_term' ).val( response.term.t_term );
                     $( '#td_content_type' ).val( response.term.t_post_type );
                     $( '#td_content_type' ).trigger( 'change' );
-                    $( '#td_link' ).val( response.term.t_post_title );
+                    if ( response.term.t_post_type === 'post_id' ) {
+                        $( '#td_link' ).val( response.term.t_post_id );
+                    }
+                    else {
+                        $( '#td_link' ).val( response.term.t_post_title );
+                    }
                     $( '#td_post_id' ).val( response.term.t_post_id );
                     var term_id_field = $( '#td_term_id' );
                     //inserting term_id field
