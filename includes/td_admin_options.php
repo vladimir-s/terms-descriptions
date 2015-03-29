@@ -56,8 +56,28 @@ class TD_Admin_Options {
                 <tr valign="middle">
                     <th scope="row"><?php _e( 'Convert terms', TD_TEXTDOMAIN ); ?></th>
                     <td>
-                        <label><input name="td_options[convert_in_posts]" type="checkbox" id="convert_in_posts" <?php checked( $options[ 'convert_in_posts' ], 'on' ); ?> /> <?php _e( 'in posts', TD_TEXTDOMAIN ); ?></label><br />
-                        <label><input name="td_options[convert_in_comments]" type="checkbox" id="convert_in_comments" <?php checked( $options[ 'convert_in_comments' ], 'on' ); ?> /> <?php _e( 'in comments', TD_TEXTDOMAIN ); ?></label>
+	                    <?php
+	                    $post_types = get_post_types( array( 'public' => true ), 'objects' );
+	                    unset( $post_types[ 'attachment' ] );
+	                    foreach ( $post_types as $type => $data ) {
+	                    ?>
+		                    <label><input name="td_options[convert_in__<?php echo $type; ?>]" type="checkbox"
+		                                  id="convert_in__<?php echo $type; ?>"
+				                    <?php checked( $options[ 'convert_in__'.$type ], 'on' ); ?> />
+			                        <?php _e( 'in posts of type', TD_TEXTDOMAIN ); ?> "<?php echo $data->labels->name; ?>"
+		                    </label><br />
+	                    <?php
+	                    }
+	                    ?>
+
+                        <label><input name="td_options[convert_in_comments]" type="checkbox" id="convert_in_comments"
+		                        <?php checked( $options[ 'convert_in_comments' ], 'on' ); ?> /> <?php _e( 'in comments', TD_TEXTDOMAIN ); ?></label>
+                    </td>
+                </tr>
+                <tr valign="middle">
+                    <th scope="row"><?php _e( 'Convert terms in shortcodes', TD_TEXTDOMAIN ); ?></th>
+                    <td>
+                        <label><input name="td_options[convert_in_shortcodes]" type="checkbox" id="convert_in_posts" <?php checked( $options[ 'convert_in_shortcodes' ], 'on' ); ?> /></label><br />
                     </td>
                 </tr>
                 <tr valign="middle">
@@ -196,8 +216,18 @@ class TD_Admin_Options {
         if ( !isset( $input[ 'convert_in_posts' ] ) ) {
             $input[ 'convert_in_posts' ] = false;
         }
+	    $post_types = get_post_types( array( 'public' => true ), 'names' );
+	    unset( $post_types[ 'attachment' ] );
+	    foreach ( $post_types as $type ) {
+		    if ( !isset( $input[ 'convert_in__'.$type ] ) ) {
+			    $input[ 'convert_in__'.$type ] = false;
+		    }
+	    }
         if ( !isset( $input[ 'convert_in_comments' ] ) ) {
             $input[ 'convert_in_comments' ] = false;
+        }
+        if ( !isset( $input[ 'convert_in_shortcodes' ] ) ) {
+            $input[ 'convert_in_shortcodes' ] = false;
         }
         if ( !isset( $input[ 'consider_existing_links' ] ) ) {
             $input[ 'consider_existing_links' ] = false;

@@ -68,9 +68,10 @@ abstract class TD_Parser {
     protected function prepare_term_regex( $term ) {
         $term = str_replace('\\\'', '\'', $term);
         $term = preg_quote( $term, '/' );
-        $search = array( ' ', '"', '&', ',', '#' );
-        $replace = array( '\s', '\"', '\&', '\,', '\#' );
-        return str_replace( $search, $replace, $term );
+        $search = array( ' ', '&', ',', '#' );
+        $replace = array( '\s', '\&', '\,', '\#' );
+	    $term = str_replace( $search, $replace, $term );
+        return preg_replace( '/(\"|\\\'|\“|\”|\‘|\’|\«|\»)/i', '[\"\\\'\“\”\‘\’\«\»]', $term );
     }
     
     /**

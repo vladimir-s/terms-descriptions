@@ -295,6 +295,50 @@ class TD_Long_Terms_First_Test extends PHPUnit_Framework_TestCase {
         $this->assertEquals($orig_text, $this->parser->parse( $orig_text, '-1', false, -1, false, '<strong>', '</strong>' ) );
     }
 
+	public function testQuotes() {
+		$terms = array(
+			array(
+				't_term' => 'ресторан "Град Петров"',
+				't_post_url' => 'http://fdgd.sff',
+				't_post_id' => 22,
+				't_post_type' => 'post',
+			)
+		);
+		$orig_text = 'abc ресторан “Град Петров“ строительная компания';
+		$parsed_text = 'abc <a href="http://fdgd.sff">ресторан “Град Петров“</a> строительная компания';
+
+		$this->parser->set_terms( $terms );
+		$this->assertEquals($parsed_text, $this->parser->parse( $orig_text ) );
+
+		$terms1 = array(
+			array(
+				't_term' => 'ресторан «Град Петров»',
+				't_post_url' => 'http://fdgd.sff',
+				't_post_id' => 22,
+				't_post_type' => 'post',
+			)
+		);
+		$orig_text1 = 'abc ресторан “Град Петров“ строительная компания';
+		$parsed_text1 = 'abc <a href="http://fdgd.sff">ресторан “Град Петров“</a> строительная компания';
+
+		$this->parser->set_terms( $terms1 );
+		$this->assertEquals($parsed_text1, $this->parser->parse( $orig_text1 ) );
+
+		$terms2 = array(
+			array(
+				't_term' => 'типография ‘Град Петров’',
+				't_post_url' => 'http://fdgd.sff',
+				't_post_id' => 22,
+				't_post_type' => 'post',
+			)
+		);
+		$orig_text2 = 'abc типография “Град Петров’ строительная компания';
+		$parsed_text2 = 'abc <a href="http://fdgd.sff">типография “Град Петров’</a> строительная компания';
+
+		$this->parser->set_terms( $terms2 );
+		$this->assertEquals($parsed_text2, $this->parser->parse( $orig_text2 ) );
+	}
+
     protected static function getMethod( $name ) {
         $class = new ReflectionClass( 'TD_Long_Terms_First_Parser' );
         $method = $class->getMethod( $name );
