@@ -2,7 +2,7 @@
 Contributors: vladimir.s
 Tags: post, page, links, plugin
 Requires at least: 3.0
-Tested up to: 4.1.1
+Tested up to: 3.9.1
 Stable tag: trunk
 
 This plugin allows you to create list of terms and assign links to them. Plugin replaces terms occurrences in your posts with appropriate links.
@@ -72,14 +72,6 @@ If you want to participate in the plugin development, create a pull request to t
 4. Tools page
 
 == Changelog ==
-
-= 3.1.9 =
-
-* New feature: "Convert in custom posts types" options added
-* New feature: shortcodes support added
-* New feature: wptexturize support added
-* New feature: word forms support added to CSV export
-* Bug fix: edit term with post_id link type bug fixed
 
 = 3.1.8 =
 

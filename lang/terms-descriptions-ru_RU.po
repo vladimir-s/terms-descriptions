@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: termdescription\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-28 19:35+0200\n"
-"PO-Revision-Date: 2015-03-28 19:36+0200\n"
+"POT-Creation-Date: 2013-12-29 19:30+0200\n"
+"PO-Revision-Date: 2013-12-29 19:33+0200\n"
 "Last-Translator: Vladimir Statsenko <vovchiksta@gmail.com>\n"
 "Language-Team: Vladimir Statsenko <vova_33@gala.net>\n"
 "Language: ru_UA\n"
@@ -13,7 +13,7 @@ msgstr ""
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_e;__\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.6.8\n"
+"X-Generator: Poedit 1.5.5\n"
 "X-Poedit-SearchPath-0: ./..\n"
 
 #: ../ajax/td_terms_ajax.php:40 ../ajax/td_terms_ajax.php:302
@@ -118,103 +118,99 @@ msgstr "Настройки сохранены"
 msgid "Convert terms"
 msgstr "Преобразовать термины"
 
-#: ../includes/td_admin_options.php:67
-msgid "in posts of type"
-msgstr "в постах типа"
+#: ../includes/td_admin_options.php:59
+msgid "in posts"
+msgstr "в записях"
 
-#: ../includes/td_admin_options.php:74
+#: ../includes/td_admin_options.php:60
 msgid "in comments"
 msgstr "в комментариях"
 
-#: ../includes/td_admin_options.php:78
-msgid "Convert terms in shortcodes"
-msgstr "Преобразовывать термины в шорткодах (shortcodes)"
-
-#: ../includes/td_admin_options.php:84
+#: ../includes/td_admin_options.php:64
 msgid "Convert the first"
 msgstr "Преобразовывать первые"
 
-#: ../includes/td_admin_options.php:86
+#: ../includes/td_admin_options.php:66
 msgid "occurrences of each term."
 msgstr "вхождений каждого термина."
 
-#: ../includes/td_admin_options.php:87
+#: ../includes/td_admin_options.php:67
 msgid "Set \"-1\" if you want to convert all terms."
 msgstr "Установите \"-1\" если вы хотите преобразовать все термины."
 
-#: ../includes/td_admin_options.php:91
+#: ../includes/td_admin_options.php:71
 msgid "Maximum transformations number"
 msgstr "Максимальное количество преобразований"
 
-#: ../includes/td_admin_options.php:99
+#: ../includes/td_admin_options.php:79
 msgid "Set \"-1\" if you don't want to use this limitation."
 msgstr "Установите \"-1\" если вы не хотите использовать это ограничение."
 
-#: ../includes/td_admin_options.php:103
+#: ../includes/td_admin_options.php:83
 msgid "Consider existing links"
 msgstr "Учитывать существующие ссылки"
 
-#: ../includes/td_admin_options.php:106
+#: ../includes/td_admin_options.php:86
 msgid ""
 "If this option is checked plugin will count links that are added by hand."
 msgstr ""
 "Если эта опция установлена, плагин будет считать ссылки созданные вручную."
 
-#: ../includes/td_admin_options.php:110
+#: ../includes/td_admin_options.php:90
 msgid "Add CSS class"
 msgstr "Добавить CSS класс"
 
-#: ../includes/td_admin_options.php:112
+#: ../includes/td_admin_options.php:92
 msgid "to terms links."
 msgstr "к ссылкам на термины."
 
-#: ../includes/td_admin_options.php:116
+#: ../includes/td_admin_options.php:96
 msgid "Add title attribute to links"
 msgstr "Добавить title атрибут к ссылкам"
 
-#: ../includes/td_admin_options.php:122
+#: ../includes/td_admin_options.php:102
 msgid "Wrap link"
 msgstr "\"Обернуть\" ссылку"
 
-#: ../includes/td_admin_options.php:124
+#: ../includes/td_admin_options.php:104
 msgid "text before"
 msgstr "текст до"
 
-#: ../includes/td_admin_options.php:125
+#: ../includes/td_admin_options.php:105
 msgid "example: &lt;strong&gt;"
 msgstr "пример: &lt;strong&gt;"
 
-#: ../includes/td_admin_options.php:126
+#: ../includes/td_admin_options.php:106
 msgid "text after"
 msgstr "текст после"
 
-#: ../includes/td_admin_options.php:127
+#: ../includes/td_admin_options.php:107
 msgid "example: &lt;/strong&gt;"
 msgstr "пример: &lt;/strong&gt;"
 
-#: ../includes/td_admin_options.php:131
+#: ../includes/td_admin_options.php:111
 msgid "Convert terms only on single pages"
 msgstr "Преобразовывать термины только на страницах отдельных записей"
 
-#: ../includes/td_admin_options.php:134
+#: ../includes/td_admin_options.php:114
 msgid "Terms will not be converted on home, categories and archives pages."
 msgstr ""
 "Термины не будут преобразованы на главной, страницах категорий и архивов."
 
-#: ../includes/td_admin_options.php:138
+#: ../includes/td_admin_options.php:118
 msgid "Open link in a new tab"
 msgstr "Открывать ссылку в новом табе"
 
-#: ../includes/td_admin_options.php:141
+#: ../includes/td_admin_options.php:121
 msgid "If this option is checked plugin will add target=\"_blank\" to links."
 msgstr ""
 "Если эта опция установлена, плагин добавит target=\"_blank\" к ссылкам."
 
-#: ../includes/td_admin_options.php:145
+#: ../includes/td_admin_options.php:125
 msgid "Add nofollow to external links"
 msgstr "Добавить nofollow для внешних ссылок"
 
-#: ../includes/td_admin_options.php:148
+#: ../includes/td_admin_options.php:128
 msgid ""
 "If this option is checked plugin will add rel=\"nofollow\" to "
 "<strong>external</strong> links."
@@ -222,11 +218,11 @@ msgstr ""
 "Если эта опция установлена, плагин добавит rel=\"nofollow\" к "
 "<strong>внешним</strong> ссылкам."
 
-#: ../includes/td_admin_options.php:152
+#: ../includes/td_admin_options.php:132
 msgid "Wrap external links with noindex tag"
 msgstr "\"Обернуть\" внешнюю ссылку в тег noindex "
 
-#: ../includes/td_admin_options.php:155
+#: ../includes/td_admin_options.php:135
 msgid ""
 "If this option is checked plugin will wrap <strong>external</strong> links "
 "with &lt;noindex&gt; tag."
@@ -234,35 +230,35 @@ msgstr ""
 "Если эта опция установлена, плагин \"обернет\" <strong>внешние</strong> "
 "ссылки в тег &lt;noindex&gt;."
 
-#: ../includes/td_admin_options.php:159
+#: ../includes/td_admin_options.php:139
 msgid "Show"
 msgstr "Показывать"
 
-#: ../includes/td_admin_options.php:169
+#: ../includes/td_admin_options.php:149
 msgid "terms on a page (in admin area)"
 msgstr "терминов на странице (в админке)"
 
-#: ../includes/td_admin_options.php:173
+#: ../includes/td_admin_options.php:153
 msgid "Parser"
 msgstr "Парсер"
 
-#: ../includes/td_admin_options.php:177
+#: ../includes/td_admin_options.php:157
 msgid "Simple parser"
 msgstr "Простой парсер"
 
-#: ../includes/td_admin_options.php:180
+#: ../includes/td_admin_options.php:160
 msgid "Simple parser with quotes support"
 msgstr "Простой парсер с поддержкой кавычек"
 
-#: ../includes/td_admin_options.php:183
+#: ../includes/td_admin_options.php:163
 msgid "Long terms first parser"
 msgstr "Парсер с сортировкой терминов по их длинне"
 
-#: ../includes/td_admin_options.php:184
+#: ../includes/td_admin_options.php:164
 msgid "Orders terms by their lengths before searching them in text"
 msgstr "Перед поиском терминов в тексте, сортирует их по убыванию их длин"
 
-#: ../includes/td_admin_options.php:190
+#: ../includes/td_admin_options.php:170
 msgid "Update"
 msgstr "Изменить"
 
