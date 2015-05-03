@@ -1,8 +1,8 @@
 === Terms descriptions ===
 Contributors: vladimir.s
 Tags: post, page, links, plugin
-Requires at least: 3.0
-Tested up to: 4.1.1
+Requires at least: 3.9
+Tested up to: 4.2.1
 Stable tag: trunk
 
 This plugin allows you to create list of terms and assign links to them. Plugin replaces terms occurrences in your posts with appropriate links.
@@ -72,6 +72,11 @@ If you want to participate in the plugin development, create a pull request to t
 4. Tools page
 
 == Changelog ==
+
+= 3.2 =
+
+* WP 4.2 support
+* Bug fix: form revert to add new term state after term update
 
 = 3.1.9 =
 

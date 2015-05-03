@@ -207,6 +207,7 @@ class TD_Admin_Terms {
     public function load_scripts() {
         wp_enqueue_script( 'td_terms', TD_URL . '/js/terms.js'
                 , array( 'jquery-ui-autocomplete', 'jquery-ui-dialog', 'backbone' ), '1.0', true );
+        wp_enqueue_style( 'wp-jquery-ui-dialog' );
         //translations for use in JS code and array of terms ids
         wp_localize_script( 'td_terms', 'td_messages', array(
             'enter_term' => __( 'Enter the term, please', TD_TEXTDOMAIN ),

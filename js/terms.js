@@ -65,7 +65,7 @@
         }
 
         $('#td_add_term').attr('disabled', true);
-        $('#save_term_spinner').css('display', 'inline-block');
+        $('#save_term_spinner').css('visibility', 'visible').css('display', 'inline-block');
 
         //sending AJAX request
         $.post( td_messages.url_save, values, function( response ) {
@@ -90,13 +90,14 @@
                 $( '#td_term' ).val( '' );
                 $( '#td_link' ).val( '' );
                 $( '#td_post_id' ).val( '' );
+                $( '#td_cancel_edit_term' ).trigger( 'click' );
             }
             else {
                 alert( response.message );
             }
 
             $('#td_add_term').attr('disabled', false);
-            $('#save_term_spinner').css('display', 'none');
+            $('#save_term_spinner').css('visibility', 'hidden').css('display', 'none');
         } );
         
         return false;
