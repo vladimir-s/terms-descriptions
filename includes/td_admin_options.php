@@ -63,7 +63,7 @@ class TD_Admin_Options {
 	                    ?>
 		                    <label><input name="td_options[convert_in__<?php echo $type; ?>]" type="checkbox"
 		                                  id="convert_in__<?php echo $type; ?>"
-				                    <?php checked( $options[ 'convert_in__'.$type ], 'on' ); ?> />
+				                    <?php if (isset($options[ 'convert_in__'.$type ])) { checked( $options[ 'convert_in__'.$type ], 'on' ); } ?> />
 			                        <?php _e( 'in posts of type', TD_TEXTDOMAIN ); ?> "<?php echo $data->labels->name; ?>"
 		                    </label><br />
 	                    <?php
@@ -77,7 +77,8 @@ class TD_Admin_Options {
                 <tr valign="middle">
                     <th scope="row"><?php _e( 'Convert terms in shortcodes', TD_TEXTDOMAIN ); ?></th>
                     <td>
-                        <label><input name="td_options[convert_in_shortcodes]" type="checkbox" id="convert_in_posts" <?php checked( $options[ 'convert_in_shortcodes' ], 'on' ); ?> /></label><br />
+                        <label><input name="td_options[convert_in_shortcodes]" type="checkbox" id="convert_in_posts"
+		                        <?php if(isset($options[ 'convert_in_shortcodes' ])) { checked( $options[ 'convert_in_shortcodes' ], 'on' ); } ?> /></label><br />
                     </td>
                 </tr>
                 <tr valign="middle">

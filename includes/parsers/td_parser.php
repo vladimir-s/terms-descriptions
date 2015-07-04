@@ -130,7 +130,9 @@ abstract class TD_Parser {
      * @return bool true if URLs are equals
      */
     protected function is_current_url( $url ) {
-        return $this->get_current_url() === trailingslashit( $url );
+	    $cur_slug = $this->get_current_url();
+	    $term_url = preg_replace( '/^https?\:\/\/(www\.)?/i', '', trailingslashit( $url ) );
+        return $cur_slug === $term_url;
     }
 
     /**
@@ -157,15 +159,10 @@ abstract class TD_Parser {
         if ( $this->cur_url !== '' ) {
             return $this->cur_url;
         }
-        $this->cur_url = 'http';
-        if ( isset( $_SERVER[ "HTTPS" ] ) && $_SERVER[ "HTTPS" ] == "on" ) {
-            $this->cur_url .= "s";
-        }
-        $this->cur_url .= "://";
         if ( $_SERVER[ "SERVER_PORT" ] != "80" ) {
-            $this->cur_url .= $_SERVER[ "SERVER_NAME" ] . ":" . $_SERVER[ "SERVER_PORT" ] . $_SERVER[ "REQUEST_URI" ];
+            $this->cur_url = $_SERVER[ "SERVER_NAME" ] . ":" . $_SERVER[ "SERVER_PORT" ] . $_SERVER[ "REQUEST_URI" ];
         } else {
-            $this->cur_url .= $_SERVER[ "SERVER_NAME" ] . $_SERVER[ "REQUEST_URI" ];
+            $this->cur_url = $_SERVER[ "SERVER_NAME" ] . $_SERVER[ "REQUEST_URI" ];
         }
         return trailingslashit( $this->cur_url );
     }
