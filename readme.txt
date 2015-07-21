@@ -1,7 +1,7 @@
 === Terms descriptions ===
 Contributors: vladimir.s
 Tags: post, page, links, plugin
-Requires at least: 3.9
+Requires at least: 4.1
 Tested up to: 4.2.2
 Stable tag: trunk
 
@@ -75,6 +75,10 @@ The plugin built with [PhpStorm]( http://www.jetbrains.com/phpstorm/ )
 5. The plugin built with PhpStorm
 
 == Changelog ==
+
+= 3.2.2 =
+
+* Bug fix: in setting cur_url variable
 
 = 3.2.1 =
 
