@@ -2,7 +2,7 @@
 Contributors: vladimir.s
 Tags: post, page, links, plugin
 Requires at least: 4.1
-Tested up to: 4.2.2
+Tested up to: 4.4
 Stable tag: trunk
 
 This plugin allows you to create list of terms and assign links to them. Plugin replaces terms occurrences in your posts with appropriate links.
@@ -75,6 +75,10 @@ The plugin built with [PhpStorm]( http://www.jetbrains.com/phpstorm/ )
 5. The plugin built with PhpStorm
 
 == Changelog ==
+
+= 3.2.3 =
+
+* Bug fix: in setting disable_terms_descriptions option
 
 = 3.2.2 =
 

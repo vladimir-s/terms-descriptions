@@ -59,7 +59,12 @@ class TD_Meta_Box {
                 return;
         }
 
-        update_post_meta( $post_id, '_disable_terms_descriptions', $_POST[ 'disable_terms_descriptions' ] );
+        if (isset($_POST[ 'disable_terms_descriptions' ])) {
+            update_post_meta( $post_id, '_disable_terms_descriptions', $_POST[ 'disable_terms_descriptions' ] );
+        }
+        else {
+            delete_post_meta( $post_id, '_disable_terms_descriptions' );
+        }
     }
 }
 $tdmb = new TD_Meta_Box();
