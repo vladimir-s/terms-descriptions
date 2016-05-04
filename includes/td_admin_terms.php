@@ -104,7 +104,7 @@ class TD_Admin_Terms {
     /**
      * This method converts data to v.1.2.0 format.
      *
-     * @global type $wpdb wordpress database class
+     * @global wpdb $wpdb wordpress database class
      */
     public function update_db() {
         if ( isset( $_GET[ 'action' ] ) && $_GET[ 'action' ] === 'update_db'
@@ -174,7 +174,7 @@ class TD_Admin_Terms {
     /**
      * Creating admin menu
      *
-     * @global type $wpdb wordpress database class
+     * @global wpdb $wpdb wordpress database class
      */
     public function admin_menu() {
         load_plugin_textdomain( TD_TEXTDOMAIN, false, TD_TEXTDOMAIN . '/lang' );
@@ -202,7 +202,7 @@ class TD_Admin_Terms {
     /**
      * Loading JS files
      *
-     * @global type $wpdb wordpress database class
+     * @global wpdb $wpdb wordpress database class
      */
     public function load_scripts() {
         wp_enqueue_script( 'td_terms', TD_URL . '/js/terms.js'
@@ -449,13 +449,25 @@ class TD_Admin_Terms {
 
         $html = '<div class="tablenav-pages">';
         $html .= '<span class="pagination-links">';
-        $html .= '<a class="first-page' . $prev_disabled . '" title="' . esc_attr__( 'Go to the first page' ) . '" href="' . $first_page_link . '">«</a>';
-        $html .= '<a class="prev-page' . $prev_disabled . '" title="' . esc_attr__( 'Go to the previous page' ) . '" href="' . $prev_page_link . '">‹</a>';
+        if (!empty($prev_disabled)) {
+            $html .= '<span class="tablenav-pages-navspan">«</span> ';
+            $html .= '<span class="tablenav-pages-navspan">‹</span> ';
+        }
+        else {
+            $html .= '<a class="first-page" title="' . esc_attr__( 'Go to the first page' ) . '" href="' . $first_page_link . '">«</a> ';
+            $html .= '<a class="prev-page" title="' . esc_attr__( 'Go to the previous page' ) . '" href="' . $prev_page_link . '">‹</a> ';
+        }
         $html .= '<span class="paging-input">';
         $html .= '<span class="total-pages"> ' . $cur_page . '</span> ' . __('of') . ' <span class="total-pages">' . $total_pages . ' </span>';
         $html .= '</span>';
-        $html .= '<a class="next-page' . $next_disabled . '" title="' . esc_attr__( 'Go to the next page' ) . '" href="' . $next_page_link . '">›</a>';
-        $html .= '<a class="last-page' . $next_disabled . '" title="' . esc_attr__( 'Go to the last page' ) . '" href="' . $last_page_link . '">»</a>';
+        if (!empty($next_disabled)) {
+            $html .= '<span class="tablenav-pages-navspan">›</span> ';
+            $html .= '<span class="tablenav-pages-navspan">»</span> ';
+        }
+        else {
+            $html .= '<a class="next-page" title="' . esc_attr__( 'Go to the next page' ) . '" href="' . $next_page_link . '">›</a> ';
+            $html .= '<a class="last-page" title="' . esc_attr__( 'Go to the last page' ) . '" href="' . $last_page_link . '">»</a> ';
+        }
         $html .= '</span>';
         $html .= '</div>';
 
