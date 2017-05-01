@@ -160,18 +160,19 @@ class TD_Simple_Parser extends TD_Parser {
      * @param $tags string|array tags string
      */
     public function add_skip_tags( $tags ) {
-        if ( empty( trim( $tags ) ) ) {
-            return;
-        }
         if ( !is_array( $tags ) ) {
+            $tags = trim( $tags );
+            if ( '' === $tags ) {
+                return;
+            }
             $tags = explode( '|', trim( $tags ) );
             foreach ( $tags as $key => $tag ) {
-                if ( !empty( trim( $tag ) ) ) {
+                if ( '' !== trim( $tag ) ) {
                     $tags[ $key ] = trim( $tag );
                 }
             }
         }
-        if ( !empty( $tags ) ) {
+        if ( count( $tags ) > 0 ) {
             $this->skip_tags = array_merge( $tags, $this->skip_tags );
         }
     }

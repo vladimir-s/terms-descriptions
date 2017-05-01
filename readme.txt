@@ -76,6 +76,10 @@ The plugin built with [PhpStorm]( http://www.jetbrains.com/phpstorm/ )
 
 == Changelog ==
 
+= 3.2.6 =
+
+* Bug fix: in add_skip_tags method
+
 = 3.2.5 =
 
 * WP 4.7.4 support
