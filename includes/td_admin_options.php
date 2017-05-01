@@ -157,6 +157,15 @@ class TD_Admin_Options {
                     </td>
                 </tr>
                 <tr valign="middle">
+                    <th scope="row"><?php _e( 'Skip tags', TD_TEXTDOMAIN ); ?></th>
+                    <td>
+                        <input name="td_options[skip_tags]" type="text" id="skip_tags" class="large-text code" value="<?php echo ( isset( $options[ 'skip_tags' ] ) ) ? $options[ 'skip_tags' ] : ''; ?>" />
+                        <p class="description"><?php _e( 'The plugin skips text inside tags like <code>a</code>, <code>h1..6</code>, <code>canvas</code>, <code>code</code>, etc. This option allows you to add additional tags to skip. Use regular expressions to specify tags and <code>|</code> (vertical line) to separate them.', TD_TEXTDOMAIN ); ?></p>
+                        <p class="description"><code>&lt;em.*?&lt;\/em&gt;|&lt;span.*?&lt;\/span&gt;</code></p>
+                        <p class="description"><?php _e( '<strong>Use this option with care</strong>. In most cases the default set of tags will be enough.', TD_TEXTDOMAIN ) ?></p>
+                    </td>
+                </tr>
+                <tr valign="middle">
                     <th scope="row"><?php _e( 'Show', TD_TEXTDOMAIN ); ?></th>
                     <td>
                         <select name="td_options[terms_per_page]" id="terms_per_page">
@@ -259,6 +268,9 @@ class TD_Admin_Options {
         }
         if ( !isset( $input[ 'show_after' ] ) ) {
             $input[ 'show_after' ] = '';
+        }
+        if ( !isset( $input[ 'skip_tags' ] ) ) {
+            $input[ 'skip_tags' ] = '';
         }
         if ( false !== $old_options ) {
             return array_merge( $old_options, $input );

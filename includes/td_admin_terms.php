@@ -21,7 +21,8 @@ class TD_Admin_Terms {
                 'open_new_tab' => false,
                 'show_title' => false,
                 'show_before' => '',
-                'show_after' => '',                
+                'show_after' => '',
+                'skip_tags' => '',
             );
     private $terms_ids = array();
 

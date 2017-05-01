@@ -60,6 +60,7 @@ class TD_Frontend {
             $terms = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . 'td_terms ORDER BY t_id DESC', ARRAY_A );
             //setting up parser
             $parser->set_terms( $terms );
+            $parser->add_skip_tags( $this->options->getOption( 'skip_tags' ) );
             //target attribute
             $target = '';
             if ( 'on' === $this->options->getOption( 'open_new_tab' ) ) {

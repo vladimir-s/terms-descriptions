@@ -153,6 +153,28 @@ class TD_Simple_Parser extends TD_Parser {
         }
         return $text;
     }
+
+    /**
+     * Appends $tags to $this->skip_tags array
+     *
+     * @param $tags string|array tags string
+     */
+    public function add_skip_tags( $tags ) {
+        if ( empty( trim( $tags ) ) ) {
+            return;
+        }
+        if ( !is_array( $tags ) ) {
+            $tags = explode( '|', trim( $tags ) );
+            foreach ( $tags as $key => $tag ) {
+                if ( !empty( trim( $tag ) ) ) {
+                    $tags[ $key ] = trim( $tag );
+                }
+            }
+        }
+        if ( !empty( $tags ) ) {
+            $this->skip_tags = array_merge( $tags, $this->skip_tags );
+        }
+    }
     
     /**
      * Replaces terms with links.
