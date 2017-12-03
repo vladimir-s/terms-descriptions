@@ -3,7 +3,7 @@
  * Simple parser which tries to convert long terms first.
  * Searches for terms in a text and converts them to links.
  */
-class TD_Long_Terms_First_Parser extends TD_Simple_Parser {
+class SCO_TD_Long_Terms_First_Parser extends SCO_TD_Simple_Parser {
 
     /**
      * Orders terms array by descending of their lengths, then searches for terms in a text and converts them to links.
@@ -22,7 +22,7 @@ class TD_Long_Terms_First_Parser extends TD_Simple_Parser {
             , $add_nofollow = false, $add_noindex = false ) {
 
         //sorting terms list according to terms length
-        uasort( $this->terms, array( 'TD_Long_Terms_First_Parser', 'compare_terms' ) );
+        uasort( $this->terms, array('SCO_TD_Long_Terms_First_Parser', 'compare_terms' ) );
 
         return parent::parse($text, $replace_terms, $class_attr
             , $max_convertions, $show_title, $text_before, $text_after, $target

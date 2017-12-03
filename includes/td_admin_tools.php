@@ -2,7 +2,7 @@
 /**
  * This class creates Tools page in Terms menu
  */
-class TD_Admin_Tools {
+class SCO_TD_Admin_Tools {
     private $page = '';
     private $message = '';
     
@@ -285,4 +285,4 @@ class TD_Admin_Tools {
     }
 }
 
-$tdat = new TD_Admin_Tools();
+$tdat = new SCO_TD_Admin_Tools();

@@ -2,7 +2,7 @@
 /**
  * This class creates meta boxes on post edit screen
  */
-class TD_Meta_Box {
+class SCO_TD_Meta_Box {
     /**
      * Constuctor. Sets the actions handlers.
      */
@@ -67,4 +67,4 @@ class TD_Meta_Box {
         }
     }
 }
-$tdmb = new TD_Meta_Box();
+$tdmb = new SCO_TD_Meta_Box();

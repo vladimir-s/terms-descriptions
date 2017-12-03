@@ -3,7 +3,7 @@
  * Simple parser with quotes support.
  * Searches for terms in a text and converts them to links.
  */
-class TD_Simple_Quotes_Parser extends TD_Simple_Parser {
+class SCO_TD_Simple_Quotes_Parser extends SCO_TD_Simple_Parser {
     /**
      * Searches for terms in a text and converts them to links.
      *

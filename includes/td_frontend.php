@@ -2,14 +2,14 @@
 /**
  * This class parses post content and replaces terms with links.
  */
-class TD_Frontend {
+class SCO_TD_Frontend {
     private $options;
     
     /**
      * Constuctor. Sets the filters handlers.
      */
     public function __construct() {
-        $this->options = TD_Options::getInstance();
+        $this->options = SCO_TD_Options::getInstance();
 
         //post filter
         $priority = 10;
@@ -44,16 +44,16 @@ class TD_Frontend {
             //selecting parser
             switch ( $this->options->getOption( 'parser' ) ) {
                 case 'simple_parser' :
-                    $parser = new TD_Simple_Parser();
+                    $parser = new SCO_TD_Simple_Parser();
                     break;
                 case 'quotes_parser' :
-                    $parser = new TD_Simple_Quotes_Parser();
+                    $parser = new SCO_TD_Simple_Quotes_Parser();
                     break;
                 case 'long_terms_first_parser' :
-                    $parser = new TD_Long_Terms_First_Parser();
+                    $parser = new SCO_TD_Long_Terms_First_Parser();
                     break;
                 default :
-                    $parser = new TD_Simple_Parser();
+                    $parser = new SCO_TD_Simple_Parser();
                     break;
             }
             //getting the terms
@@ -84,4 +84,4 @@ class TD_Frontend {
     }
 }
 
-$tdf = new TD_Frontend();
+$tdf = new SCO_TD_Frontend();

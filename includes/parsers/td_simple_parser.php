@@ -3,7 +3,7 @@
  * Simple parser.
  * Searches for terms in a text and converts them to links.
  */
-class TD_Simple_Parser extends TD_Parser {
+class SCO_TD_Simple_Parser extends SCO_TD_Parser {
     //parser will ignore these tags
     protected $skip_tags = array(
         '<a\s.*?<\/a>',

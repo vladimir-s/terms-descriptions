@@ -2,7 +2,7 @@
 /**
  * This class creates Terms page in Terms menu
  */
-class TD_Admin_Terms {
+class SCO_TD_Admin_Terms {
     private $page = '';
     private $post_types = array();
     //options defaults
@@ -141,7 +141,7 @@ class TD_Admin_Terms {
             
             //importing options from plugin previous versions
             if ( false === get_option( 'td_options' ) ) {
-                if ( false !== get_option('td_class' ) ) {
+                if ( false !== get_option( 'td_class' ) ) {
                     $this->td_options[ 'class' ] = get_option( 'td_class' );
                 }
                 if ( false !== get_option( 'td_count' ) ) {
@@ -476,4 +476,4 @@ class TD_Admin_Terms {
     }
 }
 
-$tdat = new TD_Admin_Terms();
+$tdat = new SCO_TD_Admin_Terms();

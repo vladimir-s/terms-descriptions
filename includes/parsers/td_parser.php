@@ -3,7 +3,7 @@
  * Base parser class.
  * All parsers must be inherited from this class.
  */
-abstract class TD_Parser {
+abstract class SCO_TD_Parser {
     protected $counters = array();
     protected $terms = array();
     private $cur_url = '';

@@ -2,7 +2,7 @@
 /**
  * This class creates Options page in Terms menu
  */
-class TD_Admin_Options {
+class SCO_TD_Admin_Options {
     private $page = '';
     
     /**
@@ -37,7 +37,7 @@ class TD_Admin_Options {
         $options = get_option('td_options');
         //if there is no options using default values
         if ( false === $options ) {
-            $terms_class = new TD_Admin_Terms();
+            $terms_class = new SCO_TD_Admin_Terms();
             $options = $terms_class->get_default_options();
             add_option( 'td_options', $options );
         }
@@ -212,7 +212,7 @@ class TD_Admin_Options {
      */
     public function validate_options( $input ) {
         //reading current values
-        $old_options = get_option( 'td_options' );
+        $old_options = get_option('td_options');
         //checking new values
         if ( (int)$input[ 'convert_first_n_terms' ] <= 0 ) {
             $input[ 'convert_first_n_terms' ] = '-1';
@@ -220,7 +220,7 @@ class TD_Admin_Options {
         else {
             $input[ 'convert_first_n_terms' ] = (int)$input[ 'convert_first_n_terms' ];
         }
-        if ( ( int )$input[ 'terms_per_page' ] <= 0 ) {
+        if ( !isset( $input[ 'terms_per_page' ] ) || ( int )$input[ 'terms_per_page' ] <= 0 ) {
             $input[ 'terms_per_page' ] = 20;
         }
         if ( !isset( $input[ 'convert_in_posts' ] ) ) {
@@ -281,4 +281,4 @@ class TD_Admin_Options {
     }
 }
 
-$tdao = new TD_Admin_Options();
+$tdao = new SCO_TD_Admin_Options();

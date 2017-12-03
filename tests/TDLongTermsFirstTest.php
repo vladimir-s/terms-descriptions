@@ -10,7 +10,7 @@ class TD_Long_Terms_First_Test extends PHPUnit_Framework_TestCase {
     public function setUp() {
         global $post;
 		$post = (object)array('ID' => 1);
-        $this->parser = $this->getMock('TD_Long_Terms_First_Parser', array('is_current_url'));
+        $this->parser = $this->getMock('SCO_TD_Long_Terms_First_Parser', array('is_current_url'));
     }
 
     public function testPrepareTermRegex() {
@@ -138,7 +138,7 @@ class TD_Long_Terms_First_Test extends PHPUnit_Framework_TestCase {
         $parsed_file = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/1_1.txt'));
         $this->assertEquals($parsed_file, $this->parser->parse($orig_file));
 
-        $p_2 = $this->getMock('TD_Long_Terms_First_Parser', array('is_current_url'));
+        $p_2 = $this->getMock('SCO_TD_Long_Terms_First_Parser', array('is_current_url'));
         $terms_2 = array(
             array(
                 't_term' => 'стол',
@@ -159,7 +159,7 @@ class TD_Long_Terms_First_Test extends PHPUnit_Framework_TestCase {
         $parsed_file_2 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/2_1.txt'));
         $this->assertEquals($parsed_file_2, $p_2->parse($orig_file_2, 2));
 
-        $p_3 = $this->getMock('TD_Long_Terms_First_Parser', array('is_current_url'));
+        $p_3 = $this->getMock('SCO_TD_Long_Terms_First_Parser', array('is_current_url'));
         $terms_3 = array(
             array(
                 't_term' => 'стол',
@@ -190,7 +190,7 @@ class TD_Long_Terms_First_Test extends PHPUnit_Framework_TestCase {
         $parsed_file_5 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/4_1.txt'));
         $this->assertEquals($parsed_file_5, $p_3->parse($orig_file_5, 1));
 
-        $p_4 = $this->getMock('TD_Long_Terms_First_Parser', array('is_current_url'));
+        $p_4 = $this->getMock('SCO_TD_Long_Terms_First_Parser', array('is_current_url'));
         $terms_4 = array(
         );
         $p_4->set_terms($terms_4);
@@ -199,7 +199,7 @@ class TD_Long_Terms_First_Test extends PHPUnit_Framework_TestCase {
         $parsed_file_4 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/3_1.txt'));
         $this->assertEquals($orig_file_4, $p_4->parse($orig_file_4, 1));
 
-        $p_6 = $this->getMock('TD_Long_Terms_First_Parser', array('is_current_url'));
+        $p_6 = $this->getMock('SCO_TD_Long_Terms_First_Parser', array('is_current_url'));
         $terms_6 = array(
             array(
                 't_term' => "Zachary's Jewelers",
@@ -213,7 +213,7 @@ class TD_Long_Terms_First_Test extends PHPUnit_Framework_TestCase {
         $parsed_text = "fdsgsfg <a href=\"http://fdgd.sff\">Zachary's Jewelers</a> впівп";
         $this->assertEquals($parsed_text, $p_6->parse( $orig_text ) );
 
-        $p_7 = $this->getMock('TD_Long_Terms_First_Parser', array('is_current_url'));
+        $p_7 = $this->getMock('SCO_TD_Long_Terms_First_Parser', array('is_current_url'));
         $terms_7 = array(
             array(
                 't_term' => "test",
@@ -340,7 +340,7 @@ class TD_Long_Terms_First_Test extends PHPUnit_Framework_TestCase {
 	}
 
     protected static function getMethod( $name ) {
-        $class = new ReflectionClass( 'TD_Long_Terms_First_Parser' );
+        $class = new ReflectionClass('SCO_TD_Long_Terms_First_Parser');
         $method = $class->getMethod( $name );
         $method->setAccessible( true );
         return $method;

@@ -1,10 +1,10 @@
 <?php
-class TD_Options {
+class SCO_TD_Options {
 	private $options = array();
 	private static $instance = null;
 
 	private function __construct() {
-		$this->options = get_option( 'td_options' );
+		$this->options = get_option('td_options');
 		$this->prepareOptions();
 	}
 
