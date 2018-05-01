@@ -2,7 +2,7 @@
 Contributors: vladimir.s
 Tags: post, page, links, plugin
 Requires at least: 4.1
-Tested up to: 4.9.1
+Tested up to: 4.9.5
 Stable tag: trunk
 
 This plugin allows you to create list of terms and assign links to them. Plugin replaces terms occurrences in your posts with appropriate links.
@@ -40,9 +40,9 @@ Please, note that terms *will not* be replaced with links in following cases.
 
 Huge terms lists with hundreds of terms can increase page creation time. In such cases, consider to use caching plugin.
 
-Detail description of this plugin is available in [English]( http://www.simplecoding.org/wordpress-easy-cross-linking-with-terms-descriptions-plugin "WordPress: easy cross-linking with Terms Descriptions plugin").
+Detail description of this plugin is available in [English]( https://www.simplecoding.org/wordpress-easy-cross-linking-with-terms-descriptions-plugin "WordPress: easy cross-linking with Terms Descriptions plugin").
 
-Detail description of this plugin is available in [Russian]( http://www.simplecoding.org/plagin-wordpress-terms-descriptions "Terms Descriptions WordPress Plugin").
+Detail description of this plugin is available in [Russian]( https://www.simplecoding.org/plagin-wordpress-terms-descriptions "Terms Descriptions WordPress Plugin").
 
 Serbo-Croatian translations were created by [Borisa Djuraskovic]( http://www.webhostinghub.com "Borisa Djuraskovic").
 
@@ -75,6 +75,12 @@ The plugin built with [PhpStorm]( http://www.jetbrains.com/phpstorm/ )
 5. The plugin built with PhpStorm
 
 == Changelog ==
+
+= 3.3.0 =
+
+* New feature: Custom title tag added for external links
+* Bug fix: in SCO_TD_Long_Terms_First_Parser::compare_terms method
+* WP 4.9.5 support
 
 = 3.2.7 =
 

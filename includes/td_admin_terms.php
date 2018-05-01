@@ -130,9 +130,10 @@ class SCO_TD_Admin_Terms {
                         else {
                             $post_type = get_post_type( $term[ 'pageid' ] );
                         }
-                        $terms_values[] = '(' . $term[ 'pageid' ] . ',"' . $wpdb->escape( $term[ 'title' ] )
-                                . '","' . $wpdb->escape( $term[ 'url' ] ) . '","' . $post_type
-                                . '","' . $wpdb->escape( $term[ 'term' ] ) . '")';
+                        $terms_values[] = $wpdb->prepare(
+                                '(%d,%s,%s,%s,%s)'
+                                , array( $term[ 'pageid' ], $term[ 'title' ], $term[ 'url' ], $post_type, $term[ 'term' ] )
+                        );
                     }
                     $wpdb->query( $insert_sql . implode(',', $terms_values) );
                     delete_option( 'td_terms' );
@@ -228,7 +229,9 @@ class SCO_TD_Admin_Terms {
             'done' => __( 'Done!', TD_TEXTDOMAIN ),
             'select' => __( 'Select', TD_TEXTDOMAIN ),
             'terms_ids' => json_encode( $this->terms_ids ),
-            'dbl_click_to_open_list' => __('Double click to open the titles list or type some letters', TD_TEXTDOMAIN),
+            'dbl_click_to_open_list' => __('Title. Double click to open the titles list or type some letters', TD_TEXTDOMAIN),
+            'ext_link_title' => __('Title attribute text', TD_TEXTDOMAIN),
+            'post_id' => __('Post ID', TD_TEXTDOMAIN),
         ) );
         
         global $wpdb;
@@ -275,18 +278,27 @@ class SCO_TD_Admin_Terms {
         <tr>
             <th scope="row"><label for="td_link"><?php _e( 'Link', TD_TEXTDOMAIN ); ?></label></th>
             <td>
-                <label for="td_content_type"><?php _e( 'Link to', TD_TEXTDOMAIN ); ?></label>
-                <select name="td_content_type" id="td_content_type">
-<?php
-                foreach ( $this->post_types as $type_name => $type ) {
-                    echo '<option value="'.$type_name.'">'.$type->labels->singular_name.'</option>';
-                }
-?>
-                    <option value="ext_link"><?php _e( 'External link', TD_TEXTDOMAIN ); ?></option>
-                    <option value="post_id"><?php _e( 'Post ID', TD_TEXTDOMAIN ); ?></option>
-                </select>
-                <input type="text" name="td_link" id="td_link" class="regular-text" />
-                <input type="hidden" name="td_post_id" id="td_post_id" />
+                <table class="form-table">
+                    <tr>
+                        <td style="width: 250px; vertical-align: top;">
+                            <label for="td_content_type"><?php _e( 'Link to', TD_TEXTDOMAIN ); ?></label>
+                            <select name="td_content_type" id="td_content_type">
+                                <?php
+                                foreach ( $this->post_types as $type_name => $type ) {
+                                    echo '<option value="'.$type_name.'">'.$type->labels->singular_name.'</option>';
+                                }
+                                ?>
+                                <option value="ext_link"><?php _e( 'External link', TD_TEXTDOMAIN ); ?></option>
+                                <option value="post_id"><?php _e( 'Post ID', TD_TEXTDOMAIN ); ?></option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" name="td_link" id="td_link" class="regular-text" />
+                            <input type="text" name="td_title" id="td_title" class="regular-text hidden" disabled="disabled" />
+                            <input type="hidden" name="td_post_id" id="td_post_id" />
+                        </td>
+                    </tr>
+                </table>
             </td>
         </tr>
     </table>
@@ -312,7 +324,7 @@ class SCO_TD_Admin_Terms {
     $where_clause = '';
     if ( isset( $_GET[ 'term_search' ] ) && '' !== trim( $_GET[ 'term_search' ] ) ) {
         $search_str = $_GET[ 'term_search' ];
-        $where_clause = ' WHERE t_term LIKE "%' . $wpdb->escape( $search_str ) . '%" ';
+        $where_clause = ' WHERE t_term LIKE "%' . $wpdb->esc_like( $search_str ) . '%" ';
     }
     
     $terms_count = $wpdb->get_var( 'SELECT COUNT(*) FROM ' . $wpdb->prefix . 'td_terms' . $where_clause );
@@ -338,7 +350,7 @@ class SCO_TD_Admin_Terms {
             <input type="hidden" name="page" value="terms-descriptions" />
         <?php
         if ( isset( $_GET[ 'term_search' ] ) ) {
-            echo '<a href="' . get_admin_url( null, 'admin.php' ) . '?page=terms-descriptions" class="button">' . __( 'Cancel', TD_TEXTDOMAIN ) . '</a>';
+            echo '<a href="' . get_admin_url( null, 'admin.php' ) . '?page=terms-descriptions" class="button" id="clear_filter_btn">' . __( 'Cancel', TD_TEXTDOMAIN ) . '</a>';
         }
         ?>
         </form>

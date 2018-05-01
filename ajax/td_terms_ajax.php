@@ -46,59 +46,8 @@ function td_add_term() {
         $res[ 'message' ] = __( 'Content type is not set', TD_TEXTDOMAIN );
     }
 	else {
-        switch ( $_POST[ 'td_content_type' ] ) {
-            case 'ext_link' :
-                $term_link = $_POST[ 'td_link' ];
-                if ( !preg_match( '/^\w{3,5}\:\/\//i', $term_link ) ) {
-                    $term_link = 'http://' . $term_link;
-                }
-                $term_data = array(
-                    't_post_id' => 0,
-                    't_post_title' => $term_link,
-                    't_post_url' => $term_link,
-                    't_post_type' => $_POST[ 'td_content_type' ],
-                    't_term' => $_POST[ 'td_term' ],
-                );
-                break;
-            case 'post_id' :
-                if ( !is_int( $_POST[ 'td_link' ] ) || ( int )$_POST[ 'td_link' ] <= 0 ) {
-                    $res[ 'message' ] = __( 'Incorrect post ID', TD_TEXTDOMAIN );
-                }
-                $term_link = get_permalink( ( int )$_POST[ 'td_link' ] );
-                if ( false === $term_link ) {
-                    $res[ 'message' ] = __( 'Link creation error', TD_TEXTDOMAIN );
-                    echo json_encode( $res );
-                    die();
-                }
-                $term_data = array(
-                    't_post_id' => $_POST[ 'td_link' ],
-                    't_post_title' => get_the_title( ( int )$_POST[ 'td_link' ] ),
-                    't_post_url' => $term_link,
-                    't_post_type' => $_POST[ 'td_content_type' ],
-                    't_term' => $_POST[ 'td_term' ],
-                );
-                break;
-            default :
-                if ( !isset( $_POST[ 'td_post_id' ] ) || empty( $_POST[ 'td_post_id' ] )
-                        || !is_int( $_POST[ 'td_post_id' ] ) || 0 >= ( int )$_POST[ 'td_post_id' ] ) {
-                    $res[ 'message' ] = __( 'Post ID is not set', TD_TEXTDOMAIN );
-                }
-                $term_link = get_permalink( ( int )$_POST[ 'td_post_id' ] );
-                if ( false === $term_link ) {
-                    $res[ 'message' ] = __( 'Link creation error', TD_TEXTDOMAIN );
-                    echo json_encode( $res );
-                    die();
-                }
-                $term_data = array(
-                    't_post_id' => $_POST[ 'td_post_id' ],
-                    't_post_title' => $_POST[ 'td_link' ],
-                    't_post_url' => $term_link,
-                    't_post_type' => $_POST[ 'td_content_type' ],
-                    't_term' => $_POST[ 'td_term' ],
-                );
-                break;
-        }
-		//saving term
+        list($term_data, $res) = td_prepare_term_data($res);
+        //saving term
         global $wpdb;
         $wpdb->insert( $wpdb->prefix . 'td_terms', $term_data, array( '%d', '%s', '%s', '%s', '%s' ) );
         if ( !is_int( $wpdb->insert_id ) || ( int )$wpdb->insert_id <= 0 ) {
@@ -116,6 +65,59 @@ function td_add_term() {
 
 	echo json_encode( $res );
 	die();
+}
+
+function td_prepare_term_data($res) {
+    switch ($_POST['td_content_type']) {
+        case 'ext_link' :
+            $term_link = $_POST['td_link'];
+            if (!preg_match('/^\w{3,5}\:\/\//i', $term_link)) {
+                $term_link = 'http://' . $term_link;
+            }
+            $link_title = $term_link;
+            if ( isset( $_POST[ 'td_title' ] ) && !empty( trim( $_POST[ 'td_title' ] ) ) ) {
+                $link_title = trim( $_POST[ 'td_title' ] );
+            }
+            $term_data = array('t_post_id'    => 0,
+                               't_post_title' => $link_title,
+                               't_post_url'   => $term_link,
+                               't_post_type'  => $_POST['td_content_type'],
+                               't_term'       => $_POST['td_term'],);
+            break;
+        case 'post_id' :
+            if (!is_int($_POST['td_link']) || ( int )$_POST['td_link'] <= 0) {
+                $res['message'] = __('Incorrect post ID', TD_TEXTDOMAIN);
+            }
+            $term_link = get_permalink(( int )$_POST['td_link']);
+            if (false === $term_link) {
+                $res['message'] = __('Link creation error', TD_TEXTDOMAIN);
+                echo json_encode($res);
+                die();
+            }
+            $term_data = array('t_post_id'    => $_POST['td_link'],
+                               't_post_title' => get_the_title(( int )$_POST['td_link']),
+                               't_post_url'   => $term_link,
+                               't_post_type'  => $_POST['td_content_type'],
+                               't_term'       => $_POST['td_term'],);
+            break;
+        default :
+            if (!isset($_POST['td_post_id']) || empty($_POST['td_post_id']) || !is_int($_POST['td_post_id']) || 0 >= ( int )$_POST['td_post_id']) {
+                $res['message'] = __('Post ID is not set', TD_TEXTDOMAIN);
+            }
+            $term_link = get_permalink(( int )$_POST['td_post_id']);
+            if (false === $term_link) {
+                $res['message'] = __('Link creation error', TD_TEXTDOMAIN);
+                echo json_encode($res);
+                die();
+            }
+            $term_data = array('t_post_id'    => $_POST['td_post_id'],
+                               't_post_title' => $_POST['td_link'],
+                               't_post_url'   => $term_link,
+                               't_post_type'  => $_POST['td_content_type'],
+                               't_term'       => $_POST['td_term'],);
+            break;
+    }
+    return array($term_data, $res);
 }
 
 /**
@@ -311,59 +313,7 @@ function td_update_term() {
         $res[ 'message' ] = __( 'Unknown term id', TD_TEXTDOMAIN );
     }
 	else {
-        //selecting link type
-        switch ( $_POST[ 'td_content_type' ] ) {
-            case 'ext_link' :
-                $term_link = $_POST[ 'td_link' ];
-                if ( !preg_match( '/^\w{3,5}\:\/\//i', $term_link ) ) {
-                    $term_link = 'http://' . $term_link;
-                }
-                $term_data = array(
-                    't_post_id' => 0,
-                    't_post_title' => $term_link,
-                    't_post_url' => $term_link,
-                    't_post_type' => $_POST[ 'td_content_type' ],
-                    't_term' => $_POST[ 'td_term' ],
-                );
-                break;
-            case 'post_id' :
-                if ( !is_int( $_POST[ 'td_link' ] ) || ( int )$_POST[ 'td_link' ] <= 0 ) {
-                    $res[ 'message' ] = __( 'Incorrect post ID', TD_TEXTDOMAIN );
-                }
-                $term_link = get_permalink( ( int )$_POST[ 'td_link' ] );
-                if ( false === $term_link ) {
-                    $res[ 'message' ] = __( 'Link creation error', TD_TEXTDOMAIN );
-                    echo json_encode( $res );
-                    die();
-                }
-                $term_data = array(
-                    't_post_id' => $_POST[ 'td_link' ],
-                    't_post_title' => get_the_title( ( int )$_POST[ 'td_link' ] ),
-                    't_post_url' => $term_link,
-                    't_post_type' => $_POST[ 'td_content_type' ],
-                    't_term' => $_POST[ 'td_term' ],
-                );
-                break;
-            default :
-                if ( !isset( $_POST[ 'td_post_id' ] ) || empty( $_POST[ 'td_post_id' ] )
-                        || !is_int( $_POST[ 'td_post_id' ] ) || 0 >= ( int )$_POST[ 'td_post_id' ] ) {
-                    $res[ 'message' ] = __( 'Post ID is not set', TD_TEXTDOMAIN );
-                }
-                $term_link = get_permalink( ( int )$_POST[ 'td_post_id' ] );
-                if ( false === $term_link ) {
-                    $res[ 'message' ] = __( 'Link creation error', TD_TEXTDOMAIN );
-                    echo json_encode( $res );
-                    die();
-                }
-                $term_data = array(
-                    't_post_id' => $_POST[ 'td_post_id' ],
-                    't_post_title' => $_POST[ 'td_link' ],
-                    't_post_url' => $term_link,
-                    't_post_type' => $_POST[ 'td_content_type' ],
-                    't_term' => $_POST[ 'td_term' ],
-                );
-                break;
-        }
+        list($term_data, $res) = td_prepare_term_data($res);
 		//updating term
         global $wpdb;
         $affected_rows = $wpdb->update( $wpdb->prefix . 'td_terms', $term_data, array( 't_id' => $_POST[ 'td_term_id' ] )

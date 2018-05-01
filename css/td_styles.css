@@ -10,8 +10,8 @@
     margin-left: 5em;
 }
 
-#td_link {
-    width: 60%;
+#td_link, #td_title {
+    width: 100%;
 }
 
 #td_update_permalinks {
@@ -21,6 +21,12 @@
 
 .tools_form {
     margin: 1em 0 2em 0;
+}
+
+#clear_filter_btn {
+    display: inline;
+    margin: 0;
+    padding: 3px 10px 6px 10px;
 }
 
 th.short {

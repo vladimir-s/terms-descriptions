@@ -89,6 +89,7 @@
                 //clearing form
                 $( '#td_term' ).val( '' );
                 $( '#td_link' ).val( '' );
+                $( '#td_title' ).val( '' );
                 $( '#td_post_id' ).val( '' );
                 $( '#td_cancel_edit_term' ).trigger( 'click' );
             }
@@ -106,6 +107,7 @@
     //content type select
     var content_type = $( '#td_content_type' );
     var link_field = $( '#td_link' );
+    var title_field = $( '#td_title' );
 
     function get_posts() {
         var posts = [];
@@ -145,10 +147,19 @@
         $( '#td_post_id' ).val( '' );
 
         if (content_type.val() !== 'ext_link' && content_type.val() !== 'post_id') {
+            $('#td_title').attr('disabled', 'disabled').addClass('hidden');
             link_field.attr('placeholder', td_messages.dbl_click_to_open_list);
         }
         else {
-            link_field.attr('placeholder', '');
+            if (content_type.val() === 'ext_link') {
+                $('#td_title').removeAttr('disabled').removeClass('hidden');
+                link_field.attr('placeholder', 'http://site-name.com');
+                title_field.attr('placeholder', td_messages.ext_link_title);
+            }
+            else {
+                $('#td_title').attr('disabled', 'disabled').addClass('hidden');
+                link_field.attr('placeholder', td_messages.post_id);
+            }
         }
 
         $( '#td_link').autocomplete('option', 'source', function (request, response) {
@@ -202,6 +213,10 @@
                     $( '#td_content_type' ).trigger( 'change' );
                     if ( response.term.t_post_type === 'post_id' ) {
                         $( '#td_link' ).val( response.term.t_post_id );
+                    }
+                    else if ( response.term.t_post_type === 'ext_link' ) {
+                        $( '#td_link' ).val( response.term.t_post_url );
+                        $( '#td_title' ).val( response.term.t_post_title );
                     }
                     else {
                         $( '#td_link' ).val( response.term.t_post_title );

@@ -49,8 +49,8 @@ class SCO_TD_Simple_Quotes_Parser extends SCO_TD_Simple_Parser {
                     $matches, PREG_OFFSET_CAPTURE );
                 $start_pos = 0;
 
-                //t_post_id = 0 indicates that this is an external link
-                if ( $show_title === 'on' && ( int )$term[ 't_post_id' ] !== 0 ) {
+                // t_post_title was equal to t_post_url before titles support for external links was added
+                if ( $show_title === 'on' && $term[ 't_post_title' ] !== $term[ 't_post_url' ] ) {
                     $title_attr = ' title="' . esc_attr( wp_kses_stripslashes( $term[ 't_post_title' ] ) ) . '" ';
                 }
                 else {
