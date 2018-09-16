@@ -25,19 +25,19 @@ class SCO_TD_Admin_Tools {
         //import
         if ( isset( $_POST[ 'td_import' ] ) && !empty ( $_POST[ 'td_import' ] ) ) {
             if (false === $this->import() ) {
-                $this->message = __( 'Import error', TD_TEXTDOMAIN );
+                $this->message = __( 'Import error', 'terms-descriptions' );
             }
             else {
-                $this->message = __( 'Import successfully finished', TD_TEXTDOMAIN );
+                $this->message = __( 'Import successfully finished', 'terms-descriptions' );
             }
         }
         //packet upload
         if ( isset( $_POST[ 'td_packet_upload' ] ) && !empty ( $_POST[ 'td_packet_upload' ] ) ) {
             if (false === $this->packet_upload() ) {
-                $this->message = __( 'Terms creation error', TD_TEXTDOMAIN );
+                $this->message = __( 'Terms creation error', 'terms-descriptions' );
             }
             else {
-                $this->message = __( 'Terms successfully created', TD_TEXTDOMAIN );
+                $this->message = __( 'Terms successfully created', 'terms-descriptions' );
             }
         }
         //cvs export
@@ -50,8 +50,8 @@ class SCO_TD_Admin_Tools {
      * This method creates Tools page
      */
     public function admin_menu() {
-        $this->page = add_submenu_page( TD_TEXTDOMAIN, __( 'Tools', TD_TEXTDOMAIN)
-                , __( 'Tools', TD_TEXTDOMAIN), 'manage_options', 'td-tools'
+        $this->page = add_submenu_page( 'terms-descriptions', __( 'Tools', 'terms-descriptions')
+                , __( 'Tools', 'terms-descriptions'), 'manage_options', 'td-tools'
                 , array( $this, 'tools_page' ));
 		add_action( 'admin_print_styles-' . $this->page, array( $this, 'load_styles' ) );
     }
@@ -69,37 +69,37 @@ class SCO_TD_Admin_Tools {
     public function tools_page() {
 ?>
 <div class="wrap">
-	<h2><?php _e( 'Tools', TD_TEXTDOMAIN); ?></h2>
+	<h2><?php _e( 'Tools', 'terms-descriptions'); ?></h2>
     <?php if ( !empty( $this->message ) ) { ?>
         <div id="setting-error-settings_updated" class="updated settings-error"> 
             <p><strong><?php echo $this->message; ?></strong></p>
         </div>
     <?php } ?>
-    <h3><?php _e( 'Export / Import', TD_TEXTDOMAIN ); ?></h3>
+    <h3><?php _e( 'Export / Import', 'terms-descriptions' ); ?></h3>
     <form action="admin.php?page=td-tools" method="post" class="tools_form">
-        <input type="submit" name="td_export" value="<?php _e( 'Export', TD_TEXTDOMAIN ); ?>" class="button-primary" />
+        <input type="submit" name="td_export" value="<?php _e( 'Export', 'terms-descriptions' ); ?>" class="button-primary" />
     </form>
     <form action="admin.php?page=td-tools" method="post" enctype="multipart/form-data" class="tools_form">
         <?php wp_nonce_field( 'td_import' ); ?>
-        <label><?php _e( 'Select file with terms', TD_TEXTDOMAIN ); ?> <input type="file" name="dump_file" /></label>
-        <input type="submit" name="td_import" value="<?php _e( 'Import', TD_TEXTDOMAIN ); ?>" class="button-primary" />
+        <label><?php _e( 'Select file with terms', 'terms-descriptions' ); ?> <input type="file" name="dump_file" /></label>
+        <input type="submit" name="td_import" value="<?php _e( 'Import', 'terms-descriptions' ); ?>" class="button-primary" />
     </form>
-    <h3><?php _e( 'Packet terms upload', TD_TEXTDOMAIN ); ?></h3>
+    <h3><?php _e( 'Packet terms upload', 'terms-descriptions' ); ?></h3>
     <form action="admin.php?page=td-tools" method="post" class="tools_form">
         <?php wp_nonce_field( 'td_packet_upload' ); ?>
-        <label><?php _e( 'Terms list', TD_TEXTDOMAIN ); ?> <textarea name="terms" rows="10" cols="40" class="large-text code"></textarea></label>
+        <label><?php _e( 'Terms list', 'terms-descriptions' ); ?> <textarea name="terms" rows="10" cols="40" class="large-text code"></textarea></label>
         <div class="description"><?php _e( 'Each term should be written on its own line. Use the following format.'
                 .'<br />word_form_1|word_form_2|...|post_id OR URL (with http://)'
                 .'<br />Examples:'
                 .'<br />apple|apples|21'
                 .'<br />pear|pears|http://site.domen<br />'
-                .'Note that if you use term_id the post with this id should exist.', TD_TEXTDOMAIN ); ?></div>
-        <input type="submit" name="td_packet_upload" value="<?php _e( 'Add terms', TD_TEXTDOMAIN ); ?>" class="button-primary" />
+                .'Note that if you use term_id the post with this id should exist.', 'terms-descriptions' ); ?></div>
+        <input type="submit" name="td_packet_upload" value="<?php _e( 'Add terms', 'terms-descriptions' ); ?>" class="button-primary" />
     </form>
-    <h3><?php _e( 'CSV Export', TD_TEXTDOMAIN ); ?></h3>
+    <h3><?php _e( 'CSV Export', 'terms-descriptions' ); ?></h3>
     <form action="admin.php?page=td-tools" method="post" class="tools_form">
-        <input type="submit" name="td_csv_export" value="<?php _e( 'Get terms in CSV format', TD_TEXTDOMAIN ); ?>" class="button-primary" />
-        <div class="description"><?php _e( 'Please, note, you can\'t restore terms from this file. Use Export instead.', TD_TEXTDOMAIN ); ?></div>
+        <input type="submit" name="td_csv_export" value="<?php _e( 'Get terms in CSV format', 'terms-descriptions' ); ?>" class="button-primary" />
+        <div class="description"><?php _e( 'Please, note, you can\'t restore terms from this file. Use Export instead.', 'terms-descriptions' ); ?></div>
     </form>
 </div>
 <?php        

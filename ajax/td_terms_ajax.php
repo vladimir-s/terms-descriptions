@@ -37,13 +37,13 @@ function td_add_term() {
 
     //checking term data
     if ( !isset( $_POST[ 'td_term' ] ) || empty( $_POST[ 'td_term' ] ) ) {
-        $res[ 'message' ] = __( 'Enter the term, please', TD_TEXTDOMAIN );
+        $res[ 'message' ] = __( 'Enter the term, please', 'terms-descriptions' );
     }
     elseif ( !isset( $_POST[ 'td_link' ] ) || empty( $_POST[ 'td_link' ] ) ) {
-        $res[ 'message' ] = __( 'Enter the link, please', TD_TEXTDOMAIN );
+        $res[ 'message' ] = __( 'Enter the link, please', 'terms-descriptions' );
     }
     elseif ( !isset( $_POST[ 'td_content_type' ] ) || empty( $_POST[ 'td_content_type' ] ) ) {
-        $res[ 'message' ] = __( 'Content type is not set', TD_TEXTDOMAIN );
+        $res[ 'message' ] = __( 'Content type is not set', 'terms-descriptions' );
     }
 	else {
         list($term_data, $res) = td_prepare_term_data($res);
@@ -51,12 +51,12 @@ function td_add_term() {
         global $wpdb;
         $wpdb->insert( $wpdb->prefix . 'td_terms', $term_data, array( '%d', '%s', '%s', '%s', '%s' ) );
         if ( !is_int( $wpdb->insert_id ) || ( int )$wpdb->insert_id <= 0 ) {
-            $res[ 'message' ] = __( 'Term save error', TD_TEXTDOMAIN );
+            $res[ 'message' ] = __( 'Term save error', 'terms-descriptions' );
             echo json_encode( $res );
             die();
         }
 		$res[ 'status' ] = 'OK';
-		$res[ 'message' ] = __( 'The term was added', TD_TEXTDOMAIN );
+		$res[ 'message' ] = __( 'The term was added', 'terms-descriptions' );
         $term_data[ 't_id' ] = $wpdb->insert_id;
         $res[ 'term_data' ] = $term_data;
         $res[ 'term_data' ][ 't_post_title' ] = stripcslashes( $res[ 'term_data' ][ 't_post_title' ] );
@@ -75,8 +75,9 @@ function td_prepare_term_data($res) {
                 $term_link = 'http://' . $term_link;
             }
             $link_title = $term_link;
-            if ( isset( $_POST[ 'td_title' ] ) && !empty( trim( $_POST[ 'td_title' ] ) ) ) {
-                $link_title = trim( $_POST[ 'td_title' ] );
+            $trimmedTitle = trim($_POST['td_title']);
+            if ( isset( $_POST[ 'td_title' ] ) && !empty($trimmedTitle) ) {
+                $link_title = $trimmedTitle;
             }
             $term_data = array('t_post_id'    => 0,
                                't_post_title' => $link_title,
@@ -86,11 +87,11 @@ function td_prepare_term_data($res) {
             break;
         case 'post_id' :
             if (!is_int($_POST['td_link']) || ( int )$_POST['td_link'] <= 0) {
-                $res['message'] = __('Incorrect post ID', TD_TEXTDOMAIN);
+                $res['message'] = __('Incorrect post ID', 'terms-descriptions');
             }
             $term_link = get_permalink(( int )$_POST['td_link']);
             if (false === $term_link) {
-                $res['message'] = __('Link creation error', TD_TEXTDOMAIN);
+                $res['message'] = __('Link creation error', 'terms-descriptions');
                 echo json_encode($res);
                 die();
             }
@@ -102,11 +103,11 @@ function td_prepare_term_data($res) {
             break;
         default :
             if (!isset($_POST['td_post_id']) || empty($_POST['td_post_id']) || !is_int($_POST['td_post_id']) || 0 >= ( int )$_POST['td_post_id']) {
-                $res['message'] = __('Post ID is not set', TD_TEXTDOMAIN);
+                $res['message'] = __('Post ID is not set', 'terms-descriptions');
             }
             $term_link = get_permalink(( int )$_POST['td_post_id']);
             if (false === $term_link) {
-                $res['message'] = __('Link creation error', TD_TEXTDOMAIN);
+                $res['message'] = __('Link creation error', 'terms-descriptions');
                 echo json_encode($res);
                 die();
             }
@@ -151,20 +152,20 @@ function td_delete_term() {
         $affected_rows = $wpdb->query( 'DELETE FROM ' . $wpdb->prefix . 'td_terms WHERE t_id=' . ( int )$_POST[ 'term_id' ] );
         switch ( $affected_rows ) {
             case false :
-                $res[ 'message' ] = __( 'Unknown term ID', TD_TEXTDOMAIN );
+                $res[ 'message' ] = __( 'Unknown term ID', 'terms-descriptions' );
                 break;
             case 0 :
-                $res[ 'message' ] = __( 'Term delete error', TD_TEXTDOMAIN );
+                $res[ 'message' ] = __( 'Term delete error', 'terms-descriptions' );
                 break;
             default :
                 $res[ 'status' ] = 'OK';
-                $res[ 'message' ] = __( 'The term was deleted', TD_TEXTDOMAIN );
+                $res[ 'message' ] = __( 'The term was deleted', 'terms-descriptions' );
                 $res[ 't_id' ] = $_POST[ 'term_id' ];
                 break;
         }
     }
     else {
-        $res[ 'message' ] = __( 'Unknown term', TD_TEXTDOMAIN );
+        $res[ 'message' ] = __( 'Unknown term', 'terms-descriptions' );
     }
     
 	echo json_encode( $res );
@@ -209,20 +210,20 @@ function td_delete_terms() {
         $affected_rows = $wpdb->query( 'DELETE FROM ' . $wpdb->prefix . 'td_terms WHERE t_id IN (' . implode( ',', $ids ) . ')' );
         switch ( $affected_rows ) {
             case false :
-                $res[ 'message' ] = __( 'Unknown terms IDs', TD_TEXTDOMAIN );
+                $res[ 'message' ] = __( 'Unknown terms IDs', 'terms-descriptions' );
                 break;
             case 0 :
-                $res[ 'message' ] = __( 'Terms delete error', TD_TEXTDOMAIN );
+                $res[ 'message' ] = __( 'Terms delete error', 'terms-descriptions' );
                 break;
             default :
                 $res[ 'status' ] = 'OK';
-                $res[ 'message' ] = __( 'The terms were deleted', TD_TEXTDOMAIN );
+                $res[ 'message' ] = __( 'The terms were deleted', 'terms-descriptions' );
                 $res[ 't_ids' ] = $_POST[ 'terms_ids' ];
                 break;
         }
     }
     else {
-        $res[ 'message' ] = __( 'Unknown terms', TD_TEXTDOMAIN );
+        $res[ 'message' ] = __( 'Unknown terms', 'terms-descriptions' );
     }
 
     echo json_encode( $res );
@@ -261,11 +262,11 @@ function td_get_term() {
             $res[ 'term' ]->t_term = stripcslashes( $res[ 'term' ]->t_term );
         }
         else {
-            $res[ 'message' ] = __( 'Unknown term', TD_TEXTDOMAIN );
+            $res[ 'message' ] = __( 'Unknown term', 'terms-descriptions' );
         }
     }
     else {
-        $res[ 'message' ] = __( 'Unknown term', TD_TEXTDOMAIN );
+        $res[ 'message' ] = __( 'Unknown term', 'terms-descriptions' );
     }
     
 	echo json_encode( $res );
@@ -301,16 +302,16 @@ function td_update_term() {
 
     //checkig term data
     if ( !isset( $_POST[ 'td_term' ] ) || empty( $_POST[ 'td_term' ] ) ) {
-        $res[ 'message' ] = __( 'Enter the term, please', TD_TEXTDOMAIN );
+        $res[ 'message' ] = __( 'Enter the term, please', 'terms-descriptions' );
     }
     elseif ( !isset( $_POST[ 'td_link' ] ) || empty( $_POST[ 'td_link' ] ) ) {
-        $res[ 'message' ] = __( 'Enter the link, please', TD_TEXTDOMAIN );
+        $res[ 'message' ] = __( 'Enter the link, please', 'terms-descriptions' );
     }
     elseif ( !isset( $_POST[ 'td_content_type' ] ) || empty( $_POST[ 'td_content_type' ] ) ) {
-        $res[ 'message' ] = __( 'Content type is not set', TD_TEXTDOMAIN );
+        $res[ 'message' ] = __( 'Content type is not set', 'terms-descriptions' );
     }
     elseif ( !isset( $_POST[ 'td_term_id' ] ) || 0 >= ( int )$_POST[ 'td_term_id' ] ) {
-        $res[ 'message' ] = __( 'Unknown term id', TD_TEXTDOMAIN );
+        $res[ 'message' ] = __( 'Unknown term id', 'terms-descriptions' );
     }
 	else {
         list($term_data, $res) = td_prepare_term_data($res);
@@ -319,12 +320,12 @@ function td_update_term() {
         $affected_rows = $wpdb->update( $wpdb->prefix . 'td_terms', $term_data, array( 't_id' => $_POST[ 'td_term_id' ] )
                 , array( '%d', '%s', '%s', '%s', '%s' ), array( '%d' ) );
         if ( !is_int( $affected_rows ) || ( int )$affected_rows < 0 ) {
-            $res[ 'message' ] = __( 'Term update error', TD_TEXTDOMAIN );
+            $res[ 'message' ] = __( 'Term update error', 'terms-descriptions' );
             echo json_encode( $res );
             die();
         }
 		$res[ 'status' ] = 'OK';
-		$res[ 'message' ] = __( 'The term was updated', TD_TEXTDOMAIN );
+		$res[ 'message' ] = __( 'The term was updated', 'terms-descriptions' );
         $term_data[ 't_id' ] = $_POST[ 'td_term_id' ];
         $res[ 'term_data' ] = $term_data;
         $res[ 'term_data' ][ 't_post_title' ] = stripcslashes( $res[ 'term_data' ][ 't_post_title' ] );
@@ -361,7 +362,7 @@ function td_update_permalink() {
 
     //checking term id
     if ( !isset( $_POST[ 'td_term_id' ] ) || 0 >= ( int )$_POST[ 'td_term_id' ] ) {
-        $res[ 'message' ] = __( 'Unknown term id', TD_TEXTDOMAIN );
+        $res[ 'message' ] = __( 'Unknown term id', 'terms-descriptions' );
     }
 	else {
         global $wpdb;
@@ -370,7 +371,7 @@ function td_update_permalink() {
                 . 'td_terms WHERE t_id=%d', $_POST[ 'td_term_id' ] ), ARRAY_A );
 
         if ( null === $term ) {
-            $res[ 'message' ] = __( 'Unknown term id', TD_TEXTDOMAIN );
+            $res[ 'message' ] = __( 'Unknown term id', 'terms-descriptions' );
         }
         else {
             //updating term permalink (ignoring terms with absolute links)
@@ -379,14 +380,14 @@ function td_update_permalink() {
                 $affected_rows = $wpdb->update( $wpdb->prefix . 'td_terms', $term, array( 't_id' => $_POST[ 'td_term_id' ] )
                         , array( '%d', '%d', '%s', '%s', '%s', '%s' ), array( '%d' ) );
                 if ( !is_int( $affected_rows ) || ( int )$affected_rows < 0 ) {
-                    $res[ 'message' ] = __( 'Permalink update error', TD_TEXTDOMAIN );
+                    $res[ 'message' ] = __( 'Permalink update error', 'terms-descriptions' );
                     echo json_encode( $res );
                     die();
                 }
             }
             
             $res[ 'status' ] = 'OK';
-            $res[ 'message' ] = __( 'The term permalink was updated', TD_TEXTDOMAIN );
+            $res[ 'message' ] = __( 'The term permalink was updated', 'terms-descriptions' );
             $res[ 'term_data' ] = $term;
             $res[ 'term_data' ][ 't_post_title' ] = stripcslashes( $res[ 'term_data' ][ 't_post_title' ] );
             $res[ 'term_data' ][ 't_term' ] = stripcslashes( $res[ 'term_data' ][ 't_term' ] );

@@ -94,8 +94,8 @@ class SCO_TD_Admin_Terms {
 ?>
 <div id="message" class="updated">
     <p>
-        <?php _e( 'Terms Descriptions plugin is almost updated. Please, BACKUP YOUR DATABASE and press following button to', TD_TEXTDOMAIN ); ?>
-        <a href="<?php echo wp_nonce_url( 'admin.php?page=' . TD_TEXTDOMAIN . '&action=update_db', 'update_db' ); ?>" class="button-secondary"><?php _e( 'Update DB', TD_TEXTDOMAIN ); ?></a>
+        <?php _e( 'Terms Descriptions plugin is almost updated. Please, BACKUP YOUR DATABASE and press following button to', 'terms-descriptions' ); ?>
+        <a href="<?php echo wp_nonce_url( 'admin.php?page=' . 'terms-descriptions' . '&action=update_db', 'update_db' ); ?>" class="button-secondary"><?php _e( 'Update DB', 'terms-descriptions' ); ?></a>
     </p>
 </div>
 <?php
@@ -168,7 +168,7 @@ class SCO_TD_Admin_Terms {
                 delete_option( 'td_convert_only_single' );
             }
             
-            wp_redirect( trailingslashit( site_url() ) . 'wp-admin/admin.php?page=' . TD_TEXTDOMAIN );
+            wp_redirect( trailingslashit( site_url() ) . 'wp-admin/admin.php?page=' . 'terms-descriptions' );
             die();
         }
     }
@@ -179,12 +179,12 @@ class SCO_TD_Admin_Terms {
      * @global wpdb $wpdb wordpress database class
      */
     public function admin_menu() {
-        load_plugin_textdomain( TD_TEXTDOMAIN, false, TD_TEXTDOMAIN . '/lang' );
+        load_plugin_textdomain( 'terms-descriptions', false, 'terms-descriptions' . '/lang' );
         $this->page = add_menu_page(
-            __( 'Terms', TD_TEXTDOMAIN )
-            , __( 'Terms', TD_TEXTDOMAIN )
+            __( 'Terms', 'terms-descriptions' )
+            , __( 'Terms', 'terms-descriptions' )
             , 'manage_options'
-            , TD_TEXTDOMAIN
+            , 'terms-descriptions'
             , array( $this, 'terms_page' )
             , ''
         );
@@ -212,26 +212,26 @@ class SCO_TD_Admin_Terms {
         wp_enqueue_style( 'wp-jquery-ui-dialog' );
         //translations for use in JS code and array of terms ids
         wp_localize_script( 'td_terms', 'td_messages', array(
-            'enter_term' => __( 'Enter the term, please', TD_TEXTDOMAIN ),
-            'enter_link' => __( 'Enter the link, please', TD_TEXTDOMAIN ),
+            'enter_term' => __( 'Enter the term, please', 'terms-descriptions' ),
+            'enter_link' => __( 'Enter the link, please', 'terms-descriptions' ),
             'url_save' => get_bloginfo( 'wpurl' ) . '/wp-admin/admin-ajax.php',
-            'edit' => __( 'Edit', TD_TEXTDOMAIN ),
-            'remove' => __( 'Delete', TD_TEXTDOMAIN ),
-            'confirm_delete' => __( 'Are you sure?', TD_TEXTDOMAIN ),
-            'add_term' => __( 'Add term', TD_TEXTDOMAIN ),
-            'edit_term' => __( 'Update term', TD_TEXTDOMAIN ),
-            'cancel_edit_term' => __( 'Cancel', TD_TEXTDOMAIN ),
+            'edit' => __( 'Edit', 'terms-descriptions' ),
+            'remove' => __( 'Delete', 'terms-descriptions' ),
+            'confirm_delete' => __( 'Are you sure?', 'terms-descriptions' ),
+            'add_term' => __( 'Add term', 'terms-descriptions' ),
+            'edit_term' => __( 'Update term', 'terms-descriptions' ),
+            'cancel_edit_term' => __( 'Cancel', 'terms-descriptions' ),
             'nonce' => wp_create_nonce( 'td_delete_term' ),
             'nonce_update_permalink' => wp_create_nonce( 'td_update_permalink' ),
-            'term_add' => __( 'New term was added', TD_TEXTDOMAIN ),
-            'term_update' => __( 'The term was updated', TD_TEXTDOMAIN ),
-            'updating_permalinks' => __( 'Updating...', TD_TEXTDOMAIN ),
-            'done' => __( 'Done!', TD_TEXTDOMAIN ),
-            'select' => __( 'Select', TD_TEXTDOMAIN ),
+            'term_add' => __( 'New term was added', 'terms-descriptions' ),
+            'term_update' => __( 'The term was updated', 'terms-descriptions' ),
+            'updating_permalinks' => __( 'Updating...', 'terms-descriptions' ),
+            'done' => __( 'Done!', 'terms-descriptions' ),
+            'select' => __( 'Select', 'terms-descriptions' ),
             'terms_ids' => json_encode( $this->terms_ids ),
-            'dbl_click_to_open_list' => __('Title. Double click to open the titles list or type some letters', TD_TEXTDOMAIN),
-            'ext_link_title' => __('Title attribute text', TD_TEXTDOMAIN),
-            'post_id' => __('Post ID', TD_TEXTDOMAIN),
+            'dbl_click_to_open_list' => __('Title. Double click to open the titles list or type some letters', 'terms-descriptions'),
+            'ext_link_title' => __('Title attribute text', 'terms-descriptions'),
+            'post_id' => __('Post ID', 'terms-descriptions'),
         ) );
         
         global $wpdb;
@@ -265,31 +265,31 @@ class SCO_TD_Admin_Terms {
     public function terms_page() {
 ?>
 <div class="wrap">
-    <h2><?php _e( 'Terms', TD_TEXTDOMAIN ); ?></h2>
+    <h2><?php _e( 'Terms', 'terms-descriptions' ); ?></h2>
     <form action="#" method="post" id="td_add_term_form">
     <?php wp_nonce_field( 'td_add_term' ); ?>
     <table class="form-table">
         <tr>
-            <th scope="row"><label for="td_term"><?php _e( 'Term', TD_TEXTDOMAIN ); ?></label></th>
+            <th scope="row"><label for="td_term"><?php _e( 'Term', 'terms-descriptions' ); ?></label></th>
             <td>
                 <textarea name="td_term" id="td_term" cols="50" rows="3" class="large-text code"></textarea>
             </td>
         </tr>
         <tr>
-            <th scope="row"><label for="td_link"><?php _e( 'Link', TD_TEXTDOMAIN ); ?></label></th>
+            <th scope="row"><label for="td_link"><?php _e( 'Link', 'terms-descriptions' ); ?></label></th>
             <td>
                 <table class="form-table">
                     <tr>
                         <td style="width: 250px; vertical-align: top;">
-                            <label for="td_content_type"><?php _e( 'Link to', TD_TEXTDOMAIN ); ?></label>
+                            <label for="td_content_type"><?php _e( 'Link to', 'terms-descriptions' ); ?></label>
                             <select name="td_content_type" id="td_content_type">
                                 <?php
                                 foreach ( $this->post_types as $type_name => $type ) {
                                     echo '<option value="'.$type_name.'">'.$type->labels->singular_name.'</option>';
                                 }
                                 ?>
-                                <option value="ext_link"><?php _e( 'External link', TD_TEXTDOMAIN ); ?></option>
-                                <option value="post_id"><?php _e( 'Post ID', TD_TEXTDOMAIN ); ?></option>
+                                <option value="ext_link"><?php _e( 'External link', 'terms-descriptions' ); ?></option>
+                                <option value="post_id"><?php _e( 'Post ID', 'terms-descriptions' ); ?></option>
                             </select>
                         </td>
                         <td>
@@ -303,15 +303,15 @@ class SCO_TD_Admin_Terms {
         </tr>
     </table>
         <p class="submit">
-            <input type="submit" name="td_add_term" id="td_add_term" class="button-primary" value="<?php _e( 'Add term', TD_TEXTDOMAIN ); ?>">
+            <input type="submit" name="td_add_term" id="td_add_term" class="button-primary" value="<?php _e( 'Add term', 'terms-descriptions' ); ?>">
             <span class="spinner" id="save_term_spinner"></span>
         </p>
     </form>
 
     <hr class="form-divider" />
     <form action="#" method="post" id="td_update_permalinks">
-        <span class="description"><?php _e('Press this button if you have updated permalinks structure.', TD_TEXTDOMAIN); ?></span>
-        <input type="submit" class="button-primary" name="td_update_permalinks_btn" value="<?php _e( 'Update permalinks', TD_TEXTDOMAIN ); ?>" />
+        <span class="description"><?php _e('Press this button if you have updated permalinks structure.', 'terms-descriptions'); ?></span>
+        <input type="submit" class="button-primary" name="td_update_permalinks_btn" value="<?php _e( 'Update permalinks', 'terms-descriptions' ); ?>" />
     </form>
     <hr class="form-divider" />
 
@@ -343,14 +343,14 @@ class SCO_TD_Admin_Terms {
     <div id="terms_filter" class="tablenav top">
         <form id="filter_form" class="alignleft" action="<?php echo get_admin_url( null, 'admin.php' ); ?>" method="get">
             <div class="alignleft actions td_remove_selected">
-                <button class="button action" id="td_remove_selected_btn" disabled="disabled"><?php _e( 'Remove selected', TD_TEXTDOMAIN ); ?></button>
+                <button class="button action" id="td_remove_selected_btn" disabled="disabled"><?php _e( 'Remove selected', 'terms-descriptions' ); ?></button>
             </div>
-            <label><?php _e( 'Search', TD_TEXTDOMAIN ); ?> <input type="text" name="term_search" value="<?php echo $search_str; ?>" /></label>
-            <input type="submit" class="button action" value="<?php _e( 'Search', TD_TEXTDOMAIN ); ?>" />
+            <label><?php _e( 'Search', 'terms-descriptions' ); ?> <input type="text" name="term_search" value="<?php echo $search_str; ?>" /></label>
+            <input type="submit" class="button action" value="<?php _e( 'Search', 'terms-descriptions' ); ?>" />
             <input type="hidden" name="page" value="terms-descriptions" />
         <?php
         if ( isset( $_GET[ 'term_search' ] ) ) {
-            echo '<a href="' . get_admin_url( null, 'admin.php' ) . '?page=terms-descriptions" class="button" id="clear_filter_btn">' . __( 'Cancel', TD_TEXTDOMAIN ) . '</a>';
+            echo '<a href="' . get_admin_url( null, 'admin.php' ) . '?page=terms-descriptions" class="button" id="clear_filter_btn">' . __( 'Cancel', 'terms-descriptions' ) . '</a>';
         }
         ?>
         </form>
@@ -368,21 +368,21 @@ class SCO_TD_Admin_Terms {
         <thead>
             <tr>
                 <th scope="col" class="td-check-column">
-                    <label class="screen-reader-text" for="cb-select-all-1"><?php _e( 'Select All', TD_TEXTDOMAIN ); ?></label>
+                    <label class="screen-reader-text" for="cb-select-all-1"><?php _e( 'Select All', 'terms-descriptions' ); ?></label>
                     <input id="cb-select-all-1" class="cb-select-all" type="checkbox">
                 </th>
-                <th scope="col"><?php _e( 'Term', TD_TEXTDOMAIN ); ?></th>
-                <th scope="col"><?php _e( 'Term Link', TD_TEXTDOMAIN ); ?></th>
+                <th scope="col"><?php _e( 'Term', 'terms-descriptions' ); ?></th>
+                <th scope="col"><?php _e( 'Term Link', 'terms-descriptions' ); ?></th>
             </tr>
         </thead>
         <tfoot>
             <tr>
                 <th scope="col" class="td-check-column">
-                    <label class="screen-reader-text" for="cb-select-all-2"><?php _e( 'Select All', TD_TEXTDOMAIN ); ?></label>
+                    <label class="screen-reader-text" for="cb-select-all-2"><?php _e( 'Select All', 'terms-descriptions' ); ?></label>
                     <input id="cb-select-all-2" class="cb-select-all" type="checkbox">
                 </th>
-                <th scope="col"><?php _e( 'Term', TD_TEXTDOMAIN ); ?></th>
-                <th scope="col"><?php _e( 'Term Link', TD_TEXTDOMAIN ); ?></th>
+                <th scope="col"><?php _e( 'Term', 'terms-descriptions' ); ?></th>
+                <th scope="col"><?php _e( 'Term Link', 'terms-descriptions' ); ?></th>
             </tr>
         </tfoot>
         <tbody>
@@ -398,15 +398,15 @@ class SCO_TD_Admin_Terms {
 ?>
             <tr id="term_<?php echo $term->t_id; ?>">
                 <th scope="row" class="check-column">
-                    <label class="screen-reader-text" for="cb-select-<?php echo $term->t_id; ?>"><?php _e( 'Select', TD_TEXTDOMAIN ); ?></label>
+                    <label class="screen-reader-text" for="cb-select-<?php echo $term->t_id; ?>"><?php _e( 'Select', 'terms-descriptions' ); ?></label>
                     <input id="cb-select-<?php echo $term->t_id; ?>" type="checkbox" name="td_term[]" value="<?php echo $term->t_id; ?>">
                     <div class="locked-indicator"></div>
                 </th>
                 <td>
                     <strong><?php echo stripcslashes( $term->t_term ); ?></strong>
                     <div class="row-actions">
-                        <span class="edit"><a href="?action=td_edit_term&amp;term_id=<?php echo $term->t_id; ?>"><?php _e( 'Edit', TD_TEXTDOMAIN ); ?></a> | </span>
-                        <span class="trash"><a href="?action=td_delete_term&amp;term_id=<?php echo $term->t_id; ?>&amp;_wpnonce=<?php echo $nonce; ?>"><?php _e( 'Delete', TD_TEXTDOMAIN ); ?></a></span>
+                        <span class="edit"><a href="?action=td_edit_term&amp;term_id=<?php echo $term->t_id; ?>"><?php _e( 'Edit', 'terms-descriptions' ); ?></a> | </span>
+                        <span class="trash"><a href="?action=td_delete_term&amp;term_id=<?php echo $term->t_id; ?>&amp;_wpnonce=<?php echo $nonce; ?>"><?php _e( 'Delete', 'terms-descriptions' ); ?></a></span>
                     </div>
                 </td>
                 <td><?php echo '<a href="' . $term->t_post_url . '" target="_blank">' . stripcslashes( $term->t_post_title ) . '</a>'; ?></td>
@@ -421,7 +421,7 @@ class SCO_TD_Admin_Terms {
         <?php echo $pagination; ?>
     </div>
     <div style="display: none;" id="td_update_permalinks_dialog">
-        <p><?php _e( 'Premalinks updated', TD_TEXTDOMAIN ); ?>: <span id="td_update_progress">0</span>%</p>
+        <p><?php _e( 'Premalinks updated', 'terms-descriptions' ); ?>: <span id="td_update_progress">0</span>%</p>
     </div>
 </div>
 <?php        

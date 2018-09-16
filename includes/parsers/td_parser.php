@@ -131,6 +131,8 @@ abstract class SCO_TD_Parser {
      */
     protected function is_current_url( $url ) {
 	    $cur_slug = $this->get_current_url();
+	    # remove anchor
+        $url = preg_replace( '/#[a-zA-Z0-9-_%\/]*$/i', '', $url );
 	    $term_url = preg_replace( '/^https?\:\/\/(www\.)?/i', '', trailingslashit( $url ) );
         return $cur_slug === $term_url;
     }
@@ -159,7 +161,7 @@ abstract class SCO_TD_Parser {
         if ( $this->cur_url !== '' ) {
             return $this->cur_url;
         }
-        if ( $_SERVER[ "SERVER_PORT" ] != "80" ) {
+        if ( !in_array( $_SERVER[ "SERVER_PORT" ], array( "80", "443" ) ) ) {
             $this->cur_url = trailingslashit( $_SERVER[ "SERVER_NAME" ] . ":" . $_SERVER[ "SERVER_PORT" ] . $_SERVER[ "REQUEST_URI" ] );
         } else {
             $this->cur_url = trailingslashit( $_SERVER[ "SERVER_NAME" ] . $_SERVER[ "REQUEST_URI" ] );

@@ -17,8 +17,8 @@ class SCO_TD_Admin_Options {
      * Creates option page.
      */
     public function admin_menu() {
-        add_submenu_page( TD_TEXTDOMAIN, __( 'Options', TD_TEXTDOMAIN)
-                , __( 'Options', TD_TEXTDOMAIN), 'manage_options', 'td-options'
+        add_submenu_page( 'terms-descriptions', __( 'Options', 'terms-descriptions')
+                , __( 'Options', 'terms-descriptions'), 'manage_options', 'td-options'
                 , array( $this, 'options_page' ));
     }
     
@@ -43,10 +43,10 @@ class SCO_TD_Admin_Options {
         }
 ?>
 <div class="wrap">
-	<h2><?php _e( 'Options', TD_TEXTDOMAIN); ?></h2>
+	<h2><?php _e( 'Options', 'terms-descriptions'); ?></h2>
     <?php if ( isset( $_GET[ 'settings-updated' ] ) && 'true' === $_GET[ 'settings-updated' ] ) { ?>
         <div id="setting-error-settings_updated" class="updated settings-error"> 
-            <p><strong><?php _e( 'Options saved', TD_TEXTDOMAIN ); ?></strong></p>
+            <p><strong><?php _e( 'Options saved', 'terms-descriptions' ); ?></strong></p>
         </div>
     <?php } ?>
     <form method="post" action="options.php">
@@ -54,7 +54,7 @@ class SCO_TD_Admin_Options {
         <table class="form-table">
             <tbody>
                 <tr valign="middle">
-                    <th scope="row"><?php _e( 'Convert terms', TD_TEXTDOMAIN ); ?></th>
+                    <th scope="row"><?php _e( 'Convert terms', 'terms-descriptions' ); ?></th>
                     <td>
 	                    <?php
 	                    $post_types = get_post_types( array( 'public' => true ), 'objects' );
@@ -64,32 +64,32 @@ class SCO_TD_Admin_Options {
 		                    <label><input name="td_options[convert_in__<?php echo $type; ?>]" type="checkbox"
 		                                  id="convert_in__<?php echo $type; ?>"
 				                    <?php if (isset($options[ 'convert_in__'.$type ])) { checked( $options[ 'convert_in__'.$type ], 'on' ); } ?> />
-			                        <?php _e( 'in posts of type', TD_TEXTDOMAIN ); ?> "<?php echo $data->labels->name; ?>"
+			                        <?php _e( 'in posts of type', 'terms-descriptions' ); ?> "<?php echo $data->labels->name; ?>"
 		                    </label><br />
 	                    <?php
 	                    }
 	                    ?>
 
                         <label><input name="td_options[convert_in_comments]" type="checkbox" id="convert_in_comments"
-		                        <?php checked( $options[ 'convert_in_comments' ], 'on' ); ?> /> <?php _e( 'in comments', TD_TEXTDOMAIN ); ?></label>
+		                        <?php checked( $options[ 'convert_in_comments' ], 'on' ); ?> /> <?php _e( 'in comments', 'terms-descriptions' ); ?></label>
                     </td>
                 </tr>
                 <tr valign="middle">
-                    <th scope="row"><?php _e( 'Convert terms in shortcodes', TD_TEXTDOMAIN ); ?></th>
+                    <th scope="row"><?php _e( 'Convert terms in shortcodes', 'terms-descriptions' ); ?></th>
                     <td>
                         <label><input name="td_options[convert_in_shortcodes]" type="checkbox" id="convert_in_posts"
 		                        <?php if(isset($options[ 'convert_in_shortcodes' ])) { checked( $options[ 'convert_in_shortcodes' ], 'on' ); } ?> /></label><br />
                     </td>
                 </tr>
                 <tr valign="middle">
-                    <th scope="row"><?php _e( 'Convert the first', TD_TEXTDOMAIN ); ?></th>
+                    <th scope="row"><?php _e( 'Convert the first', 'terms-descriptions' ); ?></th>
                     <td>
-                        <input name="td_options[convert_first_n_terms]" type="text" id="convert_first_n_terms" value="<?php echo $options[ 'convert_first_n_terms' ]; ?>" class="small-text" /> <?php _e( 'occurrences of each term.', TD_TEXTDOMAIN ); ?>
-                        <span class="description"><?php _e( 'Set "-1" if you want to convert all terms.', TD_TEXTDOMAIN ); ?></span>
+                        <input name="td_options[convert_first_n_terms]" type="text" id="convert_first_n_terms" value="<?php echo $options[ 'convert_first_n_terms' ]; ?>" class="small-text" /> <?php _e( 'occurrences of each term.', 'terms-descriptions' ); ?>
+                        <span class="description"><?php _e( 'Set "-1" if you want to convert all terms.', 'terms-descriptions' ); ?></span>
                     </td>
                 </tr>
                 <tr valign="middle">
-                    <th scope="row"><?php _e( 'Maximum transformations number', TD_TEXTDOMAIN ); ?></th>
+                    <th scope="row"><?php _e( 'Maximum transformations number', 'terms-descriptions' ); ?></th>
                     <td>
                         <?php
                         if ( !isset( $options[ 'convert_total' ] ) || $options[ 'convert_total' ] === null ) {
@@ -97,76 +97,76 @@ class SCO_TD_Admin_Options {
                         }
                         ?>
                         <input name="td_options[convert_total]" type="text" id="convert_total" value="<?php echo $options[ 'convert_total' ]; ?>" class="small-text" />
-                        <span class="description"><?php _e( 'Set "-1" if you don\'t want to use this limitation.', TD_TEXTDOMAIN ); ?></span>
+                        <span class="description"><?php _e( 'Set "-1" if you don\'t want to use this limitation.', 'terms-descriptions' ); ?></span>
                     </td>
                 </tr>
                 <tr valign="middle">
-                    <th scope="row"><?php _e( 'Consider existing links', TD_TEXTDOMAIN ); ?></th>
+                    <th scope="row"><?php _e( 'Consider existing links', 'terms-descriptions' ); ?></th>
                     <td>
                         <input name="td_options[consider_existing_links]" type="checkbox" id="consider_existing_links" <?php if ( isset( $options[ 'consider_existing_links' ] ) ) { checked( $options[ 'consider_existing_links' ], 'on' ); } ?> />
-                        <span class="description"><?php _e( 'If this option is checked plugin will count links that are added by hand.', TD_TEXTDOMAIN ); ?></span>
+                        <span class="description"><?php _e( 'If this option is checked plugin will count links that are added by hand.', 'terms-descriptions' ); ?></span>
                     </td>
                 </tr>
                 <tr valign="middle">
-                    <th scope="row"><?php _e( 'Add CSS class', TD_TEXTDOMAIN ); ?></th>
+                    <th scope="row"><?php _e( 'Add CSS class', 'terms-descriptions' ); ?></th>
                     <td>
-                        <input name="td_options[class]" type="text" id="class" value="<?php echo $options[ 'class' ]; ?>" /> <?php _e( 'to terms links.', TD_TEXTDOMAIN ); ?>
+                        <input name="td_options[class]" type="text" id="class" value="<?php echo $options[ 'class' ]; ?>" /> <?php _e( 'to terms links.', 'terms-descriptions' ); ?>
                     </td>
                 </tr>
                 <tr valign="middle">
-                    <th scope="row"><?php _e( 'Add title attribute to links', TD_TEXTDOMAIN ); ?></th>
+                    <th scope="row"><?php _e( 'Add title attribute to links', 'terms-descriptions' ); ?></th>
                     <td>
                         <input name="td_options[show_title]" type="checkbox" id="show_title" <?php if ( isset( $options[ 'show_title' ] ) ) { checked( $options[ 'show_title' ], 'on' ); } ?> />
                     </td>
                 </tr>
                 <tr valign="middle">
-                    <th scope="row"><?php _e( 'Wrap link', TD_TEXTDOMAIN ); ?></th>
+                    <th scope="row"><?php _e( 'Wrap link', 'terms-descriptions' ); ?></th>
                     <td>
-                        <?php _e( 'text before', TD_TEXTDOMAIN ); ?> <input name="td_options[text_before]" type="text" id="text_before" value="<?php if ( isset( $options[ 'text_before' ] ) ) { echo $options[ 'text_before' ]; } ?>" />
-                        <span class="description"><?php _e( 'example: &lt;strong&gt;', TD_TEXTDOMAIN ); ?></span><br />
-                        <?php _e( 'text after', TD_TEXTDOMAIN ); ?> <input name="td_options[text_after]" type="text" id="text_after" value="<?php if ( isset( $options[ 'text_after' ] ) ) { echo $options[ 'text_after' ]; } ?>" />
-                        <span class="description"><?php _e( 'example: &lt;/strong&gt;', TD_TEXTDOMAIN ); ?></span>
+                        <?php _e( 'text before', 'terms-descriptions' ); ?> <input name="td_options[text_before]" type="text" id="text_before" value="<?php if ( isset( $options[ 'text_before' ] ) ) { echo $options[ 'text_before' ]; } ?>" />
+                        <span class="description"><?php _e( 'example: &lt;strong&gt;', 'terms-descriptions' ); ?></span><br />
+                        <?php _e( 'text after', 'terms-descriptions' ); ?> <input name="td_options[text_after]" type="text" id="text_after" value="<?php if ( isset( $options[ 'text_after' ] ) ) { echo $options[ 'text_after' ]; } ?>" />
+                        <span class="description"><?php _e( 'example: &lt;/strong&gt;', 'terms-descriptions' ); ?></span>
                     </td>
                 </tr>
                 <tr valign="middle">
-                    <th scope="row"><?php _e( 'Convert terms only on single pages', TD_TEXTDOMAIN ); ?></th>
+                    <th scope="row"><?php _e( 'Convert terms only on single pages', 'terms-descriptions' ); ?></th>
                     <td>
                         <input name="td_options[convert_only_single]" type="checkbox" id="convert_only_single" <?php if ( isset( $options[ 'convert_only_single' ] ) ) { checked( $options[ 'convert_only_single' ], 'on' ); } ?> />
-                        <span class="description"><?php _e( 'Terms will not be converted on home, categories and archives pages.', TD_TEXTDOMAIN ); ?></span>
+                        <span class="description"><?php _e( 'Terms will not be converted on home, categories and archives pages.', 'terms-descriptions' ); ?></span>
                     </td>
                 </tr>
                 <tr valign="middle">
-                    <th scope="row"><?php _e( 'Open link in a new tab', TD_TEXTDOMAIN ); ?></th>
+                    <th scope="row"><?php _e( 'Open link in a new tab', 'terms-descriptions' ); ?></th>
                     <td>
                         <input name="td_options[open_new_tab]" type="checkbox" id="open_new_tab" <?php if ( isset( $options[ 'open_new_tab' ] ) ) { checked( $options[ 'open_new_tab' ], 'on' ); } ?> />
-                        <span class="description"><?php _e( 'If this option is checked plugin will add target="_blank" to links.', TD_TEXTDOMAIN ); ?></span>
+                        <span class="description"><?php _e( 'If this option is checked plugin will add target="_blank" to links.', 'terms-descriptions' ); ?></span>
                     </td>
                 </tr>
                 <tr valign="middle">
-                    <th scope="row"><?php _e( 'Add nofollow to external links', TD_TEXTDOMAIN ); ?></th>
+                    <th scope="row"><?php _e( 'Add nofollow to external links', 'terms-descriptions' ); ?></th>
                     <td>
                         <input name="td_options[add_nofollow]" type="checkbox" id="add_nofollow" <?php if ( isset( $options[ 'add_nofollow' ] ) ) { checked( $options[ 'add_nofollow' ], 'on' ); } ?> />
-                        <span class="description"><?php _e( 'If this option is checked plugin will add rel="nofollow" to <strong>external</strong> links.', TD_TEXTDOMAIN ); ?></span>
+                        <span class="description"><?php _e( 'If this option is checked plugin will add rel="nofollow" to <strong>external</strong> links.', 'terms-descriptions' ); ?></span>
                     </td>
                 </tr>
                 <tr valign="middle">
-                    <th scope="row"><?php _e( 'Wrap external links with noindex tag', TD_TEXTDOMAIN ); ?></th>
+                    <th scope="row"><?php _e( 'Wrap external links with noindex tag', 'terms-descriptions' ); ?></th>
                     <td>
                         <input name="td_options[add_noindex]" type="checkbox" id="add_noindex" <?php if ( isset( $options[ 'add_noindex' ] ) ) { checked( $options[ 'add_noindex' ], 'on' ); } ?> />
-                        <span class="description"><?php _e( 'If this option is checked plugin will wrap <strong>external</strong> links with &lt;noindex&gt; tag.', TD_TEXTDOMAIN ); ?></span>
+                        <span class="description"><?php _e( 'If this option is checked plugin will wrap <strong>external</strong> links with &lt;noindex&gt; tag.', 'terms-descriptions' ); ?></span>
                     </td>
                 </tr>
                 <tr valign="middle">
-                    <th scope="row"><?php _e( 'Skip tags', TD_TEXTDOMAIN ); ?></th>
+                    <th scope="row"><?php _e( 'Skip tags', 'terms-descriptions' ); ?></th>
                     <td>
                         <input name="td_options[skip_tags]" type="text" id="skip_tags" class="large-text code" value="<?php echo ( isset( $options[ 'skip_tags' ] ) ) ? $options[ 'skip_tags' ] : ''; ?>" />
-                        <p class="description"><?php _e( 'The plugin skips text inside tags like <code>a</code>, <code>h1..6</code>, <code>canvas</code>, <code>code</code>, etc. This option allows you to add additional tags to skip. Use regular expressions to specify tags and <code>|</code> (vertical line) to separate them.', TD_TEXTDOMAIN ); ?></p>
+                        <p class="description"><?php _e( 'The plugin skips text inside tags like <code>a</code>, <code>h1..6</code>, <code>canvas</code>, <code>code</code>, etc. This option allows you to add additional tags to skip. Use regular expressions to specify tags and <code>|</code> (vertical line) to separate them.', 'terms-descriptions' ); ?></p>
                         <p class="description"><code>&lt;em.*?&lt;\/em&gt;|&lt;span.*?&lt;\/span&gt;</code></p>
-                        <p class="description"><?php _e( '<strong>Use this option with care</strong>. In most cases the default set of tags will be enough.', TD_TEXTDOMAIN ) ?></p>
+                        <p class="description"><?php _e( '<strong>Use this option with care</strong>. In most cases the default set of tags will be enough.', 'terms-descriptions' ) ?></p>
                     </td>
                 </tr>
                 <tr valign="middle">
-                    <th scope="row"><?php _e( 'Show', TD_TEXTDOMAIN ); ?></th>
+                    <th scope="row"><?php _e( 'Show', 'terms-descriptions' ); ?></th>
                     <td>
                         <select name="td_options[terms_per_page]" id="terms_per_page">
                             <option value="10" <?php selected( $options[ 'terms_per_page' ], 10); ?>>10</option>
@@ -176,28 +176,28 @@ class SCO_TD_Admin_Options {
                             <option value="200" <?php selected( $options[ 'terms_per_page' ], 200); ?>>200</option>
                             <option value="500" <?php selected( $options[ 'terms_per_page' ], 500); ?>>500</option>
                         </select>
-                        <span class="description"><?php _e( 'terms on a page (in admin area)', TD_TEXTDOMAIN ); ?></span>
+                        <span class="description"><?php _e( 'terms on a page (in admin area)', 'terms-descriptions' ); ?></span>
                     </td>
                 </tr>
                 <tr valign="middle">
-                    <th scope="row"><?php _e( 'Parser', TD_TEXTDOMAIN ); ?></th>
+                    <th scope="row"><?php _e( 'Parser', 'terms-descriptions' ); ?></th>
                     <td>
                         <label><input type="radio" name="td_options[parser]" id="simple_parser" value="simple_parser"
                             <?php checked( $options[ 'parser' ], 'simple_parser' ); ?> />
-                            <?php _e( 'Simple parser', TD_TEXTDOMAIN ); ?></label><br />
+                            <?php _e( 'Simple parser', 'terms-descriptions' ); ?></label><br />
                         <label><input type="radio" name="td_options[parser]" id="quotes_parser" value="quotes_parser"
                             <?php checked( $options[ 'parser' ], 'quotes_parser' ); ?> />
-                            <?php _e( 'Simple parser with quotes support', TD_TEXTDOMAIN ); ?></label><br />
+                            <?php _e( 'Simple parser with quotes support', 'terms-descriptions' ); ?></label><br />
                         <label><input type="radio" name="td_options[parser]" id="long_terms_first_parser" value="long_terms_first_parser"
                             <?php checked( $options[ 'parser' ], 'long_terms_first_parser' ); ?> />
-                            <?php _e( 'Long terms first parser', TD_TEXTDOMAIN ); ?></label>
-                            <span class="description"><?php _e( 'Orders terms by their lengths before searching them in text', TD_TEXTDOMAIN ); ?></span>
+                            <?php _e( 'Long terms first parser', 'terms-descriptions' ); ?></label>
+                            <span class="description"><?php _e( 'Orders terms by their lengths before searching them in text', 'terms-descriptions' ); ?></span>
                     </td>
                 </tr>
             </tbody>
         </table>
         <p class="submit">
-            <input type="submit" name="submit" id="submit" class="button-primary" value="<?php _e( 'Update', TD_TEXTDOMAIN ); ?>">
+            <input type="submit" name="submit" id="submit" class="button-primary" value="<?php _e( 'Update', 'terms-descriptions' ); ?>">
         </p>
     </form>
 </div>

@@ -20,7 +20,7 @@ class SCO_TD_Meta_Box {
         foreach ( $types as $type ) {
             add_meta_box(
                 'terms_descriptions_settings',
-                __( 'Terms Descriptions', TD_TEXTDOMAIN ),
+                __( 'Terms Descriptions', 'terms-descriptions' ),
                 array( $this, 'show_box' ),
                 $type,
                 'normal',
@@ -34,7 +34,7 @@ class SCO_TD_Meta_Box {
         $cur_value = get_post_meta( get_the_ID(), '_disable_terms_descriptions', true );
 ?>
 <label for="disable_terms_descriptions">
-<?php _e( 'Disable Terms Descriptions plugin for this post', TD_TEXTDOMAIN ); ?>
+<?php _e( 'Disable Terms Descriptions plugin for this post', 'terms-descriptions' ); ?>
     <input type="checkbox" name="disable_terms_descriptions" id="disable_terms_descriptions" <?php checked( $cur_value, 'on' ) ?> />
 </label>
 <?php
