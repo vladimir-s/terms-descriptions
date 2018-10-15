@@ -76,6 +76,14 @@ The plugin built with [PhpStorm]( http://www.jetbrains.com/phpstorm/ )
 
 == Changelog ==
 
+= 3.3.3 =
+
+* Text domain fixed
+
+= 3.3.2 =
+
+* Support for the translations import mechanism
+
 = 3.3.1 =
 
 * New feature: Same URLs with different anchors are not treated as unique
