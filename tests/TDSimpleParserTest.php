@@ -294,6 +294,12 @@ class TD_Simple_Parser_Test extends PHPUnit_Framework_TestCase {
             't_post_url' => 'http://ddd.com/'
         );
         $this->assertEquals( 2, $fel->invokeArgs( $this->parser, array( $text_4, $term_2 ) ) );
+
+        $text_5 = 'test <a href="http://ddd.com?dfg=123#234">test</a> http://ddd.com?dfg=123#234 test';
+        $term_3 = array(
+            't_post_url' => 'http://ddd.com?dfg=123#234'
+        );
+        $this->assertEquals( 2, $fel->invokeArgs( $this->parser, array( $text_5, $term_3 ) ) );
     }
 
 	public function testQuotes() {

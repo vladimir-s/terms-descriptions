@@ -60,7 +60,7 @@ abstract class SCO_TD_Parser {
     }
     
     /**
-     * This mathod escapes special symbols in term that can break a regular expression.
+     * This method escapes special symbols in term that can break a regular expression.
      *
      * @param string $term original term
      * @return string escaped term
@@ -68,8 +68,8 @@ abstract class SCO_TD_Parser {
     protected function prepare_term_regex( $term ) {
         $term = str_replace('\\\'', '\'', $term);
         $term = preg_quote( $term, '/' );
-        $search = array( ' ', '&', ',', '#' );
-        $replace = array( '\s', '\&', '\,', '\#' );
+        $search = array( ' ', '&', ',' );
+        $replace = array( '\s', '\&', '\,' );
 	    $term = str_replace( $search, $replace, $term );
         return preg_replace( '/(\"|\\\'|\“|\”|\‘|\’|\«|\»)/i', '[\"\\\'\“\”\‘\’\«\»]', $term );
     }
@@ -147,7 +147,7 @@ abstract class SCO_TD_Parser {
     protected function find_existing_links( $text, $term ) {
         $url = $term[ 't_post_url' ];
         if ( substr( $term[ 't_post_url' ], -1 ) === '/' ) {
-            $url = substr( $term[ 't_post_url' ], 0, count( $term[ 't_post_url' ] ) - 2 );
+            $url = substr( $term[ 't_post_url' ], 0, strlen( $term[ 't_post_url' ] ) - 1 );
         }
         return preg_match_all( '/' . str_replace( '/', '\/', preg_quote( $url ) ) . '\/?(\"|\'|\s)/i', $text, $matches );
     }
