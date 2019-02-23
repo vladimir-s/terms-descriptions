@@ -463,23 +463,23 @@ class SCO_TD_Admin_Terms {
         $html = '<div class="tablenav-pages">';
         $html .= '<span class="pagination-links">';
         if (!empty($prev_disabled)) {
-            $html .= '<span class="tablenav-pages-navspan">«</span> ';
-            $html .= '<span class="tablenav-pages-navspan">‹</span> ';
+            $html .= '<span class="tablenav-pages-navspan button disabled" aria-hidden="true">«</span> ';
+            $html .= '<span class="tablenav-pages-navspan button disabled" aria-hidden="true">‹</span> ';
         }
         else {
-            $html .= '<a class="first-page" title="' . esc_attr__( 'Go to the first page' ) . '" href="' . $first_page_link . '">«</a> ';
-            $html .= '<a class="prev-page" title="' . esc_attr__( 'Go to the previous page' ) . '" href="' . $prev_page_link . '">‹</a> ';
+            $html .= '<a class="first-page button" title="' . esc_attr__( 'Go to the first page' ) . '" href="' . $first_page_link . '">«</a> ';
+            $html .= '<a class="prev-page button" title="' . esc_attr__( 'Go to the previous page' ) . '" href="' . $prev_page_link . '">‹</a> ';
         }
         $html .= '<span class="paging-input">';
         $html .= '<span class="total-pages"> ' . $cur_page . '</span> ' . __('of') . ' <span class="total-pages">' . $total_pages . ' </span>';
         $html .= '</span>';
         if (!empty($next_disabled)) {
-            $html .= '<span class="tablenav-pages-navspan">›</span> ';
-            $html .= '<span class="tablenav-pages-navspan">»</span> ';
+            $html .= '<span class="tablenav-pages-navspan button disabled" aria-hidden="true">›</span> ';
+            $html .= '<span class="tablenav-pages-navspan button disabled" aria-hidden="true">»</span> ';
         }
         else {
-            $html .= '<a class="next-page" title="' . esc_attr__( 'Go to the next page' ) . '" href="' . $next_page_link . '">›</a> ';
-            $html .= '<a class="last-page" title="' . esc_attr__( 'Go to the last page' ) . '" href="' . $last_page_link . '">»</a> ';
+            $html .= '<a class="next-page button" title="' . esc_attr__( 'Go to the next page' ) . '" href="' . $next_page_link . '">›</a> ';
+            $html .= '<a class="last-page button" title="' . esc_attr__( 'Go to the last page' ) . '" href="' . $last_page_link . '">»</a> ';
         }
         $html .= '</span>';
         $html .= '</div>';

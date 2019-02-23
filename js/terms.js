@@ -376,4 +376,11 @@
         }
         return false;
     } );
+
+    // search term on click
+    $('#filter_form').find('input[name="term_search"]').on( 'keypress', function (e) {
+        if ( e.which == 13 ) {
+            $( e.currentTarget ).parents( 'form' ).submit();
+        }
+    })
 } )( jQuery );
