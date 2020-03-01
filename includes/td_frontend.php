@@ -26,7 +26,7 @@ class SCO_TD_Frontend {
     /**
      * This method replaces terms with links in post content.
      *
-     * @global type $wpdb wordpress database class
+     * @global wpdb $wpdb wordpress database class
      * @param string $content original post content
      * @return string updated post content
      */

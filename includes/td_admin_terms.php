@@ -39,7 +39,7 @@ class SCO_TD_Admin_Terms {
     /**
      * Plugin installation.
      * 
-     * @global type $wpdb wordpress database class
+     * @global wpdb $wpdb wordpress database class
      */
     public function install() {
         global $wpdb;

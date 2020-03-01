@@ -33,8 +33,8 @@ class SCO_TD_Long_Terms_First_Parser extends SCO_TD_Simple_Parser {
      * Compares terms length.
      *
      * @static
-     * @param $t1 first term
-     * @param $t2 second term
+     * @param array $t1 first term
+     * @param array $t2 second term
      * @return int returns 0 if terms lengths are equal, 1 - if second term is longer, -1 - otherwise
      */
     public static function compare_terms( $t1, $t2 ) {

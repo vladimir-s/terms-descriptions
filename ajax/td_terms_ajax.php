@@ -17,7 +17,7 @@ add_action( 'wp_ajax_td_update_permalink', 'td_update_permalink' );
  * $_POST[ 'td_content_type' ]
  * $_POST[ 'td_post_id' ]
  * 
- * @return JSON new term in JSON format
+ * @return string new term in JSON format
  */
 function td_add_term() {
 	header( 'Content-type: application/json' );
@@ -125,9 +125,9 @@ function td_prepare_term_data($res) {
  * Delete term.
  * $_POST[ 'term_id' ] - id of the term that should be deleted
  * 
- * @global type $wpdb wordpress database class
+ * @global wpdb $wpdb wordpress database class
  * 
- * @return JSON id of the deleted term
+ * @return string id of the deleted term
  */
 function td_delete_term() {
 	header( 'Content-type: application/json' );
@@ -176,9 +176,9 @@ function td_delete_term() {
  * Delete several terms.
  * $_POST[ 'terms_ids' ] - ids of the terms that should be deleted
  *
- * @global type $wpdb wordpress database class
+ * @global wpdb $wpdb wordpress database class
  *
- * @return JSON ids of the deleted term
+ * @return string ids of the deleted term
  */
 function td_delete_terms() {
     header( 'Content-type: application/json' );
@@ -235,9 +235,9 @@ function td_delete_terms() {
  *
  * $_POST[ 'term_id' ] - id of the term that should be found.
  * 
- * @global type $wpdb
+ * @global wpdb $wpdb
  * 
- * @return JSON term data in JSON format
+ * @return string term data in JSON format
  */
 function td_get_term() {
 	header( 'Content-type: application/json' );
@@ -280,9 +280,9 @@ function td_get_term() {
  * $_POST[ 'td_content_type' ]
  * $_POST[ 'td_post_id' ]
  * 
- * @global type $wpdb 
+ * @global wpdb $wpdb
  * 
- * @return JSON updated term data
+ * @return string updated term data
  */
 function td_update_term() {
     header( 'Content-type: application/json' );
@@ -340,9 +340,9 @@ function td_update_term() {
  * Term permalink update.
  * $_POST[ 'td_term_id' ] - id of the term
  *
- * @global type $wpdb
+ * @global wpdb $wpdb
  * 
- * @return JSON term data with updated permalink
+ * @return string term data with updated permalink
  */
 function td_update_permalink() {
     header( 'Content-type: application/json' );

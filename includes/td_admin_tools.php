@@ -108,7 +108,7 @@ class SCO_TD_Admin_Tools {
     /**
      * This method creates file with plugin data in JSON format
      *
-     * @global type $wpdb wordpress database class
+     * @global wpdb $wpdb wordpress database class
      */
     public function export() {
         header( 'Content-Type:application/json' );
@@ -131,7 +131,7 @@ class SCO_TD_Admin_Tools {
     /**
      * This method loads data from backup file in JSON format
      *
-     * @global type $wpdb wordpress database class
+     * @global wpdb $wpdb wordpress database class
      * @return boolean true if import was successful and false otherwise 
      */
     public function import() {
@@ -164,7 +164,7 @@ class SCO_TD_Admin_Tools {
     /**
      * This method parses list of terms and creates them.
      *
-     * @global type $wpdb wordpress database class
+     * @global wpdb $wpdb wordpress database class
      * @return boolean true if upload was successful and false otherwise 
      */
     public function packet_upload() {
@@ -217,7 +217,7 @@ class SCO_TD_Admin_Tools {
     /**
      * Sends to browser CSV file with all terms.
      *
-     * @global type $wpdb wordpress database class
+     * @global wpdb $wpdb wordpress database class
      */
     public function csv_export() {
         header( 'Content-Type:text/csv; charset=windows-1251' );

@@ -79,7 +79,7 @@ abstract class SCO_TD_Parser {
      * prepares them for using in regular expressions.
      *
      * @param string $term original term
-     * @return array terms
+     * @return array|bool terms
      */
     protected function prepare_term( $term ) {
         if ( $term === null || !is_string( $term ) ) {
@@ -115,7 +115,7 @@ abstract class SCO_TD_Parser {
     /**
      * Checks if current post ID is equal to the first parameter value
      *
-     * @param $id post ID
+     * @param int $id post ID
      * @return bool true if current post ID is equal to the ID
      */
     protected function is_current_post( $id ) {
@@ -126,7 +126,7 @@ abstract class SCO_TD_Parser {
     /**
      * Compares current page URL with given URL
      *
-     * @param $url given URL
+     * @param string $url given URL
      * @return bool true if URLs are equals
      */
     protected function is_current_url( $url ) {
@@ -140,8 +140,8 @@ abstract class SCO_TD_Parser {
     /**
      * Counts URLs occurrences in the text
      *
-     * @param $text original text
-     * @param $term term data (must contain t_post_url field)
+     * @param string $text original text
+     * @param array $term term data (must contain t_post_url field)
      * @return int number of URL in the text
      */
     protected function find_existing_links( $text, $term ) {
