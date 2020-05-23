@@ -243,9 +243,12 @@ class SCO_TD_Admin_Terms {
         $posts = $wpdb->get_results( 'SELECT ID, post_title, post_type FROM '
                 . $wpdb->posts . ' WHERE post_type IN (' . implode( ',', $types_names )
                 . ') AND post_status IN ("draft", "publish")' );
+        $options = get_option( 'td_options' );
+        $time_step = ( isset( $options[ 'time_step' ] ) ) ? $options[ 'time_step' ] : 1000;
         echo '<script type="text/javascript">' . "\n"
             . '//<![CDATA[' . "\n"
             . 'var td_posts=' . json_encode( $posts ) . "\n"
+            . 'var td_time_step=' . $time_step . "\n"
             . '//]]>' . "\n"
             . '</script>';
     }

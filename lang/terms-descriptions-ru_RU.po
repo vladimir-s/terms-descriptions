@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: termdescription\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-15 15:52+0300\n"
-"PO-Revision-Date: 2018-10-15 15:52+0300\n"
+"POT-Creation-Date: 2020-05-23 12:54+0300\n"
+"PO-Revision-Date: 2020-05-23 12:55+0300\n"
 "Last-Translator: Vladimir Statsenko <vovchiksta@gmail.com>\n"
 "Language-Team: Vladimir Statsenko <vova_33@gala.net>\n"
 "Language: ru_UA\n"
@@ -286,7 +286,19 @@ msgstr "Парсер с сортировкой терминов по их дли
 msgid "Orders terms by their lengths before searching them in text"
 msgstr "Перед поиском терминов в тексте, сортирует их по убыванию их длин"
 
-#: ../includes/td_admin_options.php:200
+#: ../includes/td_admin_options.php:198
+msgid "Time step for permalink update, ms"
+msgstr "Пауза между запросами на обновления постоянных ссылок, мс"
+
+#: ../includes/td_admin_options.php:202
+msgid ""
+"This option allows adding pauses between permalinks updates to reduce server "
+"load. Value in milliseconds."
+msgstr ""
+"Эта опция определяет длительность паузы между запросами на обновление "
+"постоянных ссылок. Значение в миллисекундах."
+
+#: ../includes/td_admin_options.php:208
 msgid "Update"
 msgstr "Изменить"
 
@@ -303,15 +315,15 @@ msgid "Update DB"
 msgstr "Обновить БД"
 
 #: ../includes/td_admin_terms.php:184 ../includes/td_admin_terms.php:185
-#: ../includes/td_admin_terms.php:268
+#: ../includes/td_admin_terms.php:271
 msgid "Terms"
 msgstr "Термины"
 
-#: ../includes/td_admin_terms.php:218 ../includes/td_admin_terms.php:408
+#: ../includes/td_admin_terms.php:218 ../includes/td_admin_terms.php:411
 msgid "Edit"
 msgstr "Изменить"
 
-#: ../includes/td_admin_terms.php:219 ../includes/td_admin_terms.php:409
+#: ../includes/td_admin_terms.php:219 ../includes/td_admin_terms.php:412
 msgid "Delete"
 msgstr "Удалить"
 
@@ -319,7 +331,7 @@ msgstr "Удалить"
 msgid "Are you sure?"
 msgstr "Вы уверены?"
 
-#: ../includes/td_admin_terms.php:221 ../includes/td_admin_terms.php:306
+#: ../includes/td_admin_terms.php:221 ../includes/td_admin_terms.php:309
 msgid "Add term"
 msgstr "Добавить термин"
 
@@ -327,7 +339,7 @@ msgstr "Добавить термин"
 msgid "Update term"
 msgstr "Изменить термин"
 
-#: ../includes/td_admin_terms.php:223 ../includes/td_admin_terms.php:353
+#: ../includes/td_admin_terms.php:223 ../includes/td_admin_terms.php:356
 msgid "Cancel"
 msgstr "Отмена"
 
@@ -343,7 +355,7 @@ msgstr "Обновляю..."
 msgid "Done!"
 msgstr "Готово!"
 
-#: ../includes/td_admin_terms.php:230 ../includes/td_admin_terms.php:401
+#: ../includes/td_admin_terms.php:230 ../includes/td_admin_terms.php:404
 msgid "Select"
 msgstr "Выбрать"
 
@@ -355,56 +367,56 @@ msgstr "Заголовок. Введите несколько букв или с
 msgid "Title attribute text"
 msgstr "Текст title атрибута ссылок"
 
-#: ../includes/td_admin_terms.php:234 ../includes/td_admin_terms.php:292
+#: ../includes/td_admin_terms.php:234 ../includes/td_admin_terms.php:295
 msgid "Post ID"
 msgstr "ID записи"
 
-#: ../includes/td_admin_terms.php:273 ../includes/td_admin_terms.php:374
-#: ../includes/td_admin_terms.php:384
+#: ../includes/td_admin_terms.php:276 ../includes/td_admin_terms.php:377
+#: ../includes/td_admin_terms.php:387
 msgid "Term"
 msgstr "Термин"
 
-#: ../includes/td_admin_terms.php:279
+#: ../includes/td_admin_terms.php:282
 msgid "Link"
 msgstr "Ссылка"
 
-#: ../includes/td_admin_terms.php:284
+#: ../includes/td_admin_terms.php:287
 msgid "Link to"
 msgstr "Ссылка на"
 
-#: ../includes/td_admin_terms.php:291
+#: ../includes/td_admin_terms.php:294
 msgid "External link"
 msgstr "Внешняя ссылка"
 
-#: ../includes/td_admin_terms.php:313
+#: ../includes/td_admin_terms.php:316
 msgid "Press this button if you have updated permalinks structure."
 msgstr "Нажмите эту кнопку если вы обновляли структуру постоянных ссылок."
 
-#: ../includes/td_admin_terms.php:314
+#: ../includes/td_admin_terms.php:317
 msgid "Update permalinks"
 msgstr "Обновить ссылки на термины"
 
-#: ../includes/td_admin_terms.php:346
+#: ../includes/td_admin_terms.php:349
 msgid "Remove selected"
 msgstr "Удалить выбранные"
 
-#: ../includes/td_admin_terms.php:348 ../includes/td_admin_terms.php:349
+#: ../includes/td_admin_terms.php:351 ../includes/td_admin_terms.php:352
 msgid "Search"
 msgstr "Поиск"
 
-#: ../includes/td_admin_terms.php:371 ../includes/td_admin_terms.php:381
+#: ../includes/td_admin_terms.php:374 ../includes/td_admin_terms.php:384
 msgid "Select All"
 msgstr "Выбрать все"
 
-#: ../includes/td_admin_terms.php:375 ../includes/td_admin_terms.php:385
+#: ../includes/td_admin_terms.php:378 ../includes/td_admin_terms.php:388
 msgid "Term Link"
 msgstr "Ссылка термина"
 
-#: ../includes/td_admin_terms.php:424
+#: ../includes/td_admin_terms.php:427
 msgid "Premalinks updated"
 msgstr "Ссылки обновлены"
 
-#: ../includes/td_admin_terms.php:474
+#: ../includes/td_admin_terms.php:477
 msgid "of"
 msgstr "из"
 
@@ -492,6 +504,11 @@ msgstr "Terms Descriptions"
 #: ../includes/td_meta_box.php:37
 msgid "Disable Terms Descriptions plugin for this post"
 msgstr "Отключить плагин Terms Descriptions для этой записи"
+
+#, fuzzy
+#~| msgid "Permalink update error"
+#~ msgid "Permalink update time step, ms"
+#~ msgstr "Ошибка обновления ссылки на термин"
 
 #~ msgid "Term ID"
 #~ msgstr "ID термина"

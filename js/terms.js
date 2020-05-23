@@ -282,35 +282,39 @@
                 dialogClass: 'update-permalinks-dialog',
                 modal: true
             } );
+            let pause = td_time_step;
             //updating terms permalinks
             $( terms_ids ).each( function( i, term ) {
-                if ( true === stop_updating ) {
-                    return false;
-                }
-                $.post( td_messages.url_save, {action : 'td_update_permalink'
-                        , td_term_id : term, _wpnonce: td_messages.nonce_update_permalink}
+                setTimeout(function () {
+                    if ( true === stop_updating ) {
+                        return false;
+                    }
+                    $.post( td_messages.url_save, {action : 'td_update_permalink'
+                            , td_term_id : term, _wpnonce: td_messages.nonce_update_permalink}
                         , function( response ) {
-                    if ( response.status === 'OK' ) {
-                        //counting current update percentage
-                        terms_updated++;
-                        updated_terms_percent = Math.round( terms_updated / total_terms * 100 );
-                        progress_field.html( updated_terms_percent );
-                        //updating term link at the current page
-                        $( 'tr#term_' + response.term_data.t_id + ' > td > a' ).attr( 'href', response.term_data.t_post_url );
-                        if ( updated_terms_percent === 100 ) {
-                            $( '#td_update_permalinks_dialog' ).dialog( 'option', 'title', td_messages.done );
-                        }
-                    }
-                    else {
-                        //stopping updates
-                        stop_updating = true;
-                        if ( $( 'div#td_update_permalinks_dialog div.error' ).length === 0 ) {
-                            $( '#td_update_permalinks_dialog' ).append( '<div class="error">'
-                                + response.message + '</div>' );
-                        }
-                    }
-                } );
-                return true;
+                            if ( response.status === 'OK' ) {
+                                //counting current update percentage
+                                terms_updated++;
+                                updated_terms_percent = Math.round( terms_updated / total_terms * 100 );
+                                progress_field.html( updated_terms_percent );
+                                //updating term link at the current page
+                                $( 'tr#term_' + response.term_data.t_id + ' > td > a' ).attr( 'href', response.term_data.t_post_url );
+                                if ( updated_terms_percent === 100 ) {
+                                    $( '#td_update_permalinks_dialog' ).dialog( 'option', 'title', td_messages.done );
+                                }
+                            }
+                            else {
+                                //stopping updates
+                                stop_updating = true;
+                                if ( $( 'div#td_update_permalinks_dialog div.error' ).length === 0 ) {
+                                    $( '#td_update_permalinks_dialog' ).append( '<div class="error">'
+                                        + response.message + '</div>' );
+                                }
+                            }
+                        } );
+                    return true;
+                }, pause);
+                pause += td_time_step;
             } );
         }
         

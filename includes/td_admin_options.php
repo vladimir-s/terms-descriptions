@@ -194,6 +194,14 @@ class SCO_TD_Admin_Options {
                             <span class="description"><?php _e( 'Orders terms by their lengths before searching them in text', 'terms-descriptions' ); ?></span>
                     </td>
                 </tr>
+                <tr valign="middle">
+                    <th scope="row"><?php _e( 'Time step for permalink update, ms', 'terms-descriptions' ); ?></th>
+                    <td>
+                        <?php $time_step = ( isset( $options[ 'time_step' ] ) ) ? $options[ 'time_step' ] : 1000; ?>
+                        <input name="td_options[time_step]" type="text" id="time_step" value="<?php echo $time_step; ?>" />
+                        <span class="description"><?php _e( 'This option allows adding pauses between permalinks updates to reduce server load. Value in milliseconds.', 'terms-descriptions' ); ?></span>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <p class="submit">
@@ -271,6 +279,9 @@ class SCO_TD_Admin_Options {
         }
         if ( !isset( $input[ 'skip_tags' ] ) ) {
             $input[ 'skip_tags' ] = '';
+        }
+        if ( !isset( $input[ 'time_step' ] ) ) {
+            $input[ 'time_step' ] = 1000;
         }
         if ( false !== $old_options ) {
             return array_merge( $old_options, $input );
