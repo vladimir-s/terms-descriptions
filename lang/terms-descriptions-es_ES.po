@@ -1,0 +1,478 @@
+# Translation of Plugins - Terms descriptions - Development (trunk) in Spanish (Spain)
+# This file is distributed under the same license as the Plugins - Terms descriptions - Development (trunk) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2020-11-13 08:26:48+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/3.0.0-alpha.2\n"
+"Language: es\n"
+"Project-Id-Version: Plugins - Terms descriptions - Development (trunk)\n"
+
+#. Author URI of the plugin/theme
+msgid "https://simplecoding.org"
+msgstr "https://simplecoding.org"
+
+#. Author of the plugin/theme
+msgid "Vladimir Statsenko"
+msgstr "Vladimir Statsenko"
+
+#. Description of the plugin/theme
+msgid "This plugin allows you to create list of terms and assign links to them. Plugin automatically replaces terms occurrences in your posts with appropriate links. You can control the number of replacements. After activation you can create terms list on plugin administration page (Tools -> Terms Descriptions)."
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://simplecoding.org/plagin-wordpress-terms-descriptions"
+msgstr "https://simplecoding.org/plagin-wordpress-terms-descriptions"
+
+#: includes/td_meta_box.php:37
+msgid "Disable Terms Descriptions plugin for this post"
+msgstr ""
+
+#. #-#-#-#-#  terms-descriptions-code.pot (Terms Descriptions 3.3.2)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: includes/td_meta_box.php:23
+msgid "Terms Descriptions"
+msgstr "Terms Descriptions"
+
+#: includes/td_admin_tools.php:102
+msgid "Please, note, you can't restore terms from this file. Use Export instead."
+msgstr ""
+
+#: includes/td_admin_tools.php:101
+msgid "Get terms in CSV format"
+msgstr "Obtener términos en formato CSV"
+
+#: includes/td_admin_tools.php:99
+msgid "CSV Export"
+msgstr "Exportar CSV"
+
+#: includes/td_admin_tools.php:97
+msgid "Add terms"
+msgstr "Añadir términos"
+
+#: includes/td_admin_tools.php:90
+msgid "Terms list"
+msgstr "Lista de términos"
+
+#: includes/td_admin_tools.php:87
+msgid "Packet terms upload"
+msgstr ""
+
+#: includes/td_admin_tools.php:85
+msgid "Import"
+msgstr "Importar"
+
+#: includes/td_admin_tools.php:84
+msgid "Select file with terms"
+msgstr "Seleccionar archivo con términos"
+
+#: includes/td_admin_tools.php:80
+msgid "Export"
+msgstr "Exportar"
+
+#: includes/td_admin_tools.php:78
+msgid "Export / Import"
+msgstr "Exportar/Importar"
+
+#: includes/td_admin_tools.php:53 includes/td_admin_tools.php:54
+#: includes/td_admin_tools.php:72
+msgid "Tools"
+msgstr "Herramientas"
+
+#: includes/td_admin_tools.php:40
+msgid "Terms successfully created"
+msgstr ""
+
+#: includes/td_admin_tools.php:37
+msgid "Terms creation error"
+msgstr ""
+
+#: includes/td_admin_tools.php:31
+msgid "Import successfully finished"
+msgstr ""
+
+#: includes/td_admin_tools.php:28
+msgid "Import error"
+msgstr "Error de importación"
+
+#: includes/td_admin_terms.php:482
+msgid "Go to the last page"
+msgstr "Ir a la última página"
+
+#: includes/td_admin_terms.php:481
+msgid "Go to the next page"
+msgstr "Ir a la página siguiente"
+
+#: includes/td_admin_terms.php:474
+msgid "of"
+msgstr "de"
+
+#: includes/td_admin_terms.php:471
+msgid "Go to the previous page"
+msgstr "Ir a la página anterior"
+
+#: includes/td_admin_terms.php:470
+msgid "Go to the first page"
+msgstr "Ir a la primera página"
+
+#: includes/td_admin_terms.php:424
+msgid "Premalinks updated"
+msgstr ""
+
+#: includes/td_admin_terms.php:375 includes/td_admin_terms.php:385
+msgid "Term Link"
+msgstr ""
+
+#: includes/td_admin_terms.php:371 includes/td_admin_terms.php:381
+msgid "Select All"
+msgstr "Seleccionar todo"
+
+#: includes/td_admin_terms.php:348 includes/td_admin_terms.php:349
+msgid "Search"
+msgstr "Buscar"
+
+#: includes/td_admin_terms.php:346
+msgid "Remove selected"
+msgstr "Eliminar seleccionados"
+
+#: includes/td_admin_terms.php:314
+msgid "Update permalinks"
+msgstr ""
+
+#: includes/td_admin_terms.php:313
+msgid "Press this button if you have updated permalinks structure."
+msgstr ""
+
+#: includes/td_admin_terms.php:291
+msgid "External link"
+msgstr "Enlace externo"
+
+#: includes/td_admin_terms.php:284
+msgid "Link to"
+msgstr "Enlazar a"
+
+#: includes/td_admin_terms.php:279
+msgid "Link"
+msgstr "Enlace"
+
+#: includes/td_admin_terms.php:273 includes/td_admin_terms.php:374
+#: includes/td_admin_terms.php:384
+msgid "Term"
+msgstr "Término"
+
+#: includes/td_admin_terms.php:234 includes/td_admin_terms.php:292
+msgid "Post ID"
+msgstr ""
+
+#: includes/td_admin_terms.php:233
+msgid "Title attribute text"
+msgstr ""
+
+#: includes/td_admin_terms.php:232
+msgid "Title. Double click to open the titles list or type some letters"
+msgstr ""
+
+#: includes/td_admin_terms.php:230 includes/td_admin_terms.php:401
+msgid "Select"
+msgstr "Selecciona"
+
+#: includes/td_admin_terms.php:229
+msgid "Done!"
+msgstr "¡Hecho!"
+
+#: includes/td_admin_terms.php:228
+msgid "Updating..."
+msgstr "Actualizando..."
+
+#: includes/td_admin_terms.php:226
+msgid "New term was added"
+msgstr "Se añadió un nuevo término"
+
+#: includes/td_admin_terms.php:223 includes/td_admin_terms.php:353
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: includes/td_admin_terms.php:222
+msgid "Update term"
+msgstr "Actualizar término"
+
+#: includes/td_admin_terms.php:221 includes/td_admin_terms.php:306
+msgid "Add term"
+msgstr "Añadir término"
+
+#: includes/td_admin_terms.php:220
+msgid "Are you sure?"
+msgstr "¿Estás seguro?"
+
+#: includes/td_admin_terms.php:219 includes/td_admin_terms.php:409
+msgid "Delete"
+msgstr "Borrar"
+
+#: includes/td_admin_terms.php:218 includes/td_admin_terms.php:408
+msgid "Edit"
+msgstr "Editar"
+
+#: includes/td_admin_terms.php:184 includes/td_admin_terms.php:185
+#: includes/td_admin_terms.php:268
+msgid "Terms"
+msgstr "Términos"
+
+#: includes/td_admin_terms.php:98
+msgid "Update DB"
+msgstr "Actualizar BBDD"
+
+#: includes/td_admin_terms.php:97
+msgid "Terms Descriptions plugin is almost updated. Please, BACKUP YOUR DATABASE and press following button to"
+msgstr ""
+
+#: includes/td_admin_options.php:200
+msgid "Update"
+msgstr "Actualizar"
+
+#: includes/td_admin_options.php:194
+msgid "Orders terms by their lengths before searching them in text"
+msgstr "Ordena los términos por sus longitudes antes de buscarlos en texto"
+
+#: includes/td_admin_options.php:193
+msgid "Long terms first parser"
+msgstr "Primer analizador a largo plazo"
+
+#: includes/td_admin_options.php:190
+msgid "Simple parser with quotes support"
+msgstr ""
+
+#: includes/td_admin_options.php:187
+msgid "Simple parser"
+msgstr "Analizador simple"
+
+#: includes/td_admin_options.php:183
+msgid "Parser"
+msgstr "Analizador"
+
+#: includes/td_admin_options.php:179
+msgid "terms on a page (in admin area)"
+msgstr "términos en una página (en el área de administración)"
+
+#: includes/td_admin_options.php:169
+msgid "Show"
+msgstr "Mostrar"
+
+#: includes/td_admin_options.php:165
+msgid "<strong>Use this option with care</strong>. In most cases the default set of tags will be enough."
+msgstr ""
+
+#: includes/td_admin_options.php:163
+msgid "The plugin skips text inside tags like <code>a</code>, <code>h1..6</code>, <code>canvas</code>, <code>code</code>, etc. This option allows you to add additional tags to skip. Use regular expressions to specify tags and <code>|</code> (vertical line) to separate them."
+msgstr ""
+
+#: includes/td_admin_options.php:160
+msgid "Skip tags"
+msgstr "Omitir etiquetas"
+
+#: includes/td_admin_options.php:156
+msgid "If this option is checked plugin will wrap <strong>external</strong> links with &lt;noindex&gt; tag."
+msgstr "Si esta opción está marcada plugin ajustará los enlaces <strong>externos</strong> con la etiqueta &lt;noindex&gt;."
+
+#: includes/td_admin_options.php:153
+msgid "Wrap external links with noindex tag"
+msgstr "Ajustar enlaces externos con etiqueta noindex"
+
+#: includes/td_admin_options.php:149
+msgid "If this option is checked plugin will add rel=\"nofollow\" to <strong>external</strong> links."
+msgstr "Si esta opción está marcada plugin añadirá rel -\"nofollow\" a los enlaces <strong>externos.</strong>"
+
+#: includes/td_admin_options.php:146
+msgid "Add nofollow to external links"
+msgstr "Añadir nofollow a enlaces externos"
+
+#: includes/td_admin_options.php:142
+msgid "If this option is checked plugin will add target=\"_blank\" to links."
+msgstr "Si esta opción está marcada plugin añadirá target \"_blank\" a los enlaces."
+
+#: includes/td_admin_options.php:139
+msgid "Open link in a new tab"
+msgstr "Abrir enlace en una nueva pestaña"
+
+#: includes/td_admin_options.php:135
+msgid "Terms will not be converted on home, categories and archives pages."
+msgstr "Los términos no se convertirán en páginas de inicio, categorías y archivos."
+
+#: includes/td_admin_options.php:132
+msgid "Convert terms only on single pages"
+msgstr "Convertir términos solo en páginas individuales"
+
+#: includes/td_admin_options.php:128
+msgid "example: &lt;/strong&gt;"
+msgstr "ejemplo: &lt;/strong&gt;"
+
+#: includes/td_admin_options.php:127
+msgid "text after"
+msgstr "texto después de"
+
+#: includes/td_admin_options.php:126
+msgid "example: &lt;strong&gt;"
+msgstr "ejemplo: &lt;strong&gt;"
+
+#: includes/td_admin_options.php:125
+msgid "text before"
+msgstr "texto antes"
+
+#: includes/td_admin_options.php:123
+msgid "Wrap link"
+msgstr "Envolver enlace"
+
+#: includes/td_admin_options.php:117
+msgid "Add title attribute to links"
+msgstr ""
+
+#: includes/td_admin_options.php:113
+msgid "to terms links."
+msgstr "a los enlaces de términos."
+
+#: includes/td_admin_options.php:111
+msgid "Add CSS class"
+msgstr "Añadir clase CSS"
+
+#: includes/td_admin_options.php:107
+msgid "If this option is checked plugin will count links that are added by hand."
+msgstr ""
+
+#: includes/td_admin_options.php:104
+msgid "Consider existing links"
+msgstr ""
+
+#: includes/td_admin_options.php:100
+msgid "Set \"-1\" if you don't want to use this limitation."
+msgstr ""
+
+#: includes/td_admin_options.php:92
+msgid "Maximum transformations number"
+msgstr "Número máximo de transformaciones"
+
+#: includes/td_admin_options.php:88
+msgid "Set \"-1\" if you want to convert all terms."
+msgstr ""
+
+#: includes/td_admin_options.php:87
+msgid "occurrences of each term."
+msgstr "ocurrencias de cada término."
+
+#: includes/td_admin_options.php:85
+msgid "Convert the first"
+msgstr ""
+
+#: includes/td_admin_options.php:78
+msgid "Convert terms in shortcodes"
+msgstr "Convertir términos en shortcodes"
+
+#: includes/td_admin_options.php:74
+msgid "in comments"
+msgstr "en comentarios"
+
+#: includes/td_admin_options.php:67
+msgid "in posts of type"
+msgstr ""
+
+#: includes/td_admin_options.php:57
+msgid "Convert terms"
+msgstr "Convertir términos"
+
+#: includes/td_admin_options.php:49
+msgid "Options saved"
+msgstr "Opciones guardadas"
+
+#: includes/td_admin_options.php:20 includes/td_admin_options.php:21
+#: includes/td_admin_options.php:46
+msgid "Options"
+msgstr "Opciones"
+
+#: ajax/td_terms_ajax.php:390
+msgid "The term permalink was updated"
+msgstr ""
+
+#: ajax/td_terms_ajax.php:383
+msgid "Permalink update error"
+msgstr ""
+
+#: ajax/td_terms_ajax.php:328 includes/td_admin_terms.php:227
+msgid "The term was updated"
+msgstr "Término actualizado"
+
+#: ajax/td_terms_ajax.php:323
+msgid "Term update error"
+msgstr "Error al actualizar términos"
+
+#: ajax/td_terms_ajax.php:314 ajax/td_terms_ajax.php:365
+#: ajax/td_terms_ajax.php:374
+msgid "Unknown term id"
+msgstr "ID de término desconocido"
+
+#: ajax/td_terms_ajax.php:226
+msgid "Unknown terms"
+msgstr "Términos desconocidos"
+
+#: ajax/td_terms_ajax.php:220
+msgid "The terms were deleted"
+msgstr ""
+
+#: ajax/td_terms_ajax.php:216
+msgid "Terms delete error"
+msgstr ""
+
+#: ajax/td_terms_ajax.php:213
+msgid "Unknown terms IDs"
+msgstr "IDs de términos desconocidos"
+
+#: ajax/td_terms_ajax.php:168 ajax/td_terms_ajax.php:265
+#: ajax/td_terms_ajax.php:269
+msgid "Unknown term"
+msgstr "Término desconocido"
+
+#: ajax/td_terms_ajax.php:162
+msgid "The term was deleted"
+msgstr ""
+
+#: ajax/td_terms_ajax.php:158
+msgid "Term delete error"
+msgstr ""
+
+#: ajax/td_terms_ajax.php:155
+msgid "Unknown term ID"
+msgstr ""
+
+#: ajax/td_terms_ajax.php:106
+msgid "Post ID is not set"
+msgstr ""
+
+#: ajax/td_terms_ajax.php:94 ajax/td_terms_ajax.php:110
+msgid "Link creation error"
+msgstr ""
+
+#: ajax/td_terms_ajax.php:90
+msgid "Incorrect post ID"
+msgstr ""
+
+#: ajax/td_terms_ajax.php:59
+msgid "The term was added"
+msgstr "El término se ha añadido"
+
+#: ajax/td_terms_ajax.php:54
+msgid "Term save error"
+msgstr "Error al guardar los términos"
+
+#: ajax/td_terms_ajax.php:46 ajax/td_terms_ajax.php:311
+msgid "Content type is not set"
+msgstr "El tipo de contenido no está establecido"
+
+#: ajax/td_terms_ajax.php:43 ajax/td_terms_ajax.php:308
+#: includes/td_admin_terms.php:216
+msgid "Enter the link, please"
+msgstr ""
+
+#: ajax/td_terms_ajax.php:40 ajax/td_terms_ajax.php:305
+#: includes/td_admin_terms.php:215
+msgid "Enter the term, please"
+msgstr ""
