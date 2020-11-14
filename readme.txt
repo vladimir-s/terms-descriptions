@@ -78,6 +78,8 @@ The plugin built with [PhpStorm]( http://www.jetbrains.com/phpstorm/ )
 
 == Changelog ==
 
+= 3.3.11 =
+
 = 3.3.10 =
 
 = 3.3.9 =

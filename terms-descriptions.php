@@ -3,7 +3,7 @@
 Plugin Name: Terms Descriptions
 Plugin URI: https://simplecoding.org/plagin-wordpress-terms-descriptions
 Description: This plugin allows you to create list of terms and assign links to them. Plugin automatically replaces terms occurrences in your posts with appropriate links. You can control the number of replacements. After activation you can create terms list on plugin administration page (Tools -> Terms Descriptions).
-Version: 3.3.10
+Version: 3.3.11
 Author: Vladimir Statsenko
 Author URI: https://simplecoding.org
 Text Domain: wordpress.org/plugins/terms-descriptions
@@ -48,6 +48,8 @@ Detail description of this plugin is available in [English]( https://simplecodin
 Detail description of this plugin is available in [Russian]( https://simplecoding.org/plagin-wordpress-terms-descriptions "Terms Descriptions WordPress Plugin").
 
 Serbo-Croatian translations were created by [Borisa Djuraskovic]( http://www.webhostinghub.com "Borisa Djuraskovic").
+
+Spanish translations were created by [Ibidem Translations]( https://www.ibidem-translations.com "Ibidem Translations").
 
 **Development**
 
