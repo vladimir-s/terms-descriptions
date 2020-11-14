@@ -46,6 +46,8 @@ Detail description of this plugin is available in [Russian]( https://www.simplec
 
 Serbo-Croatian translations were created by [Borisa Djuraskovic]( http://www.webhostinghub.com "Borisa Djuraskovic").
 
+Spanish translations were created by [Juan]( https://www.ibidem-translations.com "Juan").
+
 **Development**
 
 If you want to participate in the plugin development, create a pull request to the [official GutHub repository](https://github.com/vladimir-s/terms-descriptions "Terms Descriptions GitHub repository").
@@ -75,6 +77,8 @@ The plugin built with [PhpStorm]( http://www.jetbrains.com/phpstorm/ )
 5. The plugin built with PhpStorm
 
 == Changelog ==
+
+= 3.3.10 =
 
 = 3.3.9 =
 
