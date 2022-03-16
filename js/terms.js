@@ -15,6 +15,7 @@
         + '</div>'
         + '</td>'
         + '<td><a href="<%=t_post_url%>" target="_blank"><%=t_post_title%></a></td>'
+        + '<td><%=t_use_in_post_types_list%></td>'
         + '<tr>' );
     
     //term id field template
@@ -46,6 +47,12 @@
         $.each( $( this ).serializeArray(), function( i, field ) {
             values[ field.name ] = field.value;
         });
+
+        values['t_use_in_post_types'] = [];
+        $("input:checkbox[name=t_use_in_post_types]:checked").each(function(){
+            values['t_use_in_post_types'].push($(this).val());
+        });
+
         //checking form data
         if ( values.td_term === '' ) {
             $( '#td_term' ).parent().append( $('<span class="td_error">' + td_messages.enter_term + '</span>') );
@@ -230,6 +237,14 @@
                     else {
                         term_id_field.val( response.term.t_id );
                     }
+                    if ( true === Array.isArray( response.term.t_use_in_post_types ) ) {
+                        $( "input:checkbox[name=t_use_in_post_types]" ).prop( 'checked', false );
+                        $.each( response.term.t_use_in_post_types, function ( i, type ) {
+                            $( '#t_use_in_post_types__' + type ).prop( 'checked', true );
+                        });
+                    } else {
+                        $( "input:checkbox[name=t_use_in_post_types]" ).prop( 'checked', true );
+                    }
                     //replacing add button with edit button
                     $( '#td_add_term' ).remove();
                     $( '#td_add_term_form p.submit' ).append( edit_term_button ).append( cancel_edit_term_button );
@@ -252,6 +267,7 @@
         $( '#td_link' ).val( '' );
         $( '#td_post_id' ).val( '' );
         $( '#td_add_term_form p.submit' ).append( add_term_button );
+        $( "input:checkbox[name=t_use_in_post_types]" ).prop( 'checked', true );
         return false;
     } );
     

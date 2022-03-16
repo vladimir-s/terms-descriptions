@@ -33,7 +33,9 @@ class SCO_TD_Admin_Terms {
         register_activation_hook( TD_FILE, array( $this, 'install' ) );
         add_action( 'admin_menu', array( $this, 'admin_menu' ) );
         add_action( 'admin_notices', array( $this, 'update_message' ) );
+        add_action( 'admin_notices', array( $this, 'update_message_3_4' ) );
         add_action( 'admin_init', array( $this, 'update_db' ) );
+        add_action( 'admin_init', array( $this, 'update_db_3_4' ) );
     }
 
     /**
@@ -63,11 +65,14 @@ class SCO_TD_Admin_Terms {
                 t_post_url VARCHAR(255),
                 t_post_type VARCHAR(255) NOT NULL,
                 t_term TEXT NOT NULL,
+                t_use_in_post_types TEXT,
                 UNIQUE KEY t_id (t_id)
                 )" . $charset_collate . ";";
 
             require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
             dbDelta($sql);
+
+            add_option( 'td_db_version', 340 );
         }
         
         //if there is no plugin options data from new and previous versions
@@ -96,6 +101,23 @@ class SCO_TD_Admin_Terms {
     <p>
         <?php _e( 'Terms Descriptions plugin is almost updated. Please, BACKUP YOUR DATABASE and press following button to', 'terms-descriptions' ); ?>
         <a href="<?php echo wp_nonce_url( 'admin.php?page=' . 'terms-descriptions' . '&action=update_db', 'update_db' ); ?>" class="button-secondary"><?php _e( 'Update DB', 'terms-descriptions' ); ?></a>
+    </p>
+</div>
+<?php
+        }
+    }
+    
+    /**
+     * This method shows warning message if previous plugin version is lower than 3.4.0
+     */
+    public function update_message_3_4() {
+        $db_version = get_option( 'td_db_version' );
+        if ( false === $db_version || 340 > (int) $db_version ) {
+?>
+<div id="message" class="updated">
+    <p>
+        <?php _e( 'Terms Descriptions plugin is almost updated. Please, BACKUP YOUR DATABASE and press following button to', 'terms-descriptions' ); ?>
+        <a href="<?php echo wp_nonce_url( 'admin.php?page=' . 'terms-descriptions' . '&action=update_db_3_4', 'update_db_3_4' ); ?>" class="button-secondary"><?php _e( 'Update DB', 'terms-descriptions' ); ?></a>
     </p>
 </div>
 <?php
@@ -172,7 +194,31 @@ class SCO_TD_Admin_Terms {
             die();
         }
     }
-    
+
+    /**
+     * This method converts data to v.3.4.0 format.
+     *
+     * @global wpdb $wpdb wordpress database class
+     */
+    public function update_db_3_4() {
+        if ( isset( $_GET[ 'action' ] ) && $_GET[ 'action' ] === 'update_db_3_4'
+                && isset( $_GET[ '_wpnonce' ] )
+                && wp_verify_nonce( $_GET[ '_wpnonce' ], 'update_db_3_4' ) ) {
+
+            // adding t_use_in_post_types field
+            global $wpdb;
+            $terms_table_name = $wpdb->prefix . 'td_terms';
+
+            $this->install();
+            $wpdb->query( 'ALTER TABLE ' . $terms_table_name . ' ADD COLUMN t_use_in_post_types TEXT AFTER t_term' );
+                        
+            add_option( 'td_db_version', 340 );
+
+            wp_redirect( trailingslashit( site_url() ) . 'wp-admin/admin.php?page=' . 'terms-descriptions' );
+            die();
+        }
+    }
+
     /**
      * Creating admin menu
      *
@@ -208,7 +254,7 @@ class SCO_TD_Admin_Terms {
      */
     public function load_scripts() {
         wp_enqueue_script( 'td_terms', TD_URL . '/js/terms.js'
-                , array( 'jquery-ui-autocomplete', 'jquery-ui-dialog', 'backbone' ), '1.0', true );
+                , array( 'jquery-ui-autocomplete', 'jquery-ui-dialog', 'backbone' ), '2.0', true );
         wp_enqueue_style( 'wp-jquery-ui-dialog' );
         //translations for use in JS code and array of terms ids
         wp_localize_script( 'td_terms', 'td_messages', array(
@@ -301,6 +347,19 @@ class SCO_TD_Admin_Terms {
                             <input type="hidden" name="td_post_id" id="td_post_id" />
                         </td>
                     </tr>
+                    <tr>
+                        <td colspan="2">
+                            <?php _e( 'Use for selected post types', 'terms-descriptions' ) ?>:
+                            <?php foreach ( $this->post_types as $type_name => $type ) { ?>
+                                <label style="padding-left:10px"><input name="t_use_in_post_types" type="checkbox"
+		                                    id="t_use_in_post_types__<?php echo $type_name; ?>"
+                                            value="<?php echo $type_name; ?>"
+				                            checked="on" />
+			                        <?php echo $type->labels->name; ?>
+		                        </label>
+                            <?php } ?>
+                        </td>
+                    </tr>
                 </table>
             </td>
         </tr>
@@ -376,6 +435,7 @@ class SCO_TD_Admin_Terms {
                 </th>
                 <th scope="col"><?php _e( 'Term', 'terms-descriptions' ); ?></th>
                 <th scope="col"><?php _e( 'Term Link', 'terms-descriptions' ); ?></th>
+                <th scope="col"><?php _e( 'Post Types', 'terms-descriptions' ); ?></th>
             </tr>
         </thead>
         <tfoot>
@@ -386,6 +446,7 @@ class SCO_TD_Admin_Terms {
                 </th>
                 <th scope="col"><?php _e( 'Term', 'terms-descriptions' ); ?></th>
                 <th scope="col"><?php _e( 'Term Link', 'terms-descriptions' ); ?></th>
+                <th scope="col"><?php _e( 'Post Types', 'terms-descriptions' ); ?></th>
             </tr>
         </tfoot>
         <tbody>
@@ -413,6 +474,24 @@ class SCO_TD_Admin_Terms {
                     </div>
                 </td>
                 <td><?php echo '<a href="' . $term->t_post_url . '" target="_blank">' . stripcslashes( $term->t_post_title ) . '</a>'; ?></td>
+                <td>
+                    <?php
+                    $cur_types_names = __( 'All', 'terms-descriptions' );
+                    $cur_post_types = !empty( $term->t_use_in_post_types ) ? unserialize( $term->t_use_in_post_types ) : $term->t_use_in_post_types;
+                    if ( is_array( $cur_post_types ) ) {
+                        if ( count( $cur_post_types ) < count( $this->post_types ) ) {
+                            $cur_types_labels = [];
+                            foreach ( $this->post_types as $type_name => $post_type ) {
+                                if ( in_array( $type_name, $cur_post_types ) ) {
+                                    $cur_types_labels[] = $post_type->labels->singular_name;
+                                }
+                            }
+                            $cur_types_names = implode( ', ', $cur_types_labels );
+                        }
+                    }
+                    echo $cur_types_names;
+                    ?>
+                </td>
             </tr>
 <?php
         }

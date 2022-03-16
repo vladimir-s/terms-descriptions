@@ -58,6 +58,15 @@ class SCO_TD_Frontend {
             }
             //getting the terms
             $terms = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . 'td_terms ORDER BY t_id DESC', ARRAY_A );
+            foreach ( $terms as $key => $term ) {
+                $convert_in_post_types = ( !empty( $term['t_use_in_post_types'] ) ) ? unserialize( $term['t_use_in_post_types'] ) : $term['t_use_in_post_types'];
+                if ( is_array( $convert_in_post_types ) && !empty( $convert_in_post_types )
+                    && !in_array( $post->post_type, $convert_in_post_types ) ) {
+
+                        unset( $terms[$key] );
+                }
+            }
+
             //setting up parser
             $parser->set_terms( $terms );
             $parser->add_skip_tags( $this->options->getOption( 'skip_tags' ) );

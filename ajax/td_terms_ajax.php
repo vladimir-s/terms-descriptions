@@ -49,7 +49,7 @@ function td_add_term() {
         list($term_data, $res) = td_prepare_term_data($res);
         //saving term
         global $wpdb;
-        $wpdb->insert( $wpdb->prefix . 'td_terms', $term_data, array( '%d', '%s', '%s', '%s', '%s' ) );
+        $wpdb->insert( $wpdb->prefix . 'td_terms', $term_data, array( '%d', '%s', '%s', '%s', '%s', '%s' ) );
         if ( !is_int( $wpdb->insert_id ) || ( int )$wpdb->insert_id <= 0 ) {
             $res[ 'message' ] = __( 'Term save error', 'terms-descriptions' );
             echo json_encode( $res );
@@ -61,6 +61,8 @@ function td_add_term() {
         $res[ 'term_data' ] = $term_data;
         $res[ 'term_data' ][ 't_post_title' ] = stripcslashes( $res[ 'term_data' ][ 't_post_title' ] );
         $res[ 'term_data' ][ 't_term' ] = stripcslashes( $res[ 'term_data' ][ 't_term' ] );
+        $res[ 'term_data' ][ 't_use_in_post_types' ] = unserialize( $res[ 'term_data' ][ 't_use_in_post_types' ] );
+        $res[ 'term_data' ][ 't_use_in_post_types_list' ] = td_get_use_in_post_types_list( $res[ 'term_data' ][ 't_use_in_post_types' ] );
 	}
 
 	echo json_encode( $res );
@@ -83,7 +85,9 @@ function td_prepare_term_data($res) {
                                't_post_title' => $link_title,
                                't_post_url'   => $term_link,
                                't_post_type'  => $_POST['td_content_type'],
-                               't_term'       => $_POST['td_term'],);
+                               't_term'       => $_POST['td_term'],
+                               't_use_in_post_types' => serialize($_POST['t_use_in_post_types']),
+                            );
             break;
         case 'post_id' :
             if (!is_int($_POST['td_link']) || ( int )$_POST['td_link'] <= 0) {
@@ -99,7 +103,9 @@ function td_prepare_term_data($res) {
                                't_post_title' => get_the_title(( int )$_POST['td_link']),
                                't_post_url'   => $term_link,
                                't_post_type'  => $_POST['td_content_type'],
-                               't_term'       => $_POST['td_term'],);
+                               't_term'       => $_POST['td_term'],
+                               't_use_in_post_types' => serialize($_POST['t_use_in_post_types']),
+                            );
             break;
         default :
             if (!isset($_POST['td_post_id']) || empty($_POST['td_post_id']) || !is_int($_POST['td_post_id']) || 0 >= ( int )$_POST['td_post_id']) {
@@ -115,7 +121,9 @@ function td_prepare_term_data($res) {
                                't_post_title' => $_POST['td_link'],
                                't_post_url'   => $term_link,
                                't_post_type'  => $_POST['td_content_type'],
-                               't_term'       => $_POST['td_term'],);
+                               't_term'       => $_POST['td_term'],
+                               't_use_in_post_types' => serialize($_POST['t_use_in_post_types']),
+                            );
             break;
     }
     return array($term_data, $res);
@@ -260,6 +268,7 @@ function td_get_term() {
             $res[ 'term' ] = $term;
             $res[ 'term' ]->t_post_title = stripcslashes( $res[ 'term' ]->t_post_title );
             $res[ 'term' ]->t_term = stripcslashes( $res[ 'term' ]->t_term );
+            $res[ 'term' ]->t_use_in_post_types = unserialize( $res[ 'term' ]->t_use_in_post_types );
         }
         else {
             $res[ 'message' ] = __( 'Unknown term', 'terms-descriptions' );
@@ -318,7 +327,7 @@ function td_update_term() {
 		//updating term
         global $wpdb;
         $affected_rows = $wpdb->update( $wpdb->prefix . 'td_terms', $term_data, array( 't_id' => $_POST[ 'td_term_id' ] )
-                , array( '%d', '%s', '%s', '%s', '%s' ), array( '%d' ) );
+                , array( '%d', '%s', '%s', '%s', '%s', '%s' ), array( '%d' ) );
         if ( !is_int( $affected_rows ) || ( int )$affected_rows < 0 ) {
             $res[ 'message' ] = __( 'Term update error', 'terms-descriptions' );
             echo json_encode( $res );
@@ -330,10 +339,33 @@ function td_update_term() {
         $res[ 'term_data' ] = $term_data;
         $res[ 'term_data' ][ 't_post_title' ] = stripcslashes( $res[ 'term_data' ][ 't_post_title' ] );
         $res[ 'term_data' ][ 't_term' ] = stripcslashes( $res[ 'term_data' ][ 't_term' ] );
+        $res[ 'term_data' ][ 't_use_in_post_types' ] = unserialize( $res[ 'term_data' ][ 't_use_in_post_types' ] );
+        $res[ 'term_data' ][ 't_use_in_post_types_list' ] = td_get_use_in_post_types_list( $res[ 'term_data' ][ 't_use_in_post_types' ] );
 	}
 
 	echo json_encode( $res );
 	die();
+}
+
+function td_get_use_in_post_types_list( $cur_post_types ) {
+    $post_types = get_post_types( array(
+        'public' => true,
+        'show_ui' => true,
+    ), 'objects' );
+    $cur_types_names = __( 'All', 'terms-descriptions' );
+    if ( is_array( $cur_post_types ) ) {
+        if ( count( $cur_post_types ) < count( $post_types ) ) {
+            $cur_types_labels = [];
+            foreach ( $post_types as $type_name => $post_type ) {
+                if ( in_array( $type_name, $cur_post_types ) ) {
+                    $cur_types_labels[] = $post_type->labels->singular_name;
+                }
+            }
+            $cur_types_names = implode( ', ', $cur_types_labels );
+        }
+    }
+
+    return $cur_types_names;
 }
 
 /**
@@ -378,7 +410,7 @@ function td_update_permalink() {
             if ( $term[ 't_post_id' ] != 0 ) {
                 $term[ 't_post_url' ] = get_permalink( $term[ 't_post_id' ] );
                 $affected_rows = $wpdb->update( $wpdb->prefix . 'td_terms', $term, array( 't_id' => $_POST[ 'td_term_id' ] )
-                        , array( '%d', '%d', '%s', '%s', '%s', '%s' ), array( '%d' ) );
+                        , array( '%d', '%d', '%s', '%s', '%s', '%s', '%s' ), array( '%d' ) );
                 if ( !is_int( $affected_rows ) || ( int )$affected_rows < 0 ) {
                     $res[ 'message' ] = __( 'Permalink update error', 'terms-descriptions' );
                     echo json_encode( $res );
