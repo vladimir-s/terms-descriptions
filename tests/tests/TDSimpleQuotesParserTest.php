@@ -1,13 +1,13 @@
 <?php
-require_once 'mockpress/mockpress.php';
-require_once '../includes/parsers/td_parser.php';
-require_once '../includes/parsers/td_simple_parser.php';
-require_once '../includes/parsers/td_simple_quotes_parser.php';
+require_once '../mockpress/mockpress.php';
+require_once '../../includes/parsers/td_parser.php';
+require_once '../../includes/parsers/td_simple_parser.php';
+require_once '../../includes/parsers/td_simple_quotes_parser.php';
 
-class TD_Simple_Quotes_Parser_Test extends PHPUnit_Framework_TestCase {
+class TDSimpleQuotesParserTest extends \PHPUnit\Framework\TestCase {
     public $parser;
-    
-    public function setUp() {
+
+    protected function setUp(): void {
         global $post;
 		$post = (object)array('ID' => 1);
         $this->parser = $this->getMockBuilder('SCO_TD_Simple_Quotes_Parser')->setMethods(array('is_current_url'))->getMock();
@@ -139,12 +139,12 @@ class TD_Simple_Quotes_Parser_Test extends PHPUnit_Framework_TestCase {
         $parsed_quouted_text = 'xc xsf "<a href="http://fdgd.sff">стол</a>" впівп';
         $this->assertEquals($parsed_quouted_text, $this->parser->parse( $quouted_text ) );
         
-        $orig_file = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/1.txt'));
-        $parsed_file = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/1_1.txt'));
+        $orig_file = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('../texts/1.txt'));
+        $parsed_file = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('../texts/1_1.txt'));
         $this->assertEquals($parsed_file, $this->parser->parse($orig_file));
 
-        $orig_file_q = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/1_q.txt'));
-        $parsed_file_q = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/1_q_1.txt'));
+        $orig_file_q = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('../texts/1_q.txt'));
+        $parsed_file_q = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('../texts/1_q_1.txt'));
         $this->assertEquals($parsed_file_q, $this->parser->parse($orig_file_q));
         
         $p_2 = $this->getMockBuilder('SCO_TD_Simple_Quotes_Parser')->setMethods(array('is_current_url'))->getMock();
@@ -164,12 +164,12 @@ class TD_Simple_Quotes_Parser_Test extends PHPUnit_Framework_TestCase {
         );
         $p_2->set_terms($terms_2);
         
-        $orig_file_2 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/2.txt'));
-        $parsed_file_2 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/2_1.txt'));
+        $orig_file_2 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('../texts/2.txt'));
+        $parsed_file_2 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('../texts/2_1.txt'));
         $this->assertEquals($parsed_file_2, $p_2->parse($orig_file_2, 2));
         
-        $orig_file_2_q = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/2_q.txt'));
-        $parsed_file_2_q = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/2_q_1.txt'));
+        $orig_file_2_q = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('../texts/2_q.txt'));
+        $parsed_file_2_q = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('../texts/2_q_1.txt'));
         $this->assertEquals($parsed_file_2_q, $p_2->parse($orig_file_2_q, 2));
         
         $p_3 = $this->getMockBuilder('SCO_TD_Simple_Quotes_Parser')->setMethods(array('is_current_url'))->getMock();
@@ -195,20 +195,20 @@ class TD_Simple_Quotes_Parser_Test extends PHPUnit_Framework_TestCase {
         );
         $p_3->set_terms($terms_3);
         
-        $orig_file_3 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/3.txt'));
-        $parsed_file_3 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/3_1.txt'));
+        $orig_file_3 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('../texts/3.txt'));
+        $parsed_file_3 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('../texts/3_1.txt'));
         $this->assertEquals($parsed_file_3, $p_3->parse($orig_file_3, 1));
 
-        $orig_file_3_q = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/3_q.txt'));
-        $parsed_file_3_q = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/3_q_1.txt'));
+        $orig_file_3_q = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('../texts/3_q.txt'));
+        $parsed_file_3_q = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('../texts/3_q_1.txt'));
         $this->assertEquals($parsed_file_3_q, $p_3->parse($orig_file_3_q, 1));
         
-        $orig_file_5 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/4.txt'));
-        $parsed_file_5 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/4_1.txt'));
+        $orig_file_5 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('../texts/4.txt'));
+        $parsed_file_5 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('../texts/4_1.txt'));
         $this->assertEquals($parsed_file_5, $p_3->parse($orig_file_5, 1));
 
-        $orig_file_5_q = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/4_q.txt'));
-        $parsed_file_5_q = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/4_q_1.txt'));
+        $orig_file_5_q = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('../texts/4_q.txt'));
+        $parsed_file_5_q = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('../texts/4_q_1.txt'));
         $this->assertEquals($parsed_file_5_q, $p_3->parse($orig_file_5_q, 1));
         
         $p_4 = $this->getMockBuilder('SCO_TD_Simple_Quotes_Parser')->setMethods(array('is_current_url'))->getMock();
@@ -216,8 +216,8 @@ class TD_Simple_Quotes_Parser_Test extends PHPUnit_Framework_TestCase {
         );
         $p_4->set_terms($terms_4);
         
-        $orig_file_4 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/3.txt'));
-        $parsed_file_4 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('texts/3_1.txt'));
+        $orig_file_4 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('../texts/3.txt'));
+        $parsed_file_4 = str_replace(array("\r\n", "\n", "\r"), '', file_get_contents('../texts/3_1.txt'));
         $this->assertEquals($orig_file_4, $p_4->parse($orig_file_4, 1));
 
         $p_6 = $this->getMockBuilder('SCO_TD_Simple_Quotes_Parser')->setMethods(array('is_current_url'))->getMock();

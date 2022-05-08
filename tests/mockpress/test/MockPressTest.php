@@ -3,8 +3,8 @@
 //require_once('PHPUnit/Autoload.php');
 require_once(dirname(__FILE__) . '/../mockpress.php');
 
-class MockPressTest extends PHPUnit_Framework_TestCase {
-	function setUp() {
+class MockPressTest extends \PHPUnit\Framework\TestCase {
+    protected function setUp(): void {
 		global $post;
 		_reset_wp();
 		unset($post);

@@ -21,6 +21,14 @@ class SCO_TD_Frontend {
         if ( 'on' === $this->options->getOption( 'convert_in_comments' ) ) {
             add_filter( 'comment_text', array( $this, 'parse_content' ) );
         }
+        //convert in archive descriptions
+        if ( 'on' === $this->options->getOption( 'convert_archive_descriptions' ) ) {
+            add_filter( 'get_the_archive_description', array( $this, 'parse_content' ) );
+        }
+
+        add_shortcode('terms-descriptions', function ( $atts, $content = "" ) {
+            return $this->parse_content( $content, true );
+        });
     }
 
     /**
@@ -30,11 +38,11 @@ class SCO_TD_Frontend {
      * @param string $content original post content
      * @return string updated post content
      */
-    public function parse_content( $content ) {
+    public function parse_content( $content, $is_td_shortcode = false ) {
         //checking if have to convert terms on this page
         if ( false === $this->options->getOption( 'convert_only_single' ) || is_single() || is_page() ) {
             global $wpdb, $post;
-            if ( 'on' === get_post_meta( $post->ID, '_disable_terms_descriptions', true ) ) {
+            if ( false === $is_td_shortcode && 'on' === get_post_meta( $post->ID, '_disable_terms_descriptions', true ) ) {
                 return $content;
             }
 	        if ( 'on' !== $this->options->getOption( 'convert_in__'.$post->post_type )

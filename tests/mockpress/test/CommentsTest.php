@@ -3,8 +3,8 @@
 //require_once('PHPUnit/Autoload.php');
 require_once(dirname(__FILE__) . '/../includes/comments.php');
 
-class CommentsTest extends PHPUnit_Framework_TestCase {
-	function setUp() {
+class CommentsTest extends \PHPUnit\Framework\TestCase {
+    protected function setUp(): void {
 		_reset_wp();
 		$_SERVER = array();
 	}

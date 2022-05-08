@@ -2,7 +2,7 @@
 Contributors: vladimir.s
 Tags: post, page, links, plugin, link building, cross linking, seo
 Requires at least: 4.1
-Tested up to: 5.9.2
+Tested up to: 5.9.3
 Stable tag: trunk
 
 This plugin allows you to create list of terms and assign links to them. Plugin replaces terms occurrences in your posts with appropriate links.
@@ -77,6 +77,16 @@ The plugin built with [PhpStorm]( http://www.jetbrains.com/phpstorm/ )
 5. The plugin built with PhpStorm
 
 == Changelog ==
+
+= 3.4.1 =
+
+* New feature: [terms-descriptions] shortcode added
+* New feature: convert in archive descriptions option added
+* New feature: support of t_use_in_post_types column added to packet upload and export to CSV
+* New feature: support of t_use_in_post_types column added to export and import
+* Improvement: PHPUnit 9.5 support
+* Bug fix: "www." subdomain removed from SERVER_NAME in is_current_url function
+* WordPress 5.9.3 support
 
 = 3.4.0 =
 

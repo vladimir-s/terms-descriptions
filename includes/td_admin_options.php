@@ -136,6 +136,13 @@ class SCO_TD_Admin_Options {
                     </td>
                 </tr>
                 <tr valign="middle">
+                    <th scope="row"><?php _e( 'Convert terms in archive descriptions', 'terms-descriptions' ); ?></th>
+                    <td>
+                        <input name="td_options[convert_archive_descriptions]" type="checkbox" id="convert_archive_descriptions" <?php if ( isset( $options[ 'convert_archive_descriptions' ] ) ) { checked( $options[ 'convert_archive_descriptions' ], 'on' ); } ?> />
+                        <span class="description"><?php _e( 'Terms will be converted convert in archive descriptions.', 'terms-descriptions' ); ?></span>
+                    </td>
+                </tr>
+                <tr valign="middle">
                     <th scope="row"><?php _e( 'Open link in a new tab', 'terms-descriptions' ); ?></th>
                     <td>
                         <input name="td_options[open_new_tab]" type="checkbox" id="open_new_tab" <?php if ( isset( $options[ 'open_new_tab' ] ) ) { checked( $options[ 'open_new_tab' ], 'on' ); } ?> />
@@ -252,6 +259,9 @@ class SCO_TD_Admin_Options {
         }
         if ( !isset( $input[ 'convert_only_single' ] ) ) {
             $input[ 'convert_only_single' ] = false;
+        }
+        if ( !isset( $input[ 'convert_archive_descriptions' ] ) ) {
+            $input[ 'convert_archive_descriptions' ] = false;
         }
         if ( !isset( $input[ 'open_new_tab' ] ) ) {
             $input[ 'open_new_tab' ] = false;

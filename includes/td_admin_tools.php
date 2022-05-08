@@ -89,10 +89,10 @@ class SCO_TD_Admin_Tools {
         <?php wp_nonce_field( 'td_packet_upload' ); ?>
         <label><?php _e( 'Terms list', 'terms-descriptions' ); ?> <textarea name="terms" rows="10" cols="40" class="large-text code"></textarea></label>
         <div class="description"><?php _e( 'Each term should be written on its own line. Use the following format.'
-                .'<br />word_form_1|word_form_2|...|post_id OR URL (with http://)'
+                .'<br />word_form_1|word_form_2|...|post_id OR URL (with http://)|post_types (delimited with comma)'
                 .'<br />Examples:'
                 .'<br />apple|apples|21'
-                .'<br />pear|pears|http://site.domen<br />'
+                .'<br />pear|pears|http://site.domen|post,page,attachment<br />'
                 .'Note that if you use term_id the post with this id should exist.', 'terms-descriptions' ); ?></div>
         <input type="submit" name="td_packet_upload" value="<?php _e( 'Add terms', 'terms-descriptions' ); ?>" class="button-primary" />
     </form>
@@ -120,7 +120,12 @@ class SCO_TD_Admin_Tools {
         
         $data = array();
         if ( is_array( $terms ) && !empty( $terms ) ) {
-            $data = json_encode($terms);
+            foreach ( $terms as $key => $term ) {
+                if ( isset( $term->t_use_in_post_types ) && !empty( $term->t_use_in_post_types ) ) {
+                    $terms[ $key ]->t_use_in_post_types = unserialize( $term->t_use_in_post_types );
+                }
+            }
+            $data = json_encode( $terms, JSON_UNESCAPED_UNICODE );
         }
         
         echo $data;
@@ -146,13 +151,20 @@ class SCO_TD_Admin_Tools {
             if ( NULL !== $data && is_array( $data ) ) {
                 global $wpdb;
                 //saving terms
-                $insert_sql = 'INSERT INTO ' . $wpdb->prefix . 'td_terms VALUES (null,%d,%s,%s,%s,%s)';
                 foreach ( $data as $term ) {
                     if ( isset( $term->t_post_id ) && isset( $term->t_post_title )
                             && isset( $term->t_post_url ) && isset( $term->t_post_type )
                             && isset( $term->t_term ) ) {
-                        $wpdb->query( $wpdb->prepare( $insert_sql, $term->t_post_id, $term->t_post_title
+                        if ( isset( $term->t_use_in_post_types ) ) {
+                            $insert_sql = 'INSERT INTO ' . $wpdb->prefix . 'td_terms VALUES (null,%d,%s,%s,%s,%s,%s)';
+                            $t_use_in_post_types = serialize( $term->t_use_in_post_types );
+                            $wpdb->query( $wpdb->prepare( $insert_sql, $term->t_post_id, $term->t_post_title
+                                , $term->t_post_url, $term->t_post_type, $term->t_term, $t_use_in_post_types ) );
+                        } else {
+                            $insert_sql = 'INSERT INTO ' . $wpdb->prefix . 'td_terms VALUES (null,%d,%s,%s,%s,%s,null)';
+                            $wpdb->query( $wpdb->prepare( $insert_sql, $term->t_post_id, $term->t_post_title
                                 , $term->t_post_url, $term->t_post_type, $term->t_term ) );
+                        }
                     }
                 }
                 return true;
@@ -193,19 +205,45 @@ class SCO_TD_Admin_Tools {
             if ( count( $term_parts ) < 2 ) {
                 continue;
             }
-            
+
+            $hasUsedInPostTypes = false;
+            $usedInPostTypes = null;
+            if ( count( $term_parts ) >= 3 ) {
+                $postTypes = get_post_types( array(
+                    'public' => true,
+                    'show_ui' => true,
+                ), 'objects' );
+                $usedInPostTypes = explode(',', $term_parts[ count( $term_parts ) - 1 ] );
+                foreach ( $postTypes as $typeName => $type ) {
+                    if ( in_array( $typeName, $usedInPostTypes ) ) {
+                        $hasUsedInPostTypes = true;
+                        break;
+                    }
+                }
+            }
+
             $term_data = array();
-            $term_data[ 't_term' ] = implode( '|', array_slice( $term_parts, 0, count( $term_parts ) - 1 ) );
-            
-            $link = $term_parts[ count( $term_parts ) - 1 ];
-            
+            if ( true === $hasUsedInPostTypes ) {
+                $term_data[ 't_term' ] = implode( '|', array_slice( $term_parts, 0, count( $term_parts ) - 2 ) );
+                $link = $term_parts[ count( $term_parts ) - 2 ];
+            } else {
+                $term_data[ 't_term' ] = implode( '|', array_slice( $term_parts, 0, count( $term_parts ) - 1 ) );
+                $link = $term_parts[ count( $term_parts ) - 1 ];
+            }
+
             //checking terms links
             if ( false !== ( $link_data = $this->check_link( $link ) ) ) {
                 $term_data = array_merge( $link_data, $term_data );
-                
+
                 //saving term
                 global $wpdb;
-                $wpdb->insert( $wpdb->prefix . 'td_terms', $term_data, array( '%d', '%s', '%s', '%s', '%s' ) );
+                if ( true === $hasUsedInPostTypes && is_array( $usedInPostTypes ) && !empty( $usedInPostTypes ) ) {
+                    $term_data[ 't_use_in_post_types' ] = serialize( $usedInPostTypes );
+                    $wpdb->insert( $wpdb->prefix . 'td_terms', $term_data, array( '%d', '%s', '%s', '%s', '%s', '%s' ) );
+                } else {
+                    $wpdb->insert( $wpdb->prefix . 'td_terms', $term_data, array( '%d', '%s', '%s', '%s', '%s' ) );
+                }
+
                 if ( !is_int( $wpdb->insert_id ) || ( int )$wpdb->insert_id <= 0 ) {
                     return false;
                 }
@@ -231,16 +269,26 @@ class SCO_TD_Admin_Tools {
             foreach ( $terms as $termRow ) {
                 $term = $termRow->t_term;
                 $link = $termRow->t_post_url;
+                $row = '"' . $link . '";';
                 if ( false !== strpos( $term, '|' ) ) {
                     $termsArr = explode( '|', $term );
                     foreach ($termsArr as $i => $value) {
                         $termsArr[$i] = '"' . iconv( 'UTF-8', 'windows-1251', str_replace( '"', '""', trim( stripslashes( $value ) ) ) ) . '"';
                     }
-                    $list[] = '"' . $link . '";' . implode( ';', $termsArr );
+                    $row .= implode( ';', $termsArr );
                 }
                 else {
-                    $list[] = '"' . $link . '";' . '"' . iconv( 'UTF-8', 'windows-1251', str_replace( '"', '""', trim( stripslashes( $term ) ) ) ) . '"';
+                    $row .= '"' . iconv( 'UTF-8', 'windows-1251', str_replace( '"', '""', trim( stripslashes( $term ) ) ) ) . '"';
                 }
+
+                if (!empty($termRow->t_use_in_post_types)) {
+                    $usedInPostTypes = unserialize( $termRow->t_use_in_post_types );
+                    if (is_array($usedInPostTypes)) {
+                        $row .= ';"' . implode( ',',  $usedInPostTypes). '"';
+                    }
+                }
+
+                $list[] = $row;
             }
         }
 
