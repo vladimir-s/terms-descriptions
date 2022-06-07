@@ -72,7 +72,7 @@ class SCO_TD_Simple_Parser extends SCO_TD_Parser {
                 if ( $this->is_current_post( $term[ 't_post_id' ] ) ) {
                     continue;
                 }
-                if ( isset( $term[ 't_post_type' ] ) && $term[ 't_post_type' ] === 'ext_link'
+                if ( isset( $term[ 't_post_type' ] ) && in_array($term[ 't_post_type' ], ['ext_link','page'])
                         && $this->is_current_url( $term[ 't_post_url' ] ) ) {
                     continue;
                 }

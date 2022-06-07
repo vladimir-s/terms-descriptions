@@ -77,7 +77,7 @@ class SCO_TD_Admin_Options {
                 <tr valign="middle">
                     <th scope="row"><?php _e( 'Convert terms in shortcodes', 'terms-descriptions' ); ?></th>
                     <td>
-                        <label><input name="td_options[convert_in_shortcodes]" type="checkbox" id="convert_in_posts"
+                        <label><input name="td_options[convert_in_shortcodes]" type="checkbox" id="convert_in_shortcodes"
 		                        <?php if(isset($options[ 'convert_in_shortcodes' ])) { checked( $options[ 'convert_in_shortcodes' ], 'on' ); } ?> /></label><br />
                     </td>
                 </tr>
@@ -209,6 +209,17 @@ class SCO_TD_Admin_Options {
                         <span class="description"><?php _e( 'This option allows adding pauses between permalinks updates to reduce server load. Value in milliseconds.', 'terms-descriptions' ); ?></span>
                     </td>
                 </tr>
+                <tr valign="middle">
+                    <th scope="row"><?php _e( 'Additional filters', 'terms-descriptions' ); ?></th>
+                    <td>
+                        <?php $additional_filters = ( isset( $options[ 'additional_filters' ] ) ) ? $options[ 'additional_filters' ] : ''; ?>
+                        <textarea name="td_options[additional_filters]" rows="7" cols="40" class="large-text code"><?php echo $additional_filters ?></textarea>
+                        <span class="description"><?php _e( 'This option allows adding list of filters for which conversion will be applied. Each filter name should start from a new line. For example,<br> 
+<pre><code>bbp_get_reply_content</code>
+<code>bbp_get_topic_content</code></pre>
+Please, pay attention that <code>the_content</code>, <code>comment_text</code> and <code>get_the_archive_description</code> filters are set by other options and will be ignored.', 'terms-descriptions' ); ?></span>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <p class="submit">
@@ -292,6 +303,9 @@ class SCO_TD_Admin_Options {
         }
         if ( !isset( $input[ 'time_step' ] ) ) {
             $input[ 'time_step' ] = 1000;
+        }
+        if ( !isset( $input[ 'additional_filters' ] ) ) {
+            $input[ 'additional_filters' ] = '';
         }
         if ( false !== $old_options ) {
             return array_merge( $old_options, $input );

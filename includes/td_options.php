@@ -31,6 +31,9 @@ class SCO_TD_Options {
 		if ( !isset( $this->options[ 'skip_tags' ] ) ) {
 			$this->options[ 'skip_tags' ] = '';
 		}
+		if ( !isset( $this->options[ 'additional_filters' ] ) ) {
+			$this->options[ 'additional_filters' ] = '';
+		}
 	}
 
 	public function getOption( $name ) {

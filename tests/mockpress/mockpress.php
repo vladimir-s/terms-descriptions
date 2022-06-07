@@ -1483,7 +1483,7 @@ class WP_User {
 /** WP_Widget class **/
 
 class WP_Widget {
-	function WP_Widget($id, $name, $widget_options = array(), $control_options = array()) {
+	function __construct($id, $name, $widget_options = array(), $control_options = array()) {
 		global $wp_test_expectations;
 		$wp_test_expectations['wp_widgets'][$id] = compact('id', 'name', 'widget_options', 'widget_controls');
 		$this->id = $id;
