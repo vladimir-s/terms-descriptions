@@ -120,7 +120,7 @@ abstract class SCO_TD_Parser {
      */
     protected function is_current_post( $id ) {
         global $post;
-        return ( $post->ID === ( int )$id ) ? true : false;
+        return ( is_object( $post ) && property_exists( $post, 'ID' ) && $post->ID === ( int )$id ) ? true : false;
     }
 
     /**

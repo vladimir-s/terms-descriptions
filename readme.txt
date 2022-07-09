@@ -78,6 +78,10 @@ The plugin built with [PhpStorm]( http://www.jetbrains.com/phpstorm/ )
 
 == Changelog ==
 
+= 3.4.3 =
+
+* Bug fixes: variable type check added (https://github.com/vladimir-s/terms-descriptions/issues/5)
+
 = 3.4.2 =
 
 * New feature: support of additional filters added (https://github.com/vladimir-s/terms-descriptions/issues/1)
