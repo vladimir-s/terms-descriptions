@@ -18,7 +18,7 @@ class SCO_TD_Simple_Quotes_Parser extends SCO_TD_Simple_Parser {
     public function parse( $text, $replace_terms = '-1', $class_attr = false
             , $max_convertions = -1, $show_title = false
             , $text_before = '', $text_after = '', $target = '', $consider_existing_links = false
-            , $add_nofollow = false, $add_noindex = false ) {
+            , $add_nofollow = false, $add_noindex = false, $skip_noindex_nofollow_for_internal = false ) {
         if ( null !== $text && !empty( $text ) ) {
             if ( $class_attr !== false && trim( $class_attr ) !== '' ) {
                 $class_attr = ' class="' . $class_attr . '"';
@@ -34,6 +34,14 @@ class SCO_TD_Simple_Quotes_Parser extends SCO_TD_Simple_Parser {
             if ( is_int( $this->max_convertions ) && $this->max_convertions <= 0 ) {
                 return $text;
             }
+
+            global $wp;
+            $cur_url = home_url( $wp->request );
+            $cur_domain = '//--unknown--';
+            if ( 1 === preg_match( '/\/\/([0-9\.\-_A-Za-z]+).*/i', $cur_url, $match ) ) {
+                $cur_domain = '//' . $match[1];
+            }
+
             foreach ( $this->terms as $term ) {
                 //if page URL or ID is equal to term ID or URL - skipping term
                 if ( $this->is_current_post( $term[ 't_post_id' ] ) ) {
@@ -67,13 +75,18 @@ class SCO_TD_Simple_Quotes_Parser extends SCO_TD_Simple_Parser {
                     $terms_count -= $this->find_existing_links( $text, $term );
                 }
 
+                $link_target = $target;
+                $link_text_before = $text_before;
+                $link_text_after = $text_after;
                 if ( $term[ 't_post_type' ] === 'ext_link' ) {
-                    if ( $add_nofollow === 'on' ) {
-                        $target .= ' rel="nofollow"';
-                    }
-                    if ( $add_noindex === 'on' ) {
-                        $text_before = '<noindex>'.$text_before;
-                        $text_after = $text_after.'</noindex>';
+                    if ( !('on' === $skip_noindex_nofollow_for_internal && false !== strpos( $term[ 't_post_url' ], $cur_domain )) ) {
+                        if ( $add_nofollow === 'on' ) {
+                            $link_target .= ' rel="nofollow"';
+                        }
+                        if ( $add_noindex === 'on' ) {
+                            $link_text_before = '<noindex>'.$link_text_before;
+                            $link_text_after = $link_text_after.'</noindex>';
+                        }
                     }
                 }
 
@@ -85,8 +98,8 @@ class SCO_TD_Simple_Quotes_Parser extends SCO_TD_Simple_Parser {
                         //searching for a term
                         $fragment = substr( $text, $start_pos, $length );
                         $result .= $this->replace_term( $replace_re, $term, $fragment
-                                , $terms_count, $class_attr, $title_attr, $text_before
-                                , $text_after, $target );
+                                , $terms_count, $class_attr, $title_attr, $link_text_before
+                                , $link_text_after, $link_target );
                     }
                     //adding html tag to the result
                     $result .= $match[0];
@@ -104,8 +117,8 @@ class SCO_TD_Simple_Quotes_Parser extends SCO_TD_Simple_Parser {
                         $result .= $fragment;
                     }
                     $result .= $this->replace_term( $replace_re, $term, $fragment
-                            , $terms_count, $class_attr, $title_attr, $text_before
-                            , $text_after, $target );
+                            , $terms_count, $class_attr, $title_attr, $link_text_before
+                            , $link_text_after, $link_target );
                 }
                 $text = $result;
                 

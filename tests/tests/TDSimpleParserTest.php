@@ -274,6 +274,34 @@ class TDSimpleParserTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($orig_text, $this->parser->parse( $orig_text, '-1', false, -1, false, '', '', 'on' ) );
     }
 
+    public function testSkipNoindexNofollowForInternalExtLink() {
+        $terms = array(
+            array(
+                't_term' => 'стол',
+                't_post_url' => 'http://fdgd.sff',
+                't_post_id' => 22,
+                't_post_type' => 'ext_link',
+            )
+        );
+        $orig_text = 'xc xsf стол впівп';
+        $parsed_text = 'xc xsf <noindex><a href="http://fdgd.sff" rel="nofollow">стол</a></noindex> впівп';
+        $this->assertEquals($orig_text, $this->parser->parse( $orig_text, '-1', false, -1, false, '', '', 'on', 'on', 'on' ) );
+    }
+
+    public function testSkipNoindexNofollowForInternalIntLink() {
+        $terms = array(
+            array(
+                't_term' => 'стол',
+                't_post_url' => 'http://tdhome.com',
+                't_post_id' => 22,
+                't_post_type' => 'ext_link',
+            )
+        );
+        $orig_text = 'xc xsf стол впівп';
+        $parsed_text = 'xc xsf <a href="http://tdhome.com">стол</a> впівп';
+        $this->assertEquals($orig_text, $this->parser->parse( $orig_text, '-1', false, -1, false, '', '', 'on', 'on', 'on' ) );
+    }
+
     public function testFindExistingLinks() {
         $fel = self::getMethod( 'find_existing_links' );
 
@@ -345,7 +373,67 @@ class TDSimpleParserTest extends \PHPUnit\Framework\TestCase {
 		$this->parser->set_terms( $terms2 );
 		$this->assertEquals($parsed_text2, $this->parser->parse( $orig_text2 ) );
 	}
-    
+
+    public function testApostropheType1() {
+        $terms = array(
+            array(
+                't_term' => 'd’Angers',
+                't_post_url' => 'http://fdgd.sff',
+                't_post_id' => 22,
+                't_post_type' => 'ext_link',
+            )
+        );
+        $this->parser->set_terms( $terms );
+        $orig_text = 'xc xsf d’Angers впівп';
+        $parsed_text = 'xc xsf <a href="http://fdgd.sff">d’Angers</a> впівп';
+        $this->assertEquals($parsed_text, $this->parser->parse( $orig_text ));
+    }
+
+    public function testApostropheType2() {
+        $terms = array(
+            array(
+                't_term' => 'd‘Angers',
+                't_post_url' => 'http://fdgd.sff',
+                't_post_id' => 22,
+                't_post_type' => 'ext_link',
+            )
+        );
+        $this->parser->set_terms( $terms );
+        $orig_text = 'xc xsf d‘Angers впівп';
+        $parsed_text = 'xc xsf <a href="http://fdgd.sff">d‘Angers</a> впівп';
+        $this->assertEquals($parsed_text, $this->parser->parse( $orig_text ));
+    }
+
+    public function testApostropheReplaceType1() {
+        $terms = array(
+            array(
+                't_term' => 'd’Angers',
+                't_post_url' => 'http://fdgd.sff',
+                't_post_id' => 22,
+                't_post_type' => 'ext_link',
+            )
+        );
+        $this->parser->set_terms( $terms );
+        $orig_text = 'xc xsf d‘Angers впівп';
+        $parsed_text = 'xc xsf <a href="http://fdgd.sff">d‘Angers</a> впівп';
+        $this->assertEquals($parsed_text, $this->parser->parse( $orig_text ));
+    }
+
+    public function testApostropheReplaceType2() {
+        $terms = array(
+            array(
+                't_term' => 'd‘Angers',
+                't_post_url' => 'http://fdgd.sff',
+                't_post_id' => 22,
+                't_post_type' => 'ext_link',
+            )
+        );
+        $this->parser->set_terms( $terms );
+        $orig_text = 'xc xsf d’Angers впівп';
+        $parsed_text = 'xc xsf <a href="http://fdgd.sff">d’Angers</a> впівп';
+        $this->assertEquals($parsed_text, $this->parser->parse( $orig_text ));
+    }
+
     protected static function getMethod( $name ) {
         $class = new ReflectionClass('SCO_TD_Simple_Parser');
         $method = $class->getMethod( $name );

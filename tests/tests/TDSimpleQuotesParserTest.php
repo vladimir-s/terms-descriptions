@@ -280,6 +280,34 @@ class TDSimpleQuotesParserTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($orig_text, $this->parser->parse( $orig_text, '-1', false, -1, false, '', '', 'on' ) );
     }
 
+    public function testSkipNoindexNofollowForInternalExtLink() {
+        $terms = array(
+            array(
+                't_term' => 'стол',
+                't_post_url' => 'http://fdgd.sff',
+                't_post_id' => 22,
+                't_post_type' => 'ext_link',
+            )
+        );
+        $orig_text = 'xc xsf стол впівп';
+        $parsed_text = 'xc xsf <noindex><a href="http://fdgd.sff" rel="nofollow">стол</a></noindex> впівп';
+        $this->assertEquals($orig_text, $this->parser->parse( $orig_text, '-1', false, -1, false, '', '', 'on', 'on', 'on' ) );
+    }
+
+    public function testSkipNoindexNofollowForInternalIntLink() {
+        $terms = array(
+            array(
+                't_term' => 'стол',
+                't_post_url' => 'http://tdhome.com',
+                't_post_id' => 22,
+                't_post_type' => 'ext_link',
+            )
+        );
+        $orig_text = 'xc xsf стол впівп';
+        $parsed_text = 'xc xsf <a href="http://tdhome.com">стол</a> впівп';
+        $this->assertEquals($orig_text, $this->parser->parse( $orig_text, '-1', false, -1, false, '', '', 'on', 'on', 'on' ) );
+    }
+
     public function testWrap() {
         $terms = array(
             array(

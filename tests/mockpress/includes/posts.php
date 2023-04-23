@@ -220,3 +220,7 @@ function get_children($options) {
   global $wp_test_expectations;
   return $wp_test_expectations['children'][md5(serialize($options))];
 }
+
+function home_url() {
+  return 'http://tdhome.com';
+}

@@ -1703,3 +1703,9 @@ function wp_redirect($location, $status = 302) {
 	   'status'    => $status,
 	);
 }
+
+global $wp;
+class WP {
+	public $request;
+}
+$wp = new WP;

@@ -28,6 +28,9 @@ class SCO_TD_Options {
 		if ( !isset( $this->options[ 'add_noindex' ] ) ) {
 			$this->options[ 'add_noindex' ] = '';
 		}
+		if ( !isset( $this->options[ 'skip_noindex_nofollow_for_internal' ] ) ) {
+			$this->options[ 'skip_noindex_nofollow_for_internal' ] = '';
+		}
 		if ( !isset( $this->options[ 'skip_tags' ] ) ) {
 			$this->options[ 'skip_tags' ] = '';
 		}

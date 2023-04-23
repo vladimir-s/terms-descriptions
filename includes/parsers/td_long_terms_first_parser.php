@@ -19,14 +19,14 @@ class SCO_TD_Long_Terms_First_Parser extends SCO_TD_Simple_Parser {
     public function parse( $text, $replace_terms = '-1', $class_attr = false
             , $max_convertions = -1, $show_title = false
             , $text_before = '', $text_after = '', $target = '', $consider_existing_links = false
-            , $add_nofollow = false, $add_noindex = false ) {
+            , $add_nofollow = false, $add_noindex = false, $skip_noindex_nofollow_for_internal = false ) {
 
         //sorting terms list according to terms length
         uasort( $this->terms, array('SCO_TD_Long_Terms_First_Parser', 'compare_terms' ) );
 
-        return parent::parse($text, $replace_terms, $class_attr
+        return parent::parse( $text, $replace_terms, $class_attr
             , $max_convertions, $show_title, $text_before, $text_after, $target
-            , $consider_existing_links, $add_nofollow, $add_noindex);
+            , $consider_existing_links, $add_nofollow, $add_noindex, $skip_noindex_nofollow_for_internal );
     }
 
     /**

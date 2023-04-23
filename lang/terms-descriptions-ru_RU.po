@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: termdescription\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-16 14:54+0200\n"
-"PO-Revision-Date: 2022-03-16 15:57+0200\n"
+"POT-Creation-Date: 2023-04-23 19:35+0300\n"
+"PO-Revision-Date: 2023-04-23 19:43+0300\n"
 "Last-Translator: Vladimir Statsenko <vovchiksta@gmail.com>\n"
 "Language-Team: Vladimir Statsenko <vladimirsta@yandex.ru>\n"
 "Language: ru_RU\n"
@@ -207,19 +207,28 @@ msgstr ""
 "Термины не будут преобразованы на главной, страницах категорий и архивов."
 
 #: ../includes/td_admin_options.php:139
+msgid "Convert terms in archive descriptions"
+msgstr "Преобразовывать термины в шорткодах (shortcodes)"
+
+#: ../includes/td_admin_options.php:142
+msgid "Terms will be converted convert in archive descriptions."
+msgstr ""
+"Термины не будут преобразованы на главной, страницах категорий и архивов."
+
+#: ../includes/td_admin_options.php:146
 msgid "Open link in a new tab"
 msgstr "Открывать ссылку в новом табе"
 
-#: ../includes/td_admin_options.php:142
+#: ../includes/td_admin_options.php:149
 msgid "If this option is checked plugin will add target=\"_blank\" to links."
 msgstr ""
 "Если эта опция установлена, плагин добавит target=\"_blank\" к ссылкам."
 
-#: ../includes/td_admin_options.php:146
+#: ../includes/td_admin_options.php:153
 msgid "Add nofollow to external links"
 msgstr "Добавить nofollow для внешних ссылок"
 
-#: ../includes/td_admin_options.php:149
+#: ../includes/td_admin_options.php:156
 msgid ""
 "If this option is checked plugin will add rel=\"nofollow\" to "
 "<strong>external</strong> links."
@@ -227,11 +236,11 @@ msgstr ""
 "Если эта опция установлена, плагин добавит rel=\"nofollow\" к "
 "<strong>внешним</strong> ссылкам."
 
-#: ../includes/td_admin_options.php:153
+#: ../includes/td_admin_options.php:160
 msgid "Wrap external links with noindex tag"
 msgstr "\"Обернуть\" внешнюю ссылку в тег noindex"
 
-#: ../includes/td_admin_options.php:156
+#: ../includes/td_admin_options.php:163
 msgid ""
 "If this option is checked plugin will wrap <strong>external</strong> links "
 "with &lt;noindex&gt; tag."
@@ -239,11 +248,25 @@ msgstr ""
 "Если эта опция установлена, плагин \"обернет\" <strong>внешние</strong> "
 "ссылки в тег &lt;noindex&gt;."
 
-#: ../includes/td_admin_options.php:160
+#: ../includes/td_admin_options.php:167
+msgid "Skip nofollow and noindex if link is internal"
+msgstr "Игнорировать nofollow и noindex если ссылка внутренняя"
+
+#: ../includes/td_admin_options.php:170
+msgid ""
+"If this option is checked plugin will check domain of <strong>external</"
+"strong> links. If it matches this site, the plugin will ignore \"Add nofollow"
+"\" and \"Wrap with noindex\" options."
+msgstr ""
+"Если эта опция установлена, плагин проверит домен <strong>внешней</strong> "
+"ссылки. Если он совпадает с доменом сайт, плагин проигнорирует опции "
+"\"Добавить nofollow\" и \"Обернуть в noindex\"."
+
+#: ../includes/td_admin_options.php:174
 msgid "Skip tags"
 msgstr "Пропустить теги"
 
-#: ../includes/td_admin_options.php:163
+#: ../includes/td_admin_options.php:177
 msgid ""
 "The plugin skips text inside tags like <code>a</code>, <code>h1..6</code>, "
 "<code>canvas</code>, <code>code</code>, etc. This option allows you to add "
@@ -256,7 +279,7 @@ msgstr ""
 "регулярных выражений, а разделять их символом вертикальной черты <code>|</"
 "code>."
 
-#: ../includes/td_admin_options.php:165
+#: ../includes/td_admin_options.php:179
 msgid ""
 "<strong>Use this option with care</strong>. In most cases the default set of "
 "tags will be enough."
@@ -264,39 +287,39 @@ msgstr ""
 "<strong>Используйте эту опцию осторожно</strong>. В большинстве случаев "
 "будет достаточно стандартного набора тегов."
 
-#: ../includes/td_admin_options.php:169
+#: ../includes/td_admin_options.php:183
 msgid "Show"
 msgstr "Показывать"
 
-#: ../includes/td_admin_options.php:179
+#: ../includes/td_admin_options.php:193
 msgid "terms on a page (in admin area)"
 msgstr "терминов на странице (в админке)"
 
-#: ../includes/td_admin_options.php:183
+#: ../includes/td_admin_options.php:197
 msgid "Parser"
 msgstr "Парсер"
 
-#: ../includes/td_admin_options.php:187
+#: ../includes/td_admin_options.php:201
 msgid "Simple parser"
 msgstr "Простой парсер"
 
-#: ../includes/td_admin_options.php:190
+#: ../includes/td_admin_options.php:204
 msgid "Simple parser with quotes support"
 msgstr "Простой парсер с поддержкой кавычек"
 
-#: ../includes/td_admin_options.php:193
+#: ../includes/td_admin_options.php:207
 msgid "Long terms first parser"
 msgstr "Парсер с сортировкой терминов по их длинне"
 
-#: ../includes/td_admin_options.php:194
+#: ../includes/td_admin_options.php:208
 msgid "Orders terms by their lengths before searching them in text"
 msgstr "Перед поиском терминов в тексте, сортирует их по убыванию их длин"
 
-#: ../includes/td_admin_options.php:198
+#: ../includes/td_admin_options.php:212
 msgid "Time step for permalink update, ms"
 msgstr "Пауза между запросами на обновления постоянных ссылок, мс"
 
-#: ../includes/td_admin_options.php:202
+#: ../includes/td_admin_options.php:216
 msgid ""
 "This option allows adding pauses between permalinks updates to reduce server "
 "load. Value in milliseconds."
@@ -304,7 +327,30 @@ msgstr ""
 "Эта опция определяет длительность паузы между запросами на обновление "
 "постоянных ссылок. Значение в миллисекундах."
 
-#: ../includes/td_admin_options.php:208
+#: ../includes/td_admin_options.php:220
+msgid "Additional filters"
+msgstr "Дополнительные фильтры"
+
+#: ../includes/td_admin_options.php:224
+msgid ""
+"This option allows adding list of filters for which conversion will be "
+"applied. Each filter name should start from a new line. For example,<br> \n"
+"<pre><code>bbp_get_reply_content</code>\n"
+"<code>bbp_get_topic_content</code></pre>\n"
+"Please, pay attention that <code>the_content</code>, <code>comment_text</"
+"code> and <code>get_the_archive_description</code> filters are set by other "
+"options and will be ignored."
+msgstr ""
+"Эта опция позволяет добавить список фильтров для которых будут применяться "
+"преобразования ссылок. Имена фильтров должны начинаться с новой строки. "
+"Например,<br> \n"
+"<pre><code>bbp_get_reply_content</code>\n"
+"<code>bbp_get_topic_content</code></pre>\n"
+"Пожалуйста, обратите внимание, фильтры <code>the_content</code>, "
+"<code>comment_text</code> и <code>get_the_archive_description</code> "
+"устанавливаются с помощью других настроек и будут проигнорированы."
+
+#: ../includes/td_admin_options.php:233
 msgid "Update"
 msgstr "Изменить"
 
@@ -482,9 +528,10 @@ msgstr "Список терминов"
 #: ../includes/td_admin_tools.php:91
 msgid ""
 "Each term should be written on its own line. Use the following format.<br /"
-">word_form_1|word_form_2|...|post_id OR URL (with http://)<br />Examples:"
-"<br />apple|apples|21<br />pear|pears|http://site.domen<br />Note that if "
-"you use term_id the post with this id should exist."
+">word_form_1|word_form_2|...|post_id OR URL (with http://)|post_types "
+"(delimited with comma)<br />Examples:<br />apple|apples|21<br />pear|pears|"
+"http://site.domen|post,page,attachment<br />Note that if you use term_id the "
+"post with this id should exist."
 msgstr ""
 "Каждый термин должен быть записан в отдельной строке. Используйте следующий "
 "формат.<br />word_form_1|word_form_2|...|post_id OR URL (with http://)<br /"

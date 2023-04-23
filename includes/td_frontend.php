@@ -106,7 +106,8 @@ class SCO_TD_Frontend {
         return $parser->parse( $content, $this->options->getOption( 'convert_first_n_terms' ), $this->options->getOption( 'class' )
             , ( int )$this->options->getOption( 'convert_total' ), $this->options->getOption( 'show_title' )
             , $this->options->getOption( 'text_before' ), $this->options->getOption( 'text_after' ), $target, $consider_existing_links
-            , $this->options->getOption( 'add_nofollow' ), $this->options->getOption( 'add_noindex' ) );
+            , $this->options->getOption( 'add_nofollow' ), $this->options->getOption( 'add_noindex' )
+            , $this->options->getOption( 'skip_noindex_nofollow_for_internal' ) );
     }
 
     /**

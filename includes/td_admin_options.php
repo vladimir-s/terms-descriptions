@@ -164,6 +164,13 @@ class SCO_TD_Admin_Options {
                     </td>
                 </tr>
                 <tr valign="middle">
+                    <th scope="row"><?php _e( 'Skip nofollow and noindex if link is internal', 'terms-descriptions' ); ?></th>
+                    <td>
+                        <input name="td_options[skip_noindex_nofollow_for_internal]" type="checkbox" id="skip_noindex_nofollow_for_internal" <?php if ( isset( $options[ 'skip_noindex_nofollow_for_internal' ] ) ) { checked( $options[ 'skip_noindex_nofollow_for_internal' ], 'on' ); } ?> />
+                        <span class="description"><?php _e( 'If this option is checked plugin will check domain of <strong>external</strong> links. If it matches this site, the plugin will ignore "Add nofollow" and "Wrap with noindex" options.', 'terms-descriptions' ); ?></span>
+                    </td>
+                </tr>
+                <tr valign="middle">
                     <th scope="row"><?php _e( 'Skip tags', 'terms-descriptions' ); ?></th>
                     <td>
                         <input name="td_options[skip_tags]" type="text" id="skip_tags" class="large-text code" value="<?php echo ( isset( $options[ 'skip_tags' ] ) ) ? $options[ 'skip_tags' ] : ''; ?>" />
@@ -282,6 +289,9 @@ Please, pay attention that <code>the_content</code>, <code>comment_text</code> a
         }
         if ( !isset( $input[ 'add_noindex' ] ) ) {
             $input[ 'add_noindex' ] = false;
+        }
+        if ( !isset( $input[ 'skip_noindex_nofollow_for_internal' ] ) ) {
+            $input[ 'skip_noindex_nofollow_for_internal' ] = false;
         }
         if ( !isset( $input[ 'parser' ] ) ) {
             $input[ 'parser' ] = 'simple_parser';
