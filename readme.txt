@@ -78,6 +78,11 @@ The plugin built with [PhpStorm]( http://www.jetbrains.com/phpstorm/ )
 
 == Changelog ==
 
+= 3.4.5 =
+
+* Bug fixes: reflected XSS vulnerability fixed
+* Wordpress 6.2 support
+
 = 3.4.4 =
 
 * New option added: skip_noindex_nofollow_for_internal

@@ -385,7 +385,7 @@ class SCO_TD_Admin_Terms {
     $search_str = '';
     $where_clause = '';
     if ( isset( $_GET[ 'term_search' ] ) && '' !== trim( $_GET[ 'term_search' ] ) ) {
-        $search_str = $_GET[ 'term_search' ];
+        $search_str = esc_attr( $_GET[ 'term_search' ] );
         $where_clause = ' WHERE t_term LIKE "%' . $wpdb->esc_like( $search_str ) . '%" ';
     }
     
