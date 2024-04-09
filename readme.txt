@@ -2,7 +2,7 @@
 Contributors: vladimir.s
 Tags: post, page, links, plugin, link building, cross linking, seo
 Requires at least: 4.1
-Tested up to: 6.2
+Tested up to: 6.5
 Stable tag: trunk
 
 This plugin allows you to create list of terms and assign links to them. Plugin replaces terms occurrences in your posts with appropriate links.
@@ -77,6 +77,10 @@ The plugin built with [PhpStorm]( http://www.jetbrains.com/phpstorm/ )
 5. The plugin built with PhpStorm
 
 == Changelog ==
+
+= 3.4.6 =
+
+* Wordpress 6.5 support
 
 = 3.4.5 =
 
