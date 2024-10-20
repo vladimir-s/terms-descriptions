@@ -520,26 +520,26 @@ class SCO_TD_Admin_Terms {
     public function pagination( $terms_count, $cur_page, $terms_per_page ) {
         $total_pages = ceil( $terms_count / $terms_per_page );
 
-        $first_page_link = add_query_arg( 'term_page', false );
+        $first_page_link = esc_url( add_query_arg( 'term_page', false ) );
 
         $prev_disabled = '';
         if ( $cur_page <= 1 ) {
-            $prev_page_link = add_query_arg( 'term_page', false );
+            $prev_page_link = esc_url( add_query_arg( 'term_page', false ) );
             $prev_disabled = ' disabled';
         }
         else {
-            $prev_page_link = add_query_arg( 'term_page', $cur_page - 1 );
+            $prev_page_link = esc_url( add_query_arg( 'term_page', $cur_page - 1 ) );
         }
 
-        $last_page_link = add_query_arg( 'term_page', $total_pages );
+        $last_page_link = esc_url( add_query_arg( 'term_page', $total_pages ) );
 
         $next_disabled = '';
         if ( $cur_page >= $total_pages ) {
-            $next_page_link = add_query_arg( 'term_page', $total_pages );
+            $next_page_link = esc_url( add_query_arg( 'term_page', $total_pages ) );
             $next_disabled = ' disabled';
         }
         else {
-            $next_page_link = add_query_arg( 'term_page', $cur_page + 1 );
+            $next_page_link = esc_url( add_query_arg( 'term_page', $cur_page + 1 ) );
         }
 
         $html = '<div class="tablenav-pages">';
