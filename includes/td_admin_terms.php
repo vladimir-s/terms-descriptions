@@ -467,7 +467,7 @@ class SCO_TD_Admin_Terms {
                     <div class="locked-indicator"></div>
                 </th>
                 <td>
-                    <strong><?php echo stripcslashes( $term->t_term ); ?></strong>
+                    <strong><?php echo preg_replace('/>/', '&gt;', preg_replace('/</', '&lt;', stripcslashes( $term->t_term ))); ?></strong>
                     <div class="row-actions">
                         <span class="edit"><a href="?action=td_edit_term&amp;term_id=<?php echo $term->t_id; ?>"><?php _e( 'Edit', 'terms-descriptions' ); ?></a> | </span>
                         <span class="trash"><a href="?action=td_delete_term&amp;term_id=<?php echo $term->t_id; ?>&amp;_wpnonce=<?php echo $nonce; ?>"><?php _e( 'Delete', 'terms-descriptions' ); ?></a></span>

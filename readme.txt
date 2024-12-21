@@ -78,6 +78,10 @@ The plugin built with [PhpStorm]( http://www.jetbrains.com/phpstorm/ )
 
 == Changelog ==
 
+= 3.4.8 =
+
+* Bug fixes: XSS vulnerability fixed
+
 = 3.4.7 =
 
 * Bug fixes: reflected XSS vulnerability fixed

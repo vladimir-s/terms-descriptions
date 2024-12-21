@@ -60,7 +60,7 @@ function td_add_term() {
         $term_data[ 't_id' ] = $wpdb->insert_id;
         $res[ 'term_data' ] = $term_data;
         $res[ 'term_data' ][ 't_post_title' ] = stripcslashes( $res[ 'term_data' ][ 't_post_title' ] );
-        $res[ 'term_data' ][ 't_term' ] = stripcslashes( $res[ 'term_data' ][ 't_term' ] );
+        $res[ 'term_data' ][ 't_term' ] = preg_replace('/>/', '&gt;', preg_replace('/</', '&lt;', stripcslashes( $res[ 'term_data' ][ 't_term' ] )));
         $res[ 'term_data' ][ 't_use_in_post_types' ] = unserialize( $res[ 'term_data' ][ 't_use_in_post_types' ] );
         $res[ 'term_data' ][ 't_use_in_post_types_list' ] = td_get_use_in_post_types_list( $res[ 'term_data' ][ 't_use_in_post_types' ] );
 	}
@@ -70,6 +70,7 @@ function td_add_term() {
 }
 
 function td_prepare_term_data($res) {
+    $term = preg_replace('/>/', '&gt;', preg_replace('/</', '&lt;', $_POST['td_term']));
     switch ($_POST['td_content_type']) {
         case 'ext_link' :
             $term_link = $_POST['td_link'];
