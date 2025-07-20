@@ -1,4 +1,7 @@
 <?php
+
+require_once TD_DIR . 'includes/utils.php';
+
 /**
  * This class creates Options page in Terms menu
  */
@@ -40,6 +43,10 @@ class SCO_TD_Admin_Options {
             $terms_class = new SCO_TD_Admin_Terms();
             $options = $terms_class->get_default_options();
             add_option( 'td_options', $options );
+        }
+
+        foreach ($options as $key => $value) {
+            $options[$key] = preg_replace('/"/i', '&quot;', $value);
         }
 ?>
 <div class="wrap">
@@ -317,6 +324,11 @@ Please, pay attention that <code>the_content</code>, <code>comment_text</code> a
         if ( !isset( $input[ 'additional_filters' ] ) ) {
             $input[ 'additional_filters' ] = '';
         }
+
+        foreach ($input as $key => $value) {
+            $input[$key] = td_sanitize_XSS($value);
+        }
+
         if ( false !== $old_options ) {
             return array_merge( $old_options, $input );
         }

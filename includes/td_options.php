@@ -1,4 +1,7 @@
 <?php
+
+require_once TD_DIR . 'includes/utils.php';
+
 class SCO_TD_Options {
 	private $options = array();
 	private static $instance = null;
@@ -43,6 +46,6 @@ class SCO_TD_Options {
 		if ( !isset( $this->options[ $name ] ) ) {
 			return false;
 		}
-		return $this->options[ $name ];
+		return td_sanitize_XSS($this->options[ $name ]);
 	}
 }

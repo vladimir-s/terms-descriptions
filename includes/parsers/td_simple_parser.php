@@ -126,7 +126,7 @@ class SCO_TD_Simple_Parser extends SCO_TD_Parser {
 
                 //adding links to terms
                 foreach ( $matches[0] as $match ) {
-                    //is their a text before this occurrence?
+                    //is there a text before this occurrence?
                     $length = $match[1] - $start_pos;
                     if ( $length > 0 ) {
                         //searching for a term
