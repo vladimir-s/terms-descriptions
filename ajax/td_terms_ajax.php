@@ -73,12 +73,12 @@ function td_prepare_term_data($res) {
     $term = preg_replace('/>/', '&gt;', preg_replace('/</', '&lt;', $_POST['td_term']));
     switch ($_POST['td_content_type']) {
         case 'ext_link' :
-            $term_link = $_POST['td_link'];
+            $term_link = htmlspecialchars($_POST['td_link']);
             if (!preg_match('/^\w{3,5}\:\/\//i', $term_link)) {
                 $term_link = 'http://' . $term_link;
             }
             $link_title = $term_link;
-            $trimmedTitle = trim($_POST['td_title']);
+            $trimmedTitle = htmlspecialchars(trim($_POST['td_title']));
             if ( isset( $_POST[ 'td_title' ] ) && !empty($trimmedTitle) ) {
                 $link_title = $trimmedTitle;
             }
@@ -86,7 +86,7 @@ function td_prepare_term_data($res) {
                                't_post_title' => $link_title,
                                't_post_url'   => $term_link,
                                't_post_type'  => $_POST['td_content_type'],
-                               't_term'       => $_POST['td_term'],
+                               't_term'       => $term,
                                't_use_in_post_types' => serialize($_POST['t_use_in_post_types']),
                             );
             break;
@@ -104,7 +104,7 @@ function td_prepare_term_data($res) {
                                't_post_title' => get_the_title(( int )$_POST['td_link']),
                                't_post_url'   => $term_link,
                                't_post_type'  => $_POST['td_content_type'],
-                               't_term'       => $_POST['td_term'],
+                               't_term'       => $term,
                                't_use_in_post_types' => serialize($_POST['t_use_in_post_types']),
                             );
             break;
@@ -122,7 +122,7 @@ function td_prepare_term_data($res) {
                                't_post_title' => $_POST['td_link'],
                                't_post_url'   => $term_link,
                                't_post_type'  => $_POST['td_content_type'],
-                               't_term'       => $_POST['td_term'],
+                               't_term'       => $term,
                                't_use_in_post_types' => serialize($_POST['t_use_in_post_types']),
                             );
             break;

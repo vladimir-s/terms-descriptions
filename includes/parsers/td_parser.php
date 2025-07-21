@@ -27,6 +27,8 @@ abstract class SCO_TD_Parser {
                         && false !== ( $prepared_term = $this->prepare_term( $term[ 't_term' ] ) ) ) {
                     $new_terms[ $i ] = $term;
                     $new_terms[ $i ][ 't_term' ] = $prepared_term;
+                    $new_terms[ $i ][ 't_post_title' ] = htmlspecialchars($term[ 't_post_title' ]);
+                    $new_terms[ $i ][ 't_post_url' ] = htmlspecialchars($term[ 't_post_url' ]);
                 }
             }
             if ( !empty( $new_terms ) ) {
