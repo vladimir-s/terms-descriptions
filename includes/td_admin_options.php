@@ -1,7 +1,5 @@
 <?php
 
-require_once TD_DIR . 'includes/utils.php';
-
 /**
  * This class creates Options page in Terms menu
  */
@@ -326,7 +324,7 @@ Please, pay attention that <code>the_content</code>, <code>comment_text</code> a
         }
 
         foreach ($input as $key => $value) {
-            $input[$key] = td_sanitize_XSS($value);
+            $input[$key] = wp_kses_post($value);
         }
 
         if ( false !== $old_options ) {

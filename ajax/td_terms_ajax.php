@@ -70,15 +70,15 @@ function td_add_term() {
 }
 
 function td_prepare_term_data($res) {
-    $term = preg_replace('/>/', '&gt;', preg_replace('/</', '&lt;', $_POST['td_term']));
+    $term = htmlspecialchars($_POST['td_term']);
     switch ($_POST['td_content_type']) {
         case 'ext_link' :
-            $term_link = htmlspecialchars($_POST['td_link']);
+            $term_link = sanitize_url($_POST['td_link']);
             if (!preg_match('/^\w{3,5}\:\/\//i', $term_link)) {
                 $term_link = 'http://' . $term_link;
             }
             $link_title = $term_link;
-            $trimmedTitle = htmlspecialchars(trim($_POST['td_title']));
+            $trimmedTitle = wp_kses(trim($_POST['td_title']), 'post');
             if ( isset( $_POST[ 'td_title' ] ) && !empty($trimmedTitle) ) {
                 $link_title = $trimmedTitle;
             }

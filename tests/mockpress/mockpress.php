@@ -12,6 +12,9 @@ require_once('includes/media.php');
 require_once('includes/posts.php');
 require_once('includes/filtering.php');
 require_once('includes/comments.php');
+require_once('includes/functions.php');
+require_once('includes/formatting.php');
+require_once('includes/kses.php');
 
 /**
  * Reset the WordPress test expectations.
@@ -148,24 +151,6 @@ function wp_load_alloptions() {
 
 /** String Utility Functions **/
 
-/**
- * Remove a trailing slash from a string if it exists.
- * @param string $string The string to check for trailing slashes.
- * @return string The string with a trailing slash removed, if necessary.
- */
-function untrailingslashit($string) {
-	return preg_replace('#/$#', '', $string);
-}
-
-/**
- * Add a trailing slash to a string if it does not exist.
- * @param string $string The string to which a trailing slash should be added.
- * @return string The string with a trailing slash added, if necessary.
- */
-function trailingslashit($string) {
-	return preg_replace('#([^/])$#', '\1/', $string);
-}
-
 function user_trailingslashit($string, $type_of_url = '') {
 	$which = 'untrailingslashit';
 	if ($permalink_structure = get_option('permalink_structure')) {
@@ -174,16 +159,6 @@ function user_trailingslashit($string, $type_of_url = '') {
 		}
 	}
 	return call_user_func($which, $string);
-}
-
-/**
- * Get GMT string from date string.
- * Currently does nothing.
- * @param string $date_string The date string to convert.
- * @return string The converted date string in GMT.
- */
-function get_gmt_from_date($date_string) {
-	return $date_string;
 }
 
 /**
