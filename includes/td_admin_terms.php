@@ -473,7 +473,7 @@ class SCO_TD_Admin_Terms {
                         <span class="trash"><a href="?action=td_delete_term&amp;term_id=<?php echo $term->t_id; ?>&amp;_wpnonce=<?php echo $nonce; ?>"><?php _e( 'Delete', 'terms-descriptions' ); ?></a></span>
                     </div>
                 </td>
-                <td><?php echo '<a href="' . $term->t_post_url . '" target="_blank">' . stripcslashes( $term->t_post_title ) . '</a>'; ?></td>
+                <td><?php echo '<a href="' . $term->t_post_url . '" target="_blank">' . esc_attr( stripcslashes( $term->t_post_title ) ) . '</a>'; ?></td>
                 <td>
                     <?php
                     $cur_types_names = __( 'All', 'terms-descriptions' );

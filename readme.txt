@@ -2,7 +2,7 @@
 Contributors: vladimir.s
 Tags: post, page, links, link building, cross linking
 Requires at least: 4.1
-Tested up to: 6.8.2
+Tested up to: 6.9
 Stable tag: trunk
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -81,6 +81,12 @@ The plugin built with [PhpStorm]( http://www.jetbrains.com/phpstorm/ )
 5. The plugin built with PhpStorm
 
 == Changelog ==
+
+= 3.4.10 =
+
+* Bug fixes: Sensitive Data Exposure vulnerability fixed
+* Bug fix: in saving skip_tags
+* Bug fixes: XSS vulnerability fixed
 
 = 3.4.9 =
 

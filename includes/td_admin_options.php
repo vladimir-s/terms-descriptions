@@ -324,7 +324,9 @@ Please, pay attention that <code>the_content</code>, <code>comment_text</code> a
         }
 
         foreach ($input as $key => $value) {
-            $input[$key] = wp_kses_post($value);
+            if ('skip_tags' !== $key) {
+                $input[$key] = wp_kses_post($value);
+            }
         }
 
         if ( false !== $old_options ) {

@@ -11,7 +11,7 @@ class SCO_TD_Admin_Tools {
      */
     public function __construct() {
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
-        add_action( 'init', array( $this, 'process_form_data' ) );
+        add_action( 'admin_init', array( $this, 'process_form_data' ) );
     }
     
     /**

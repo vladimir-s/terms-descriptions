@@ -118,8 +118,8 @@ function td_prepare_term_data($res) {
                 echo json_encode($res);
                 die();
             }
-            $term_data = array('t_post_id'    => $_POST['td_post_id'],
-                               't_post_title' => $_POST['td_link'],
+            $term_data = array('t_post_id'    => ( int )$_POST['td_post_id'],
+                               't_post_title' => esc_attr($_POST['td_link']),
                                't_post_url'   => $term_link,
                                't_post_type'  => $_POST['td_content_type'],
                                't_term'       => $term,
