@@ -82,6 +82,10 @@ The plugin built with [PhpStorm]( http://www.jetbrains.com/phpstorm/ )
 
 == Changelog ==
 
+= 3.4.11 =
+
+* Security fix: JSON and CSV export require the manage_options capability and a nonce. admin_init also runs on admin-ajax.php, so the 3.4.10 check did not stop unauthenticated downloads of the terms table (CVE-2025-62139).
+
 = 3.4.10 =
 
 * Bug fixes: Sensitive Data Exposure vulnerability fixed

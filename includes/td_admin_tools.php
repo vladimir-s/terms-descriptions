@@ -18,6 +18,11 @@ class SCO_TD_Admin_Tools {
      * This method checks whether the form is sent and processed it.
      */
     public function process_form_data() {
+        // admin_init also runs on admin-ajax.php for logged-out requests
+        if ( !current_user_can( 'manage_options' ) ) {
+            return;
+        }
+
         //export
         if ( isset( $_POST[ 'td_export' ] ) && !empty ( $_POST[ 'td_export' ] ) ) {
             $this->export();
@@ -77,6 +82,7 @@ class SCO_TD_Admin_Tools {
     <?php } ?>
     <h3><?php _e( 'Export / Import', 'terms-descriptions' ); ?></h3>
     <form action="admin.php?page=td-tools" method="post" class="tools_form">
+        <?php wp_nonce_field( 'td_export' ); ?>
         <input type="submit" name="td_export" value="<?php _e( 'Export', 'terms-descriptions' ); ?>" class="button-primary" />
     </form>
     <form action="admin.php?page=td-tools" method="post" enctype="multipart/form-data" class="tools_form">
@@ -98,6 +104,7 @@ class SCO_TD_Admin_Tools {
     </form>
     <h3><?php _e( 'CSV Export', 'terms-descriptions' ); ?></h3>
     <form action="admin.php?page=td-tools" method="post" class="tools_form">
+        <?php wp_nonce_field( 'td_csv_export' ); ?>
         <input type="submit" name="td_csv_export" value="<?php _e( 'Get terms in CSV format', 'terms-descriptions' ); ?>" class="button-primary" />
         <div class="description"><?php _e( 'Please, note, you can\'t restore terms from this file. Use Export instead.', 'terms-descriptions' ); ?></div>
     </form>
@@ -111,6 +118,11 @@ class SCO_TD_Admin_Tools {
      * @global wpdb $wpdb wordpress database class
      */
     public function export() {
+        if ( !current_user_can( 'manage_options' ) ) {
+            wp_die( esc_html__( 'Sorry, you are not allowed to export terms.', 'terms-descriptions' ), '', array( 'response' => 403 ) );
+        }
+        check_admin_referer( 'td_export' );
+
         header( 'Content-Type:application/json' );
         $file_name = 'terms_descriptions_' . date( 'Y_m_d_G_i_s' ) . '.json';
         header( 'Content-Disposition:attachment; filename="' . $file_name . '"' );
@@ -140,6 +152,10 @@ class SCO_TD_Admin_Tools {
      * @return boolean true if import was successful and false otherwise 
      */
     public function import() {
+        if ( !current_user_can( 'manage_options' ) ) {
+            wp_die( esc_html__( 'Sorry, you are not allowed to import terms.', 'terms-descriptions' ), '', array( 'response' => 403 ) );
+        }
+
         if( !wp_verify_nonce( $_POST[ '_wpnonce' ], 'td_import' ) ) {  
           return false;  
         }
@@ -180,6 +196,10 @@ class SCO_TD_Admin_Tools {
      * @return boolean true if upload was successful and false otherwise 
      */
     public function packet_upload() {
+        if ( !current_user_can( 'manage_options' ) ) {
+            wp_die( esc_html__( 'Sorry, you are not allowed to create terms.', 'terms-descriptions' ), '', array( 'response' => 403 ) );
+        }
+
         //checking form data
         if( !wp_verify_nonce( $_POST[ '_wpnonce' ], 'td_packet_upload' ) ) {  
           return false;  
@@ -258,6 +278,11 @@ class SCO_TD_Admin_Tools {
      * @global wpdb $wpdb wordpress database class
      */
     public function csv_export() {
+        if ( !current_user_can( 'manage_options' ) ) {
+            wp_die( esc_html__( 'Sorry, you are not allowed to export terms.', 'terms-descriptions' ), '', array( 'response' => 403 ) );
+        }
+        check_admin_referer( 'td_csv_export' );
+
         header( 'Content-Type:text/csv; charset=windows-1251' );
         $file_name = 'terms_descriptions_' . date( 'Y_m_d_G_i_s' ) . '.csv';
         header( 'Content-Disposition:attachment; filename="' . $file_name . '"' );
